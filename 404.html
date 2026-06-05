@@ -8,43 +8,34 @@
         // ============================================
         // FIREMC STORE - GitHub Pages SPA Redirect
         // ============================================
-        // Clean URL Routing: /items -> /?view=items
-        // Isse URL clean dikhta hai: site.com/items
+        // Ye trick GitHub Pages pe SPA ko handle karti hai
+        // Jab koi /items, /money wagera direct access kare toh
+        // redirect kar ke index.html pe bhej deti hai
         // ============================================
-
+        
         (function() {
+            // URL ka path lo
             var path = window.location.pathname;
-            var repo = '/Firemc-store'; // Tera repo name
-
-            // Remove repo prefix
-            var cleanPath = path;
-            if (cleanPath.indexOf(repo) === 0) {
-                cleanPath = cleanPath.substring(repo.length);
-            }
-
-            // Remove leading slash
-            cleanPath = cleanPath.replace(/^\//, '');
-
-            // If empty, go home
-            if (!cleanPath || cleanPath === 'index.html') {
-                window.location.replace(
-                    window.location.protocol + '//' + 
-                    window.location.hostname + 
-                    (window.location.port ? ':' + window.location.port : '') + 
-                    repo + '/'
-                );
-                return;
-            }
-
-            // Convert to query param: /items -> /?view=items
-            var redirectUrl = 
+            var repo = ''; // Agar custom domain hai toh '' (empty), agar username.github.io/repo hai toh '/repo-name'
+            
+            // Check agar repo-name hai URL mein (e.g., /Firemc-store/)
+            var pathParts = path.split('/').filter(Boolean);
+            
+            // Bas path ko hash mein convert karo
+            // e.g., /items -> /#/items
+            // e.g., /money -> /#/money
+            var redirectPath = '/#/' + pathParts.join('/');
+            
+            // Redirect to index.html with hash
+            window.location.replace(
                 window.location.protocol + '//' + 
                 window.location.hostname + 
                 (window.location.port ? ':' + window.location.port : '') + 
-                repo + '/?view=' + encodeURIComponent(cleanPath) +
-                window.location.hash;
-
-            window.location.replace(redirectUrl);
+                repo + 
+                '/?' + 
+                redirectPath + 
+                window.location.hash
+            );
         })();
     </script>
 <base target="_blank">
@@ -52,7 +43,7 @@
 <body style="background:#050508; color:#ff4757; font-family:monospace; display:flex; align-items:center; justify-content:center; height:100vh; margin:0;">
     <div style="text-align:center;">
         <h2>🔥 FIREMC STORE</h2>
-        <p>Redirecting to clean URL...</p>
+        <p>Redirecting...</p>
     </div>
 </body>
 </html>
