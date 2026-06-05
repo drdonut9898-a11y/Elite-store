@@ -741,6 +741,23 @@
             setupProductsListener();
             renderProducts(); loadReviews(); setupAuth();
             updateWishlistUI(); setupStarRating();
+
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', (e) => {
+                if (e.state && e.state.view) {
+                    const view = e.state.view;
+                    if (view === 'landing') {
+                        document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+                        setTimeout(() => document.getElementById('viewLanding').classList.add('active'), 50);
+                    } else {
+                        switchView(view);
+                    }
+                } else {
+                    // No state, go to landing
+                    document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+                    setTimeout(() => document.getElementById('viewLanding').classList.add('active'), 50);
+                }
+            });
         }
 
         async function loadProductsFromFirestore() {
@@ -1014,6 +1031,13 @@
             if (map[view]) { setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); window.scrollTo({ top: 0, behavior: 'smooth' }); }
             if (view === 'admin') { renderAdminTable(); }
             if (view === 'userSignIns') { loadUserSignIns(); }
+
+            // Push view to browser history for back button support
+            if (view !== 'landing') {
+                history.pushState({ view: view }, '', '#' + view);
+            } else {
+                history.pushState({ view: 'landing' }, '', window.location.pathname);
+            }
         };
 
         function renderAdminTable() {
