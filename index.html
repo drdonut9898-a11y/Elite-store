@@ -744,7 +744,19 @@
 
             // Handle browser back/forward buttons
             window.addEventListener('popstate', (e) => {
-                const view = (e.state && e.state.view) ? e.state.view : 'landing';
+                // Check if we have history state
+                let view = 'landing';
+                if (e.state && e.state.view) {
+                    view = e.state.view;
+                } else {
+                    // Check URL for view name (without #)
+                    const path = window.location.pathname + window.location.hash.replace('#', '');
+                    const urlView = window.location.hash.replace('#', '') || window.location.pathname.split('/').pop();
+                    if (urlView && ['menu', 'money', 'items', 'accounts', 'admin', 'userSignIns'].includes(urlView)) {
+                        view = urlView;
+                    }
+                }
+
                 const map = { landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', accounts: 'viewAccounts', admin: 'viewAdmin', userSignIns: 'viewUserSignIns' };
 
                 document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
@@ -1033,7 +1045,7 @@
             // Push view to browser history for back button support (skip if called from popstate)
             if (!skipHistory) {
                 if (view !== 'landing') {
-                    history.pushState({ view: view }, '', '#' + view);
+                    history.pushState({ view: view }, '', view);
                 } else {
                     history.pushState({ view: 'landing' }, '', window.location.pathname);
                 }
