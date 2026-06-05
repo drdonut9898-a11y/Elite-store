@@ -26,20 +26,7 @@
     <link rel="canonical" href="https://yourdomain.com">
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/drdonut9898-a11y/Firemc-store/main/favicon.jpg">
 
-    <!-- GitHub Pages SPA Redirect Handler -->
-    <script>
-        (function() {
-            var search = window.location.search;
-            if (search && search.indexOf('?/#/') === 0) {
-                var hashPath = search.replace('?/', '');
-                var cleanUrl = window.location.protocol + '//' + 
-                              window.location.hostname + 
-                              (window.location.port ? ':' + window.location.port : '') + 
-                              window.location.pathname + hashPath;
-                window.history.replaceState(null, null, cleanUrl);
-            }
-        })();
-    </script>
+    <base target="_blank">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
@@ -71,17 +58,14 @@
         body.light-theme .master-card,
         body.light-theme .review-card,
         body.light-theme .wishlist-item,
-        body.light-theme .cart-item,
-        body.light-theme .ticket-item {
+        body.light-theme .cart-item {
             background: rgba(255,255,255,0.95);
             border-color: rgba(0,0,0,0.1);
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         body.light-theme .search-input,
         body.light-theme .payment-input,
-        body.light-theme .admin-input,
-        body.light-theme .chat-input,
-        body.light-theme .ticket-chat-input {
+        body.light-theme .admin-input {
             background: #ffffff;
             border-color: rgba(0,0,0,0.15);
             color: #1a1a2e;
@@ -91,17 +75,6 @@
         }
         body.light-theme .guest-banner {
             background: linear-gradient(90deg, rgba(255,159,67,0.05), transparent);
-        }
-        body.light-theme .chat-message-admin,
-        body.light-theme .ticket-chat-message-admin {
-            background: #f0f2f5;
-            border-color: rgba(0,0,0,0.1);
-            color: #1a1a2e;
-        }
-        body.light-theme .chat-panel,
-        body.light-theme .ticket-chat-box {
-            background: #ffffff;
-            border-color: rgba(0,0,0,0.1);
         }
 
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -290,10 +263,6 @@
         .admin-table tr { transition: var(--transition-smooth); }
         .admin-table tr:hover { background: rgba(255,255,255,0.02); transform: scale(1.01); }
 
-        .user-signins-panel { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:25px; animation: fadeInUp 0.5s ease-out; }
-        .user-signins-panel h3 { font-family:var(--font-display); color:var(--accent-purple); }
-        #signInsTable td { font-size:0.9rem; padding:12px 15px; }
-        #signInsTable th { background:rgba(168,85,247,0.08); color:var(--accent-purple); }
         .admin-input { background:var(--bg-secondary); border:1px solid var(--border-subtle); color:var(--text-primary); padding:10px 14px; border-radius:8px; width:100%; transition: var(--transition-smooth); }
         .admin-input:focus { outline:none; border-color:var(--accent-red); box-shadow:0 0 10px rgba(255,71,87,0.1); }
 
@@ -304,7 +273,6 @@
             .home-wrapper { grid-template-columns:1fr; }
             .master-card-green { grid-column:span 1; max-width:100%; }
             .packages-container { grid-template-columns:1fr; }
-            .chat-panel, .ticket-chat-box { width:100%; right:0; left:0; bottom:0; border-radius:16px 16px 0 0; }
             .modal-box { max-width:95vw; padding:20px; }
         }
 
@@ -316,7 +284,6 @@
         .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 12px 24px; border-radius: 12px; font-family: var(--font-display); font-size: 0.85rem; z-index: 10000; opacity: 0; transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
-<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -430,7 +397,6 @@
                 <button class="btn btn-secondary btn-sm" onclick="window.selectAllAdminItems()">Select All</button>
                 <button class="btn btn-blue btn-sm" onclick="window.saveSelectedItems()">Save Selected</button>
                 <button class="btn btn-gold btn-sm" onclick="window.deselectAllAdminItems()">Deselect</button>
-                <button class="btn btn-purple btn-sm" onclick="window.toggleUserSignIns()">&#128100; User SignIns</button>
             </div>
             <div style="overflow-x:auto;">
                 <table class="admin-table">
@@ -440,33 +406,6 @@
                     <tbody id="adminTableBody"></tbody>
                 </table>
             </div>
-        </div>
-    </div>
-
-    <div class="view-section" id="viewUserSignIns">
-        <button class="back-btn" onclick="window.switchView('admin')">&#8592; Back to Admin</button>
-        <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--accent-purple); margin-bottom:20px; border-left:4px solid var(--accent-purple); padding-left:15px;">User SignIns</div>
-        <div class="admin-controls">
-            <button class="btn btn-secondary btn-sm" onclick="window.loadUserSignIns()">&#128260; Refresh</button>
-            <span id="signInCount" style="background:var(--accent-purple); color:white; padding:6px 16px; border-radius:20px; font-size:0.85rem; font-weight:700;">0 users</span>
-        </div>
-        <div style="overflow-x:auto; margin-top:20px;">
-            <table class="admin-table" id="signInsTable">
-                <thead>
-                    <tr>
-                        <th style="width:60px;">#</th>
-                        <th>Email</th>
-                        <th>Login Time</th>
-                        <th>User ID</th>
-                    </tr>
-                </thead>
-                <tbody id="signInsTableBody"></tbody>
-            </table>
-        </div>
-        <div id="noSignIns" style="text-align:center; padding:60px 40px; color:var(--text-muted);">
-            <div style="font-size:4rem; margin-bottom:20px;">&#128100;</div>
-            <h3 style="font-family:var(--font-display); margin-bottom:10px;">No SignIns Yet</h3>
-            <p>User login data will appear here automatically</p>
         </div>
     </div>
 
@@ -632,7 +571,7 @@
     <div class="modal-overlay" id="authModal">
         <div class="modal-box" style="max-width:450px;">
             <h2 id="authTitle">MEMBER ACCESS</h2>
-            <p>Login to order and chat</p>
+            <p>Login to order</p>
             <div style="display:flex; gap:10px; margin-bottom:25px;">
                 <button class="btn btn-sm" style="flex:1; background:var(--accent-red); color:white;" id="loginTab" onclick="window.switchAuthTab('login')">Login</button>
                 <button class="btn btn-sm" style="flex:1; background:var(--bg-glass); color:var(--text-muted);" id="registerTab" onclick="window.switchAuthTab('register')">Register</button>
@@ -722,7 +661,7 @@
             const hash = window.location.hash;
             if (hash && hash.startsWith('#/')) {
                 const view = hash.replace('#/', '');
-                if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'userSignIns'].includes(view)) {
+                if (view && ['menu', 'money', 'items', 'accounts', 'admin'].includes(view)) {
                     return view;
                 }
             }
@@ -745,7 +684,7 @@
         function handleHashChange() {
             if (state.isNavigating) return;
             const view = getHashView();
-            if ((view === 'admin' || view === 'userSignIns') && !state.isAdmin) {
+            if (view === 'admin' && !state.isAdmin) {
                 showToast('Admin only!');
                 window.location.hash = '';
                 return;
@@ -755,13 +694,12 @@
 
         function switchViewInternal(view, skipHashUpdate) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            const map = { landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', accounts: 'viewAccounts', admin: 'viewAdmin', userSignIns: 'viewUserSignIns' };
+            const map = { landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', accounts: 'viewAccounts', admin: 'viewAdmin' };
             if (map[view]) { 
                 setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); 
                 window.scrollTo({ top: 0, behavior: 'smooth' }); 
             }
             if (view === 'admin') { renderAdminTable(); }
-            if (view === 'userSignIns') { loadUserSignIns(); }
         }
 
         async function init() {
@@ -773,7 +711,7 @@
 
             const initialView = getHashView();
             if (initialView !== 'landing') {
-                if ((initialView === 'admin' || initialView === 'userSignIns') && !state.isAdmin) {
+                if (initialView === 'admin' && !state.isAdmin) {
                     window.location.hash = '';
                 } else {
                     switchViewInternal(initialView, true);
@@ -825,17 +763,13 @@
                     document.getElementById('authTriggerBtn').textContent = 'Logout';
                     document.getElementById('authTriggerBtn').onclick = () => signOut(auth);
                     closeAuthModal();
-                    // FIXED: Only save email, NO password
-                    try {
-                        await saveUserSignIn(user.email, user.uid);
-                    } catch (e) { /* silent fail */ }
                 } else {
                     document.getElementById('authTriggerBtn').textContent = 'Login';
                     document.getElementById('authTriggerBtn').onclick = openAuthModal;
                 }
 
                 const currentHash = getHashView();
-                if ((currentHash === 'admin' || currentHash === 'userSignIns') && !state.isAdmin) {
+                if (currentHash === 'admin' && !state.isAdmin) {
                     window.location.hash = '';
                     switchViewInternal('landing', true);
                 }
@@ -864,7 +798,6 @@
             state.authTab = tab;
         };
 
-        // FIXED: No password saving
         window.handleAuth = async () => {
             const email = document.getElementById('authEmail').value.trim();
             const password = document.getElementById('authPassword').value;
@@ -878,8 +811,6 @@
                     cred = await createUserWithEmailAndPassword(auth, email, password);
                     await setDoc(doc(db, 'users', cred.user.uid), { email, isAdmin: false, createdAt: serverTimestamp() });
                 }
-                // FIXED: Only save email and uid, NO password
-                await saveUserSignIn(email, cred.user.uid);
                 errorDiv.textContent = ''; closeAuthModal();
             } catch (err) {
                 const errors = { 'auth/invalid-email': 'Invalid email', 'auth/user-not-found': 'User not found', 'auth/wrong-password': 'Wrong password', 'auth/email-already-in-use': 'Email already registered', 'auth/weak-password': 'Password too weak (min 6 chars)', 'auth/invalid-credential': 'Invalid credentials' };
@@ -1031,7 +962,7 @@
         };
 
         window.switchView = (view) => {
-            if ((view === 'admin' || view === 'userSignIns') && !state.isAdmin) { showToast('Admin only!'); return; }
+            if (view === 'admin' && !state.isAdmin) { showToast('Admin only!'); return; }
             updateHash(view);
             switchViewInternal(view, true);
         };
@@ -1084,7 +1015,6 @@
             showToast(`Saved ${checked.length} items!`);
         };
 
-        window.toggleUserSignIns = () => switchView('userSignIns');
         window.openAddItemModal = () => { document.getElementById('addItemModal').classList.add('active'); document.getElementById('addItemError').textContent = ''; };
         window.closeAddItemModal = () => { document.getElementById('addItemModal').classList.remove('active'); };
         window.addNewItem = async () => {
@@ -1118,35 +1048,6 @@
                 renderProducts(); renderAdminTable(); showToast('Item deleted!');
             } catch (e) { showToast('Delete failed: ' + e.message); }
         };
-
-        // FIXED: No password in signins
-        async function loadUserSignIns() {
-            try {
-                const snap = await getDocs(collection(db, 'userSignIns'));
-                const tbody = document.getElementById('signInsTableBody');
-                const noData = document.getElementById('noSignIns');
-                const countBadge = document.getElementById('signInCount');
-                const table = document.getElementById('signInsTable');
-                if (snap.empty) {
-                    tbody.innerHTML = ''; noData.style.display = 'block'; if (table) table.style.display = 'none'; if (countBadge) countBadge.textContent = '0 users'; return;
-                }
-                if (noData) noData.style.display = 'none'; if (table) table.style.display = 'table';
-                const seenEmails = new Set(); const uniqueSignIns = [];
-                snap.forEach(d => { const data = d.data(); if (!seenEmails.has(data.email)) { seenEmails.add(data.email); uniqueSignIns.push({ id: d.id, ...data }); } });
-                if (countBadge) countBadge.textContent = `${uniqueSignIns.length} users`;
-                tbody.innerHTML = uniqueSignIns.map((item, i) => {
-                    const time = item.loginTime ? new Date(item.loginTime.toDate()).toLocaleString() : 'Unknown';
-                    return `<tr><td>${i + 1}</td><td style="color:var(--accent-blue); font-weight:600;">${item.email || 'N/A'}</td><td style="color:var(--text-secondary); font-size:0.85rem;">${time}</td><td style="font-size:0.75rem; color:var(--text-muted);">${item.userId || 'N/A'}</td></tr>`;
-                }).join('');
-            } catch (e) { console.error('Load signins error', e); showToast('Failed to load sign-ins'); }
-        }
-
-        // FIXED: Only email and uid, NO password
-        async function saveUserSignIn(email, userId) {
-            try {
-                await addDoc(collection(db, 'userSignIns'), { email, userId, loginTime: serverTimestamp() });
-            } catch (e) { console.error('Save signin error:', e); }
-        }
 
         window.filterProducts = (type) => {
             const searchId = type === 'money' ? 'moneySearch' : type === 'items' ? 'itemSearch' : 'accountSearch';
