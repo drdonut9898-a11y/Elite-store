@@ -12,27 +12,21 @@
         // Jab koi /items, /money wagera direct access kare toh
         // redirect kar ke index.html pe bhej deti hai
         // ============================================
-        
+
         (function() {
             // URL ka path lo
             var path = window.location.pathname;
-            var repo = ''; // Agar custom domain hai toh '' (empty), agar username.github.io/repo hai toh '/repo-name'
-            
-            // Check agar repo-name hai URL mein (e.g., /Firemc-store/)
-            var pathParts = path.split('/').filter(Boolean);
-            
-            // Bas path ko hash mein convert karo
+
+            // Path ko hash mein convert karo
             // e.g., /items -> /#/items
             // e.g., /money -> /#/money
-            var redirectPath = '/#/' + pathParts.join('/');
-            
+            var redirectPath = '/#/' + path.split('/').filter(Boolean).join('/');
+
             // Redirect to index.html with hash
             window.location.replace(
                 window.location.protocol + '//' + 
                 window.location.hostname + 
                 (window.location.port ? ':' + window.location.port : '') + 
-                repo + 
-                '/?' + 
                 redirectPath + 
                 window.location.hash
             );
@@ -42,7 +36,7 @@
 </head>
 <body style="background:#050508; color:#ff4757; font-family:monospace; display:flex; align-items:center; justify-content:center; height:100vh; margin:0;">
     <div style="text-align:center;">
-        <h2>🔥 FIREMC STORE</h2>
+        <h2>FIREMC STORE</h2>
         <p>Redirecting...</p>
     </div>
 </body>
