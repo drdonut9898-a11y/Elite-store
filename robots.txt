@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://drdonut9898-a11y.github.io/sitemap.xml
