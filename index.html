@@ -3,34 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ===== SEO META TAGS ===== -->
     <title>FireMC Store - Buy Minecraft Items, Accounts & Spawners</title>
     <meta name="description" content="Best Minecraft Store - Buy items, accounts, spawners, and money. Cheap prices, secure payment via bKash/UPI. Instant delivery!">
     <meta name="keywords" content="minecraft store, buy minecraft items, minecraft accounts, minecraft spawners, minecraft money, minecraft server shop, firemc">
     <meta name="author" content="FireMC Store">
     <meta name="robots" content="index, follow">
-
-    <!-- Facebook/Discord share -->
     <meta property="og:title" content="FireMC Store - Minecraft Items & Accounts">
     <meta property="og:description" content="Buy Minecraft items, accounts, and spawners at best prices. Secure payments.">
     <meta property="og:image" content="https://raw.githubusercontent.com/drdonut9898-a11y/Firemc-store/main/favicon.jpg">
     <meta property="og:url" content="https://yourdomain.com">
     <meta property="og:type" content="website">
-
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="FireMC Store">
     <meta name="twitter:description" content="Best Minecraft Store - Items, Accounts, Spawners">
-
     <link rel="canonical" href="https://yourdomain.com">
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/drdonut9898-a11y/Firemc-store/main/favicon.jpg">
-
     <base target="_blank">
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
-
         :root {
             --bg-primary: #050508; --bg-secondary: #0a0a12; --bg-card: rgba(15,15,25,0.8);
             --bg-glass: rgba(20,20,35,0.5); --border-subtle: rgba(255,255,255,0.08);
@@ -47,222 +37,73 @@
             --transition-bounce: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
             --sidebar-width: 280px;
         }
-
         body.light-theme {
             --bg-primary: #f0f2f5; --bg-secondary: #ffffff; --bg-card: rgba(255,255,255,0.95);
             --bg-glass: rgba(240,242,245,0.8); --border-subtle: rgba(0,0,0,0.1);
             --border-accent: rgba(255,71,87,0.3); --text-primary: #1a1a2e;
             --text-secondary: #4a4a6a; --text-muted: #8888a0;
         }
-        body.light-theme .pkg-card,
-        body.light-theme .menu-card,
-        body.light-theme .master-card,
-        body.light-theme .review-card,
-        body.light-theme .wishlist-item,
-        body.light-theme .cart-item,
-        body.light-theme .sidebar,
-        body.light-theme .credit-shop-item,
-        body.light-theme .afk-container {
-            background: rgba(255,255,255,0.95);
-            border-color: rgba(0,0,0,0.1);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        body.light-theme .pkg-card, body.light-theme .menu-card, body.light-theme .master-card,
+        body.light-theme .review-card, body.light-theme .wishlist-item, body.light-theme .cart-item,
+        body.light-theme .sidebar, body.light-theme .credit-shop-item, body.light-theme .afk-container {
+            background: rgba(255,255,255,0.95); border-color: rgba(0,0,0,0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-        body.light-theme .search-input,
-        body.light-theme .payment-input,
-        body.light-theme .admin-input {
-            background: #ffffff;
-            border-color: rgba(0,0,0,0.15);
-            color: #1a1a2e;
+        body.light-theme .search-input, body.light-theme .payment-input, body.light-theme .admin-input {
+            background: #ffffff; border-color: rgba(0,0,0,0.15); color: #1a1a2e;
         }
-        body.light-theme .store-billboard {
-            background: linear-gradient(90deg, rgba(255,71,87,0.05), transparent);
-        }
-        body.light-theme .guest-banner {
-            background: linear-gradient(90deg, rgba(255,159,67,0.05), transparent);
-        }
-        body.light-theme .sidebar-link {
-            color: var(--text-primary);
-        }
-        body.light-theme .sidebar-link:hover {
-            background: rgba(255,71,87,0.1);
-        }
-        body.light-theme .sidebar-category {
-            color: var(--accent-red);
-        }
-
+        body.light-theme .store-billboard { background: linear-gradient(90deg, rgba(255,71,87,0.05), transparent); }
+        body.light-theme .guest-banner { background: linear-gradient(90deg, rgba(255,159,67,0.05), transparent); }
+        body.light-theme .sidebar-link { color: var(--text-primary); }
+        body.light-theme .sidebar-link:hover { background: rgba(255,71,87,0.1); }
+        body.light-theme .sidebar-category { color: var(--accent-red); }
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
         body { font-family:var(--font-body); background:var(--bg-primary); color:var(--text-primary); min-height:100vh; overflow-x:hidden; transition: background 0.4s, color 0.4s; }
-
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(ellipse at 20% 80%, rgba(255,71,87,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(0,210,255,0.06) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(168,85,247,0.04) 0%, transparent 60%);
             pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
         }
         @keyframes bgPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); } }
-
         .app-container { max-width:1200px; margin:0 auto; padding:0 20px; margin-left: 0; transition: margin-left 0.4s ease; }
         .app-container.sidebar-open { margin-left: var(--sidebar-width); }
-
-        /* ===== SIDEBAR ===== */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border-subtle);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.4s cubic-bezier(0.25,1,0.5,1);
-            overflow-y: auto;
-            transform: translateX(-100%);
-        }
+        .sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100vh; background: var(--bg-secondary); border-right: 1px solid var(--border-subtle); z-index: 1000; display: flex; flex-direction: column; transition: transform 0.4s cubic-bezier(0.25,1,0.5,1); overflow-y: auto; transform: translateX(-100%); }
         .sidebar.open { transform: translateX(0); }
-        .sidebar-header {
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-        .sidebar-brand {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--accent-red);
-            text-shadow: 0 0 20px var(--accent-red-glow);
-            letter-spacing: 3px;
-            animation: glowPulse 2s ease-in-out infinite;
-        }
-        .sidebar-brand span {
-            color: var(--text-primary);
-        }
-        .sidebar-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
-            margin: 10px 20px;
-        }
-        .sidebar-section {
-            padding: 15px 20px;
-        }
-        .sidebar-section-title {
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            padding: 0 10px;
-        }
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            border-radius: 10px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition-smooth);
-            cursor: pointer;
-            margin-bottom: 4px;
-            border: 1px solid transparent;
-        }
-        .sidebar-link:hover {
-            background: var(--bg-glass);
-            color: var(--accent-red);
-            border-color: var(--border-accent);
-            transform: translateX(5px);
-        }
-        .sidebar-link.active {
-            background: linear-gradient(135deg, rgba(255,71,87,0.15), rgba(255,71,87,0.05));
-            color: var(--accent-red);
-            border-color: var(--border-accent);
-            box-shadow: 0 4px 15px var(--accent-red-glow);
-        }
-        .sidebar-link .link-icon {
-            font-size: 1.2rem;
-            width: 28px;
-            text-align: center;
-        }
-        .sidebar-category {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
+        .sidebar-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid var(--border-subtle); }
+        .sidebar-brand { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: var(--accent-red); text-shadow: 0 0 20px var(--accent-red-glow); letter-spacing: 3px; animation: glowPulse 2s ease-in-out infinite; }
+        .sidebar-brand span { color: var(--text-primary); }
+        .sidebar-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border-accent), transparent); margin: 10px 20px; }
+        .sidebar-section { padding: 15px 20px; }
+        .sidebar-section-title { font-family: var(--font-display); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; padding: 0 10px; }
+        .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 10px; color: var(--text-secondary); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: var(--transition-smooth); cursor: pointer; margin-bottom: 4px; border: 1px solid transparent; }
+        .sidebar-link:hover { background: var(--bg-glass); color: var(--accent-red); border-color: var(--border-accent); transform: translateX(5px); }
+        .sidebar-link.active { background: linear-gradient(135deg, rgba(255,71,87,0.15), rgba(255,71,87,0.05)); color: var(--accent-red); border-color: var(--border-accent); box-shadow: 0 4px 15px var(--accent-red-glow); }
+        .sidebar-link .link-icon { font-size: 1.2rem; width: 28px; text-align: center; }
+        .sidebar-category { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; letter-spacing: 2px; }
         .sidebar-category-firemc { color: var(--accent-red); }
         .sidebar-category-donut { color: var(--accent-blue); }
         .sidebar-category-account { color: var(--accent-green); }
         .sidebar-category-credits { color: var(--accent-gold); }
         .sidebar-category-admin { color: var(--accent-purple); }
-
-        .sidebar-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: var(--transition-smooth);
-            box-shadow: var(--shadow-md);
-        }
-        .sidebar-toggle:hover {
-            background: var(--accent-red);
-            color: white;
-            transform: scale(1.1);
-        }
-        .sidebar-toggle.sidebar-open {
-            left: calc(var(--sidebar-width) + 20px);
-        }
-
-        /* Credits Display in Sidebar */
-        .credits-display {
-            background: linear-gradient(135deg, rgba(234,179,8,0.15), rgba(234,179,8,0.05));
-            border: 1px solid rgba(234,179,8,0.3);
-            border-radius: 12px;
-            padding: 15px;
-            margin: 15px 20px;
-            text-align: center;
-            animation: glowGold 2s ease-in-out infinite;
-        }
-        @keyframes glowGold {
-            0%, 100% { box-shadow: 0 0 10px rgba(234,179,8,0.2); }
-            50% { box-shadow: 0 0 20px rgba(234,179,8,0.4); }
-        }
-        .credits-display .credits-label {
-            font-family: var(--font-display);
-            font-size: 0.7rem;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-        .credits-display .credits-value {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--accent-gold);
-            text-shadow: 0 0 15px var(--accent-gold-glow);
-        }
-
+        .sidebar-toggle { position: fixed; top: 20px; left: 20px; z-index: 1001; width: 45px; height: 45px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: var(--transition-smooth); box-shadow: var(--shadow-md); }
+        .sidebar-toggle:hover { background: var(--accent-red); color: white; transform: scale(1.1); }
+        .sidebar-toggle.sidebar-open { left: calc(var(--sidebar-width) + 20px); }
+        .credits-display { background: linear-gradient(135deg, rgba(234,179,8,0.15), rgba(234,179,8,0.05)); border: 1px solid rgba(234,179,8,0.3); border-radius: 12px; padding: 15px; margin: 15px 20px; text-align: center; animation: glowGold 2s ease-in-out infinite; }
+        @keyframes glowGold { 0%, 100% { box-shadow: 0 0 10px rgba(234,179,8,0.2); } 50% { box-shadow: 0 0 20px rgba(234,179,8,0.4); } }
+        .credits-display .credits-label { font-family: var(--font-display); font-size: 0.7rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
+        .credits-display .credits-value { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: var(--accent-gold); text-shadow: 0 0 15px var(--accent-gold-glow); }
+        .sidebar-username { margin: 15px 20px; padding: 12px 15px; background: linear-gradient(135deg, rgba(0,210,255,0.1), rgba(0,210,255,0.05)); border: 1px solid rgba(0,210,255,0.2); border-radius: 12px; text-align: center; display: none; }
+        .sidebar-username.visible { display: block; }
+        .sidebar-username .username-label { font-family: var(--font-display); font-size: 0.65rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3px; }
+        .sidebar-username .username-value { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--accent-blue); text-shadow: 0 0 10px var(--accent-blue-glow); }
         .top-navbar { display:flex; justify-content:space-between; align-items:center; padding:20px 0; margin-bottom:20px; flex-wrap:wrap; gap:15px; animation: slideDown 0.6s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         .nav-brand { font-family:var(--font-display); font-size:1.2rem; font-weight:800; letter-spacing:2px; color:var(--accent-red); text-shadow:0 0 20px var(--accent-red-glow); animation: glowPulse 2s ease-in-out infinite; }
         @keyframes glowPulse { 0%, 100% { text-shadow: 0 0 20px var(--accent-red-glow); } 50% { text-shadow: 0 0 40px var(--accent-red-glow), 0 0 60px rgba(255,71,87,0.2); } }
         .nav-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-
+        .nav-username { font-family: var(--font-display); font-size: 0.85rem; color: var(--accent-blue); font-weight: 700; letter-spacing: 1px; display: none; align-items: center; gap: 6px; }
+        .nav-username.visible { display: flex; }
+        .nav-username::before { content: '👤'; font-size: 1rem; }
         .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 20px; border-radius:8px; font-family:var(--font-display); font-size:0.8rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; border:none; transition:var(--transition-smooth); position:relative; overflow:hidden; }
         .btn:hover { transform: translateY(-2px); }
         .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
@@ -283,20 +124,16 @@
         .btn-danger:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px rgba(239,68,68,0.4); }
         .btn-sm { padding:6px 14px; font-size:0.7rem; }
         .btn-lg { padding:16px 40px; font-size:1rem; }
-
         .header-container { text-align:center; margin-bottom:60px; animation: fadeInUp 0.8s ease-out; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         .header-title { font-family:var(--font-display); font-size:clamp(2rem,5vw,3.5rem); font-weight:900; text-transform:uppercase; letter-spacing:6px; animation: floatTitle 3s ease-in-out infinite; }
         .header-title span { color:var(--accent-red); text-shadow:0 0 20px var(--accent-red-glow); animation: glowPulse 2s ease-in-out infinite; }
         @keyframes floatTitle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
         .view-section { display:none; opacity:0; transform:translateY(30px) scale(0.98); transition:all 0.5s cubic-bezier(0.25,1,0.5,1); }
         .view-section.active { display:block; opacity:1; transform:translateY(0) scale(1); animation: viewEnter 0.5s ease-out; }
         @keyframes viewEnter { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-
         .back-btn { background:var(--bg-glass); border:1px solid var(--border-accent); color:var(--accent-red); font-family:var(--font-display); font-size:0.85rem; font-weight:700; padding:12px 24px; border-radius:8px; cursor:pointer; transition:var(--transition-smooth); margin-bottom:35px; display:inline-flex; align-items:center; gap:10px; }
         .back-btn:hover { background:var(--accent-red); color:white; transform: translateX(-5px); }
-
         .home-wrapper { display:grid; grid-template-columns:repeat(2,1fr); gap:30px; max-width:900px; margin:0 auto; }
         .master-card { background:var(--bg-card); border:1px solid var(--border-accent); border-top:4px solid var(--accent-red); border-radius:16px; padding:50px 30px; text-align:center; cursor:pointer; transition:var(--transition-smooth); position: relative; overflow: hidden; }
         .master-card::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,71,87,0.12) 0%, transparent 70%); opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
@@ -314,7 +151,6 @@
         .master-card-gold { border-top-color:var(--accent-gold); border-color:rgba(234,179,8,0.3); }
         .master-card-gold h2 { color:var(--accent-gold); }
         .master-card-gold:hover { border-color:var(--accent-gold); box-shadow:0 20px 40px rgba(234,179,8,0.15); }
-
         .menu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
         .menu-card { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; padding:45px 35px; text-align:center; cursor:pointer; transition:var(--transition-smooth); position: relative; overflow: hidden; }
         .menu-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,71,87,0.08), transparent); transition: left 0.6s; }
@@ -323,13 +159,11 @@
         .menu-card h3 { font-family:var(--font-display); font-size:1.9rem; color:var(--accent-red); margin-bottom:15px; transition: var(--transition-smooth); }
         .menu-card:hover h3 { text-shadow: 0 0 20px var(--accent-red-glow); }
         .menu-card p { color:var(--text-muted); font-size:1.1rem; }
-
         .search-container { margin-bottom:30px; position:relative; }
         .search-input { width:100%; padding:14px 20px 14px 50px; border-radius:12px; background:var(--bg-card); border:1px solid var(--border-subtle); color:var(--text-primary); font-size:1rem; transition: var(--transition-smooth); }
         .search-input:focus { outline:none; border-color:var(--accent-red); box-shadow:0 0 20px rgba(255,71,87,0.1); transform: scale(1.01); }
         .search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:1.2rem; transition: var(--transition-smooth); }
         .search-input:focus + .search-icon { color: var(--accent-red); transform: translateY(-50%) scale(1.2); }
-
         .store-billboard { background:linear-gradient(90deg,rgba(255,71,87,0.08),transparent); border:1px solid var(--border-accent); border-left:5px solid var(--accent-red); padding:25px 30px; border-radius:12px; margin-bottom:35px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; animation: slideInLeft 0.6s ease-out; }
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
         .billboard-blue { background:linear-gradient(90deg,rgba(0,210,255,0.08),transparent); border-color:rgba(0,210,255,0.3); border-left-color:var(--accent-blue); }
@@ -341,13 +175,11 @@
         @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,71,87,0.4); } 50% { box-shadow: 0 0 0 10px rgba(255,71,87,0); } }
         .warning-tag-green { background:rgba(46,213,115,0.1); color:var(--accent-green); border-color:rgba(46,213,115,0.4); animation: pulseGreen 2s infinite; }
         @keyframes pulseGreen { 0%, 100% { box-shadow: 0 0 0 0 rgba(46,213,115,0.4); } 50% { box-shadow: 0 0 0 10px rgba(46,213,115,0); } }
-
         .packages-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:25px; margin-bottom:50px; }
         .pkg-card { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:35px 25px; text-align:center; display:flex; flex-direction:column; justify-content:space-between; min-height:300px; position:relative; transition:var(--transition-smooth); animation: cardAppear 0.6s ease-out backwards; }
         @keyframes cardAppear { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .pkg-card:hover { border-color:rgba(255,71,87,0.5); transform:translateY(-10px) scale(1.02); box-shadow:0 20px 40px rgba(255,71,87,0.15); }
         .pkg-card:hover .pkg-val { transform: scale(1.08); }
-
         .pkg-val { font-family:var(--font-display); font-size:2rem; font-weight:800; transition: var(--transition-smooth); }
         .pkg-val span { color:var(--accent-red); }
         .stock-label { display:inline-block; background:rgba(46,213,115,0.1); color:var(--accent-green); font-size:0.85rem; font-weight:700; padding:5px 14px; border-radius:20px; border:1px solid rgba(46,213,115,0.2); margin-top:10px; }
@@ -356,30 +188,9 @@
         .pkg-card:hover .pkg-cost { background: rgba(255,71,87,0.1); border-color: rgba(255,71,87,0.3); }
         .promo-badge { position:absolute; top:15px; right:15px; background:linear-gradient(90deg,var(--accent-gold),#ca8a04); color:#000; font-size:0.7rem; font-weight:900; padding:4px 12px; border-radius:6px; animation: shimmer 2s infinite; }
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-
-        /* ===== DISCOUNT TAG ===== */
-        .discount-tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, var(--accent-red), #ff2e44);
-            color: white;
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            font-weight: 900;
-            padding: 5px 14px;
-            border-radius: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px var(--accent-red-glow);
-            animation: tagPulse 2s ease-in-out infinite;
-            z-index: 2;
-        }
-        @keyframes tagPulse {
-            0%, 100% { box-shadow: 0 4px 15px var(--accent-red-glow); }
-            50% { box-shadow: 0 4px 25px var(--accent-red-glow), 0 0 40px rgba(255,71,87,0.3); }
-        }
-
+        .discount-tag { position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, var(--accent-red), #ff2e44); color: white; font-family: var(--font-display); font-size: 0.75rem; font-weight: 900; padding: 5px 14px; border-radius: 8px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px var(--accent-red-glow); animation: tagPulse 2s ease-in-out infinite; z-index: 2; }
+        @keyframes tagPulse { 0%, 100% { box-shadow: 0 4px 15px var(--accent-red-glow); } 50% { box-shadow: 0 4px 25px var(--accent-red-glow), 0 0 40px rgba(255,71,87,0.3); } }
+        .eligible-tag { display: inline-block; background: linear-gradient(135deg, var(--accent-green), #26af5f); color: white; font-family: var(--font-display); font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; box-shadow: 0 2px 8px var(--accent-green-glow); }
         .wishlist-btn { position:absolute; top:15px; left:15px; background:rgba(255,71,87,0.1); border:1px solid rgba(255,71,87,0.2); color:var(--text-muted); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; transition:var(--transition-bounce); z-index:3; }
         .wishlist-btn:hover, .wishlist-btn.active { background:var(--accent-red); color:white; border-color:var(--accent-red); transform: scale(1.2); }
         .wishlist-panel { position:fixed; top:0; right:-400px; width:380px; max-width:90vw; height:100vh; background:var(--bg-secondary); border-left:1px solid var(--border-subtle); z-index:1000; transition:right 0.4s cubic-bezier(0.25,1,0.5,1); display:flex; flex-direction:column; }
@@ -395,7 +206,6 @@
         .wishlist-btn-float:hover { transform: scale(1.1) rotate(10deg); box-shadow:0 8px 30px var(--accent-red-glow); }
         .wishlist-count { position:absolute; top:-5px; right:-5px; background:var(--accent-gold); color:#000; font-size:0.75rem; font-weight:900; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; animation: bounce 0.5s ease-out; }
         @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
-
         .cart-widget { position:fixed; bottom:30px; right:30px; z-index:100; animation: floatIn 0.6s ease-out 0.1s backwards; }
         .cart-btn { width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg,var(--accent-red),#ff2e44); border:none; color:white; font-size:1.5rem; cursor:pointer; box-shadow:0 4px 20px var(--accent-red-glow); display:flex; align-items:center; justify-content:center; position:relative; transition: var(--transition-bounce); }
         .cart-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow:0 8px 30px var(--accent-red-glow); }
@@ -407,21 +217,22 @@
         .cart-items { flex:1; overflow-y:auto; padding:20px; }
         .cart-item { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; padding:15px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; transition: var(--transition-smooth); }
         .cart-item:hover { border-color: var(--accent-red); transform: translateX(5px); }
+        .cart-item-info { flex: 1; }
+        .cart-item-qty { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-secondary); border-radius: 8px; padding: 4px 12px; margin-top: 8px; }
+        .cart-item-qty button { background: none; border: none; color: var(--accent-red); font-size: 1rem; cursor: pointer; font-weight: 700; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: var(--transition-smooth); }
+        .cart-item-qty button:hover { background: rgba(255,71,87,0.1); }
+        .cart-item-qty span { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; min-width: 20px; text-align: center; }
         .cart-footer { padding:25px; border-top:1px solid var(--border-subtle); }
         .cart-total { display:flex; justify-content:space-between; font-size:1.2rem; margin-bottom:20px; }
         .cart-total strong { font-family:var(--font-display); color:var(--accent-red); font-size:1.5rem; }
         .cart-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; opacity:0; pointer-events:none; transition:opacity 0.3s; }
         .cart-overlay.active { opacity:1; pointer-events:auto; }
-
-        /* Cart Discount Line */
-        .cart-discount-line {
-            color: var(--accent-green);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 5px;
-            font-family: var(--font-display);
-        }
-
+        .cart-discount-line { color: var(--accent-green); font-size: 0.85rem; font-weight: 600; margin-top: 5px; font-family: var(--font-display); }
+        .cart-savings-banner { background: linear-gradient(135deg, rgba(46,213,115,0.1), rgba(46,213,115,0.05)); border: 1px solid rgba(46,213,115,0.3); border-radius: 10px; padding: 12px 15px; margin-bottom: 15px; text-align: center; display: none; }
+        .cart-savings-banner.visible { display: block; }
+        .cart-savings-banner .savings-title { font-family: var(--font-display); font-size: 0.8rem; color: var(--accent-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .cart-savings-banner .savings-amount { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--accent-green); }
+        .cart-savings-banner .savings-detail { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
         .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,2,3,0.95); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; pointer-events:none; transition:all 0.3s; }
         .modal-overlay.active { opacity:1; pointer-events:auto; }
         .modal-box { background:var(--bg-card); border:2px solid var(--accent-red); border-radius:20px; padding:40px; max-width:450px; width:92%; text-align:center; animation: modalPop 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
@@ -447,7 +258,6 @@
         .discord-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow:0 10px 30px rgba(88,101,242,0.4); }
         .modal-dismiss { background:none; border:none; color:var(--text-muted); font-size:0.9rem; cursor:pointer; margin-top:20px; transition: var(--transition-smooth); }
         .modal-dismiss:hover { color: var(--accent-red); transform: scale(1.1); }
-
         .reviews-section { margin:60px 0; padding:40px 0; border-top:1px solid var(--border-subtle); animation: fadeInUp 1s ease-out; }
         .reviews-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; }
         .reviews-header h2 { font-family:var(--font-display); color:var(--accent-gold); }
@@ -456,7 +266,6 @@
         .review-card:hover { transform: translateY(-5px) scale(1.02); border-color: var(--accent-gold); box-shadow:0 15px 30px rgba(234,179,8,0.1); }
         .review-stars { color:var(--accent-gold); margin-bottom:10px; }
         .review-text { color:var(--text-secondary); }
-
         .admin-badge { background:linear-gradient(135deg,var(--accent-green),#26af5f); color:white; padding:8px 16px; font-family:var(--font-display); font-size:0.8rem; border-radius:6px; cursor:pointer; display:none; transition: var(--transition-bounce); }
         .admin-badge:hover { transform: scale(1.05); box-shadow:0 5px 20px var(--accent-green-glow); }
         .admin-badge.visible { display:block; animation: slideDown 0.5s ease-out; }
@@ -466,499 +275,77 @@
         .admin-table th { background:rgba(255,71,87,0.08); color:var(--accent-red); font-family:var(--font-display); font-size:0.8rem; text-transform:uppercase; }
         .admin-table tr { transition: var(--transition-smooth); }
         .admin-table tr:hover { background: rgba(255,255,255,0.02); transform: scale(1.01); }
-
         .admin-input { background:var(--bg-secondary); border:1px solid var(--border-subtle); color:var(--text-primary); padding:10px 14px; border-radius:8px; width:100%; transition: var(--transition-smooth); }
         .admin-input:focus { outline:none; border-color:var(--accent-red); box-shadow:0 0 10px rgba(255,71,87,0.1); }
-
         .guest-banner { background:linear-gradient(90deg,rgba(255,159,67,0.1),transparent); border:1px solid rgba(255,159,67,0.3); border-left:4px solid #ff9f43; padding:15px 20px; border-radius:10px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; animation: slideInLeft 0.6s ease-out; }
         .guest-banner p { color:#ff9f43; font-weight:600; }
-
-        /* ===== AFK / CREDITS PAGE ===== */
-        .credits-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: start;
-        }
-
-        .afk-container {
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-card);
-            padding: 40px;
-        }
-
-        /* Meteor Animation */
-        .meteor-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .meteor {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-red), transparent);
-            border-radius: 50%;
-            animation: meteorFall linear infinite;
-            opacity: 0;
-        }
-        .meteor::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-red), transparent);
-            right: 0;
-        }
-        @keyframes meteorFall {
-            0% {
-                transform: translateX(0) translateY(0) rotate(-45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(-500px) translateY(500px) rotate(-45deg);
-                opacity: 0;
-            }
-        }
-
-        /* Floating particles */
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            animation: floatParticle 3s ease-in-out infinite;
-            opacity: 0.6;
-        }
-        @keyframes floatParticle {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
-            50% { transform: translateY(-30px) scale(1.5); opacity: 1; }
-        }
-
-        .afk-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .afk-title {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: var(--accent-gold);
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px var(--accent-gold-glow);
-            letter-spacing: 3px;
-        }
-
-        .afk-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-        }
-
-        .afk-timer-display {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 900;
-            color: var(--accent-red);
-            text-shadow: 0 0 40px var(--accent-red-glow);
-            margin: 30px 0;
-            letter-spacing: 5px;
-            transition: var(--transition-smooth);
-        }
-
-        .afk-timer-display.running {
-            color: var(--accent-gold);
-            text-shadow: 0 0 40px var(--accent-gold-glow);
-        }
-
-        .afk-timer-display.complete {
-            color: var(--accent-green);
-            text-shadow: 0 0 40px var(--accent-green-glow);
-            animation: pulse 1s ease-in-out infinite;
-        }
-
-        .afk-start-btn {
-            padding: 20px 60px;
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-            background: linear-gradient(135deg, var(--accent-gold), #ca8a04);
-            color: #000;
-            border: none;
-            border-radius: 16px;
-            cursor: pointer;
-            font-family: var(--font-display);
-            font-weight: 800;
-            transition: var(--transition-bounce);
-            box-shadow: 0 10px 40px rgba(234,179,8,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .afk-start-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 50px rgba(234,179,8,0.5);
-        }
-
-        .afk-start-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .afk-start-btn .btn-shine {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.6s;
-        }
-
-        .afk-start-btn:hover .btn-shine {
-            left: 100%;
-        }
-
-        .afk-status {
-            margin-top: 25px;
-            font-size: 1rem;
-            color: var(--text-secondary);
-            min-height: 30px;
-            font-weight: 600;
-        }
-
-        .afk-status.earning {
-            color: var(--accent-gold);
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            animation: glowPulse 1s ease-in-out infinite;
-        }
-
-        .afk-status.cancelled {
-            color: var(--accent-red);
-        }
-
-        .afk-status.success {
-            color: var(--accent-green);
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-        }
-
-        .afk-progress-bar {
-            width: 100%;
-            max-width: 400px;
-            height: 8px;
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            margin: 20px auto;
-            overflow: hidden;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .afk-progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-red));
-            border-radius: 10px;
-            transition: width 1s linear;
-            width: 0%;
-        }
-
-        .afk-progress-fill.running {
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-green));
-        }
-
-        /* ===== CREDIT SHOP (Side Section) ===== */
-        .credit-shop-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 30px;
-            height: fit-content;
-        }
-
-        .credit-shop-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .credit-shop-header h2 {
-            font-family: var(--font-display);
-            color: var(--accent-gold);
-            font-size: 1.3rem;
-            letter-spacing: 2px;
-        }
-
-        .credit-shop-header .credits-info {
-            font-family: var(--font-display);
-            color: var(--accent-gold);
-            font-size: 1rem;
-        }
-
-        .credit-shop-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .credit-shop-item {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 20px;
-            text-align: center;
-            transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .credit-shop-item:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(234,179,8,0.1);
-        }
-
-        .credit-shop-item .shop-item-img {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent-gold), #ca8a04);
-            border-radius: 12px;
-            margin: 0 auto 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-
-        .credit-shop-item .shop-item-name {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            margin-bottom: 5px;
-        }
-
-        .credit-shop-item .shop-item-desc {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-
-        .credit-shop-item .shop-item-price {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            color: var(--accent-gold);
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-
-        .credit-shop-item .shop-item-price span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .credit-shop-item .btn-buy-credit {
-            width: 100%;
-            padding: 10px;
-            background: linear-gradient(135deg, var(--accent-gold), #ca8a04);
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .credit-shop-item .btn-buy-credit:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(234,179,8,0.3);
-        }
-
-        .credit-shop-item .btn-buy-credit:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .credit-shop-item .btn-buy-credit.owned {
-            background: var(--accent-green);
-            color: white;
-            cursor: default;
-        }
-
-        /* Active Offers Display */
-        .active-offers-banner {
-            background: linear-gradient(90deg, rgba(46,213,115,0.1), rgba(234,179,8,0.1));
-            border: 1px solid rgba(46,213,115,0.3);
-            border-left: 4px solid var(--accent-green);
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .active-offers-banner .banner-icon {
-            font-size: 2rem;
-        }
-
-        .active-offers-banner .banner-text {
-            font-family: var(--font-display);
-            color: var(--accent-green);
-            font-size: 1rem;
-        }
-
-        .active-offers-banner .banner-text span {
-            color: var(--accent-gold);
-            font-weight: 700;
-        }
-
-        /* Discount Info in Credit Shop */
-        .discount-info {
-            background: rgba(255,71,87,0.05);
-            border: 1px solid rgba(255,71,87,0.2);
-            border-radius: 8px;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-align: left;
-        }
-
-        .discount-info strong {
-            color: var(--accent-red);
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-        }
-
-        .discount-info ul {
-            list-style: none;
-            margin-top: 5px;
-        }
-
-        .discount-info li {
-            margin-bottom: 3px;
-            padding-left: 15px;
-            position: relative;
-        }
-
-        .discount-info li::before {
-            content: '>';
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-        }
-
-        /* Admin Credit Controls */
-        .admin-credit-controls {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
-
-        .admin-credit-controls h3 {
-            font-family: var(--font-display);
-            color: var(--accent-purple);
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-
-        /* Admin Give Credits */
-        .admin-give-credits {
-            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(168,85,247,0.05));
-            border: 1px solid rgba(168,85,247,0.3);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-
-        .admin-give-credits h3 {
-            font-family: var(--font-display);
-            color: var(--accent-purple);
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-
-        /* Discount Toggle */
-        .discount-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            padding: 12px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .discount-toggle .toggle-label {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            color: var(--text-primary);
-        }
-
-        .toggle-switch {
-            position: relative;
-            width: 50px;
-            height: 26px;
-            background: var(--bg-secondary);
-            border-radius: 13px;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .toggle-switch.active {
-            background: var(--accent-green);
-        }
-
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            transition: var(--transition-smooth);
-        }
-
-        .toggle-switch.active::after {
-            left: 26px;
-        }
-
+        .credits-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+        .afk-container { min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 20px; border: 1px solid var(--border-subtle); background: var(--bg-card); padding: 40px; }
+        .meteor-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
+        .meteor { position: absolute; width: 4px; height: 4px; background: linear-gradient(90deg, var(--accent-red), transparent); border-radius: 50%; animation: meteorFall linear infinite; opacity: 0; }
+        .meteor::before { content: ''; position: absolute; top: 50%; transform: translateY(-50%); width: 100px; height: 2px; background: linear-gradient(90deg, var(--accent-red), transparent); right: 0; }
+        @keyframes meteorFall { 0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; } 100% { transform: translateX(-500px) translateY(500px) rotate(-45deg); opacity: 0; } }
+        .particle { position: absolute; width: 6px; height: 6px; background: var(--accent-gold); border-radius: 50%; animation: floatParticle 3s ease-in-out infinite; opacity: 0.6; }
+        @keyframes floatParticle { 0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; } 50% { transform: translateY(-30px) scale(1.5); opacity: 1; } }
+        .afk-content { position: relative; z-index: 1; text-align: center; width: 100%; max-width: 500px; }
+        .afk-title { font-family: var(--font-display); font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--accent-gold); margin-bottom: 10px; text-shadow: 0 0 30px var(--accent-gold-glow); letter-spacing: 3px; }
+        .afk-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; }
+        .afk-timer-display { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); font-weight: 900; color: var(--accent-red); text-shadow: 0 0 40px var(--accent-red-glow); margin: 30px 0; letter-spacing: 5px; transition: var(--transition-smooth); }
+        .afk-timer-display.running { color: var(--accent-gold); text-shadow: 0 0 40px var(--accent-gold-glow); }
+        .afk-timer-display.complete { color: var(--accent-green); text-shadow: 0 0 40px var(--accent-green-glow); animation: pulse 1s ease-in-out infinite; }
+        .afk-start-btn { padding: 20px 60px; font-size: 1.2rem; letter-spacing: 4px; background: linear-gradient(135deg, var(--accent-gold), #ca8a04); color: #000; border: none; border-radius: 16px; cursor: pointer; font-family: var(--font-display); font-weight: 800; transition: var(--transition-bounce); box-shadow: 0 10px 40px rgba(234,179,8,0.3); position: relative; overflow: hidden; }
+        .afk-start-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 50px rgba(234,179,8,0.5); }
+        .afk-start-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .afk-start-btn .btn-shine { position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.6s; }
+        .afk-start-btn:hover .btn-shine { left: 100%; }
+        .afk-status { margin-top: 25px; font-size: 1rem; color: var(--text-secondary); min-height: 30px; font-weight: 600; }
+        .afk-status.earning { color: var(--accent-gold); font-family: var(--font-display); font-size: 1.2rem; animation: glowPulse 1s ease-in-out infinite; }
+        .afk-status.cancelled { color: var(--accent-red); }
+        .afk-status.success { color: var(--accent-green); font-family: var(--font-display); font-size: 1.3rem; }
+        .afk-progress-bar { width: 100%; max-width: 400px; height: 8px; background: var(--bg-secondary); border-radius: 10px; margin: 20px auto; overflow: hidden; border: 1px solid var(--border-subtle); }
+        .afk-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-gold), var(--accent-red)); border-radius: 10px; transition: width 1s linear; width: 0%; }
+        .afk-progress-fill.running { background: linear-gradient(90deg, var(--accent-gold), var(--accent-green)); }
+        .credit-shop-section { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 20px; padding: 30px; height: fit-content; }
+        .credit-shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border-subtle); }
+        .credit-shop-header h2 { font-family: var(--font-display); color: var(--accent-gold); font-size: 1.3rem; letter-spacing: 2px; }
+        .credit-shop-header .credits-info { font-family: var(--font-display); color: var(--accent-gold); font-size: 1rem; }
+        .credit-shop-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .credit-shop-item { background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 20px; text-align: center; transition: var(--transition-smooth); position: relative; overflow: hidden; }
+        .credit-shop-item:hover { border-color: var(--accent-gold); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(234,179,8,0.1); }
+        .credit-shop-item .shop-item-img { width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-gold), #ca8a04); border-radius: 12px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        .credit-shop-item .shop-item-name { font-family: var(--font-display); font-size: 1.1rem; color: var(--text-primary); margin-bottom: 5px; }
+        .credit-shop-item .shop-item-desc { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 10px; }
+        .credit-shop-item .shop-item-price { font-family: var(--font-display); font-size: 1.3rem; color: var(--accent-gold); font-weight: 800; margin-bottom: 12px; }
+        .credit-shop-item .shop-item-price span { font-size: 0.8rem; color: var(--text-muted); }
+        .credit-shop-item .btn-buy-credit { width: 100%; padding: 10px; background: linear-gradient(135deg, var(--accent-gold), #ca8a04); color: #000; border: none; border-radius: 10px; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; cursor: pointer; transition: var(--transition-smooth); text-transform: uppercase; letter-spacing: 1px; }
+        .credit-shop-item .btn-buy-credit:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(234,179,8,0.3); }
+        .credit-shop-item .btn-buy-credit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .credit-shop-item .btn-buy-credit.owned { background: var(--accent-green); color: white; cursor: default; }
+        .credit-shop-item .btn-buy-credit.out-of-stock { background: var(--text-muted); color: var(--text-primary); cursor: not-allowed; }
+        .active-offers-banner { background: linear-gradient(90deg, rgba(46,213,115,0.1), rgba(234,179,8,0.1)); border: 1px solid rgba(46,213,115,0.3); border-left: 4px solid var(--accent-green); padding: 15px 20px; border-radius: 12px; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .active-offers-banner .banner-icon { font-size: 2rem; }
+        .active-offers-banner .banner-text { font-family: var(--font-display); color: var(--accent-green); font-size: 1rem; }
+        .active-offers-banner .banner-text span { color: var(--accent-gold); font-weight: 700; }
+        .discount-info { background: rgba(255,71,87,0.05); border: 1px solid rgba(255,71,87,0.2); border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 0.8rem; color: var(--text-secondary); text-align: left; }
+        .discount-info strong { color: var(--accent-red); font-family: var(--font-display); font-size: 0.75rem; }
+        .discount-info ul { list-style: none; margin-top: 5px; }
+        .discount-info li { margin-bottom: 3px; padding-left: 15px; position: relative; }
+        .discount-info li::before { content: '>'; position: absolute; left: 0; color: var(--accent-green); }
+        .admin-credit-controls { background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 12px; margin-bottom: 25px; }
+        .admin-credit-controls h3 { font-family: var(--font-display); color: var(--accent-purple); margin-bottom: 15px; font-size: 1rem; }
+        .admin-give-credits { background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(168,85,247,0.05)); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
+        .admin-give-credits h3 { font-family: var(--font-display); color: var(--accent-purple); margin-bottom: 15px; font-size: 1rem; }
+        .discount-toggle { display: flex; align-items: center; gap: 10px; background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 12px 20px; border-radius: 10px; margin-bottom: 20px; }
+        .discount-toggle .toggle-label { font-family: var(--font-display); font-size: 0.9rem; color: var(--text-primary); }
+        .toggle-switch { position: relative; width: 50px; height: 26px; background: var(--bg-secondary); border-radius: 13px; cursor: pointer; transition: var(--transition-smooth); border: 1px solid var(--border-subtle); }
+        .toggle-switch.active { background: var(--accent-green); }
+        .toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: var(--transition-smooth); }
+        .toggle-switch.active::after { left: 26px; }
+        .admin-credit-shop-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .admin-credit-shop-table th, .admin-credit-shop-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--border-subtle); }
+        .admin-credit-shop-table th { background: rgba(234,179,8,0.08); color: var(--accent-gold); font-family: var(--font-display); font-size: 0.75rem; text-transform: uppercase; }
+        .admin-credit-shop-table td { font-size: 0.9rem; }
+        .admin-credit-shop-table .btn-sm { padding: 4px 10px; font-size: 0.65rem; }
         @media (max-width:768px) {
             .home-wrapper { grid-template-columns:1fr; }
             .master-card-green { grid-column:span 1; max-width:100%; }
@@ -972,93 +359,75 @@
             .credits-layout { grid-template-columns: 1fr; }
             .credit-shop-grid { grid-template-columns: 1fr; }
         }
-
         ::-webkit-scrollbar { width:8px; }
         ::-webkit-scrollbar-track { background:var(--bg-secondary); }
         ::-webkit-scrollbar-thumb { background:var(--border-subtle); border-radius:4px; }
         ::-webkit-scrollbar-thumb:hover { background:var(--accent-red); }
-
         .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 12px 24px; border-radius: 12px; font-family: var(--font-display); font-size: 0.85rem; z-index: 10000; opacity: 0; transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
 <base target="_blank">
-<base target="_blank">
 </head>
 <body>
-    <!-- Sidebar Toggle Button -->
     <button class="sidebar-toggle" id="sidebarToggle" onclick="window.toggleSidebar()">☰</button>
-
-    <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-brand">FIRE<span>MC</span></div>
         </div>
-
-        <!-- Credits Display -->
         <div class="credits-display" id="sidebarCredits" style="display:none;">
             <div class="credits-label">💰 Your Credits</div>
             <div class="credits-value" id="sidebarCreditsValue">0</div>
         </div>
-
+        <div class="sidebar-username" id="sidebarUsername" style="display:none;">
+            <div class="username-label">👤 Username</div>
+            <div class="username-value" id="sidebarUsernameValue">-</div>
+        </div>
         <div class="sidebar-divider"></div>
-
         <div class="sidebar-section">
             <div class="sidebar-section-title">Categories</div>
             <a class="sidebar-link sidebar-category sidebar-category-firemc" onclick="window.sidebarNavigate('menu')" data-view="menu">
-                <span class="link-icon"></span>
-                <span>FIREMC</span>
+                <span class="link-icon"></span><span>FIREMC</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-donut" onclick="window.sidebarNavigate('donutsmp')" data-view="donutsmp">
-                <span class="link-icon"></span>
-                <span>DONUTSMP</span>
+                <span class="link-icon"></span><span>DONUTSMP</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-account" onclick="window.sidebarNavigate('accounts')" data-view="accounts">
-                <span class="link-icon"></span>
-                <span>ACCOUNT</span>
+                <span class="link-icon"></span><span>ACCOUNT</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-credits" onclick="window.sidebarNavigate('credits')" data-view="credits">
-                <span class="link-icon"></span>
-                <span>CREDITS</span>
+                <span class="link-icon"></span><span>CREDITS</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-admin" id="sidebarAdminLink" onclick="window.sidebarNavigate('admin')" data-view="admin" style="display:none;">
-                <span class="link-icon"></span>
-                <span>ADMIN</span>
+                <span class="link-icon"></span><span>ADMIN</span>
             </a>
         </div>
-
         <div class="sidebar-divider"></div>
-
         <div class="sidebar-section">
             <div class="sidebar-section-title">Quick Links</div>
             <a class="sidebar-link" onclick="window.sidebarNavigate('landing')">
-                <span class="link-icon"></span>
-                <span>Home</span>
+                <span class="link-icon"></span><span>Home</span>
             </a>
             <a class="sidebar-link" onclick="window.toggleTheme()">
-                <span class="link-icon"></span>
-                <span>Theme</span>
+                <span class="link-icon"></span><span>Theme</span>
             </a>
             <a class="sidebar-link" onclick="window.openAuthModal()" id="sidebarAuthLink">
-                <span class="link-icon"></span>
-                <span>Login</span>
+                <span class="link-icon"></span><span>Login</span>
             </a>
         </div>
     </nav>
-
     <div class="app-container" id="appContainer">
         <div class="top-navbar">
             <div class="nav-brand">FireMc Store</div>
             <div class="nav-actions">
+                <div class="nav-username" id="navUsername"><span id="navUsernameValue">-</span></div>
                 <button class="btn btn-secondary btn-sm" onclick="window.toggleTheme()">Theme</button>
                 <button class="btn btn-glass btn-sm" id="authTriggerBtn" onclick="window.openAuthModal()">Login</button>
                 <button class="admin-badge" id="adminBadge" onclick="window.switchView('admin')"> Admin Panel</button>
             </div>
         </div>
-
         <div class="header-container">
             <h1 class="header-title">FIREMC <span>STORE</span></h1>
         </div>
-
         <div class="guest-banner" id="guestBanner" style="display:none;">
             <p>Guest Mode - View Only</p>
             <button class="btn btn-primary btn-sm" onclick="window.openAuthModal()">Login to Order</button>
@@ -1159,64 +528,45 @@
         <!-- CREDITS / AFK VIEW -->
         <div class="view-section" id="viewCredits">
             <button class="back-btn" onclick="window.switchView('landing')">Back</button>
-            
-            <!-- Active Offers Banner -->
             <div class="active-offers-banner" id="activeOffersBanner" style="display:none;">
                 <div class="banner-icon">🎁</div>
                 <div class="banner-text">Active Offers: <span id="activeOffersList">None</span></div>
             </div>
-
-            <!-- Discount Toggle -->
             <div class="discount-toggle" id="discountToggle" style="display:none;">
                 <span class="toggle-label">Discount: <span id="toggleStatus">ON</span></span>
                 <div class="toggle-switch active" id="toggleSwitch" onclick="window.toggleDiscount()"></div>
             </div>
-
             <div class="credits-layout">
-                <!-- AFK Section (Left) -->
                 <div class="afk-container" id="afkContainer">
-                    <!-- Meteor Animation Background -->
                     <div class="meteor-container" id="meteorContainer"></div>
-                    
                     <div class="afk-content">
                         <div class="afk-title">EARN CREDITS</div>
                         <div class="afk-subtitle">Stay AFK for 60 seconds to earn 1 Credit</div>
-                        
                         <div class="afk-timer-display" id="afkTimerDisplay">01:00</div>
-                        
                         <div class="afk-progress-bar">
                             <div class="afk-progress-fill" id="afkProgressFill"></div>
                         </div>
-                        
                         <button class="afk-start-btn" id="afkStartBtn" onclick="window.toggleAFK()">
-                            <span class="btn-shine"></span>
-                            START AFK
+                            <span class="btn-shine"></span>START AFK
                         </button>
-                        
                         <div class="afk-status" id="afkStatus">Click the button to start earning credits</div>
                     </div>
                 </div>
-
-                <!-- Credit Shop Section (Right) -->
                 <div class="credit-shop-section" id="creditShopSection">
                     <div class="credit-shop-header">
                         <h2>CREDIT SHOP</h2>
-                        <div class="credits-info">
-                            💰 <span id="shopCreditsValue">0</span>
-                        </div>
+                        <div class="credits-info">💰 <span id="shopCreditsValue">0</span></div>
                     </div>
-                    <div class="credit-shop-grid" id="creditShopGrid">
-                        <!-- Items will be rendered here -->
-                    </div>
+                    <div class="credit-shop-grid" id="creditShopGrid"></div>
                 </div>
             </div>
         </div>
 
-        <!-- ADMIN VIEW -->
+        <!-- ADMIN VIEW - REORDERED: Reviews at bottom -->
         <div class="view-section" id="viewAdmin">
             <button class="back-btn" onclick="window.switchView('landing')">Back</button>
             <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--text-primary); margin-bottom:20px; border-left:4px solid var(--accent-red); padding-left:15px;">Admin Dashboard</div>
-            
+
             <!-- Admin Give Credits -->
             <div class="admin-give-credits">
                 <h3>Give Credits to User</h3>
@@ -1248,17 +598,6 @@
                         <tr><th style="width:60px;">Select</th><th>Name</th><th>Category</th><th>Stock</th><th>Price</th><th>Action</th></tr>
                     </thead>
                     <tbody id="adminTableBody"></tbody>
-                </table>
-            </div>
-
-            <!-- Admin Reviews Management -->
-            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-gold); padding-left:15px;">Reviews Management</div>
-            <div style="overflow-x:auto; margin-top:20px;">
-                <table class="admin-table">
-                    <thead>
-                        <tr><th>Name</th><th>Rating</th><th>Product</th><th>Review</th><th>Date</th><th>Action</th></tr>
-                    </thead>
-                    <tbody id="adminReviewsBody"></tbody>
                 </table>
             </div>
 
@@ -1296,6 +635,16 @@
                 <div id="addCreditItemError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
             </div>
 
+            <!-- Admin Credit Shop Table - Shows all OFF items with edit/delete -->
+            <div style="overflow-x:auto; margin-top:20px;">
+                <table class="admin-credit-shop-table">
+                    <thead>
+                        <tr><th>Name</th><th>Cost</th><th>Discount</th><th>Stock</th><th>Tag</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody id="adminCreditShopBody"></tbody>
+                </table>
+            </div>
+
             <!-- Admin AFK Rewards Management -->
             <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-blue); padding-left:15px;">AFK Rewards Management</div>
             <div class="admin-credit-controls">
@@ -1320,6 +669,17 @@
                 </div>
                 <button class="btn btn-blue btn-sm" style="margin-top:15px;" onclick="window.addAFKReward()">Add AFK Reward</button>
                 <div id="addAFKRewardError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
+            </div>
+
+            <!-- Reviews Management - MOVED TO BOTTOM -->
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-gold); padding-left:15px;">Reviews Management</div>
+            <div style="overflow-x:auto; margin-top:20px;">
+                <table class="admin-table">
+                    <thead>
+                        <tr><th>Name</th><th>Rating</th><th>Product</th><th>Review</th><th>Date</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="adminReviewsBody"></tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -1365,6 +725,11 @@
             </div>
         </div>
         <div class="cart-footer">
+            <div class="cart-savings-banner" id="cartSavingsBanner">
+                <div class="savings-title">💰 Discount Applied!</div>
+                <div class="savings-amount" id="savingsAmount">-0 INR</div>
+                <div class="savings-detail" id="savingsDetail">You saved with your OFF!</div>
+            </div>
             <div class="cart-total"><span>Total:</span><strong id="cartTotal">0 INR</strong></div>
             <button class="btn btn-primary" style="width:100%;" onclick="window.checkoutCart()">Checkout</button>
         </div>
@@ -1483,6 +848,43 @@
         </div>
     </div>
 
+    <!-- Edit Credit Shop Item Modal -->
+    <div class="modal-overlay" id="editCreditItemModal">
+        <div class="modal-box" style="border-color:var(--accent-gold); max-width:550px;">
+            <h2 style="color:var(--accent-gold);">Edit Credit Shop Item</h2>
+            <div id="editCreditItemError" style="color:var(--accent-red); margin-bottom:15px; min-height:20px;"></div>
+            <input type="hidden" id="editCreditItemId">
+            <div class="payment-input-group">
+                <label>Item Name</label>
+                <input type="text" class="payment-input" id="editCreditItemName" placeholder="e.g. 5% OFF">
+            </div>
+            <div class="payment-input-group">
+                <label>Description</label>
+                <input type="text" class="payment-input" id="editCreditItemDesc" placeholder="e.g. Get 5% discount">
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                <div class="payment-input-group">
+                    <label>Credit Cost</label>
+                    <input type="number" class="payment-input" id="editCreditItemCost" placeholder="e.g. 620">
+                </div>
+                <div class="payment-input-group">
+                    <label>Discount %</label>
+                    <input type="number" class="payment-input" id="editCreditItemDiscount" placeholder="e.g. 5">
+                </div>
+            </div>
+            <div class="payment-input-group">
+                <label>Stock</label>
+                <input type="text" class="payment-input" id="editCreditItemStock" placeholder="e.g. Unlimited">
+            </div>
+            <div class="payment-input-group">
+                <label>Tag Text (Optional)</label>
+                <input type="text" class="payment-input" id="editCreditItemTag" placeholder="e.g. HOT">
+            </div>
+            <button class="btn btn-gold" style="width:100%; margin-top:10px;" onclick="window.saveEditCreditItem()">Save Changes</button>
+            <button class="modal-dismiss" onclick="window.closeEditCreditItemModal()">Cancel</button>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="authModal">
         <div class="modal-box" style="max-width:450px;">
             <h2 id="authTitle">MEMBER ACCESS</h2>
@@ -1492,6 +894,7 @@
                 <button class="btn btn-sm" style="flex:1; background:var(--bg-glass); color:var(--text-muted);" id="registerTab" onclick="window.switchAuthTab('register')">Register</button>
             </div>
             <div id="authError" style="color:var(--accent-red); margin-bottom:15px; min-height:20px;"></div>
+            <input type="text" class="payment-input" id="authUsername" placeholder="Username (unique)" style="margin-bottom:10px;">
             <input type="email" class="payment-input" id="authEmail" placeholder="Email" style="margin-bottom:10px;">
             <input type="password" class="payment-input" id="authPassword" placeholder="Password" style="margin-bottom:15px;">
             <button class="btn btn-primary" style="width:100%;" onclick="window.handleAuth()" id="authBtn">Authenticate</button>
@@ -1503,7 +906,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, addDoc, query, where, orderBy, serverTimestamp, getDocs, updateDoc, deleteDoc, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -1530,7 +933,6 @@
             selectedPaymentApp: null,
             authTab: 'login',
             isNavigating: false,
-            // AFK / Credits State
             credits: 0,
             userOffers: [],
             afkTimer: null,
@@ -1539,13 +941,12 @@
             afkAutoLoop: false,
             afkSessionId: null,
             sidebarOpen: false,
-            // Credit Shop Items
             creditShopItems: [],
-            // Discount
             activeDiscount: 0,
             discountEnabled: true,
-            // AFK Rewards
-            afkRewards: []
+            afkRewards: [],
+            username: null,
+            usernames: new Set() // Track taken usernames locally
         };
 
         const catalog = {
@@ -1588,98 +989,44 @@
             ]
         };
 
-        // Default Credit Shop Items with updated prices
         const defaultCreditItems = [
-            { 
-                id: '5off', 
-                name: '5% OFF', 
-                description: 'Get 5% discount on eligible purchases', 
-                cost: 620, 
-                stock: 'Unlimited', 
-                tag: 'HOT', 
-                discount: 5,
-                discountInfo: {
-                    money: '100M+ (Rs 50+)',
-                    items: 'Rs 50+ items',
-                    accounts: 'Any account'
-                }
-            },
-            { 
-                id: '15off', 
-                name: '15% OFF', 
-                description: 'Get 15% discount on eligible purchases', 
-                cost: 2680, 
-                stock: 'Unlimited', 
-                tag: 'BEST', 
-                discount: 15,
-                discountInfo: {
-                    money: '100M+ (Rs 50+)',
-                    items: 'Rs 50+ items',
-                    accounts: 'Any account'
-                }
-            }
+            { id: '5off', name: '5% OFF', description: 'Get 5% discount on eligible purchases', cost: 620, stock: 'Unlimited', tag: 'HOT', discount: 5,
+              discountInfo: { money: '100M+ (Rs 50+)', items: 'Rs 50+ items', accounts: 'Any account' } },
+            { id: '15off', name: '15% OFF', description: 'Get 15% discount on eligible purchases', cost: 2680, stock: 'Unlimited', tag: 'BEST', discount: 15,
+              discountInfo: { money: '100M+ (Rs 50+)', items: 'Rs 50+ items', accounts: 'Any account' } }
         ];
 
         function getHashView() {
             const hash = window.location.hash;
             if (hash && hash.startsWith('#/')) {
                 const view = hash.replace('#/', '');
-                if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'credits'].includes(view)) {
-                    return view;
-                }
+                if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'credits'].includes(view)) return view;
             }
             return 'landing';
         }
 
         function updateHash(view) {
-            if (view === 'landing') {
-                if (window.location.hash) {
-                    window.location.hash = '';
-                }
-            } else {
-                const newHash = '#/' + view;
-                if (window.location.hash !== newHash) {
-                    window.location.hash = newHash;
-                }
-            }
+            if (view === 'landing') { if (window.location.hash) window.location.hash = ''; }
+            else { const newHash = '#/' + view; if (window.location.hash !== newHash) window.location.hash = newHash; }
         }
 
         function handleHashChange() {
             if (state.isNavigating) return;
             const view = getHashView();
-            if (view === 'admin' && !state.isAdmin) {
-                showToast('Admin only!');
-                window.location.hash = '';
-                return;
-            }
+            if (view === 'admin' && !state.isAdmin) { showToast('Admin only!'); window.location.hash = ''; return; }
             switchViewInternal(view, true);
         }
 
         function switchViewInternal(view, skipHashUpdate) {
-            // Stop AFK timer if leaving credits page
-            if (view !== 'credits' && state.afkIsRunning) {
-                stopAFKInternal();
-            }
-
+            if (view !== 'credits' && state.afkIsRunning) stopAFKInternal();
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
             const map = { landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', accounts: 'viewAccounts', admin: 'viewAdmin', credits: 'viewCredits' };
-            if (map[view]) { 
-                setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); 
-                window.scrollTo({ top: 0, behavior: 'smooth' }); 
-            }
-            if (view === 'admin') { renderAdminTable(); renderAdminReviews(); }
-            if (view === 'credits') { 
-                renderCreditShop(); 
-                updateCreditsDisplay();
-                updateDiscountToggle();
-            }
-            
-            // Update sidebar active state
+            if (map[view]) { setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            if (view === 'admin') { renderAdminTable(); renderAdminReviews(); renderAdminCreditShopTable(); }
+            if (view === 'credits') { renderCreditShop(); updateCreditsDisplay(); updateDiscountToggle(); }
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 link.classList.remove('active');
-                if (link.dataset.view === view) {
-                    link.classList.add('active');
-                }
+                if (link.dataset.view === view) link.classList.add('active');
             });
         }
 
@@ -1691,16 +1038,13 @@
             updateWishlistUI(); setupStarRating();
             setupMeteorAnimation();
             await loadCreditShopItems();
-            await syncCreditShopPrices(); // Sync prices to latest defaults
+            await syncCreditShopPrices();
             await loadAFKRewards();
-
+            await loadAllUsernames(); // Load taken usernames
             const initialView = getHashView();
             if (initialView !== 'landing') {
-                if (initialView === 'admin' && !state.isAdmin) {
-                    window.location.hash = '';
-                } else {
-                    switchViewInternal(initialView, true);
-                }
+                if (initialView === 'admin' && !state.isAdmin) window.location.hash = '';
+                else switchViewInternal(initialView, true);
             }
             window.addEventListener('hashchange', handleHashChange);
         }
@@ -1733,10 +1077,29 @@
                     }
                 });
                 renderProducts();
-                if (document.getElementById('viewAdmin').classList.contains('active')) {
-                    renderAdminTable();
-                }
+                if (document.getElementById('viewAdmin').classList.contains('active')) renderAdminTable();
             });
+        }
+
+        async function loadAllUsernames() {
+            try {
+                const snap = await getDocs(collection(db, 'users'));
+                snap.forEach(d => {
+                    const data = d.data();
+                    if (data.username) state.usernames.add(data.username.toLowerCase());
+                });
+            } catch (e) { console.log('Username load error', e); }
+        }
+
+        async function isUsernameTaken(username) {
+            if (!username) return true;
+            const lower = username.toLowerCase().trim();
+            if (state.usernames.has(lower)) return true;
+            try {
+                const q = query(collection(db, 'users'), where('username', '==', lower));
+                const snap = await getDocs(q);
+                return !snap.empty;
+            } catch (e) { return false; }
         }
 
         function setupAuth() {
@@ -1744,34 +1107,57 @@
                 state.user = user;
                 state.isAdmin = user?.uid === state.adminUID;
                 updateUI();
-                
                 if (user) {
                     document.getElementById('authTriggerBtn').textContent = 'Logout';
                     document.getElementById('authTriggerBtn').onclick = () => signOut(auth);
                     document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Logout</span>';
                     document.getElementById('sidebarAuthLink').onclick = () => signOut(auth);
                     closeAuthModal();
-                    
-                    // Load user credits and offers
                     await loadUserCredits();
                     await loadUserOffers();
+                    await loadUserUsername();
                 } else {
                     document.getElementById('authTriggerBtn').textContent = 'Login';
                     document.getElementById('authTriggerBtn').onclick = openAuthModal;
                     document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Login</span>';
                     document.getElementById('sidebarAuthLink').onclick = openAuthModal;
-                    state.credits = 0;
-                    state.userOffers = [];
-                    state.activeDiscount = 0;
-                    updateCreditsDisplay();
+                    state.credits = 0; state.userOffers = []; state.activeDiscount = 0;
+                    state.username = null;
+                    updateCreditsDisplay(); updateUsernameDisplay();
                 }
-
                 const currentHash = getHashView();
                 if (currentHash === 'admin' && !state.isAdmin) {
-                    window.location.hash = '';
-                    switchViewInternal('landing', true);
+                    window.location.hash = ''; switchViewInternal('landing', true);
                 }
             });
+        }
+
+        async function loadUserUsername() {
+            if (!state.user) return;
+            try {
+                const userDoc = await getDoc(doc(db, 'users', state.user.uid));
+                if (userDoc.exists()) {
+                    state.username = userDoc.data().username || null;
+                    updateUsernameDisplay();
+                }
+            } catch (e) { console.log('Username load error', e); }
+        }
+
+        function updateUsernameDisplay() {
+            const navUsername = document.getElementById('navUsername');
+            const navUsernameValue = document.getElementById('navUsernameValue');
+            const sidebarUsername = document.getElementById('sidebarUsername');
+            const sidebarUsernameValue = document.getElementById('sidebarUsernameValue');
+
+            if (state.username && state.user) {
+                navUsernameValue.textContent = state.username;
+                navUsername.classList.add('visible');
+                sidebarUsernameValue.textContent = state.username;
+                sidebarUsername.classList.add('visible');
+            } else {
+                navUsername.classList.remove('visible');
+                sidebarUsername.classList.remove('visible');
+            }
         }
 
         async function loadUserCredits() {
@@ -1781,11 +1167,8 @@
                 if (userDoc.exists()) {
                     state.credits = userDoc.data().credits || 0;
                 } else {
-                    await setDoc(doc(db, 'users', state.user.uid), { 
-                        email: state.user.email, 
-                        credits: 0, 
-                        isAdmin: false, 
-                        createdAt: serverTimestamp() 
+                    await setDoc(doc(db, 'users', state.user.uid), {
+                        email: state.user.email, credits: 0, isAdmin: false, createdAt: serverTimestamp()
                     }, { merge: true });
                     state.credits = 0;
                 }
@@ -1798,17 +1181,10 @@
             try {
                 const offersSnap = await getDocs(collection(db, 'users', state.user.uid, 'offers'));
                 state.userOffers = offersSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-                
-                // Calculate best discount
                 let bestDiscount = 0;
-                state.userOffers.forEach(offer => {
-                    if (offer.discount > bestDiscount) bestDiscount = offer.discount;
-                });
+                state.userOffers.forEach(offer => { if (offer.discount > bestDiscount) bestDiscount = offer.discount; });
                 state.activeDiscount = bestDiscount;
-                
-                updateActiveOffersBanner();
-                updateDiscountToggle();
-                renderCreditShop();
+                updateActiveOffersBanner(); updateDiscountToggle(); renderCreditShop();
             } catch (e) { console.log('Offers load error', e); }
         }
 
@@ -1816,7 +1192,6 @@
             try {
                 const snap = await getDocs(collection(db, 'credit_shop'));
                 if (snap.empty) {
-                    // Initialize default items
                     for (const item of defaultCreditItems) {
                         await setDoc(doc(db, 'credit_shop', item.id), { ...item, createdAt: serverTimestamp() });
                     }
@@ -1831,54 +1206,34 @@
         }
 
         async function syncCreditShopPrices() {
-            // Update existing credit shop items to latest default prices
             try {
                 for (const defaultItem of defaultCreditItems) {
                     const existingItem = state.creditShopItems.find(i => i.id === defaultItem.id);
                     if (existingItem && existingItem.cost !== defaultItem.cost) {
-                        await updateDoc(doc(db, 'credit_shop', defaultItem.id), {
-                            cost: defaultItem.cost,
-                            updatedAt: serverTimestamp()
-                        });
+                        await updateDoc(doc(db, 'credit_shop', defaultItem.id), { cost: defaultItem.cost, updatedAt: serverTimestamp() });
                         existingItem.cost = defaultItem.cost;
                     }
                 }
-            } catch (e) {
-                console.log('Price sync error', e);
-            }
+            } catch (e) { console.log('Price sync error', e); }
         }
 
         async function loadAFKRewards() {
             try {
                 const snap = await getDocs(collection(db, 'afk_rewards'));
                 state.afkRewards = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            } catch (e) {
-                console.log('AFK rewards load error', e);
-                state.afkRewards = [];
-            }
+            } catch (e) { state.afkRewards = []; }
         }
 
         function updateCreditsDisplay() {
-            const creditsValue = state.credits;
-            document.getElementById('sidebarCreditsValue').textContent = creditsValue;
-            document.getElementById('shopCreditsValue').textContent = creditsValue;
-            
-            if (state.user) {
-                document.getElementById('sidebarCredits').style.display = 'block';
-            } else {
-                document.getElementById('sidebarCredits').style.display = 'none';
-            }
+            document.getElementById('sidebarCreditsValue').textContent = state.credits;
+            document.getElementById('shopCreditsValue').textContent = state.credits;
+            document.getElementById('sidebarCredits').style.display = state.user ? 'block' : 'none';
         }
 
         function updateActiveOffersBanner() {
             const banner = document.getElementById('activeOffersBanner');
             const list = document.getElementById('activeOffersList');
-            
-            if (state.userOffers.length === 0) {
-                banner.style.display = 'none';
-                return;
-            }
-            
+            if (state.userOffers.length === 0) { banner.style.display = 'none'; return; }
             banner.style.display = 'flex';
             const offerNames = state.userOffers.map(o => {
                 const offer = state.creditShopItems.find(i => i.id === o.id);
@@ -1891,27 +1246,16 @@
             const toggle = document.getElementById('discountToggle');
             const toggleSwitch = document.getElementById('toggleSwitch');
             const toggleStatus = document.getElementById('toggleStatus');
-            
             if (state.activeDiscount > 0) {
                 toggle.style.display = 'flex';
-                if (state.discountEnabled) {
-                    toggleSwitch.classList.add('active');
-                    toggleStatus.textContent = 'ON';
-                    toggleStatus.style.color = 'var(--accent-green)';
-                } else {
-                    toggleSwitch.classList.remove('active');
-                    toggleStatus.textContent = 'OFF';
-                    toggleStatus.style.color = 'var(--accent-red)';
-                }
-            } else {
-                toggle.style.display = 'none';
-            }
+                if (state.discountEnabled) { toggleSwitch.classList.add('active'); toggleStatus.textContent = 'ON'; toggleStatus.style.color = 'var(--accent-green)'; }
+                else { toggleSwitch.classList.remove('active'); toggleStatus.textContent = 'OFF'; toggleStatus.style.color = 'var(--accent-red)'; }
+            } else { toggle.style.display = 'none'; }
         }
 
         window.toggleDiscount = () => {
             state.discountEnabled = !state.discountEnabled;
-            updateDiscountToggle();
-            updateCartUI();
+            updateDiscountToggle(); updateCartUI(); renderProducts();
             showToast(`Discount ${state.discountEnabled ? 'ENABLED' : 'DISABLED'}`);
         };
 
@@ -1930,39 +1274,16 @@
             const sidebar = document.getElementById('sidebar');
             const toggle = document.getElementById('sidebarToggle');
             const appContainer = document.getElementById('appContainer');
-            
             state.sidebarOpen = !state.sidebarOpen;
-            
-            if (state.sidebarOpen) {
-                sidebar.classList.add('open');
-                toggle.classList.add('sidebar-open');
-                appContainer.classList.add('sidebar-open');
-            } else {
-                sidebar.classList.remove('open');
-                toggle.classList.remove('sidebar-open');
-                appContainer.classList.remove('sidebar-open');
-            }
+            if (state.sidebarOpen) { sidebar.classList.add('open'); toggle.classList.add('sidebar-open'); appContainer.classList.add('sidebar-open'); }
+            else { sidebar.classList.remove('open'); toggle.classList.remove('sidebar-open'); appContainer.classList.remove('sidebar-open'); }
         };
 
         window.sidebarNavigate = (view) => {
-            // Auto-close sidebar after navigation
-            if (state.sidebarOpen) {
-                window.toggleSidebar();
-            }
-            
-            if (view === 'donutsmp') {
-                window.showComingSoon();
-                return;
-            }
-            if (view === 'credits' && !state.user) {
-                showToast('Login to access Credits!');
-                openAuthModal();
-                return;
-            }
-            if (view === 'admin' && !state.isAdmin) {
-                showToast('Admin only!');
-                return;
-            }
+            if (state.sidebarOpen) window.toggleSidebar();
+            if (view === 'donutsmp') { window.showComingSoon(); return; }
+            if (view === 'credits' && !state.user) { showToast('Login to access Credits!'); openAuthModal(); return; }
+            if (view === 'admin' && !state.isAdmin) { showToast('Admin only!'); return; }
             switchView(view);
         };
 
@@ -1980,22 +1301,37 @@
         };
 
         window.handleAuth = async () => {
+            const username = document.getElementById('authUsername').value.trim().toLowerCase();
             const email = document.getElementById('authEmail').value.trim();
             const password = document.getElementById('authPassword').value;
             const errorDiv = document.getElementById('authError');
+
+            if (state.authTab === 'register') {
+                if (!username) { errorDiv.textContent = 'Username is required'; return; }
+                if (username.length < 3) { errorDiv.textContent = 'Username must be at least 3 characters'; return; }
+                if (!/^[a-z0-9_]+$/.test(username)) { errorDiv.textContent = 'Username: letters, numbers, underscores only'; return; }
+                const taken = await isUsernameTaken(username);
+                if (taken) { errorDiv.textContent = 'Username already taken! Choose another.'; return; }
+            }
             if (!email || !password) { errorDiv.textContent = 'Enter email and password'; return; }
+
             try {
                 let cred;
                 if (state.authTab === 'login') {
                     cred = await signInWithEmailAndPassword(auth, email, password);
                 } else {
                     cred = await createUserWithEmailAndPassword(auth, email, password);
-                    await setDoc(doc(db, 'users', cred.user.uid), { email, credits: 0, isAdmin: false, createdAt: serverTimestamp() });
+                    await setDoc(doc(db, 'users', cred.user.uid), {
+                        email, username, credits: 0, isAdmin: false, createdAt: serverTimestamp()
+                    });
+                    state.usernames.add(username);
+                    state.username = username;
+                    updateUsernameDisplay();
                 }
                 errorDiv.textContent = ''; closeAuthModal();
             } catch (err) {
                 const errors = { 'auth/invalid-email': 'Invalid email', 'auth/user-not-found': 'User not found', 'auth/wrong-password': 'Wrong password', 'auth/email-already-in-use': 'Email already registered', 'auth/weak-password': 'Password too weak (min 6 chars)', 'auth/invalid-credential': 'Invalid credentials' };
-                errorDiv.textContent = errors[err.code] || 'Authentication failed';
+                errorDiv.textContent = errors[err.code] || 'Authentication failed: ' + err.message;
             }
         };
 
@@ -2016,14 +1352,19 @@
             const btnClass = isPromo ? 'btn-gold' : 'btn-primary';
             const btnText = isPromo ? 'Claim Promo' : 'Add to Cart';
             const displayName = p.name.replace(/(\d+M|Promo)/g, '<span style="color:var(--accent-red);">$1</span>');
-            
-            // Discount tag for eligible items
+
             let discountTag = '';
             if (state.activeDiscount > 0 && state.discountEnabled && isEligibleForDiscount(p)) {
                 discountTag = `<div class="discount-tag">${state.activeDiscount}% OFF</div>`;
             }
-            
-            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}${discountTag}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
+
+            // Eligible tag for items >= 50 INR
+            let eligibleTag = '';
+            if (isEligibleForDiscount(p) && state.activeDiscount > 0) {
+                eligibleTag = `<div class="eligible-tag">${state.activeDiscount}% OFF Eligible</div>`;
+            }
+
+            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}${discountTag}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div>${eligibleTag}</div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
         }
 
         window.addToCart = (id) => {
@@ -2031,27 +1372,45 @@
             const p = state.products[id]; if (!p) return;
             if (p.promo && state.cart.some(i => i.id === id)) { showToast('Promo only once!'); return; }
             if (p.promo && state.cart.length === 0) { showToast('Add regular item first!'); return; }
-            state.cart.push({ id: p.id, name: p.name, price: p.price });
+
+            // Check if item already in cart - increase quantity
+            const existingIndex = state.cart.findIndex(item => item.id === id);
+            if (existingIndex > -1) {
+                state.cart[existingIndex].qty += 1;
+            } else {
+                state.cart.push({ id: p.id, name: p.name, price: p.price, qty: 1 });
+            }
             updateCartUI(); showToast(`${p.name} added to cart!`);
         };
+
         window.removeFromCart = (idx) => { state.cart.splice(idx, 1); updateCartUI(); };
 
+        window.updateCartQty = (idx, change) => {
+            const item = state.cart[idx];
+            if (!item) return;
+            item.qty += change;
+            if (item.qty <= 0) {
+                state.cart.splice(idx, 1);
+            }
+            updateCartUI();
+        };
+
         function calculateCartTotal() {
-            let subtotal = state.cart.reduce((s, i) => s + i.price, 0);
+            let subtotal = state.cart.reduce((s, i) => s + (i.price * i.qty), 0);
             let discount = 0;
             let eligibleTotal = 0;
 
-            // Calculate eligible amount for discount
-            state.cart.forEach(item => {
-                const product = state.products[item.id];
-                if (product && isEligibleForDiscount(product) && state.discountEnabled) {
-                    eligibleTotal += item.price;
+            // Only apply discount if user has OFF and discount is enabled AND total >= 50
+            if (state.activeDiscount > 0 && state.discountEnabled && subtotal >= 50) {
+                state.cart.forEach(item => {
+                    const product = state.products[item.id];
+                    if (product && isEligibleForDiscount(product)) {
+                        eligibleTotal += (item.price * item.qty);
+                    }
+                });
+                if (eligibleTotal > 0) {
+                    discount = Math.round((eligibleTotal * state.activeDiscount) / 100);
                 }
-            });
-
-            // Apply discount
-            if (state.activeDiscount > 0 && eligibleTotal > 0 && state.discountEnabled) {
-                discount = Math.round((eligibleTotal * state.activeDiscount) / 100);
             }
 
             const final = subtotal - discount;
@@ -2059,34 +1418,42 @@
         }
 
         function isEligibleForDiscount(product) {
-            // Money: 100M+ (price >= 50)
             if (product.category === 'money' && product.price >= 50) return true;
-            
-            // Items: price >= 50
             if (['spawners', 'armory', 'materials'].includes(product.category) && product.price >= 50) return true;
-            
-            // Accounts: any price
             if (product.category === 'accounts') return true;
-            
             return false;
         }
 
         function updateCartUI() {
-            document.getElementById('cartCount').textContent = state.cart.length;
+            document.getElementById('cartCount').textContent = state.cart.reduce((sum, i) => sum + i.qty, 0);
             const totals = calculateCartTotal();
             document.getElementById('cartTotal').textContent = totals.final + ' INR';
-            
+
+            // Show/hide savings banner
+            const savingsBanner = document.getElementById('cartSavingsBanner');
+            const savingsAmount = document.getElementById('savingsAmount');
+            const savingsDetail = document.getElementById('savingsDetail');
+
+            if (totals.discount > 0 && totals.subtotal >= 50) {
+                savingsBanner.classList.add('visible');
+                savingsAmount.textContent = `-${totals.discount} INR Saved!`;
+                savingsDetail.textContent = `${state.activeDiscount}% OFF applied on eligible items`;
+            } else {
+                savingsBanner.classList.remove('visible');
+            }
+
             if (state.cart.length === 0) {
                 document.getElementById('cartItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">🛒</div><p>Your cart is empty</p></div>';
                 return;
             }
-            
+
             document.getElementById('cartItems').innerHTML = state.cart.map((item, i) => {
                 const product = state.products[item.id];
-                const isDiscounted = product && isEligibleForDiscount(product) && state.discountEnabled && state.activeDiscount > 0;
-                const discountLine = isDiscounted ? `<div class="cart-discount-line">-${state.activeDiscount}% OFF applied = -${Math.round((item.price * state.activeDiscount) / 100)} INR</div>` : '';
-                
-                return `<div class="cart-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} INR</p>${discountLine}</div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div>`;
+                const isDiscounted = product && isEligibleForDiscount(product) && state.discountEnabled && state.activeDiscount > 0 && totals.subtotal >= 50;
+                const itemTotal = item.price * item.qty;
+                const discountLine = isDiscounted ? `<div class="cart-discount-line">-${state.activeDiscount}% OFF = ${Math.round(itemTotal - (itemTotal * state.activeDiscount / 100))} INR</div>` : '';
+
+                return `<div class="cart-item"><div class="cart-item-info"><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} INR x ${item.qty} = ${itemTotal} INR</p>${discountLine}</div><div style="display:flex; align-items:center; gap:8px;"><div class="cart-item-qty"><button onclick="window.updateCartQty(${i}, -1)">−</button><span>${item.qty}</span><button onclick="window.updateCartQty(${i}, 1)">+</button></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div></div>`;
             }).join('');
         }
 
@@ -2094,7 +1461,7 @@
             document.getElementById('cartPanel').classList.toggle('open'); 
             document.getElementById('cartOverlay').classList.toggle('active'); 
         };
-        
+
         window.checkoutCart = () => {
             if (state.cart.length === 0) { showToast('Cart is empty!'); return; }
             toggleCart(); 
@@ -2108,7 +1475,7 @@
             localStorage.setItem('firemc_wishlist', JSON.stringify(state.wishlist));
             updateWishlistUI(); renderProducts();
         };
-        
+
         function updateWishlistUI() {
             document.getElementById('wishlistCount').textContent = state.wishlist.length;
             if (state.wishlist.length === 0) {
@@ -2120,7 +1487,7 @@
                 return `<div class="wishlist-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${p.name}</h4><p style="color:var(--accent-red); font-weight:700;">${p.price} INR</p></div><div style="display:flex; gap:8px;"><button class="btn btn-primary btn-sm" onclick="window.addToCart('${p.id}'); window.toggleWishlist()">Add</button><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.toggleWishlistItem('${p.id}')">🗑️</button></div></div>`;
             }).join('');
         }
-        
+
         window.toggleWishlist = () => {
             document.getElementById('wishlistPanel').classList.toggle('open');
             const overlay = document.getElementById('wishlistOverlay');
@@ -2136,7 +1503,7 @@
                 renderReviews();
             } catch (e) { console.log('Reviews load error', e); }
         }
-        
+
         function renderReviews() {
             const container = document.getElementById('reviewsContainer');
             if (state.reviews.length === 0) { container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No reviews yet. Be the first!</p>'; return; }
@@ -2146,35 +1513,20 @@
         function renderAdminReviews() {
             const tbody = document.getElementById('adminReviewsBody');
             if (!tbody) return;
-            
             tbody.innerHTML = state.reviews.map(r => `
-                <tr>
-                    <td>${r.name || 'Anonymous'}</td>
-                    <td>${'⭐'.repeat(r.rating || 5)}</td>
-                    <td>${r.product || '-'}</td>
-                    <td>${r.text || ''}</td>
-                    <td>${r.createdAt ? new Date(r.createdAt.toDate()).toLocaleDateString() : ''}</td>
-                    <td><button class="btn btn-danger btn-sm" onclick="window.deleteReview('${r.id}')">🗑️ Delete</button></td>
-                </tr>
+                <tr><td>${r.name || 'Anonymous'}</td><td>${'⭐'.repeat(r.rating || 5)}</td><td>${r.product || '-'}</td><td>${r.text || ''}</td><td>${r.createdAt ? new Date(r.createdAt.toDate()).toLocaleDateString() : ''}</td><td><button class="btn btn-danger btn-sm" onclick="window.deleteReview('${r.id}')">🗑️ Delete</button></td></tr>
             `).join('');
         }
 
         window.deleteReview = async (reviewId) => {
-            if (!state.isAdmin) {
-                showToast('Admin only!');
-                return;
-            }
+            if (!state.isAdmin) { showToast('Admin only!'); return; }
             if (!confirm('Delete this review?')) return;
-            
             try {
                 await deleteDoc(doc(db, 'reviews', reviewId));
                 state.reviews = state.reviews.filter(r => r.id !== reviewId);
-                renderReviews();
-                renderAdminReviews();
+                renderReviews(); renderAdminReviews();
                 showToast('Review deleted!');
-            } catch (e) {
-                showToast('Delete failed: ' + e.message);
-            }
+            } catch (e) { showToast('Delete failed: ' + e.message); }
         };
 
         function setupStarRating() {
@@ -2185,15 +1537,15 @@
                 });
             });
         }
-        
+
         window.openReviewModal = () => {
             document.getElementById('reviewModal').classList.add('active'); 
             state.currentRating = 0;
             document.querySelectorAll('#starRatingInput span').forEach(s => s.style.color = 'var(--text-muted)');
         };
-        
+
         window.closeReviewModal = () => document.getElementById('reviewModal').classList.remove('active');
-        
+
         window.submitReview = async () => {
             const name = document.getElementById('reviewerName').value.trim();
             const product = document.getElementById('reviewProduct').value.trim();
@@ -2213,46 +1565,39 @@
 
         window.openPaymentModal = () => {
             hideCheckout(); 
-            
             const totals = calculateCartTotal();
             const discountBanner = document.getElementById('discountBanner');
             const discountText = document.getElementById('discountText');
-            
             if (totals.discount > 0) {
                 discountBanner.style.display = 'block';
                 discountText.textContent = `${state.activeDiscount}% OFF applied = -${totals.discount} INR (Final: ${totals.final} INR)`;
-            } else {
-                discountBanner.style.display = 'none';
-            }
-            
+            } else { discountBanner.style.display = 'none'; }
             document.getElementById('paymentModal').classList.add('active');
             state.selectedPaymentApp = null;
             document.querySelectorAll('.payment-app-btn').forEach(b => b.classList.remove('selected'));
         };
-        
+
         window.hidePaymentModal = () => {
             document.getElementById('paymentModal').classList.remove('active'); 
             state.selectedPaymentApp = null;
         };
-        
+
         window.selectPaymentApp = function(el) {
             document.querySelectorAll('.payment-app-btn').forEach(b => b.classList.remove('selected'));
             el.classList.add('selected'); 
             state.selectedPaymentApp = el.dataset.app;
         };
-        
+
         window.submitPayment = async () => {
             const email = document.getElementById('paymentEmail').value.trim();
             if (!state.selectedPaymentApp) { showToast('Select a payment app!'); return; }
             if (!email) { showToast('Enter your email!'); return; }
-            
             const totals = calculateCartTotal();
-            
             try {
                 await addDoc(collection(db, 'payments'), {
                     userId: state.user.uid, 
                     userEmail: email,
-                    items: state.cart.map(i => ({ id: i.id, name: i.name, price: i.price })),
+                    items: state.cart.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
                     subtotal: totals.subtotal,
                     discount: totals.discount,
                     discountPercent: state.discountEnabled ? state.activeDiscount : 0,
@@ -2286,8 +1631,6 @@
         function setupMeteorAnimation() {
             const container = document.getElementById('meteorContainer');
             if (!container) return;
-            
-            // Create meteors
             for (let i = 0; i < 15; i++) {
                 const meteor = document.createElement('div');
                 meteor.className = 'meteor';
@@ -2297,8 +1640,6 @@
                 meteor.style.animationDelay = Math.random() * 5 + 's';
                 container.appendChild(meteor);
             }
-
-            // Create floating particles
             for (let i = 0; i < 10; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
@@ -2311,130 +1652,70 @@
         }
 
         window.toggleAFK = () => {
-            if (state.afkIsRunning) {
-                stopAFKInternal();
-            } else {
-                startAFKInternal();
-            }
+            if (state.afkIsRunning) stopAFKInternal();
+            else startAFKInternal();
         };
 
         function startAFKInternal() {
-            if (!state.user) {
-                showToast('Login to earn credits!');
-                openAuthModal();
-                return;
-            }
-
-            if (!document.getElementById('viewCredits').classList.contains('active')) {
-                showToast('Stay on Credits page to earn!');
-                return;
-            }
-
+            if (!state.user) { showToast('Login to earn credits!'); openAuthModal(); return; }
+            if (!document.getElementById('viewCredits').classList.contains('active')) { showToast('Stay on Credits page to earn!'); return; }
             state.afkIsRunning = true;
             state.afkAutoLoop = true;
             state.afkTimeRemaining = 60;
-
             const btn = document.getElementById('afkStartBtn');
             const timerDisplay = document.getElementById('afkTimerDisplay');
             const progressFill = document.getElementById('afkProgressFill');
             const status = document.getElementById('afkStatus');
-
             btn.innerHTML = '<span class="btn-shine"></span>STOP AFK';
             timerDisplay.classList.add('running');
             timerDisplay.classList.remove('complete');
             progressFill.classList.add('running');
             status.textContent = 'AFK running... Stay on this page!';
             status.className = 'afk-status earning';
-
             runAFKTimer();
         }
 
         function runAFKTimer() {
             state.afkTimer = setInterval(() => {
-                // Check if still on credits page
-                if (!document.getElementById('viewCredits').classList.contains('active')) {
-                    stopAFKInternal();
-                    return;
-                }
-
+                if (!document.getElementById('viewCredits').classList.contains('active')) { stopAFKInternal(); return; }
                 state.afkTimeRemaining--;
-                
-                // Update display
                 const mins = Math.floor(state.afkTimeRemaining / 60);
                 const secs = state.afkTimeRemaining % 60;
                 document.getElementById('afkTimerDisplay').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                
-                // Update progress
                 const progress = ((60 - state.afkTimeRemaining) / 60) * 100;
                 document.getElementById('afkProgressFill').style.width = progress + '%';
-
-                if (state.afkTimeRemaining <= 0) {
-                    // Timer complete!
-                    clearInterval(state.afkTimer);
-                    completeAFK();
-                }
+                if (state.afkTimeRemaining <= 0) { clearInterval(state.afkTimer); completeAFK(); }
             }, 1000);
         }
 
         function stopAFKInternal() {
             if (!state.afkIsRunning) return;
-
             clearInterval(state.afkTimer);
             state.afkIsRunning = false;
             state.afkAutoLoop = false;
             state.afkTimeRemaining = 60;
-
             const btn = document.getElementById('afkStartBtn');
             const timerDisplay = document.getElementById('afkTimerDisplay');
             const progressFill = document.getElementById('afkProgressFill');
             const status = document.getElementById('afkStatus');
-
-            if (btn) {
-                btn.innerHTML = '<span class="btn-shine"></span>START AFK';
-            }
-            if (timerDisplay) {
-                timerDisplay.textContent = '01:00';
-                timerDisplay.classList.remove('running', 'complete');
-            }
-            if (progressFill) {
-                progressFill.style.width = '0%';
-                progressFill.classList.remove('running');
-            }
-            if (status) {
-                status.textContent = 'AFK stopped.';
-                status.className = 'afk-status cancelled';
-            }
+            if (btn) btn.innerHTML = '<span class="btn-shine"></span>START AFK';
+            if (timerDisplay) { timerDisplay.textContent = '01:00'; timerDisplay.classList.remove('running', 'complete'); }
+            if (progressFill) { progressFill.style.width = '0%'; progressFill.classList.remove('running'); }
+            if (status) { status.textContent = 'AFK stopped.'; status.className = 'afk-status cancelled'; }
         }
 
         async function completeAFK() {
             const timerDisplay = document.getElementById('afkTimerDisplay');
             const progressFill = document.getElementById('afkProgressFill');
             const status = document.getElementById('afkStatus');
-
-            if (timerDisplay) {
-                timerDisplay.textContent = '00:00';
-                timerDisplay.classList.remove('running');
-                timerDisplay.classList.add('complete');
-            }
-            if (progressFill) {
-                progressFill.style.width = '100%';
-                progressFill.classList.remove('running');
-            }
-            if (status) {
-                status.textContent = '+1 Credit Earned! Restarting...';
-                status.className = 'afk-status success';
-            }
-
-            // Credit user
+            if (timerDisplay) { timerDisplay.textContent = '00:00'; timerDisplay.classList.remove('running'); timerDisplay.classList.add('complete'); }
+            if (progressFill) { progressFill.style.width = '100%'; progressFill.classList.remove('running'); }
+            if (status) { status.textContent = '+1 Credit Earned! Restarting...'; status.className = 'afk-status success'; }
             try {
                 state.credits += 1;
-                await updateDoc(doc(db, 'users', state.user.uid), {
-                    credits: increment(1)
-                });
+                await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(1) });
                 updateCreditsDisplay();
                 showToast('+1 Credit Earned!');
-
-                // Auto restart if still on credits page and auto-loop enabled
                 setTimeout(() => {
                     if (state.afkAutoLoop && document.getElementById('viewCredits').classList.contains('active')) {
                         state.afkTimeRemaining = 60;
@@ -2445,11 +1726,8 @@
                         document.getElementById('afkTimerDisplay').classList.add('running');
                         document.getElementById('afkProgressFill').classList.add('running');
                         runAFKTimer();
-                    } else {
-                        stopAFKInternal();
-                    }
+                    } else { stopAFKInternal(); }
                 }, 1500);
-
             } catch (e) {
                 console.error('Credit update error', e);
                 showToast('Error saving credit. Contact admin.');
@@ -2461,102 +1739,55 @@
         function renderCreditShop() {
             const grid = document.getElementById('creditShopGrid');
             if (!grid) return;
-
             if (state.creditShopItems.length === 0) {
                 grid.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">No items available</div>';
                 return;
             }
-
             grid.innerHTML = state.creditShopItems.map((item, index) => {
                 const isOwned = state.userOffers.some(o => o.id === item.id);
+                const isOutOfStock = item.stock !== 'Unlimited' && parseInt(item.stock) <= 0;
                 const tagHtml = item.tag ? `<div class="discount-tag">${item.tag}</div>` : '';
                 const stockLabel = item.stock === 'Unlimited' ? '' : `<div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">${item.stock} left</div>`;
-                
-                // Discount info HTML
                 let discountInfoHtml = '';
                 if (item.discountInfo) {
-                    discountInfoHtml = `
-                        <div class="discount-info">
-                            <strong>APPLIES TO:</strong>
-                            <ul>
-                                <li>Money: ${item.discountInfo.money}</li>
-                                <li>Items: ${item.discountInfo.items}</li>
-                                <li>Accounts: ${item.discountInfo.accounts}</li>
-                            </ul>
-                        </div>
-                    `;
+                    discountInfoHtml = `<div class="discount-info"><strong>APPLIES TO:</strong><ul><li>Money: ${item.discountInfo.money}</li><li>Items: ${item.discountInfo.items}</li><li>Accounts: ${item.discountInfo.accounts}</li></ul></div>`;
                 }
-                
-                return `
-                    <div class="credit-shop-item" style="animation-delay:${index * 0.1}s;">
-                        ${tagHtml}
-                        <div class="shop-item-img">💰</div>
-                        <div class="shop-item-name">${item.name}</div>
-                        <div class="shop-item-desc">${item.description}</div>
-                        ${discountInfoHtml}
-                        ${stockLabel}
-                        <div class="shop-item-price">${item.cost} <span>CREDITS</span></div>
-                        <button class="btn-buy-credit ${isOwned ? 'owned' : ''}" 
-                                id="buy${item.id}" 
-                                onclick="window.buyCreditItem('${item.id}', ${item.cost})"
-                                ${isOwned ? 'disabled' : ''}>
-                            ${isOwned ? 'OWNED' : 'BUY NOW'}
-                        </button>
-                    </div>
-                `;
+                let btnClass = '';
+                let btnText = 'BUY NOW';
+                let btnDisabled = '';
+                if (isOwned) { btnClass = 'owned'; btnText = 'OWNED'; btnDisabled = 'disabled'; }
+                else if (isOutOfStock) { btnClass = 'out-of-stock'; btnText = 'OUT OF STOCK'; btnDisabled = 'disabled'; }
+                return `<div class="credit-shop-item" style="animation-delay:${index * 0.1}s;">${tagHtml}<div class="shop-item-img">💰</div><div class="shop-item-name">${item.name}</div><div class="shop-item-desc">${item.description}</div>${discountInfoHtml}${stockLabel}<div class="shop-item-price">${item.cost} <span>CREDITS</span></div><button class="btn-buy-credit ${btnClass}" id="buy${item.id}" onclick="window.buyCreditItem('${item.id}', ${item.cost})" ${btnDisabled}>${btnText}</button></div>`;
             }).join('');
         }
 
         window.buyCreditItem = async (itemId, cost) => {
-            if (!state.user) {
-                showToast('Login to buy items!');
-                openAuthModal();
-                return;
-            }
+            if (!state.user) { showToast('Login to buy items!'); openAuthModal(); return; }
+            if (state.userOffers.some(o => o.id === itemId)) { showToast('You already own this item!'); return; }
 
-            if (state.userOffers.some(o => o.id === itemId)) {
-                showToast('You already own this item!');
-                return;
-            }
+            // Check stock
+            const item = state.creditShopItems.find(i => i.id === itemId);
+            if (item && item.stock !== 'Unlimited' && parseInt(item.stock) <= 0) { showToast('This item is out of stock!'); return; }
 
-            if (state.credits < cost) {
-                showToast(`Not enough credits! Need ${cost} credits.`);
-                return;
-            }
-
+            if (state.credits < cost) { showToast(`Not enough credits! Need ${cost} credits.`); return; }
             try {
-                // Get item details
-                const item = state.creditShopItems.find(i => i.id === itemId);
                 const discount = item ? item.discount : 0;
-
-                // Deduct credits
                 state.credits -= cost;
-                await updateDoc(doc(db, 'users', state.user.uid), {
-                    credits: state.credits
-                });
+                await updateDoc(doc(db, 'users', state.user.uid), { credits: state.credits });
+                await setDoc(doc(db, 'users', state.user.uid, 'offers', itemId), { purchasedAt: serverTimestamp(), itemId: itemId, discount: discount });
 
-                // Add item to user with discount info
-                await setDoc(doc(db, 'users', state.user.uid, 'offers', itemId), {
-                    purchasedAt: serverTimestamp(),
-                    itemId: itemId,
-                    discount: discount
-                });
+                // Decrement stock if not unlimited
+                if (item && item.stock !== 'Unlimited') {
+                    const newStock = Math.max(0, parseInt(item.stock) - 1);
+                    item.stock = newStock.toString();
+                    await updateDoc(doc(db, 'credit_shop', itemId), { stock: item.stock });
+                }
 
                 state.userOffers.push({ id: itemId, discount: discount });
-                
-                // Recalculate active discount
                 let bestDiscount = 0;
-                state.userOffers.forEach(o => {
-                    if (o.discount > bestDiscount) bestDiscount = o.discount;
-                });
+                state.userOffers.forEach(o => { if (o.discount > bestDiscount) bestDiscount = o.discount; });
                 state.activeDiscount = bestDiscount;
-                
-                updateCreditsDisplay();
-                updateActiveOffersBanner();
-                updateDiscountToggle();
-                renderCreditShop();
-                renderProducts(); // Re-render to show discount tags
-                
+                updateCreditsDisplay(); updateActiveOffersBanner(); updateDiscountToggle(); renderCreditShop(); renderProducts();
                 showToast(`${item ? item.name : itemId} purchased! ${discount}% discount active!`);
             } catch (e) {
                 console.error('Buy item error', e);
@@ -2566,55 +1797,29 @@
 
         // ===== ADMIN: Give Credits =====
         window.giveCredits = async () => {
-            if (!state.isAdmin) {
-                showToast('Admin only!');
-                return;
-            }
-
+            if (!state.isAdmin) { showToast('Admin only!'); return; }
             const email = document.getElementById('giveCreditEmail').value.trim();
             const amount = parseInt(document.getElementById('giveCreditAmount').value);
             const errorDiv = document.getElementById('giveCreditError');
-
-            if (!email || !amount || amount <= 0) {
-                errorDiv.textContent = 'Enter valid email and amount';
-                return;
-            }
-
+            if (!email || !amount || amount <= 0) { errorDiv.textContent = 'Enter valid email and amount'; return; }
             try {
-                // Find user by email
                 const usersQuery = query(collection(db, 'users'), where('email', '==', email));
                 const usersSnap = await getDocs(usersQuery);
-
-                if (usersSnap.empty) {
-                    errorDiv.textContent = 'User not found with this email';
-                    return;
-                }
-
+                if (usersSnap.empty) { errorDiv.textContent = 'User not found with this email'; return; }
                 const userDoc = usersSnap.docs[0];
                 const userId = userDoc.id;
-
-                await updateDoc(doc(db, 'users', userId), {
-                    credits: increment(amount)
-                });
-
+                await updateDoc(doc(db, 'users', userId), { credits: increment(amount) });
                 errorDiv.textContent = '';
                 document.getElementById('giveCreditEmail').value = '';
                 document.getElementById('giveCreditAmount').value = '';
                 showToast(`${amount} credits given to ${email}`);
-
-                // Refresh if it's the current user
-                if (state.user && state.user.uid === userId) {
-                    await loadUserCredits();
-                }
-            } catch (e) {
-                errorDiv.textContent = 'Error: ' + e.message;
-            }
+                if (state.user && state.user.uid === userId) { await loadUserCredits(); }
+            } catch (e) { errorDiv.textContent = 'Error: ' + e.message; }
         };
 
         // ===== ADMIN: Add Credit Shop Item =====
         window.addCreditShopItem = async () => {
             if (!state.isAdmin) return;
-            
             const name = document.getElementById('newCreditItemName').value.trim();
             const desc = document.getElementById('newCreditItemDesc').value.trim();
             const cost = parseInt(document.getElementById('newCreditItemCost').value);
@@ -2622,36 +1827,15 @@
             const stock = document.getElementById('newCreditItemStock').value.trim();
             const tag = document.getElementById('newCreditItemTag').value.trim();
             const errorDiv = document.getElementById('addCreditItemError');
-
-            if (!name || !desc || !cost || !discount || !stock) {
-                errorDiv.textContent = 'Fill all required fields';
-                return;
-            }
-
+            if (!name || !desc || !cost || !discount || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
             const id = 'cs_' + Date.now().toString(36);
             try {
-                const itemData = {
-                    name, 
-                    description: desc, 
-                    cost, 
-                    discount,
-                    stock,
-                    discountInfo: {
-                        money: '100M+ (Rs 50+)',
-                        items: 'Rs 50+ items',
-                        accounts: 'Any account'
-                    },
-                    createdAt: serverTimestamp()
-                };
+                const itemData = { name, description: desc, cost, discount, stock, discountInfo: { money: '100M+ (Rs 50+)', items: 'Rs 50+ items', accounts: 'Any account' }, createdAt: serverTimestamp() };
                 if (tag) itemData.tag = tag;
-
                 await setDoc(doc(db, 'credit_shop', id), itemData);
-                
                 state.creditShopItems.push({ id, ...itemData });
-                renderCreditShop();
+                renderCreditShop(); renderAdminCreditShopTable();
                 showToast('Credit shop item added!');
-                
-                // Clear inputs
                 document.getElementById('newCreditItemName').value = '';
                 document.getElementById('newCreditItemDesc').value = '';
                 document.getElementById('newCreditItemCost').value = '';
@@ -2659,48 +1843,103 @@
                 document.getElementById('newCreditItemStock').value = '';
                 document.getElementById('newCreditItemTag').value = '';
                 errorDiv.textContent = '';
-            } catch (e) {
-                errorDiv.textContent = 'Failed: ' + e.message;
-            }
+            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
+        };
+
+        // ===== ADMIN: Edit/Delete Credit Shop Items =====
+        window.renderAdminCreditShopTable = () => {
+            const tbody = document.getElementById('adminCreditShopBody');
+            if (!tbody) return;
+            tbody.innerHTML = state.creditShopItems.map(item => `
+                <tr>
+                    <td><strong>${item.name}</strong></td>
+                    <td>${item.cost}</td>
+                    <td>${item.discount}%</td>
+                    <td>${item.stock}</td>
+                    <td>${item.tag || '-'}</td>
+                    <td>
+                        <button class="btn btn-gold btn-sm" onclick="window.openEditCreditItem('${item.id}')">✏️ Edit</button>
+                        <button class="btn btn-danger btn-sm" onclick="window.deleteCreditShopItem('${item.id}')">🗑️ Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        };
+
+        window.openEditCreditItem = (itemId) => {
+            const item = state.creditShopItems.find(i => i.id === itemId);
+            if (!item) return;
+            document.getElementById('editCreditItemId').value = itemId;
+            document.getElementById('editCreditItemName').value = item.name;
+            document.getElementById('editCreditItemDesc').value = item.description;
+            document.getElementById('editCreditItemCost').value = item.cost;
+            document.getElementById('editCreditItemDiscount').value = item.discount;
+            document.getElementById('editCreditItemStock').value = item.stock;
+            document.getElementById('editCreditItemTag').value = item.tag || '';
+            document.getElementById('editCreditItemError').textContent = '';
+            document.getElementById('editCreditItemModal').classList.add('active');
+        };
+
+        window.closeEditCreditItemModal = () => {
+            document.getElementById('editCreditItemModal').classList.remove('active');
+        };
+
+        window.saveEditCreditItem = async () => {
+            const itemId = document.getElementById('editCreditItemId').value;
+            const name = document.getElementById('editCreditItemName').value.trim();
+            const desc = document.getElementById('editCreditItemDesc').value.trim();
+            const cost = parseInt(document.getElementById('editCreditItemCost').value);
+            const discount = parseInt(document.getElementById('editCreditItemDiscount').value);
+            const stock = document.getElementById('editCreditItemStock').value.trim();
+            const tag = document.getElementById('editCreditItemTag').value.trim();
+            const errorDiv = document.getElementById('editCreditItemError');
+
+            if (!name || !desc || !cost || !discount || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
+            try {
+                const updateData = { name, description: desc, cost, discount, stock, updatedAt: serverTimestamp() };
+                if (tag) updateData.tag = tag;
+                await updateDoc(doc(db, 'credit_shop', itemId), updateData);
+
+                const idx = state.creditShopItems.findIndex(i => i.id === itemId);
+                if (idx > -1) {
+                    state.creditShopItems[idx] = { ...state.creditShopItems[idx], ...updateData };
+                }
+                renderCreditShop(); renderAdminCreditShopTable();
+                closeEditCreditItemModal();
+                showToast('Credit shop item updated!');
+            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
+        };
+
+        window.deleteCreditShopItem = async (itemId) => {
+            if (!state.isAdmin) { showToast('Admin only!'); return; }
+            if (!confirm('Delete this credit shop item?')) return;
+            try {
+                await deleteDoc(doc(db, 'credit_shop', itemId));
+                state.creditShopItems = state.creditShopItems.filter(i => i.id !== itemId);
+                renderCreditShop(); renderAdminCreditShopTable();
+                showToast('Credit shop item deleted!');
+            } catch (e) { showToast('Delete failed: ' + e.message); }
         };
 
         // ===== ADMIN: Add AFK Reward =====
         window.addAFKReward = async () => {
             if (!state.isAdmin) return;
-            
             const name = document.getElementById('newAFKRewardName').value.trim();
             const desc = document.getElementById('newAFKRewardDesc').value.trim();
             const credits = parseInt(document.getElementById('newAFKRewardCredits').value);
             const duration = parseInt(document.getElementById('newAFKRewardDuration').value);
             const errorDiv = document.getElementById('addAFKRewardError');
-
-            if (!name || !desc || !credits || !duration) {
-                errorDiv.textContent = 'Fill all required fields';
-                return;
-            }
-
+            if (!name || !desc || !credits || !duration) { errorDiv.textContent = 'Fill all required fields'; return; }
             const id = 'afk_' + Date.now().toString(36);
             try {
-                await setDoc(doc(db, 'afk_rewards', id), {
-                    name, 
-                    description: desc, 
-                    credits, 
-                    duration,
-                    createdAt: serverTimestamp()
-                });
-                
+                await setDoc(doc(db, 'afk_rewards', id), { name, description: desc, credits, duration, createdAt: serverTimestamp() });
                 state.afkRewards.push({ id, name, description: desc, credits, duration });
                 showToast('AFK reward added!');
-                
-                // Clear inputs
                 document.getElementById('newAFKRewardName').value = '';
                 document.getElementById('newAFKRewardDesc').value = '';
                 document.getElementById('newAFKRewardCredits').value = '';
                 document.getElementById('newAFKRewardDuration').value = '';
                 errorDiv.textContent = '';
-            } catch (e) {
-                errorDiv.textContent = 'Failed: ' + e.message;
-            }
+            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
         };
 
         function renderAdminTable() {
@@ -2718,10 +1957,7 @@
             const price = parseFloat(document.getElementById(`price-${id}`).value);
             const category = document.getElementById(`cat-${id}`).value;
             const oldCategory = state.products[id].category;
-            state.products[id].name = name; 
-            state.products[id].stock = stock; 
-            state.products[id].price = price; 
-            state.products[id].category = category;
+            state.products[id].name = name; state.products[id].stock = stock; state.products[id].price = price; state.products[id].category = category;
             try {
                 await setDoc(doc(db, 'products', id), { name, stock, price, category, updatedAt: serverTimestamp() }, { merge: true });
                 if (oldCategory !== category) {
@@ -2729,18 +1965,9 @@
                     if (!catalog[category]) catalog[category] = [];
                     catalog[category].push(state.products[id]);
                     showToast(`Moved to ${category}!`);
-                } else {
-                    if (catalog[category]) {
-                        const idx = catalog[category].findIndex(p => p.id === id);
-                        if (idx > -1) catalog[category][idx] = state.products[id];
-                    }
-                    showToast('Saved!');
-                }
-                renderProducts(); 
-                renderAdminTable(); 
-            } catch (e) { 
-                showToast('Save failed: ' + e.message); 
-            }
+                } else { showToast('Saved!'); }
+                renderProducts(); renderAdminTable();
+            } catch (e) { showToast('Save failed: ' + e.message); }
         };
 
         window.selectAllAdminItems = () => document.querySelectorAll('#adminTableBody input[type="checkbox"]').forEach(c => c.checked = true);
