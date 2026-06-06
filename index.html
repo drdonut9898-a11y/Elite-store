@@ -1358,12 +1358,6 @@
                 discountTag = `<div class="discount-tag">${state.activeDiscount}% OFF</div>`;
             }
 
-            // Eligible tag for items >= 50 INR
-            let eligibleTag = '';
-            if (isEligibleForDiscount(p) && state.activeDiscount > 0) {
-                eligibleTag = `<div class="eligible-tag">${state.activeDiscount}% OFF Eligible</div>`;
-            }
-
             return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}${discountTag}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div>${eligibleTag}</div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
         }
 
