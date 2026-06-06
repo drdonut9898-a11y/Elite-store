@@ -1748,7 +1748,7 @@
                 if (user) {
                     document.getElementById('authTriggerBtn').textContent = 'Logout';
                     document.getElementById('authTriggerBtn').onclick = () => signOut(auth);
-                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🚪</span><span>Logout</span>';
+                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Logout</span>';
                     document.getElementById('sidebarAuthLink').onclick = () => signOut(auth);
                     closeAuthModal();
                     
