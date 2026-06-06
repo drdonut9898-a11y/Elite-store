@@ -45,6 +45,7 @@
             --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
             --transition-smooth: all 0.4s cubic-bezier(0.25,1,0.5,1);
             --transition-bounce: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
+            --sidebar-width: 280px;
         }
 
         body.light-theme {
@@ -58,7 +59,10 @@
         body.light-theme .master-card,
         body.light-theme .review-card,
         body.light-theme .wishlist-item,
-        body.light-theme .cart-item {
+        body.light-theme .cart-item,
+        body.light-theme .sidebar,
+        body.light-theme .credit-shop-item,
+        body.light-theme .afk-container {
             background: rgba(255,255,255,0.95);
             border-color: rgba(0,0,0,0.1);
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -76,6 +80,15 @@
         body.light-theme .guest-banner {
             background: linear-gradient(90deg, rgba(255,159,67,0.05), transparent);
         }
+        body.light-theme .sidebar-link {
+            color: var(--text-primary);
+        }
+        body.light-theme .sidebar-link:hover {
+            background: rgba(255,71,87,0.1);
+        }
+        body.light-theme .sidebar-category {
+            color: var(--accent-red);
+        }
 
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
@@ -88,7 +101,161 @@
         }
         @keyframes bgPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); } }
 
-        .app-container { max-width:1200px; margin:0 auto; padding:0 20px; }
+        .app-container { max-width:1200px; margin:0 auto; padding:0 20px; margin-left: 0; transition: margin-left 0.4s ease; }
+        .app-container.sidebar-open { margin-left: var(--sidebar-width); }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-subtle);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s cubic-bezier(0.25,1,0.5,1);
+            overflow-y: auto;
+            transform: translateX(-100%);
+        }
+        .sidebar.open { transform: translateX(0); }
+        .sidebar-header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .sidebar-brand {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent-red);
+            text-shadow: 0 0 20px var(--accent-red-glow);
+            letter-spacing: 3px;
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+        .sidebar-brand span {
+            color: var(--text-primary);
+        }
+        .sidebar-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
+            margin: 10px 20px;
+        }
+        .sidebar-section {
+            padding: 15px 20px;
+        }
+        .sidebar-section-title {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            padding: 0 10px;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            margin-bottom: 4px;
+            border: 1px solid transparent;
+        }
+        .sidebar-link:hover {
+            background: var(--bg-glass);
+            color: var(--accent-red);
+            border-color: var(--border-accent);
+            transform: translateX(5px);
+        }
+        .sidebar-link.active {
+            background: linear-gradient(135deg, rgba(255,71,87,0.15), rgba(255,71,87,0.05));
+            color: var(--accent-red);
+            border-color: var(--border-accent);
+            box-shadow: 0 4px 15px var(--accent-red-glow);
+        }
+        .sidebar-link .link-icon {
+            font-size: 1.2rem;
+            width: 28px;
+            text-align: center;
+        }
+        .sidebar-category {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .sidebar-category-firemc { color: var(--accent-red); }
+        .sidebar-category-donut { color: var(--accent-blue); }
+        .sidebar-category-account { color: var(--accent-green); }
+        .sidebar-category-credits { color: var(--accent-gold); }
+        .sidebar-category-admin { color: var(--accent-purple); }
+
+        .sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-md);
+        }
+        .sidebar-toggle:hover {
+            background: var(--accent-red);
+            color: white;
+            transform: scale(1.1);
+        }
+        .sidebar-toggle.sidebar-open {
+            left: calc(var(--sidebar-width) + 20px);
+        }
+
+        /* Credits Display in Sidebar */
+        .credits-display {
+            background: linear-gradient(135deg, rgba(234,179,8,0.15), rgba(234,179,8,0.05));
+            border: 1px solid rgba(234,179,8,0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 20px;
+            text-align: center;
+            animation: glowGold 2s ease-in-out infinite;
+        }
+        @keyframes glowGold {
+            0%, 100% { box-shadow: 0 0 10px rgba(234,179,8,0.2); }
+            50% { box-shadow: 0 0 20px rgba(234,179,8,0.4); }
+        }
+        .credits-display .credits-label {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        .credits-display .credits-value {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            text-shadow: 0 0 15px var(--accent-gold-glow);
+        }
 
         .top-navbar { display:flex; justify-content:space-between; align-items:center; padding:20px 0; margin-bottom:20px; flex-wrap:wrap; gap:15px; animation: slideDown 0.6s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
@@ -115,6 +282,7 @@
         .btn-danger { background:linear-gradient(135deg,#ef4444,#dc2626); color:white; }
         .btn-danger:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px rgba(239,68,68,0.4); }
         .btn-sm { padding:6px 14px; font-size:0.7rem; }
+        .btn-lg { padding:16px 40px; font-size:1rem; }
 
         .header-container { text-align:center; margin-bottom:60px; animation: fadeInUp 0.8s ease-out; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
@@ -143,6 +311,9 @@
         .master-card-green { border-top-color:var(--accent-green); border-color:rgba(46,213,115,0.3); }
         .master-card-green h2 { color:var(--accent-green); }
         .master-card-green:hover { border-color:var(--accent-green); box-shadow:0 20px 40px rgba(46,213,115,0.15); }
+        .master-card-gold { border-top-color:var(--accent-gold); border-color:rgba(234,179,8,0.3); }
+        .master-card-gold h2 { color:var(--accent-gold); }
+        .master-card-gold:hover { border-color:var(--accent-gold); box-shadow:0 20px 40px rgba(234,179,8,0.15); }
 
         .menu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
         .menu-card { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; padding:45px 35px; text-align:center; cursor:pointer; transition:var(--transition-smooth); position: relative; overflow: hidden; }
@@ -163,6 +334,7 @@
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
         .billboard-blue { background:linear-gradient(90deg,rgba(0,210,255,0.08),transparent); border-color:rgba(0,210,255,0.3); border-left-color:var(--accent-blue); }
         .billboard-green { background:linear-gradient(90deg,rgba(46,213,115,0.08),transparent); border-color:rgba(46,213,115,0.3); border-left-color:var(--accent-green); }
+        .billboard-gold { background:linear-gradient(90deg,rgba(234,179,8,0.08),transparent); border-color:rgba(234,179,8,0.3); border-left-color:var(--accent-gold); }
         .rate-tag { font-size:1.3rem; font-weight:600; color:var(--text-secondary); }
         .rate-tag strong { color:var(--accent-red); font-family:var(--font-display); font-size:1.5rem; }
         .warning-tag { background:rgba(255,71,87,0.1); color:var(--accent-red); border:1px solid var(--border-accent); font-weight:700; padding:8px 18px; border-radius:6px; text-transform:uppercase; font-size:0.9rem; animation: pulse 2s infinite; }
@@ -184,6 +356,29 @@
         .pkg-card:hover .pkg-cost { background: rgba(255,71,87,0.1); border-color: rgba(255,71,87,0.3); }
         .promo-badge { position:absolute; top:15px; right:15px; background:linear-gradient(90deg,var(--accent-gold),#ca8a04); color:#000; font-size:0.7rem; font-weight:900; padding:4px 12px; border-radius:6px; animation: shimmer 2s infinite; }
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+
+        /* ===== DISCOUNT TAG ===== */
+        .discount-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--accent-red), #ff2e44);
+            color: white;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 900;
+            padding: 5px 14px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px var(--accent-red-glow);
+            animation: tagPulse 2s ease-in-out infinite;
+            z-index: 2;
+        }
+        @keyframes tagPulse {
+            0%, 100% { box-shadow: 0 4px 15px var(--accent-red-glow); }
+            50% { box-shadow: 0 4px 25px var(--accent-red-glow), 0 0 40px rgba(255,71,87,0.3); }
+        }
 
         .wishlist-btn { position:absolute; top:15px; left:15px; background:rgba(255,71,87,0.1); border:1px solid rgba(255,71,87,0.2); color:var(--text-muted); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; transition:var(--transition-bounce); z-index:3; }
         .wishlist-btn:hover, .wishlist-btn.active { background:var(--accent-red); color:white; border-color:var(--accent-red); transform: scale(1.2); }
@@ -217,6 +412,15 @@
         .cart-total strong { font-family:var(--font-display); color:var(--accent-red); font-size:1.5rem; }
         .cart-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; opacity:0; pointer-events:none; transition:opacity 0.3s; }
         .cart-overlay.active { opacity:1; pointer-events:auto; }
+
+        /* Cart Discount Line */
+        .cart-discount-line {
+            color: var(--accent-green);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 5px;
+            font-family: var(--font-display);
+        }
 
         .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,2,3,0.95); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; pointer-events:none; transition:all 0.3s; }
         .modal-overlay.active { opacity:1; pointer-events:auto; }
@@ -269,11 +473,504 @@
         .guest-banner { background:linear-gradient(90deg,rgba(255,159,67,0.1),transparent); border:1px solid rgba(255,159,67,0.3); border-left:4px solid #ff9f43; padding:15px 20px; border-radius:10px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; animation: slideInLeft 0.6s ease-out; }
         .guest-banner p { color:#ff9f43; font-weight:600; }
 
+        /* ===== AFK / CREDITS PAGE ===== */
+        .credits-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .afk-container {
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-card);
+            padding: 40px;
+        }
+
+        /* Meteor Animation */
+        .meteor-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .meteor {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-red), transparent);
+            border-radius: 50%;
+            animation: meteorFall linear infinite;
+            opacity: 0;
+        }
+        .meteor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-red), transparent);
+            right: 0;
+        }
+        @keyframes meteorFall {
+            0% {
+                transform: translateX(0) translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-500px) translateY(500px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: floatParticle 3s ease-in-out infinite;
+            opacity: 0.6;
+        }
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+            50% { transform: translateY(-30px) scale(1.5); opacity: 1; }
+        }
+
+        .afk-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .afk-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px var(--accent-gold-glow);
+            letter-spacing: 3px;
+        }
+
+        .afk-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .afk-timer-display {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            color: var(--accent-red);
+            text-shadow: 0 0 40px var(--accent-red-glow);
+            margin: 30px 0;
+            letter-spacing: 5px;
+            transition: var(--transition-smooth);
+        }
+
+        .afk-timer-display.running {
+            color: var(--accent-gold);
+            text-shadow: 0 0 40px var(--accent-gold-glow);
+        }
+
+        .afk-timer-display.complete {
+            color: var(--accent-green);
+            text-shadow: 0 0 40px var(--accent-green-glow);
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .afk-start-btn {
+            padding: 20px 60px;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, var(--accent-gold), #ca8a04);
+            color: #000;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            font-family: var(--font-display);
+            font-weight: 800;
+            transition: var(--transition-bounce);
+            box-shadow: 0 10px 40px rgba(234,179,8,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .afk-start-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(234,179,8,0.5);
+        }
+
+        .afk-start-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .afk-start-btn .btn-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .afk-start-btn:hover .btn-shine {
+            left: 100%;
+        }
+
+        .afk-status {
+            margin-top: 25px;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            min-height: 30px;
+            font-weight: 600;
+        }
+
+        .afk-status.earning {
+            color: var(--accent-gold);
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            animation: glowPulse 1s ease-in-out infinite;
+        }
+
+        .afk-status.cancelled {
+            color: var(--accent-red);
+        }
+
+        .afk-status.success {
+            color: var(--accent-green);
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+        }
+
+        .afk-progress-bar {
+            width: 100%;
+            max-width: 400px;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .afk-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-red));
+            border-radius: 10px;
+            transition: width 1s linear;
+            width: 0%;
+        }
+
+        .afk-progress-fill.running {
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-green));
+        }
+
+        /* ===== CREDIT SHOP (Side Section) ===== */
+        .credit-shop-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 30px;
+            height: fit-content;
+        }
+
+        .credit-shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .credit-shop-header h2 {
+            font-family: var(--font-display);
+            color: var(--accent-gold);
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+        }
+
+        .credit-shop-header .credits-info {
+            font-family: var(--font-display);
+            color: var(--accent-gold);
+            font-size: 1rem;
+        }
+
+        .credit-shop-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .credit-shop-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .credit-shop-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(234,179,8,0.1);
+        }
+
+        .credit-shop-item .shop-item-img {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-gold), #ca8a04);
+            border-radius: 12px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .credit-shop-item .shop-item-name {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .credit-shop-item .shop-item-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .credit-shop-item .shop-item-price {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .credit-shop-item .shop-item-price span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .credit-shop-item .btn-buy-credit {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, var(--accent-gold), #ca8a04);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .credit-shop-item .btn-buy-credit:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(234,179,8,0.3);
+        }
+
+        .credit-shop-item .btn-buy-credit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .credit-shop-item .btn-buy-credit.owned {
+            background: var(--accent-green);
+            color: white;
+            cursor: default;
+        }
+
+        /* Active Offers Display */
+        .active-offers-banner {
+            background: linear-gradient(90deg, rgba(46,213,115,0.1), rgba(234,179,8,0.1));
+            border: 1px solid rgba(46,213,115,0.3);
+            border-left: 4px solid var(--accent-green);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .active-offers-banner .banner-icon {
+            font-size: 2rem;
+        }
+
+        .active-offers-banner .banner-text {
+            font-family: var(--font-display);
+            color: var(--accent-green);
+            font-size: 1rem;
+        }
+
+        .active-offers-banner .banner-text span {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        /* Discount Info in Credit Shop */
+        .discount-info {
+            background: rgba(255,71,87,0.05);
+            border: 1px solid rgba(255,71,87,0.2);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: left;
+        }
+
+        .discount-info strong {
+            color: var(--accent-red);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+        }
+
+        .discount-info ul {
+            list-style: none;
+            margin-top: 5px;
+        }
+
+        .discount-info li {
+            margin-bottom: 3px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .discount-info li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        /* Admin Credit Controls */
+        .admin-credit-controls {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .admin-credit-controls h3 {
+            font-family: var(--font-display);
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        /* Admin Give Credits */
+        .admin-give-credits {
+            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(168,85,247,0.05));
+            border: 1px solid rgba(168,85,247,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .admin-give-credits h3 {
+            font-family: var(--font-display);
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        /* Discount Toggle */
+        .discount-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .discount-toggle .toggle-label {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: var(--bg-secondary);
+            border-radius: 13px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-green);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: var(--transition-smooth);
+        }
+
+        .toggle-switch.active::after {
+            left: 26px;
+        }
+
         @media (max-width:768px) {
             .home-wrapper { grid-template-columns:1fr; }
             .master-card-green { grid-column:span 1; max-width:100%; }
             .packages-container { grid-template-columns:1fr; }
             .modal-box { max-width:95vw; padding:20px; }
+            .app-container { margin-left: 0; }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-toggle { left: 20px; }
+            .sidebar-toggle.sidebar-open { left: 20px; }
+            .credits-layout { grid-template-columns: 1fr; }
+            .credit-shop-grid { grid-template-columns: 1fr; }
         }
 
         ::-webkit-scrollbar { width:8px; }
@@ -285,15 +982,76 @@
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
-    <div class="app-container">
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="window.toggleSidebar()">☰</button>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">FIRE<span>MC</span></div>
+        </div>
+
+        <!-- Credits Display -->
+        <div class="credits-display" id="sidebarCredits" style="display:none;">
+            <div class="credits-label">💰 Your Credits</div>
+            <div class="credits-value" id="sidebarCreditsValue">0</div>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Categories</div>
+            <a class="sidebar-link sidebar-category sidebar-category-firemc" onclick="window.sidebarNavigate('menu')" data-view="menu">
+                <span class="link-icon">🔥</span>
+                <span>FIREMC</span>
+            </a>
+            <a class="sidebar-link sidebar-category sidebar-category-donut" onclick="window.sidebarNavigate('donutsmp')" data-view="donutsmp">
+                <span class="link-icon">🍩</span>
+                <span>DONUTSMP</span>
+            </a>
+            <a class="sidebar-link sidebar-category sidebar-category-account" onclick="window.sidebarNavigate('accounts')" data-view="accounts">
+                <span class="link-icon">👤</span>
+                <span>ACCOUNT</span>
+            </a>
+            <a class="sidebar-link sidebar-category sidebar-category-credits" onclick="window.sidebarNavigate('credits')" data-view="credits">
+                <span class="link-icon">⭐</span>
+                <span>CREDITS</span>
+            </a>
+            <a class="sidebar-link sidebar-category sidebar-category-admin" id="sidebarAdminLink" onclick="window.sidebarNavigate('admin')" data-view="admin" style="display:none;">
+                <span class="link-icon">🛡️</span>
+                <span>ADMIN</span>
+            </a>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Quick Links</div>
+            <a class="sidebar-link" onclick="window.sidebarNavigate('landing')">
+                <span class="link-icon">🏠</span>
+                <span>Home</span>
+            </a>
+            <a class="sidebar-link" onclick="window.toggleTheme()">
+                <span class="link-icon">🌓</span>
+                <span>Theme</span>
+            </a>
+            <a class="sidebar-link" onclick="window.openAuthModal()" id="sidebarAuthLink">
+                <span class="link-icon">🔐</span>
+                <span>Login</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="app-container" id="appContainer">
         <div class="top-navbar">
             <div class="nav-brand">FireMc Store</div>
             <div class="nav-actions">
                 <button class="btn btn-secondary btn-sm" onclick="window.toggleTheme()">Theme</button>
                 <button class="btn btn-glass btn-sm" id="authTriggerBtn" onclick="window.openAuthModal()">Login</button>
-                <button class="admin-badge" id="adminBadge" onclick="window.switchView('admin')">Admin Panel</button>
+                <button class="admin-badge" id="adminBadge" onclick="window.switchView('admin')">🛡️ Admin Panel</button>
             </div>
         </div>
 
@@ -306,6 +1064,7 @@
             <button class="btn btn-primary btn-sm" onclick="window.openAuthModal()">Login to Order</button>
         </div>
 
+        <!-- LANDING VIEW -->
         <div class="view-section active" id="viewLanding">
             <div class="home-wrapper">
                 <div class="master-card" onclick="window.handleCardClick('menu')">
@@ -320,6 +1079,10 @@
                     <h2>ACCOUNTS</h2>
                     <p style="color:var(--accent-green);">Click for Details</p>
                 </div>
+                <div class="master-card master-card-gold" onclick="window.handleCardClick('credits')">
+                    <h2 style="color:var(--accent-gold);">EARN CREDITS</h2>
+                    <p style="color:var(--accent-gold);">AFK & Earn Rewards</p>
+                </div>
             </div>
             <div class="reviews-section">
                 <div class="reviews-header">
@@ -330,6 +1093,7 @@
             </div>
         </div>
 
+        <!-- MENU VIEW -->
         <div class="view-section" id="viewMenu">
             <button class="back-btn" onclick="window.switchView('landing')">Back</button>
             <div class="menu-grid">
@@ -344,6 +1108,7 @@
             </div>
         </div>
 
+        <!-- MONEY VIEW -->
         <div class="view-section" id="viewMoney">
             <button class="back-btn" onclick="window.switchView('menu')">Back</button>
             <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--accent-red); margin-bottom:20px; text-align:center; letter-spacing:3px;">FIREMC CLASSIC</div>
@@ -352,12 +1117,13 @@
                 <div class="warning-tag">Min: 40M</div>
             </div>
             <div class="search-container">
-                <span class="search-icon">&#128269;</span>
+                <span class="search-icon">🔍</span>
                 <input type="text" class="search-input" id="moneySearch" placeholder="Search money..." onkeyup="window.filterProducts('money')">
             </div>
             <div class="packages-container" id="moneyContainer"></div>
         </div>
 
+        <!-- ITEMS VIEW -->
         <div class="view-section" id="viewItems">
             <button class="back-btn" onclick="window.switchView('menu')">Back</button>
             <div class="store-billboard">
@@ -365,7 +1131,7 @@
                 <div class="warning-tag">Premium Only</div>
             </div>
             <div class="search-container">
-                <span class="search-icon">&#128269;</span>
+                <span class="search-icon">🔍</span>
                 <input type="text" class="search-input" id="itemSearch" placeholder="Search items..." onkeyup="window.filterProducts('items')">
             </div>
             <div style="font-family:var(--font-display); color:var(--text-primary); margin:20px 0; border-left:4px solid var(--accent-red); padding-left:15px;">Custom Spawners</div>
@@ -376,6 +1142,7 @@
             <div class="packages-container" id="materialsContainer"></div>
         </div>
 
+        <!-- ACCOUNTS VIEW -->
         <div class="view-section" id="viewAccounts">
             <button class="back-btn" onclick="window.switchView('landing')">Back</button>
             <div class="store-billboard billboard-green">
@@ -383,17 +1150,94 @@
                 <div class="warning-tag warning-tag-green">Secure</div>
             </div>
             <div class="search-container">
-                <span class="search-icon">&#128269;</span>
+                <span class="search-icon">🔍</span>
                 <input type="text" class="search-input" id="accountSearch" placeholder="Search..." onkeyup="window.filterProducts('accounts')">
             </div>
             <div class="packages-container" id="accountsContainer"></div>
         </div>
 
+        <!-- CREDITS / AFK VIEW -->
+        <div class="view-section" id="viewCredits">
+            <button class="back-btn" onclick="window.switchView('landing')">Back</button>
+            
+            <!-- Active Offers Banner -->
+            <div class="active-offers-banner" id="activeOffersBanner" style="display:none;">
+                <div class="banner-icon">🎁</div>
+                <div class="banner-text">Active Offers: <span id="activeOffersList">None</span></div>
+            </div>
+
+            <!-- Discount Toggle -->
+            <div class="discount-toggle" id="discountToggle" style="display:none;">
+                <span class="toggle-label">Discount: <span id="toggleStatus">ON</span></span>
+                <div class="toggle-switch active" id="toggleSwitch" onclick="window.toggleDiscount()"></div>
+            </div>
+
+            <div class="credits-layout">
+                <!-- AFK Section (Left) -->
+                <div class="afk-container" id="afkContainer">
+                    <!-- Meteor Animation Background -->
+                    <div class="meteor-container" id="meteorContainer"></div>
+                    
+                    <div class="afk-content">
+                        <div class="afk-title">EARN CREDITS</div>
+                        <div class="afk-subtitle">Stay AFK for 60 seconds to earn 1 Credit</div>
+                        
+                        <div class="afk-timer-display" id="afkTimerDisplay">01:00</div>
+                        
+                        <div class="afk-progress-bar">
+                            <div class="afk-progress-fill" id="afkProgressFill"></div>
+                        </div>
+                        
+                        <button class="afk-start-btn" id="afkStartBtn" onclick="window.toggleAFK()">
+                            <span class="btn-shine"></span>
+                            START AFK
+                        </button>
+                        
+                        <div class="afk-status" id="afkStatus">Click the button to start earning credits</div>
+                    </div>
+                </div>
+
+                <!-- Credit Shop Section (Right) -->
+                <div class="credit-shop-section" id="creditShopSection">
+                    <div class="credit-shop-header">
+                        <h2>CREDIT SHOP</h2>
+                        <div class="credits-info">
+                            💰 <span id="shopCreditsValue">0</span>
+                        </div>
+                    </div>
+                    <div class="credit-shop-grid" id="creditShopGrid">
+                        <!-- Items will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN VIEW -->
         <div class="view-section" id="viewAdmin">
             <button class="back-btn" onclick="window.switchView('landing')">Back</button>
             <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--text-primary); margin-bottom:20px; border-left:4px solid var(--accent-red); padding-left:15px;">Admin Dashboard</div>
+            
+            <!-- Admin Give Credits -->
+            <div class="admin-give-credits">
+                <h3>Give Credits to User</h3>
+                <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:15px; align-items:end;">
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">User Email</label>
+                        <input type="email" class="admin-input" id="giveCreditEmail" placeholder="user@example.com">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Credits</label>
+                        <input type="number" class="admin-input" id="giveCreditAmount" placeholder="e.g. 100">
+                    </div>
+                    <div>
+                        <button class="btn btn-purple" style="width:100%;" onclick="window.giveCredits()">Give Credits</button>
+                    </div>
+                </div>
+                <div id="giveCreditError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
+            </div>
+
             <div class="admin-controls">
-                <button class="btn btn-success btn-sm" onclick="window.openAddItemModal()">&#10133; Add Item</button>
+                <button class="btn btn-success btn-sm" onclick="window.openAddItemModal()">+ Add Item</button>
                 <button class="btn btn-secondary btn-sm" onclick="window.selectAllAdminItems()">Select All</button>
                 <button class="btn btn-blue btn-sm" onclick="window.saveSelectedItems()">Save Selected</button>
                 <button class="btn btn-gold btn-sm" onclick="window.deselectAllAdminItems()">Deselect</button>
@@ -406,19 +1250,90 @@
                     <tbody id="adminTableBody"></tbody>
                 </table>
             </div>
+
+            <!-- Admin Reviews Management -->
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-gold); padding-left:15px;">Reviews Management</div>
+            <div style="overflow-x:auto; margin-top:20px;">
+                <table class="admin-table">
+                    <thead>
+                        <tr><th>Name</th><th>Rating</th><th>Product</th><th>Review</th><th>Date</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="adminReviewsBody"></tbody>
+                </table>
+            </div>
+
+            <!-- Admin Credit Shop Management -->
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-purple); padding-left:15px;">Credit Shop Management</div>
+            <div class="admin-credit-controls">
+                <h3>Add Credit Shop Item</h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:15px;">
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Item Name</label>
+                        <input type="text" class="admin-input" id="newCreditItemName" placeholder="e.g. 5% OFF">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Description</label>
+                        <input type="text" class="admin-input" id="newCreditItemDesc" placeholder="e.g. Get 5% discount">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Credit Cost</label>
+                        <input type="number" class="admin-input" id="newCreditItemCost" placeholder="e.g. 620">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Discount %</label>
+                        <input type="number" class="admin-input" id="newCreditItemDiscount" placeholder="e.g. 5">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Stock</label>
+                        <input type="text" class="admin-input" id="newCreditItemStock" placeholder="e.g. Unlimited">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Tag Text (Optional)</label>
+                        <input type="text" class="admin-input" id="newCreditItemTag" placeholder="e.g. HOT">
+                    </div>
+                </div>
+                <button class="btn btn-purple btn-sm" style="margin-top:15px;" onclick="window.addCreditShopItem()">Add Credit Shop Item</button>
+                <div id="addCreditItemError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
+            </div>
+
+            <!-- Admin AFK Rewards Management -->
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-blue); padding-left:15px;">AFK Rewards Management</div>
+            <div class="admin-credit-controls">
+                <h3>Add AFK Reward</h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:15px;">
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Reward Name</label>
+                        <input type="text" class="admin-input" id="newAFKRewardName" placeholder="e.g. Bonus Credits">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Description</label>
+                        <input type="text" class="admin-input" id="newAFKRewardDesc" placeholder="e.g. Extra 5 credits">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Credits Given</label>
+                        <input type="number" class="admin-input" id="newAFKRewardCredits" placeholder="e.g. 5">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Duration (sec)</label>
+                        <input type="number" class="admin-input" id="newAFKRewardDuration" placeholder="e.g. 120">
+                    </div>
+                </div>
+                <button class="btn btn-blue btn-sm" style="margin-top:15px;" onclick="window.addAFKReward()">Add AFK Reward</button>
+                <div id="addAFKRewardError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
+            </div>
         </div>
     </div>
 
     <div class="wishlist-widget" id="wishlistWidget" style="display:none;">
         <button class="wishlist-btn-float" onclick="window.toggleWishlist()">
-            &#9829;
+            ❤️
             <span class="wishlist-count" id="wishlistCount">0</span>
         </button>
     </div>
 
     <div class="cart-widget" id="cartWidget" style="display:none;">
         <button class="cart-btn" onclick="window.toggleCart()">
-            &#128722;
+            🛒
             <span class="cart-count" id="cartCount">0</span>
         </button>
     </div>
@@ -427,11 +1342,11 @@
     <div class="wishlist-panel" id="wishlistPanel">
         <div class="wishlist-header">
             <h3>WISHLIST</h3>
-            <button class="chat-close" onclick="window.toggleWishlist()">&#10005;</button>
+            <button class="chat-close" onclick="window.toggleWishlist()">✕</button>
         </div>
         <div class="wishlist-items" id="wishlistItems">
             <div style="text-align:center; padding:40px; color:var(--text-muted);">
-                <div style="font-size:3rem; margin-bottom:15px;">&#9829;</div>
+                <div style="font-size:3rem; margin-bottom:15px;">❤️</div>
                 <p>Your wishlist is empty</p>
             </div>
         </div>
@@ -441,11 +1356,11 @@
     <div class="cart-panel" id="cartPanel">
         <div class="cart-header">
             <h3>YOUR CART</h3>
-            <button class="chat-close" onclick="window.toggleCart()">&#10005;</button>
+            <button class="chat-close" onclick="window.toggleCart()">✕</button>
         </div>
         <div class="cart-items" id="cartItems">
             <div style="text-align:center; padding:40px; color:var(--text-muted);">
-                <div style="font-size:3rem; margin-bottom:15px;">&#128722;</div>
+                <div style="font-size:3rem; margin-bottom:15px;">🛒</div>
                 <p>Your cart is empty</p>
             </div>
         </div>
@@ -467,36 +1382,36 @@
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-box" style="max-width:420px; padding:30px;">
             <h2>Complete Payment</h2>
-            <div id="bulkDiscountBanner" style="display:none; background:rgba(234,179,8,0.1); border:1px solid rgba(234,179,8,0.3); border-radius:10px; padding:12px; margin-bottom:15px; text-align:center;">
-                <div style="font-family:var(--font-display); color:var(--accent-gold); font-size:0.9rem;">Bulk Discount Applied!</div>
+            <div id="discountBanner" style="display:none; background:rgba(46,213,115,0.1); border:1px solid rgba(46,213,115,0.3); border-radius:10px; padding:12px; margin-bottom:15px; text-align:center;">
+                <div style="font-family:var(--font-display); color:var(--accent-green); font-size:0.9rem;">Discount Applied!</div>
                 <p id="discountText" style="color:var(--text-secondary); font-size:0.85rem; margin:0;"></p>
             </div>
             <div class="payment-category">
-                <div class="payment-category-title">&#128241; UPI Payment</div>
+                <div class="payment-category-title">UPI Payment</div>
                 <div class="payment-apps">
                     <div class="payment-app-btn" data-app="fampay" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128179;</div>
+                        <div class="app-icon">F</div>
                         <div class="app-name">Fampay</div>
                     </div>
                     <div class="payment-app-btn" data-app="phonepe" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128242;</div>
+                        <div class="app-icon">P</div>
                         <div class="app-name">PhonePe</div>
                     </div>
                     <div class="payment-app-btn" data-app="gpay" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128181;</div>
+                        <div class="app-icon">G</div>
                         <div class="app-name">Google Pay</div>
                     </div>
                 </div>
             </div>
             <div class="payment-category">
-                <div class="payment-category-title">&#128176; bKash</div>
+                <div class="payment-category-title">bKash</div>
                 <div class="payment-apps">
                     <div class="payment-app-btn" data-app="bkash" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128176;</div>
+                        <div class="app-icon">B</div>
                         <div class="app-name">bKash</div>
                     </div>
                     <div class="payment-app-btn" data-app="nagad" onclick="window.selectPaymentApp(this)">
-                        <div class="app-icon">&#128184;</div>
+                        <div class="app-icon">N</div>
                         <div class="app-name">Nagad</div>
                     </div>
                 </div>
@@ -523,11 +1438,11 @@
         <div class="modal-box" style="border-color:var(--accent-gold); max-width:500px;">
             <h2 style="color:var(--accent-gold);">Add Review</h2>
             <div id="starRatingInput" style="display:flex; gap:8px; justify-content:center; margin:20px 0; font-size:2rem; cursor:pointer;">
-                <span data-rating="1">&#9733;</span>
-                <span data-rating="2">&#9733;</span>
-                <span data-rating="3">&#9733;</span>
-                <span data-rating="4">&#9733;</span>
-                <span data-rating="5">&#9733;</span>
+                <span data-rating="1">⭐</span>
+                <span data-rating="2">⭐</span>
+                <span data-rating="3">⭐</span>
+                <span data-rating="4">⭐</span>
+                <span data-rating="5">⭐</span>
             </div>
             <input type="text" class="payment-input" id="reviewerName" placeholder="Your Name" style="margin-bottom:10px;">
             <input type="text" class="payment-input" id="reviewProduct" placeholder="Product (optional)" style="margin-bottom:10px;">
@@ -589,7 +1504,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, addDoc, query, where, orderBy, serverTimestamp, getDocs, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, addDoc, query, where, orderBy, serverTimestamp, getDocs, updateDoc, deleteDoc, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBel_TeEf1vjBfio9UyQXEAA775w-mXv4I",
@@ -614,7 +1529,23 @@
             currentRating: 0,
             selectedPaymentApp: null,
             authTab: 'login',
-            isNavigating: false
+            isNavigating: false,
+            // AFK / Credits State
+            credits: 0,
+            userOffers: [],
+            afkTimer: null,
+            afkTimeRemaining: 60,
+            afkIsRunning: false,
+            afkAutoLoop: false,
+            afkSessionId: null,
+            sidebarOpen: false,
+            // Credit Shop Items
+            creditShopItems: [],
+            // Discount
+            activeDiscount: 0,
+            discountEnabled: true,
+            // AFK Rewards
+            afkRewards: []
         };
 
         const catalog = {
@@ -657,11 +1588,43 @@
             ]
         };
 
+        // Default Credit Shop Items with updated prices
+        const defaultCreditItems = [
+            { 
+                id: '5off', 
+                name: '5% OFF', 
+                description: 'Get 5% discount on eligible purchases', 
+                cost: 620, 
+                stock: 'Unlimited', 
+                tag: 'HOT', 
+                discount: 5,
+                discountInfo: {
+                    money: '100M+ (Rs 50+)',
+                    items: 'Rs 50+ items',
+                    accounts: 'Any account'
+                }
+            },
+            { 
+                id: '15off', 
+                name: '15% OFF', 
+                description: 'Get 15% discount on eligible purchases', 
+                cost: 2680, 
+                stock: 'Unlimited', 
+                tag: 'BEST', 
+                discount: 15,
+                discountInfo: {
+                    money: '100M+ (Rs 50+)',
+                    items: 'Rs 50+ items',
+                    accounts: 'Any account'
+                }
+            }
+        ];
+
         function getHashView() {
             const hash = window.location.hash;
             if (hash && hash.startsWith('#/')) {
                 const view = hash.replace('#/', '');
-                if (view && ['menu', 'money', 'items', 'accounts', 'admin'].includes(view)) {
+                if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'credits'].includes(view)) {
                     return view;
                 }
             }
@@ -693,13 +1656,31 @@
         }
 
         function switchViewInternal(view, skipHashUpdate) {
+            // Stop AFK timer if leaving credits page
+            if (view !== 'credits' && state.afkIsRunning) {
+                stopAFKInternal();
+            }
+
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            const map = { landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', accounts: 'viewAccounts', admin: 'viewAdmin' };
+            const map = { landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', accounts: 'viewAccounts', admin: 'viewAdmin', credits: 'viewCredits' };
             if (map[view]) { 
                 setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); 
                 window.scrollTo({ top: 0, behavior: 'smooth' }); 
             }
-            if (view === 'admin') { renderAdminTable(); }
+            if (view === 'admin') { renderAdminTable(); renderAdminReviews(); }
+            if (view === 'credits') { 
+                renderCreditShop(); 
+                updateCreditsDisplay();
+                updateDiscountToggle();
+            }
+            
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.view === view) {
+                    link.classList.add('active');
+                }
+            });
         }
 
         async function init() {
@@ -708,6 +1689,10 @@
             setupProductsListener();
             renderProducts(); loadReviews(); setupAuth();
             updateWishlistUI(); setupStarRating();
+            setupMeteorAnimation();
+            await loadCreditShopItems();
+            await syncCreditShopPrices(); // Sync prices to latest defaults
+            await loadAFKRewards();
 
             const initialView = getHashView();
             if (initialView !== 'landing') {
@@ -759,13 +1744,26 @@
                 state.user = user;
                 state.isAdmin = user?.uid === state.adminUID;
                 updateUI();
+                
                 if (user) {
                     document.getElementById('authTriggerBtn').textContent = 'Logout';
                     document.getElementById('authTriggerBtn').onclick = () => signOut(auth);
+                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🚪</span><span>Logout</span>';
+                    document.getElementById('sidebarAuthLink').onclick = () => signOut(auth);
                     closeAuthModal();
+                    
+                    // Load user credits and offers
+                    await loadUserCredits();
+                    await loadUserOffers();
                 } else {
                     document.getElementById('authTriggerBtn').textContent = 'Login';
                     document.getElementById('authTriggerBtn').onclick = openAuthModal;
+                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔐</span><span>Login</span>';
+                    document.getElementById('sidebarAuthLink').onclick = openAuthModal;
+                    state.credits = 0;
+                    state.userOffers = [];
+                    state.activeDiscount = 0;
+                    updateCreditsDisplay();
                 }
 
                 const currentHash = getHashView();
@@ -776,14 +1774,197 @@
             });
         }
 
+        async function loadUserCredits() {
+            if (!state.user) return;
+            try {
+                const userDoc = await getDoc(doc(db, 'users', state.user.uid));
+                if (userDoc.exists()) {
+                    state.credits = userDoc.data().credits || 0;
+                } else {
+                    await setDoc(doc(db, 'users', state.user.uid), { 
+                        email: state.user.email, 
+                        credits: 0, 
+                        isAdmin: false, 
+                        createdAt: serverTimestamp() 
+                    }, { merge: true });
+                    state.credits = 0;
+                }
+                updateCreditsDisplay();
+            } catch (e) { console.log('Credits load error', e); }
+        }
+
+        async function loadUserOffers() {
+            if (!state.user) return;
+            try {
+                const offersSnap = await getDocs(collection(db, 'users', state.user.uid, 'offers'));
+                state.userOffers = offersSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+                
+                // Calculate best discount
+                let bestDiscount = 0;
+                state.userOffers.forEach(offer => {
+                    if (offer.discount > bestDiscount) bestDiscount = offer.discount;
+                });
+                state.activeDiscount = bestDiscount;
+                
+                updateActiveOffersBanner();
+                updateDiscountToggle();
+                renderCreditShop();
+            } catch (e) { console.log('Offers load error', e); }
+        }
+
+        async function loadCreditShopItems() {
+            try {
+                const snap = await getDocs(collection(db, 'credit_shop'));
+                if (snap.empty) {
+                    // Initialize default items
+                    for (const item of defaultCreditItems) {
+                        await setDoc(doc(db, 'credit_shop', item.id), { ...item, createdAt: serverTimestamp() });
+                    }
+                    state.creditShopItems = [...defaultCreditItems];
+                } else {
+                    state.creditShopItems = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                }
+            } catch (e) {
+                console.log('Credit shop load error', e);
+                state.creditShopItems = [...defaultCreditItems];
+            }
+        }
+
+        async function syncCreditShopPrices() {
+            // Update existing credit shop items to latest default prices
+            try {
+                for (const defaultItem of defaultCreditItems) {
+                    const existingItem = state.creditShopItems.find(i => i.id === defaultItem.id);
+                    if (existingItem && existingItem.cost !== defaultItem.cost) {
+                        await updateDoc(doc(db, 'credit_shop', defaultItem.id), {
+                            cost: defaultItem.cost,
+                            updatedAt: serverTimestamp()
+                        });
+                        existingItem.cost = defaultItem.cost;
+                    }
+                }
+            } catch (e) {
+                console.log('Price sync error', e);
+            }
+        }
+
+        async function loadAFKRewards() {
+            try {
+                const snap = await getDocs(collection(db, 'afk_rewards'));
+                state.afkRewards = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            } catch (e) {
+                console.log('AFK rewards load error', e);
+                state.afkRewards = [];
+            }
+        }
+
+        function updateCreditsDisplay() {
+            const creditsValue = state.credits;
+            document.getElementById('sidebarCreditsValue').textContent = creditsValue;
+            document.getElementById('shopCreditsValue').textContent = creditsValue;
+            
+            if (state.user) {
+                document.getElementById('sidebarCredits').style.display = 'block';
+            } else {
+                document.getElementById('sidebarCredits').style.display = 'none';
+            }
+        }
+
+        function updateActiveOffersBanner() {
+            const banner = document.getElementById('activeOffersBanner');
+            const list = document.getElementById('activeOffersList');
+            
+            if (state.userOffers.length === 0) {
+                banner.style.display = 'none';
+                return;
+            }
+            
+            banner.style.display = 'flex';
+            const offerNames = state.userOffers.map(o => {
+                const offer = state.creditShopItems.find(i => i.id === o.id);
+                return offer ? offer.name : o.id;
+            });
+            list.textContent = offerNames.join(', ');
+        }
+
+        function updateDiscountToggle() {
+            const toggle = document.getElementById('discountToggle');
+            const toggleSwitch = document.getElementById('toggleSwitch');
+            const toggleStatus = document.getElementById('toggleStatus');
+            
+            if (state.activeDiscount > 0) {
+                toggle.style.display = 'flex';
+                if (state.discountEnabled) {
+                    toggleSwitch.classList.add('active');
+                    toggleStatus.textContent = 'ON';
+                    toggleStatus.style.color = 'var(--accent-green)';
+                } else {
+                    toggleSwitch.classList.remove('active');
+                    toggleStatus.textContent = 'OFF';
+                    toggleStatus.style.color = 'var(--accent-red)';
+                }
+            } else {
+                toggle.style.display = 'none';
+            }
+        }
+
+        window.toggleDiscount = () => {
+            state.discountEnabled = !state.discountEnabled;
+            updateDiscountToggle();
+            updateCartUI();
+            showToast(`Discount ${state.discountEnabled ? 'ENABLED' : 'DISABLED'}`);
+        };
+
         function updateUI() {
             const isGuest = !state.user;
             document.getElementById('guestBanner').style.display = isGuest ? 'flex' : 'none';
             document.getElementById('wishlistWidget').style.display = isGuest ? 'none' : 'block';
             document.getElementById('cartWidget').style.display = isGuest ? 'none' : 'block';
             document.getElementById('adminBadge').classList.toggle('visible', state.isAdmin);
+            document.getElementById('sidebarAdminLink').style.display = state.isAdmin ? 'flex' : 'none';
             if (!state.isAdmin && document.getElementById('viewAdmin').classList.contains('active')) switchView('landing');
         }
+
+        // ===== SIDEBAR =====
+        window.toggleSidebar = () => {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.getElementById('sidebarToggle');
+            const appContainer = document.getElementById('appContainer');
+            
+            state.sidebarOpen = !state.sidebarOpen;
+            
+            if (state.sidebarOpen) {
+                sidebar.classList.add('open');
+                toggle.classList.add('sidebar-open');
+                appContainer.classList.add('sidebar-open');
+            } else {
+                sidebar.classList.remove('open');
+                toggle.classList.remove('sidebar-open');
+                appContainer.classList.remove('sidebar-open');
+            }
+        };
+
+        window.sidebarNavigate = (view) => {
+            // Auto-close sidebar after navigation
+            if (state.sidebarOpen) {
+                window.toggleSidebar();
+            }
+            
+            if (view === 'donutsmp') {
+                window.showComingSoon();
+                return;
+            }
+            if (view === 'credits' && !state.user) {
+                showToast('Login to access Credits!');
+                openAuthModal();
+                return;
+            }
+            if (view === 'admin' && !state.isAdmin) {
+                showToast('Admin only!');
+                return;
+            }
+            switchView(view);
+        };
 
         window.toggleTheme = () => document.body.classList.toggle('light-theme');
         window.openAuthModal = () => document.getElementById('authModal').classList.add('active');
@@ -809,7 +1990,7 @@
                     cred = await signInWithEmailAndPassword(auth, email, password);
                 } else {
                     cred = await createUserWithEmailAndPassword(auth, email, password);
-                    await setDoc(doc(db, 'users', cred.user.uid), { email, isAdmin: false, createdAt: serverTimestamp() });
+                    await setDoc(doc(db, 'users', cred.user.uid), { email, credits: 0, isAdmin: false, createdAt: serverTimestamp() });
                 }
                 errorDiv.textContent = ''; closeAuthModal();
             } catch (err) {
@@ -825,8 +2006,8 @@
             document.getElementById('armoryContainer').innerHTML = allProducts.filter(p => p.category === 'armory').map((p, i) => makeCard(p, i)).join('');
             document.getElementById('materialsContainer').innerHTML = allProducts.filter(p => p.category === 'materials').map((p, i) => makeCard(p, i)).join('');
             const acc = allProducts.find(p => p.category === 'accounts') || catalog.accounts[0];
-            const specs = acc.specs ? `<ul style="text-align:left; margin:15px 0; background:rgba(255,255,255,0.02); padding:15px; border-radius:8px; list-style:none;">${acc.specs.map(s => `<li style="color:var(--text-secondary); margin-bottom:8px;">&#9889; ${s}</li>`).join('')}</ul>` : '';
-            document.getElementById('accountsContainer').innerHTML = `<div class="pkg-card" style="max-width:380px; margin:0 auto; animation-delay:0s;"><button class="wishlist-btn ${state.wishlist.includes(acc.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${acc.id}', event)">&#9829;</button><div><div class="pkg-val" style="font-size:1.4rem;">${acc.name}</div><div class="stock-label">${acc.stock} in stock</div>${specs}</div><div><div class="pkg-cost">${acc.price} INR</div><button class="btn btn-success" style="width:100%;" onclick="window.addToCart('${acc.id}')">Add to Cart</button></div></div>`;
+            const specs = acc.specs ? `<ul style="text-align:left; margin:15px 0; background:rgba(255,255,255,0.02); padding:15px; border-radius:8px; list-style:none;">${acc.specs.map(s => `<li style="color:var(--text-secondary); margin-bottom:8px;">> ${s}</li>`).join('')}</ul>` : '';
+            document.getElementById('accountsContainer').innerHTML = `<div class="pkg-card" style="max-width:380px; margin:0 auto; animation-delay:0s;"><button class="wishlist-btn ${state.wishlist.includes(acc.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${acc.id}', event)">❤️</button><div><div class="pkg-val" style="font-size:1.4rem;">${acc.name}</div><div class="stock-label">${acc.stock} in stock</div>${specs}</div><div><div class="pkg-cost">${acc.price} INR</div><button class="btn btn-success" style="width:100%;" onclick="window.addToCart('${acc.id}')">Add to Cart</button></div></div>`;
         }
 
         function makeCard(p, index) {
@@ -835,7 +2016,14 @@
             const btnClass = isPromo ? 'btn-gold' : 'btn-primary';
             const btnText = isPromo ? 'Claim Promo' : 'Add to Cart';
             const displayName = p.name.replace(/(\d+M|Promo)/g, '<span style="color:var(--accent-red);">$1</span>');
-            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">&#9829;</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
+            
+            // Discount tag for eligible items
+            let discountTag = '';
+            if (state.activeDiscount > 0 && state.discountEnabled && isEligibleForDiscount(p)) {
+                discountTag = `<div class="discount-tag">${state.activeDiscount}% OFF</div>`;
+            }
+            
+            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}${discountTag}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
         }
 
         window.addToCart = (id) => {
@@ -848,20 +2036,69 @@
         };
         window.removeFromCart = (idx) => { state.cart.splice(idx, 1); updateCartUI(); };
 
+        function calculateCartTotal() {
+            let subtotal = state.cart.reduce((s, i) => s + i.price, 0);
+            let discount = 0;
+            let eligibleTotal = 0;
+
+            // Calculate eligible amount for discount
+            state.cart.forEach(item => {
+                const product = state.products[item.id];
+                if (product && isEligibleForDiscount(product) && state.discountEnabled) {
+                    eligibleTotal += item.price;
+                }
+            });
+
+            // Apply discount
+            if (state.activeDiscount > 0 && eligibleTotal > 0 && state.discountEnabled) {
+                discount = Math.round((eligibleTotal * state.activeDiscount) / 100);
+            }
+
+            const final = subtotal - discount;
+            return { subtotal, discount, final, eligibleTotal };
+        }
+
+        function isEligibleForDiscount(product) {
+            // Money: 100M+ (price >= 50)
+            if (product.category === 'money' && product.price >= 50) return true;
+            
+            // Items: price >= 50
+            if (['spawners', 'armory', 'materials'].includes(product.category) && product.price >= 50) return true;
+            
+            // Accounts: any price
+            if (product.category === 'accounts') return true;
+            
+            return false;
+        }
+
         function updateCartUI() {
             document.getElementById('cartCount').textContent = state.cart.length;
-            const total = state.cart.reduce((s, i) => s + i.price, 0);
-            document.getElementById('cartTotal').textContent = total + ' INR';
+            const totals = calculateCartTotal();
+            document.getElementById('cartTotal').textContent = totals.final + ' INR';
+            
             if (state.cart.length === 0) {
-                document.getElementById('cartItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">&#128722;</div><p>Your cart is empty</p></div>';
+                document.getElementById('cartItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">🛒</div><p>Your cart is empty</p></div>';
                 return;
             }
-            document.getElementById('cartItems').innerHTML = state.cart.map((item, i) => `<div class="cart-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} INR</p></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">&#128465;</button></div>`).join('');
+            
+            document.getElementById('cartItems').innerHTML = state.cart.map((item, i) => {
+                const product = state.products[item.id];
+                const isDiscounted = product && isEligibleForDiscount(product) && state.discountEnabled && state.activeDiscount > 0;
+                const discountLine = isDiscounted ? `<div class="cart-discount-line">-${state.activeDiscount}% OFF applied = -${Math.round((item.price * state.activeDiscount) / 100)} INR</div>` : '';
+                
+                return `<div class="cart-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} INR</p>${discountLine}</div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div>`;
+            }).join('');
         }
-        window.toggleCart = () => { document.getElementById('cartPanel').classList.toggle('open'); document.getElementById('cartOverlay').classList.toggle('active'); };
+
+        window.toggleCart = () => { 
+            document.getElementById('cartPanel').classList.toggle('open'); 
+            document.getElementById('cartOverlay').classList.toggle('active'); 
+        };
+        
         window.checkoutCart = () => {
             if (state.cart.length === 0) { showToast('Cart is empty!'); return; }
-            toggleCart(); document.getElementById('checkoutModal').classList.add('active');
+            toggleCart(); 
+            document.getElementById('checkoutModal').classList.add('active');
         };
 
         window.toggleWishlistItem = (id, e) => {
@@ -871,17 +2108,19 @@
             localStorage.setItem('firemc_wishlist', JSON.stringify(state.wishlist));
             updateWishlistUI(); renderProducts();
         };
+        
         function updateWishlistUI() {
             document.getElementById('wishlistCount').textContent = state.wishlist.length;
             if (state.wishlist.length === 0) {
-                document.getElementById('wishlistItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">&#9829;</div><p>Your wishlist is empty</p></div>';
+                document.getElementById('wishlistItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">❤️</div><p>Your wishlist is empty</p></div>';
                 return;
             }
             document.getElementById('wishlistItems').innerHTML = state.wishlist.map(id => {
                 const p = state.products[id]; if (!p) return '';
-                return `<div class="wishlist-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${p.name}</h4><p style="color:var(--accent-red); font-weight:700;">${p.price} INR</p></div><div style="display:flex; gap:8px;"><button class="btn btn-primary btn-sm" onclick="window.addToCart('${p.id}'); window.toggleWishlist()">Add</button><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.toggleWishlistItem('${p.id}')">&#128465;</button></div></div>`;
+                return `<div class="wishlist-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${p.name}</h4><p style="color:var(--accent-red); font-weight:700;">${p.price} INR</p></div><div style="display:flex; gap:8px;"><button class="btn btn-primary btn-sm" onclick="window.addToCart('${p.id}'); window.toggleWishlist()">Add</button><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.toggleWishlistItem('${p.id}')">🗑️</button></div></div>`;
             }).join('');
         }
+        
         window.toggleWishlist = () => {
             document.getElementById('wishlistPanel').classList.toggle('open');
             const overlay = document.getElementById('wishlistOverlay');
@@ -897,11 +2136,47 @@
                 renderReviews();
             } catch (e) { console.log('Reviews load error', e); }
         }
+        
         function renderReviews() {
             const container = document.getElementById('reviewsContainer');
             if (state.reviews.length === 0) { container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No reviews yet. Be the first!</p>'; return; }
-            container.innerHTML = state.reviews.map((r, i) => `<div class="review-card" style="animation-delay:${i * 0.1}s;"><div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span style="font-family:var(--font-display); font-weight:700;">${r.name || 'Anonymous'}</span><span style="font-size:0.8rem; color:var(--text-muted);">${r.createdAt ? new Date(r.createdAt.toDate()).toLocaleDateString() : ''}</span></div><div class="review-stars">${'&#9733;'.repeat(r.rating || 5)}${'&#9734;'.repeat(5 - (r.rating || 5))}</div><div class="review-text">${r.text || ''}</div>${r.product ? `<div style="margin-top:10px; font-size:0.85rem; color:var(--accent-red);">Purchased: ${r.product}</div>` : ''}</div>`).join('');
+            container.innerHTML = state.reviews.map((r, i) => `<div class="review-card" style="animation-delay:${i * 0.1}s;"><div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span style="font-family:var(--font-display); font-weight:700;">${r.name || 'Anonymous'}</span><span style="font-size:0.8rem; color:var(--text-muted);">${r.createdAt ? new Date(r.createdAt.toDate()).toLocaleDateString() : ''}</span></div><div class="review-stars">${'⭐'.repeat(r.rating || 5)}${'☆'.repeat(5 - (r.rating || 5))}</div><div class="review-text">${r.text || ''}</div>${r.product ? `<div style="margin-top:10px; font-size:0.85rem; color:var(--accent-red);">Purchased: ${r.product}</div>` : ''}</div>`).join('');
         }
+
+        function renderAdminReviews() {
+            const tbody = document.getElementById('adminReviewsBody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = state.reviews.map(r => `
+                <tr>
+                    <td>${r.name || 'Anonymous'}</td>
+                    <td>${'⭐'.repeat(r.rating || 5)}</td>
+                    <td>${r.product || '-'}</td>
+                    <td>${r.text || ''}</td>
+                    <td>${r.createdAt ? new Date(r.createdAt.toDate()).toLocaleDateString() : ''}</td>
+                    <td><button class="btn btn-danger btn-sm" onclick="window.deleteReview('${r.id}')">🗑️ Delete</button></td>
+                </tr>
+            `).join('');
+        }
+
+        window.deleteReview = async (reviewId) => {
+            if (!state.isAdmin) {
+                showToast('Admin only!');
+                return;
+            }
+            if (!confirm('Delete this review?')) return;
+            
+            try {
+                await deleteDoc(doc(db, 'reviews', reviewId));
+                state.reviews = state.reviews.filter(r => r.id !== reviewId);
+                renderReviews();
+                renderAdminReviews();
+                showToast('Review deleted!');
+            } catch (e) {
+                showToast('Delete failed: ' + e.message);
+            }
+        };
+
         function setupStarRating() {
             document.querySelectorAll('#starRatingInput span').forEach(star => {
                 star.addEventListener('click', function() {
@@ -910,11 +2185,15 @@
                 });
             });
         }
+        
         window.openReviewModal = () => {
-            document.getElementById('reviewModal').classList.add('active'); state.currentRating = 0;
+            document.getElementById('reviewModal').classList.add('active'); 
+            state.currentRating = 0;
             document.querySelectorAll('#starRatingInput span').forEach(s => s.style.color = 'var(--text-muted)');
         };
+        
         window.closeReviewModal = () => document.getElementById('reviewModal').classList.remove('active');
+        
         window.submitReview = async () => {
             const name = document.getElementById('reviewerName').value.trim();
             const product = document.getElementById('reviewProduct').value.trim();
@@ -922,38 +2201,74 @@
             if (!name || !text || state.currentRating === 0) { showToast('Fill all fields and select rating'); return; }
             try {
                 await addDoc(collection(db, 'reviews'), { name, product, text, rating: state.currentRating, createdAt: serverTimestamp() });
-                closeReviewModal(); document.getElementById('reviewerName').value = ''; document.getElementById('reviewProduct').value = ''; document.getElementById('reviewText').value = '';
-                state.currentRating = 0; loadReviews(); showToast('Review submitted!');
+                closeReviewModal(); 
+                document.getElementById('reviewerName').value = ''; 
+                document.getElementById('reviewProduct').value = ''; 
+                document.getElementById('reviewText').value = '';
+                state.currentRating = 0; 
+                loadReviews(); 
+                showToast('Review submitted!');
             } catch (e) { showToast('Failed to submit review'); }
         };
 
         window.openPaymentModal = () => {
-            hideCheckout(); document.getElementById('paymentModal').classList.add('active');
+            hideCheckout(); 
+            
+            const totals = calculateCartTotal();
+            const discountBanner = document.getElementById('discountBanner');
+            const discountText = document.getElementById('discountText');
+            
+            if (totals.discount > 0) {
+                discountBanner.style.display = 'block';
+                discountText.textContent = `${state.activeDiscount}% OFF applied = -${totals.discount} INR (Final: ${totals.final} INR)`;
+            } else {
+                discountBanner.style.display = 'none';
+            }
+            
+            document.getElementById('paymentModal').classList.add('active');
             state.selectedPaymentApp = null;
             document.querySelectorAll('.payment-app-btn').forEach(b => b.classList.remove('selected'));
         };
+        
         window.hidePaymentModal = () => {
-            document.getElementById('paymentModal').classList.remove('active'); state.selectedPaymentApp = null;
+            document.getElementById('paymentModal').classList.remove('active'); 
+            state.selectedPaymentApp = null;
         };
+        
         window.selectPaymentApp = function(el) {
             document.querySelectorAll('.payment-app-btn').forEach(b => b.classList.remove('selected'));
-            el.classList.add('selected'); state.selectedPaymentApp = el.dataset.app;
+            el.classList.add('selected'); 
+            state.selectedPaymentApp = el.dataset.app;
         };
+        
         window.submitPayment = async () => {
             const email = document.getElementById('paymentEmail').value.trim();
             if (!state.selectedPaymentApp) { showToast('Select a payment app!'); return; }
             if (!email) { showToast('Enter your email!'); return; }
-            const total = state.cart.reduce((s, i) => s + i.price, 0);
+            
+            const totals = calculateCartTotal();
+            
             try {
                 await addDoc(collection(db, 'payments'), {
-                    userId: state.user.uid, userEmail: email,
+                    userId: state.user.uid, 
+                    userEmail: email,
                     items: state.cart.map(i => ({ id: i.id, name: i.name, price: i.price })),
-                    total, paymentApp: state.selectedPaymentApp,
-                    status: 'pending', createdAt: serverTimestamp()
+                    subtotal: totals.subtotal,
+                    discount: totals.discount,
+                    discountPercent: state.discountEnabled ? state.activeDiscount : 0,
+                    total: totals.final, 
+                    paymentApp: state.selectedPaymentApp,
+                    status: 'pending', 
+                    createdAt: serverTimestamp()
                 });
-                hidePaymentModal(); state.cart = []; updateCartUI();
+                hidePaymentModal(); 
+                state.cart = []; 
+                updateCartUI();
                 showToast('Payment request sent! Admin will contact you via email.');
-            } catch (e) { showToast('Payment failed. Try again.'); console.error(e); }
+            } catch (e) { 
+                showToast('Payment failed. Try again.'); 
+                console.error(e); 
+            }
         };
 
         window.handleCardClick = (view) => {
@@ -967,12 +2282,433 @@
             switchViewInternal(view, true);
         };
 
+        // ===== AFK / CREDITS SYSTEM =====
+        function setupMeteorAnimation() {
+            const container = document.getElementById('meteorContainer');
+            if (!container) return;
+            
+            // Create meteors
+            for (let i = 0; i < 15; i++) {
+                const meteor = document.createElement('div');
+                meteor.className = 'meteor';
+                meteor.style.left = Math.random() * 100 + '%';
+                meteor.style.top = Math.random() * 50 + '%';
+                meteor.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                meteor.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(meteor);
+            }
+
+            // Create floating particles
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        window.toggleAFK = () => {
+            if (state.afkIsRunning) {
+                stopAFKInternal();
+            } else {
+                startAFKInternal();
+            }
+        };
+
+        function startAFKInternal() {
+            if (!state.user) {
+                showToast('Login to earn credits!');
+                openAuthModal();
+                return;
+            }
+
+            if (!document.getElementById('viewCredits').classList.contains('active')) {
+                showToast('Stay on Credits page to earn!');
+                return;
+            }
+
+            state.afkIsRunning = true;
+            state.afkAutoLoop = true;
+            state.afkTimeRemaining = 60;
+
+            const btn = document.getElementById('afkStartBtn');
+            const timerDisplay = document.getElementById('afkTimerDisplay');
+            const progressFill = document.getElementById('afkProgressFill');
+            const status = document.getElementById('afkStatus');
+
+            btn.innerHTML = '<span class="btn-shine"></span>STOP AFK';
+            timerDisplay.classList.add('running');
+            timerDisplay.classList.remove('complete');
+            progressFill.classList.add('running');
+            status.textContent = 'AFK running... Stay on this page!';
+            status.className = 'afk-status earning';
+
+            runAFKTimer();
+        }
+
+        function runAFKTimer() {
+            state.afkTimer = setInterval(() => {
+                // Check if still on credits page
+                if (!document.getElementById('viewCredits').classList.contains('active')) {
+                    stopAFKInternal();
+                    return;
+                }
+
+                state.afkTimeRemaining--;
+                
+                // Update display
+                const mins = Math.floor(state.afkTimeRemaining / 60);
+                const secs = state.afkTimeRemaining % 60;
+                document.getElementById('afkTimerDisplay').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                
+                // Update progress
+                const progress = ((60 - state.afkTimeRemaining) / 60) * 100;
+                document.getElementById('afkProgressFill').style.width = progress + '%';
+
+                if (state.afkTimeRemaining <= 0) {
+                    // Timer complete!
+                    clearInterval(state.afkTimer);
+                    completeAFK();
+                }
+            }, 1000);
+        }
+
+        function stopAFKInternal() {
+            if (!state.afkIsRunning) return;
+
+            clearInterval(state.afkTimer);
+            state.afkIsRunning = false;
+            state.afkAutoLoop = false;
+            state.afkTimeRemaining = 60;
+
+            const btn = document.getElementById('afkStartBtn');
+            const timerDisplay = document.getElementById('afkTimerDisplay');
+            const progressFill = document.getElementById('afkProgressFill');
+            const status = document.getElementById('afkStatus');
+
+            if (btn) {
+                btn.innerHTML = '<span class="btn-shine"></span>START AFK';
+            }
+            if (timerDisplay) {
+                timerDisplay.textContent = '01:00';
+                timerDisplay.classList.remove('running', 'complete');
+            }
+            if (progressFill) {
+                progressFill.style.width = '0%';
+                progressFill.classList.remove('running');
+            }
+            if (status) {
+                status.textContent = 'AFK stopped.';
+                status.className = 'afk-status cancelled';
+            }
+        }
+
+        async function completeAFK() {
+            const timerDisplay = document.getElementById('afkTimerDisplay');
+            const progressFill = document.getElementById('afkProgressFill');
+            const status = document.getElementById('afkStatus');
+
+            if (timerDisplay) {
+                timerDisplay.textContent = '00:00';
+                timerDisplay.classList.remove('running');
+                timerDisplay.classList.add('complete');
+            }
+            if (progressFill) {
+                progressFill.style.width = '100%';
+                progressFill.classList.remove('running');
+            }
+            if (status) {
+                status.textContent = '+1 Credit Earned! Restarting...';
+                status.className = 'afk-status success';
+            }
+
+            // Credit user
+            try {
+                state.credits += 1;
+                await updateDoc(doc(db, 'users', state.user.uid), {
+                    credits: increment(1)
+                });
+                updateCreditsDisplay();
+                showToast('+1 Credit Earned!');
+
+                // Auto restart if still on credits page and auto-loop enabled
+                setTimeout(() => {
+                    if (state.afkAutoLoop && document.getElementById('viewCredits').classList.contains('active')) {
+                        state.afkTimeRemaining = 60;
+                        document.getElementById('afkTimerDisplay').textContent = '01:00';
+                        document.getElementById('afkProgressFill').style.width = '0%';
+                        document.getElementById('afkStatus').textContent = 'AFK running... Stay on this page!';
+                        document.getElementById('afkStatus').className = 'afk-status earning';
+                        document.getElementById('afkTimerDisplay').classList.add('running');
+                        document.getElementById('afkProgressFill').classList.add('running');
+                        runAFKTimer();
+                    } else {
+                        stopAFKInternal();
+                    }
+                }, 1500);
+
+            } catch (e) {
+                console.error('Credit update error', e);
+                showToast('Error saving credit. Contact admin.');
+                stopAFKInternal();
+            }
+        }
+
+        // ===== CREDIT SHOP =====
+        function renderCreditShop() {
+            const grid = document.getElementById('creditShopGrid');
+            if (!grid) return;
+
+            if (state.creditShopItems.length === 0) {
+                grid.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">No items available</div>';
+                return;
+            }
+
+            grid.innerHTML = state.creditShopItems.map((item, index) => {
+                const isOwned = state.userOffers.some(o => o.id === item.id);
+                const tagHtml = item.tag ? `<div class="discount-tag">${item.tag}</div>` : '';
+                const stockLabel = item.stock === 'Unlimited' ? '' : `<div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">${item.stock} left</div>`;
+                
+                // Discount info HTML
+                let discountInfoHtml = '';
+                if (item.discountInfo) {
+                    discountInfoHtml = `
+                        <div class="discount-info">
+                            <strong>APPLIES TO:</strong>
+                            <ul>
+                                <li>Money: ${item.discountInfo.money}</li>
+                                <li>Items: ${item.discountInfo.items}</li>
+                                <li>Accounts: ${item.discountInfo.accounts}</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+                return `
+                    <div class="credit-shop-item" style="animation-delay:${index * 0.1}s;">
+                        ${tagHtml}
+                        <div class="shop-item-img">💰</div>
+                        <div class="shop-item-name">${item.name}</div>
+                        <div class="shop-item-desc">${item.description}</div>
+                        ${discountInfoHtml}
+                        ${stockLabel}
+                        <div class="shop-item-price">${item.cost} <span>CREDITS</span></div>
+                        <button class="btn-buy-credit ${isOwned ? 'owned' : ''}" 
+                                id="buy${item.id}" 
+                                onclick="window.buyCreditItem('${item.id}', ${item.cost})"
+                                ${isOwned ? 'disabled' : ''}>
+                            ${isOwned ? 'OWNED' : 'BUY NOW'}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.buyCreditItem = async (itemId, cost) => {
+            if (!state.user) {
+                showToast('Login to buy items!');
+                openAuthModal();
+                return;
+            }
+
+            if (state.userOffers.some(o => o.id === itemId)) {
+                showToast('You already own this item!');
+                return;
+            }
+
+            if (state.credits < cost) {
+                showToast(`Not enough credits! Need ${cost} credits.`);
+                return;
+            }
+
+            try {
+                // Get item details
+                const item = state.creditShopItems.find(i => i.id === itemId);
+                const discount = item ? item.discount : 0;
+
+                // Deduct credits
+                state.credits -= cost;
+                await updateDoc(doc(db, 'users', state.user.uid), {
+                    credits: state.credits
+                });
+
+                // Add item to user with discount info
+                await setDoc(doc(db, 'users', state.user.uid, 'offers', itemId), {
+                    purchasedAt: serverTimestamp(),
+                    itemId: itemId,
+                    discount: discount
+                });
+
+                state.userOffers.push({ id: itemId, discount: discount });
+                
+                // Recalculate active discount
+                let bestDiscount = 0;
+                state.userOffers.forEach(o => {
+                    if (o.discount > bestDiscount) bestDiscount = o.discount;
+                });
+                state.activeDiscount = bestDiscount;
+                
+                updateCreditsDisplay();
+                updateActiveOffersBanner();
+                updateDiscountToggle();
+                renderCreditShop();
+                renderProducts(); // Re-render to show discount tags
+                
+                showToast(`${item ? item.name : itemId} purchased! ${discount}% discount active!`);
+            } catch (e) {
+                console.error('Buy item error', e);
+                showToast('Purchase failed. Try again.');
+            }
+        };
+
+        // ===== ADMIN: Give Credits =====
+        window.giveCredits = async () => {
+            if (!state.isAdmin) {
+                showToast('Admin only!');
+                return;
+            }
+
+            const email = document.getElementById('giveCreditEmail').value.trim();
+            const amount = parseInt(document.getElementById('giveCreditAmount').value);
+            const errorDiv = document.getElementById('giveCreditError');
+
+            if (!email || !amount || amount <= 0) {
+                errorDiv.textContent = 'Enter valid email and amount';
+                return;
+            }
+
+            try {
+                // Find user by email
+                const usersQuery = query(collection(db, 'users'), where('email', '==', email));
+                const usersSnap = await getDocs(usersQuery);
+
+                if (usersSnap.empty) {
+                    errorDiv.textContent = 'User not found with this email';
+                    return;
+                }
+
+                const userDoc = usersSnap.docs[0];
+                const userId = userDoc.id;
+
+                await updateDoc(doc(db, 'users', userId), {
+                    credits: increment(amount)
+                });
+
+                errorDiv.textContent = '';
+                document.getElementById('giveCreditEmail').value = '';
+                document.getElementById('giveCreditAmount').value = '';
+                showToast(`${amount} credits given to ${email}`);
+
+                // Refresh if it's the current user
+                if (state.user && state.user.uid === userId) {
+                    await loadUserCredits();
+                }
+            } catch (e) {
+                errorDiv.textContent = 'Error: ' + e.message;
+            }
+        };
+
+        // ===== ADMIN: Add Credit Shop Item =====
+        window.addCreditShopItem = async () => {
+            if (!state.isAdmin) return;
+            
+            const name = document.getElementById('newCreditItemName').value.trim();
+            const desc = document.getElementById('newCreditItemDesc').value.trim();
+            const cost = parseInt(document.getElementById('newCreditItemCost').value);
+            const discount = parseInt(document.getElementById('newCreditItemDiscount').value);
+            const stock = document.getElementById('newCreditItemStock').value.trim();
+            const tag = document.getElementById('newCreditItemTag').value.trim();
+            const errorDiv = document.getElementById('addCreditItemError');
+
+            if (!name || !desc || !cost || !discount || !stock) {
+                errorDiv.textContent = 'Fill all required fields';
+                return;
+            }
+
+            const id = 'cs_' + Date.now().toString(36);
+            try {
+                const itemData = {
+                    name, 
+                    description: desc, 
+                    cost, 
+                    discount,
+                    stock,
+                    discountInfo: {
+                        money: '100M+ (Rs 50+)',
+                        items: 'Rs 50+ items',
+                        accounts: 'Any account'
+                    },
+                    createdAt: serverTimestamp()
+                };
+                if (tag) itemData.tag = tag;
+
+                await setDoc(doc(db, 'credit_shop', id), itemData);
+                
+                state.creditShopItems.push({ id, ...itemData });
+                renderCreditShop();
+                showToast('Credit shop item added!');
+                
+                // Clear inputs
+                document.getElementById('newCreditItemName').value = '';
+                document.getElementById('newCreditItemDesc').value = '';
+                document.getElementById('newCreditItemCost').value = '';
+                document.getElementById('newCreditItemDiscount').value = '';
+                document.getElementById('newCreditItemStock').value = '';
+                document.getElementById('newCreditItemTag').value = '';
+                errorDiv.textContent = '';
+            } catch (e) {
+                errorDiv.textContent = 'Failed: ' + e.message;
+            }
+        };
+
+        // ===== ADMIN: Add AFK Reward =====
+        window.addAFKReward = async () => {
+            if (!state.isAdmin) return;
+            
+            const name = document.getElementById('newAFKRewardName').value.trim();
+            const desc = document.getElementById('newAFKRewardDesc').value.trim();
+            const credits = parseInt(document.getElementById('newAFKRewardCredits').value);
+            const duration = parseInt(document.getElementById('newAFKRewardDuration').value);
+            const errorDiv = document.getElementById('addAFKRewardError');
+
+            if (!name || !desc || !credits || !duration) {
+                errorDiv.textContent = 'Fill all required fields';
+                return;
+            }
+
+            const id = 'afk_' + Date.now().toString(36);
+            try {
+                await setDoc(doc(db, 'afk_rewards', id), {
+                    name, 
+                    description: desc, 
+                    credits, 
+                    duration,
+                    createdAt: serverTimestamp()
+                });
+                
+                state.afkRewards.push({ id, name, description: desc, credits, duration });
+                showToast('AFK reward added!');
+                
+                // Clear inputs
+                document.getElementById('newAFKRewardName').value = '';
+                document.getElementById('newAFKRewardDesc').value = '';
+                document.getElementById('newAFKRewardCredits').value = '';
+                document.getElementById('newAFKRewardDuration').value = '';
+                errorDiv.textContent = '';
+            } catch (e) {
+                errorDiv.textContent = 'Failed: ' + e.message;
+            }
+        };
+
         function renderAdminTable() {
             const tbody = document.getElementById('adminTableBody');
             const categories = { money: 'Money', spawners: 'Spawners', armory: 'Armory', materials: 'Materials', accounts: 'Accounts' };
             tbody.innerHTML = Object.values(state.products).map(p => {
                 const catOptions = Object.entries(categories).map(([val, label]) => `<option value="${val}" ${p.category === val ? 'selected' : ''}>${label}</option>`).join('');
-                return `<tr><td><input type="checkbox" data-id="${p.id}"></td><td><input class="admin-input" id="name-${p.id}" value="${p.name}"></td><td><select class="admin-input" id="cat-${p.id}" style="cursor:pointer;">${catOptions}</select></td><td><input class="admin-input" id="stock-${p.id}" value="${p.stock}"></td><td><input class="admin-input" id="price-${p.id}" value="${p.price}" type="number"></td><td><button class="btn btn-primary btn-sm" onclick="window.saveItem('${p.id}')">Save</button> <button class="btn btn-danger btn-sm" onclick="window.deleteItem('${p.id}')">Delete</button></td></tr>`;
+                return `<tr><td><input type="checkbox" data-id="${p.id}"></td><td><input class="admin-input" id="name-${p.id}" value="${p.name}"></td><td><select class="admin-input" id="cat-${p.id}" style="cursor:pointer;">${catOptions}</select></td><td><input class="admin-input" id="stock-${p.id}" value="${p.stock}"></td><td><input class="admin-input" id="price-${p.id}" value="${p.price}" type="number"></td><td><button class="btn btn-primary btn-sm" onclick="window.saveItem('${p.id}')">Save</button> <button class="btn btn-danger btn-sm" onclick="window.deleteItem('${p.id}')">🗑️ Delete</button></td></tr>`;
             }).join('');
         }
 
