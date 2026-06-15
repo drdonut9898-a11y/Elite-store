@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FireMC Store - Buy Minecraft Items, Accounts & Spawners</title>
-    <meta name="description" content="Best Minecraft Store - Buy items, accounts, spawners, and money. Cheap prices, secure payment via bKash/UPI. Instant delivery!">
-    <meta name="keywords" content="minecraft store, buy minecraft items, minecraft accounts, minecraft spawners, minecraft money, minecraft server shop, firemc">
+    <title>FireMC Store - Buy Minecraft Items, Accounts & Discord</title>
+    <meta name="description" content="Best Minecraft Store - Buy items, accounts, Discord Nitro, Boosts. Cheap prices, secure payment via bKash/UPI. Instant delivery!">
+    <meta name="keywords" content="minecraft store, buy minecraft items, minecraft accounts, discord nitro, discord boost, firemc">
     <meta name="author" content="FireMC Store">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="FireMC Store - Minecraft Items & Accounts">
-    <meta property="og:description" content="Buy Minecraft items, accounts, and spawners at best prices. Secure payments.">
+    <meta property="og:title" content="FireMC Store - Minecraft Items & Discord">
+    <meta property="og:description" content="Buy Minecraft items, accounts, and Discord perks at best prices. Secure payments.">
     <meta property="og:image" content="https://raw.githubusercontent.com/drdonut9898-a11y/Firemc-store/main/favicon.jpg">
     <meta property="og:url" content="https://yourdomain.com">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="FireMC Store">
-    <meta name="twitter:description" content="Best Minecraft Store - Items, Accounts, Spawners">
+    <meta name="twitter:description" content="Best Minecraft Store - Items, Accounts, Discord">
     <link rel="canonical" href="https://yourdomain.com">
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/drdonut9898-a11y/Firemc-store/main/favicon.jpg">
     <base target="_blank">
@@ -31,6 +31,7 @@
             --accent-green: #2ed573; --accent-green-glow: rgba(46,213,115,0.4);
             --accent-gold: #eab308; --accent-gold-glow: rgba(234,179,8,0.4);
             --accent-purple: #a855f7; --accent-purple-glow: rgba(168,85,247,0.4);
+            --accent-discord: #5865F2; --accent-discord-glow: rgba(88,101,242,0.4);
             --font-display: 'Orbitron',sans-serif; --font-body: 'Rajdhani',sans-serif;
             --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
             --transition-smooth: all 0.4s cubic-bezier(0.25,1,0.5,1);
@@ -45,8 +46,7 @@
         }
         body.light-theme .pkg-card, body.light-theme .menu-card, body.light-theme .master-card,
         body.light-theme .review-card, body.light-theme .wishlist-item, body.light-theme .cart-item,
-        body.light-theme .sidebar, body.light-theme .credit-shop-item, body.light-theme .afk-container,
-        body.light-theme .offer-card {
+        body.light-theme .sidebar, body.light-theme .offer-card {
             background: rgba(255,255,255,0.95); border-color: rgba(0,0,0,0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         body.light-theme .search-input, body.light-theme .payment-input, body.light-theme .admin-input {
@@ -84,16 +84,12 @@
         .sidebar-category-firemc { color: var(--accent-red); }
         .sidebar-category-donut { color: var(--accent-blue); }
         .sidebar-category-account { color: var(--accent-green); }
-        .sidebar-category-credits { color: var(--accent-gold); }
+        .sidebar-category-discord { color: var(--accent-discord); }
         .sidebar-category-offers { color: var(--accent-purple); }
         .sidebar-category-admin { color: var(--accent-purple); }
         .sidebar-toggle { position: fixed; top: 20px; left: 20px; z-index: 1001; width: 45px; height: 45px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: var(--transition-smooth); box-shadow: var(--shadow-md); }
         .sidebar-toggle:hover { background: var(--accent-red); color: white; transform: scale(1.1); }
         .sidebar-toggle.sidebar-open { left: calc(var(--sidebar-width) + 20px); }
-        .credits-display { background: linear-gradient(135deg, rgba(234,179,8,0.15), rgba(234,179,8,0.05)); border: 1px solid rgba(234,179,8,0.3); border-radius: 12px; padding: 15px; margin: 15px 20px; text-align: center; animation: glowGold 2s ease-in-out infinite; }
-        @keyframes glowGold { 0%, 100% { box-shadow: 0 0 10px rgba(234,179,8,0.2); } 50% { box-shadow: 0 0 20px rgba(234,179,8,0.4); } }
-        .credits-display .credits-label { font-family: var(--font-display); font-size: 0.7rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
-        .credits-display .credits-value { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: var(--accent-gold); text-shadow: 0 0 15px var(--accent-gold-glow); }
         .sidebar-username { margin: 0 20px 15px; padding: 10px 15px; text-align: center; }
         .sidebar-username.visible { display: block; }
         .sidebar-username .username-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3px; }
@@ -121,6 +117,8 @@
         .btn-gold:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px var(--accent-gold-glow); }
         .btn-purple { background:linear-gradient(135deg,var(--accent-purple),#7c3aed); color:white; }
         .btn-purple:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px var(--accent-purple-glow); }
+        .btn-discord { background:linear-gradient(135deg,var(--accent-discord),#4752C4); color:white; }
+        .btn-discord:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px var(--accent-discord-glow); }
         .btn-danger { background:linear-gradient(135deg,#ef4444,#dc2626); color:white; }
         .btn-danger:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px rgba(239,68,68,0.4); }
         .btn-sm { padding:6px 14px; font-size:0.7rem; }
@@ -149,9 +147,9 @@
         .master-card-green { border-top-color:var(--accent-green); border-color:rgba(46,213,115,0.3); }
         .master-card-green h2 { color:var(--accent-green); }
         .master-card-green:hover { border-color:var(--accent-green); box-shadow:0 20px 40px rgba(46,213,115,0.15); }
-        .master-card-gold { border-top-color:var(--accent-gold); border-color:rgba(234,179,8,0.3); }
-        .master-card-gold h2 { color:var(--accent-gold); }
-        .master-card-gold:hover { border-color:var(--accent-gold); box-shadow:0 20px 40px rgba(234,179,8,0.15); }
+        .master-card-discord { border-top-color:var(--accent-discord); border-color:rgba(88,101,242,0.3); }
+        .master-card-discord h2 { color:var(--accent-discord); }
+        .master-card-discord:hover { border-color:var(--accent-discord); box-shadow:0 20px 40px rgba(88,101,242,0.15); }
         .master-card-purple { border-top-color:var(--accent-purple); border-color:rgba(168,85,247,0.3); }
         .master-card-purple h2 { color:var(--accent-purple); }
         .master-card-purple:hover { border-color:var(--accent-purple); box-shadow:0 20px 40px rgba(168,85,247,0.15); }
@@ -172,7 +170,7 @@
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
         .billboard-blue { background:linear-gradient(90deg,rgba(0,210,255,0.08),transparent); border-color:rgba(0,210,255,0.3); border-left-color:var(--accent-blue); }
         .billboard-green { background:linear-gradient(90deg,rgba(46,213,115,0.08),transparent); border-color:rgba(46,213,115,0.3); border-left-color:var(--accent-green); }
-        .billboard-gold { background:linear-gradient(90deg,rgba(234,179,8,0.08),transparent); border-color:rgba(234,179,8,0.3); border-left-color:var(--accent-gold); }
+        .billboard-discord { background:linear-gradient(90deg,rgba(88,101,242,0.08),transparent); border-color:rgba(88,101,242,0.3); border-left-color:var(--accent-discord); }
         .billboard-purple { background:linear-gradient(90deg,rgba(168,85,247,0.08),transparent); border-color:rgba(168,85,247,0.3); border-left-color:var(--accent-purple); }
         .rate-tag { font-size:1.3rem; font-weight:600; color:var(--text-secondary); }
         .rate-tag strong { color:var(--accent-red); font-family:var(--font-display); font-size:1.5rem; }
@@ -193,8 +191,6 @@
         .pkg-card:hover .pkg-cost { background: rgba(255,71,87,0.1); border-color: rgba(255,71,87,0.3); }
         .promo-badge { position:absolute; top:15px; right:15px; background:linear-gradient(90deg,var(--accent-gold),#ca8a04); color:#000; font-size:0.7rem; font-weight:900; padding:4px 12px; border-radius:6px; animation: shimmer 2s infinite; }
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-        .discount-tag { position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, var(--accent-red), #ff2e44); color: white; font-family: var(--font-display); font-size: 0.75rem; font-weight: 900; padding: 5px 14px; border-radius: 8px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px var(--accent-red-glow); animation: tagPulse 2s ease-in-out infinite; z-index: 2; }
-        @keyframes tagPulse { 0%, 100% { box-shadow: 0 4px 15px var(--accent-red-glow); } 50% { box-shadow: 0 4px 25px var(--accent-red-glow), 0 0 40px rgba(255,71,87,0.3); } }
         .wishlist-btn { position:absolute; top:15px; left:15px; background:rgba(255,71,87,0.1); border:1px solid rgba(255,71,87,0.2); color:var(--text-muted); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; transition:var(--transition-bounce); z-index:3; }
         .wishlist-btn:hover, .wishlist-btn.active { background:var(--accent-red); color:white; border-color:var(--accent-red); transform: scale(1.2); }
         .wishlist-panel { position:fixed; top:0; right:-400px; width:380px; max-width:90vw; height:100vh; background:var(--bg-secondary); border-left:1px solid var(--border-subtle); z-index:1000; transition:right 0.4s cubic-bezier(0.25,1,0.5,1); display:flex; flex-direction:column; }
@@ -231,12 +227,6 @@
         .cart-total strong { font-family:var(--font-display); color:var(--accent-red); font-size:1.5rem; }
         .cart-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; opacity:0; pointer-events:none; transition:opacity 0.3s; }
         .cart-overlay.active { opacity:1; pointer-events:auto; }
-        .cart-discount-line { color: var(--accent-green); font-size: 0.85rem; font-weight: 600; margin-top: 5px; font-family: var(--font-display); }
-        .cart-savings-banner { background: linear-gradient(135deg, rgba(46,213,115,0.1), rgba(46,213,115,0.05)); border: 1px solid rgba(46,213,115,0.3); border-radius: 10px; padding: 12px 15px; margin-bottom: 15px; text-align: center; display: none; }
-        .cart-savings-banner.visible { display: block; }
-        .cart-savings-banner .savings-title { font-family: var(--font-display); font-size: 0.8rem; color: var(--accent-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .cart-savings-banner .savings-amount { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--accent-green); }
-        .cart-savings-banner .savings-detail { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
         .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,2,3,0.95); display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0; pointer-events:none; transition:all 0.3s; }
         .modal-overlay.active { opacity:1; pointer-events:auto; }
         .modal-box { background:var(--bg-card); border:2px solid var(--accent-red); border-radius:20px; padding:40px; max-width:450px; width:92%; text-align:center; animation: modalPop 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
@@ -283,79 +273,14 @@
         .admin-input:focus { outline:none; border-color:var(--accent-red); box-shadow:0 0 10px rgba(255,71,87,0.1); }
         .guest-banner { background:linear-gradient(90deg,rgba(255,159,67,0.1),transparent); border:1px solid rgba(255,159,67,0.3); border-left:4px solid #ff9f43; padding:15px 20px; border-radius:10px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; animation: slideInLeft 0.6s ease-out; }
         .guest-banner p { color:#ff9f43; font-weight:600; }
-        .credits-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
-        .afk-container { min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 20px; border: 1px solid var(--border-subtle); background: var(--bg-card); padding: 40px; }
-        .meteor-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
-        .meteor { position: absolute; width: 4px; height: 4px; background: linear-gradient(90deg, var(--accent-red), transparent); border-radius: 50%; animation: meteorFall linear infinite; opacity: 0; }
-        .meteor::before { content: ''; position: absolute; top: 50%; transform: translateY(-50%); width: 100px; height: 2px; background: linear-gradient(90deg, var(--accent-red), transparent); right: 0; }
-        @keyframes meteorFall { 0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; } 100% { transform: translateX(-500px) translateY(500px) rotate(-45deg); opacity: 0; } }
-        .particle { position: absolute; width: 6px; height: 6px; background: var(--accent-gold); border-radius: 50%; animation: floatParticle 3s ease-in-out infinite; opacity: 0.6; }
-        @keyframes floatParticle { 0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; } 50% { transform: translateY(-30px) scale(1.5); opacity: 1; } }
-        .afk-content { position: relative; z-index: 1; text-align: center; width: 100%; max-width: 500px; }
-        .afk-title { font-family: var(--font-display); font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--accent-gold); margin-bottom: 10px; text-shadow: 0 0 30px var(--accent-gold-glow); letter-spacing: 3px; }
-        .afk-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; }
-        .afk-timer-display { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); font-weight: 900; color: var(--accent-red); text-shadow: 0 0 40px var(--accent-red-glow); margin: 30px 0; letter-spacing: 5px; transition: var(--transition-smooth); }
-        .afk-timer-display.running { color: var(--accent-gold); text-shadow: 0 0 40px var(--accent-gold-glow); }
-        .afk-timer-display.complete { color: var(--accent-green); text-shadow: 0 0 40px var(--accent-green-glow); animation: pulse 1s ease-in-out infinite; }
-        .afk-start-btn { padding: 20px 60px; font-size: 1.2rem; letter-spacing: 4px; background: linear-gradient(135deg, var(--accent-gold), #ca8a04); color: #000; border: none; border-radius: 16px; cursor: pointer; font-family: var(--font-display); font-weight: 800; transition: var(--transition-bounce); box-shadow: 0 10px 40px rgba(234,179,8,0.3); position: relative; overflow: hidden; }
-        .afk-start-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 50px rgba(234,179,8,0.5); }
-        .afk-start-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .afk-start-btn .btn-shine { position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.6s; }
-        .afk-start-btn:hover .btn-shine { left: 100%; }
-        .afk-status { margin-top: 25px; font-size: 1rem; color: var(--text-secondary); min-height: 30px; font-weight: 600; }
-        .afk-status.earning { color: var(--accent-gold); font-family: var(--font-display); font-size: 1.2rem; animation: glowPulse 1s ease-in-out infinite; }
-        .afk-status.cancelled { color: var(--accent-red); }
-        .afk-status.success { color: var(--accent-green); font-family: var(--font-display); font-size: 1.3rem; }
-        .afk-progress-bar { width: 100%; max-width: 400px; height: 8px; background: var(--bg-secondary); border-radius: 10px; margin: 20px auto; overflow: hidden; border: 1px solid var(--border-subtle); }
-        .afk-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-gold), var(--accent-red)); border-radius: 10px; transition: width 1s linear; width: 0%; }
-        .afk-progress-fill.running { background: linear-gradient(90deg, var(--accent-gold), var(--accent-green)); }
-        .off-shop-section { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 20px; padding: 30px; height: fit-content; }
-        .off-shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border-subtle); }
-        .off-shop-header h2 { font-family: var(--font-display); color: var(--accent-gold); font-size: 1.3rem; letter-spacing: 2px; }
-        .off-shop-header .credits-info { font-family: var(--font-display); color: var(--accent-gold); font-size: 1rem; }
-        .off-shop-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .off-shop-item { background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 20px; text-align: center; transition: var(--transition-smooth); position: relative; overflow: hidden; }
-        .off-shop-item:hover { border-color: var(--accent-gold); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(234,179,8,0.1); }
-        .off-shop-item .shop-item-img { width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-gold), #ca8a04); border-radius: 12px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
-        .off-shop-item .shop-item-name { font-family: var(--font-display); font-size: 1.1rem; color: var(--text-primary); margin-bottom: 5px; }
-        .off-shop-item .shop-item-desc { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 10px; }
-        .off-shop-item .shop-item-price { font-family: var(--font-display); font-size: 1.3rem; color: var(--accent-gold); font-weight: 800; margin-bottom: 12px; }
-        .off-shop-item .shop-item-price span { font-size: 0.8rem; color: var(--text-muted); }
-        .off-shop-item .btn-buy-off { width: 100%; padding: 10px; background: linear-gradient(135deg, var(--accent-gold), #ca8a04); color: #000; border: none; border-radius: 10px; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; cursor: pointer; transition: var(--transition-smooth); text-transform: uppercase; letter-spacing: 1px; }
-        .off-shop-item .btn-buy-off:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(234,179,8,0.3); }
-        .off-shop-item .btn-buy-off:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .off-shop-item .btn-buy-off.owned { background: var(--accent-green); color: white; cursor: default; }
-        .off-shop-item .btn-buy-off.out-of-stock { background: var(--text-muted); color: var(--text-primary); cursor: not-allowed; }
-        .active-offers-banner { background: linear-gradient(90deg, rgba(46,213,115,0.1), rgba(234,179,8,0.1)); border: 1px solid rgba(46,213,115,0.3); border-left: 4px solid var(--accent-green); padding: 15px 20px; border-radius: 12px; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
-        .active-offers-banner .banner-icon { font-size: 2rem; }
-        .active-offers-banner .banner-text { font-family: var(--font-display); color: var(--accent-green); font-size: 1rem; }
-        .active-offers-banner .banner-text span { color: var(--accent-gold); font-weight: 700; }
-        .discount-info { background: rgba(255,71,87,0.05); border: 1px solid rgba(255,71,87,0.2); border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 0.8rem; color: var(--text-secondary); text-align: left; }
-        .discount-info strong { color: var(--accent-red); font-family: var(--font-display); font-size: 0.75rem; }
-        .discount-info ul { list-style: none; margin-top: 5px; }
-        .discount-info li { margin-bottom: 3px; padding-left: 15px; position: relative; }
-        .discount-info li::before { content: '>'; position: absolute; left: 0; color: var(--accent-green); }
-        .admin-credit-controls { background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 12px; margin-bottom: 25px; }
-        .admin-credit-controls h3 { font-family: var(--font-display); color: var(--accent-purple); margin-bottom: 15px; font-size: 1rem; }
-        .admin-give-credits { background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(168,85,247,0.05)); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
-        .admin-give-credits h3 { font-family: var(--font-display); color: var(--accent-purple); margin-bottom: 15px; font-size: 1rem; }
-        .discount-toggle { display: flex; align-items: center; gap: 10px; background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 12px 20px; border-radius: 10px; margin-bottom: 20px; }
-        .discount-toggle .toggle-label { font-family: var(--font-display); font-size: 0.9rem; color: var(--text-primary); }
-        .toggle-switch { position: relative; width: 50px; height: 26px; background: var(--bg-secondary); border-radius: 13px; cursor: pointer; transition: var(--transition-smooth); border: 1px solid var(--border-subtle); }
-        .toggle-switch.active { background: var(--accent-green); }
-        .toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: var(--transition-smooth); }
-        .toggle-switch.active::after { left: 26px; }
-        .admin-credit-shop-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .admin-credit-shop-table th, .admin-credit-shop-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--border-subtle); }
-        .admin-credit-shop-table th { background: rgba(234,179,8,0.08); color: var(--accent-gold); font-family: var(--font-display); font-size: 0.75rem; text-transform: uppercase; }
-        .admin-credit-shop-table td { font-size: 0.9rem; }
-        .admin-credit-shop-table .btn-sm { padding: 4px 10px; font-size: 0.65rem; }
-        /* ===== OFFER PAGE ===== */
         .offer-card { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:35px 25px; text-align:center; display:flex; flex-direction:column; justify-content:space-between; min-height:300px; position:relative; transition:var(--transition-smooth); animation: cardAppear 0.6s ease-out backwards; }
         .offer-card:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-10px) scale(1.02); box-shadow:0 20px 40px rgba(168,85,247,0.15); }
         .offer-card .offer-tag { position:absolute; top:15px; right:15px; background:linear-gradient(90deg,var(--accent-purple),#7c3aed); color:white; font-size:0.7rem; font-weight:900; padding:4px 12px; border-radius:6px; }
         .offer-card .offer-val { font-family:var(--font-display); font-size:2rem; font-weight:800; color:var(--accent-purple); }
         .offer-card .offer-cost { font-size:1.8rem; color:var(--accent-purple); font-weight:700; background:rgba(168,85,247,0.05); padding:10px 0; border-radius:8px; border:1px solid rgba(168,85,247,0.1); margin:15px 0; }
+        .discord-desc-box { background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
+        .discord-desc-box h4 { font-family: var(--font-display); color: var(--accent-discord); margin-bottom: 10px; font-size: 1.1rem; }
+        .discord-desc-box p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
         @media (max-width:768px) {
             .home-wrapper { grid-template-columns:1fr; }
             .master-card-green { grid-column:span 1; max-width:100%; }
@@ -366,8 +291,6 @@
             .sidebar.open { transform: translateX(0); }
             .sidebar-toggle { left: 20px; }
             .sidebar-toggle.sidebar-open { left: 20px; }
-            .credits-layout { grid-template-columns: 1fr; }
-            .off-shop-grid { grid-template-columns: 1fr; }
         }
         ::-webkit-scrollbar { width:8px; }
         ::-webkit-scrollbar-track { background:var(--bg-secondary); }
@@ -384,10 +307,6 @@
         <div class="sidebar-header">
             <div class="sidebar-brand">FIRE<span>MC</span></div>
         </div>
-        <div class="credits-display" id="sidebarCredits" style="display:none;">
-            <div class="credits-label">💰 Your Credits</div>
-            <div class="credits-value" id="sidebarCreditsValue">0</div>
-        </div>
         <div class="sidebar-username" id="sidebarUsername" style="display:none;">
             <div class="username-label">Username</div>
             <div class="username-value" id="sidebarUsernameValue">-</div>
@@ -396,38 +315,35 @@
         <div class="sidebar-section">
             <div class="sidebar-section-title">Categories</div>
             <a class="sidebar-link sidebar-category sidebar-category-firemc" onclick="window.sidebarNavigate('menu')" data-view="menu">
-                <span class="link-icon"></span><span>FIREMC</span>
+                <span class="link-icon">🔥</span><span>FIREMC</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-donut" onclick="window.sidebarNavigate('donutsmp')" data-view="donutsmp">
-                <span class="link-icon"></span><span>DONUTSMP</span>
+                <span class="link-icon">🍩</span><span>DONUTSMP</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-account" onclick="window.sidebarNavigate('accounts')" data-view="accounts">
-                <span class="link-icon"></span><span>ACCOUNT</span>
+                <span class="link-icon">👤</span><span>ACCOUNT</span>
             </a>
-            <a class="sidebar-link sidebar-category sidebar-category-credits" onclick="window.sidebarNavigate('credits')" data-view="credits">
-                <span class="link-icon"></span><span>EARN CREDITS</span>
-            </a>
-            <a class="sidebar-link sidebar-category sidebar-category-credits" onclick="window.sidebarNavigate('offs')" data-view="offs">
-                <span class="link-icon"></span><span>OFFs</span>
+            <a class="sidebar-link sidebar-category sidebar-category-discord" onclick="window.sidebarNavigate('discord')" data-view="discord">
+                <span class="link-icon">💬</span><span>DISCORD</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-offers" onclick="window.sidebarNavigate('offers')" data-view="offers">
-                <span class="link-icon"></span><span>OFFER</span>
+                <span class="link-icon">🎁</span><span>OFFER</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-admin" id="sidebarAdminLink" onclick="window.sidebarNavigate('admin')" data-view="admin" style="display:none;">
-                <span class="link-icon"></span><span>ADMIN</span>
+                <span class="link-icon">⚙️</span><span>ADMIN</span>
             </a>
         </div>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section">
             <div class="sidebar-section-title">Quick Links</div>
             <a class="sidebar-link" onclick="window.sidebarNavigate('landing')">
-                <span class="link-icon"></span><span>Home</span>
+                <span class="link-icon">🏠</span><span>Home</span>
             </a>
             <a class="sidebar-link" onclick="window.toggleTheme()">
-                <span class="link-icon"></span><span>Theme</span>
+                <span class="link-icon">🎨</span><span>Theme</span>
             </a>
             <a class="sidebar-link" onclick="window.openAuthModal()" id="sidebarAuthLink">
-                <span class="link-icon"></span><span>Login</span>
+                <span class="link-icon">🔑</span><span>Login</span>
             </a>
         </div>
     </nav>
@@ -464,13 +380,9 @@
                     <h2>ACCOUNTS</h2>
                     <p style="color:var(--accent-green);">Click for Details</p>
                 </div>
-                <div class="master-card master-card-gold" onclick="window.handleCardClick('credits')">
-                    <h2 style="color:var(--accent-gold);">EARN CREDITS</h2>
-                    <p style="color:var(--accent-gold);">AFK & Earn Rewards</p>
-                </div>
-                <div class="master-card master-card-purple" onclick="window.handleCardClick('offs')">
-                    <h2 style="color:var(--accent-purple);">OFFs</h2>
-                    <p style="color:var(--accent-purple);">Buy Discounts</p>
+                <div class="master-card master-card-discord" onclick="window.handleCardClick('discord')">
+                    <h2 style="color:var(--accent-discord);">DISCORD</h2>
+                    <p style="color:var(--accent-discord);">Nitro & Boosts</p>
                 </div>
                 <div class="master-card master-card-purple" onclick="window.handleCardClick('offers')">
                     <h2 style="color:var(--accent-purple);">OFFER</h2>
@@ -549,52 +461,55 @@
             <div class="packages-container" id="accountsContainer"></div>
         </div>
 
-        <!-- CREDITS / AFK VIEW (Only AFK) -->
-        <div class="view-section" id="viewCredits">
+        <!-- DISCORD VIEW -->
+        <div class="view-section" id="viewDiscord">
             <button class="back-btn" onclick="window.switchView('landing')">Back</button>
-            <div class="active-offers-banner" id="activeOffersBanner" style="display:none;">
-                <div class="banner-icon">🎁</div>
-                <div class="banner-text">Active Offers: <span id="activeOffersList">None</span></div>
-            </div>
-            <div class="discount-toggle" id="discountToggle" style="display:none;">
-                <span class="toggle-label">Discount: <span id="toggleStatus">ON</span></span>
-                <div class="toggle-switch active" id="toggleSwitch" onclick="window.toggleDiscount()"></div>
-            </div>
-            <div class="afk-container" id="afkContainer">
-                <div class="meteor-container" id="meteorContainer"></div>
-                <div class="afk-content">
-                    <div class="afk-title">EARN CREDITS</div>
-                    <div class="afk-subtitle">Stay AFK for 60 seconds to earn 1 Credit</div>
-                    <div class="afk-timer-display" id="afkTimerDisplay">01:00</div>
-                    <div class="afk-progress-bar">
-                        <div class="afk-progress-fill" id="afkProgressFill"></div>
-                    </div>
-                    <button class="afk-start-btn" id="afkStartBtn" onclick="window.toggleAFK()">
-                        <span class="btn-shine"></span>START AFK
-                    </button>
-                    <div class="afk-status" id="afkStatus">Click the button to start earning credits</div>
+            <div class="menu-grid">
+                <div class="menu-card" onclick="window.handleCardClick('nitro')">
+                    <h3 style="color:var(--accent-discord);">NITRO</h3>
+                    <p>Discord Nitro subscriptions</p>
+                </div>
+                <div class="menu-card" onclick="window.handleCardClick('boosts')">
+                    <h3 style="color:var(--accent-discord);">BOOSTS</h3>
+                    <p>Server boost packages</p>
                 </div>
             </div>
         </div>
 
-        <!-- OFFs VIEW (Credit Shop) -->
-        <div class="view-section" id="viewOffs">
-            <button class="back-btn" onclick="window.switchView('landing')">Back</button>
-            <div class="active-offers-banner" id="offsActiveOffersBanner" style="display:none;">
-                <div class="banner-icon">🎁</div>
-                <div class="banner-text">Active Offers: <span id="offsActiveOffersList">None</span></div>
+        <!-- NITRO VIEW -->
+        <div class="view-section" id="viewNitro">
+            <button class="back-btn" onclick="window.switchView('discord')">Back</button>
+            <div class="store-billboard billboard-discord">
+                <div class="rate-tag">Market: <strong>Discord Nitro</strong></div>
+                <div class="warning-tag" style="animation: pulseGreen 2s infinite; background:rgba(46,213,115,0.1); color:var(--accent-green); border-color:rgba(46,213,115,0.4);">Instant</div>
             </div>
-            <div class="discount-toggle" id="offsDiscountToggle" style="display:none;">
-                <span class="toggle-label">Discount: <span id="offsToggleStatus">ON</span></span>
-                <div class="toggle-switch active" id="offsToggleSwitch" onclick="window.toggleDiscount()"></div>
+            <div id="nitroDescBox" class="discord-desc-box" style="display:none;">
+                <h4>📋 About Nitro</h4>
+                <p id="nitroDescText"></p>
             </div>
-            <div class="off-shop-section" id="offShopSection">
-                <div class="off-shop-header">
-                    <h2>OFFs</h2>
-                    <div class="credits-info">💰 <span id="offShopCreditsValue">0</span></div>
-                </div>
-                <div class="off-shop-grid" id="offShopGrid"></div>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="nitroSearch" placeholder="Search nitro..." onkeyup="window.filterProducts('nitro')">
             </div>
+            <div class="packages-container" id="nitroContainer"></div>
+        </div>
+
+        <!-- BOOSTS VIEW -->
+        <div class="view-section" id="viewBoosts">
+            <button class="back-btn" onclick="window.switchView('discord')">Back</button>
+            <div class="store-billboard billboard-discord">
+                <div class="rate-tag">Market: <strong>Server Boosts</strong></div>
+                <div class="warning-tag" style="animation: pulseGreen 2s infinite; background:rgba(46,213,115,0.1); color:var(--accent-green); border-color:rgba(46,213,115,0.4);">Instant</div>
+            </div>
+            <div id="boostsDescBox" class="discord-desc-box" style="display:none;">
+                <h4>📋 About Boosts</h4>
+                <p id="boostsDescText"></p>
+            </div>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="boostsSearch" placeholder="Search boosts..." onkeyup="window.filterProducts('boosts')">
+            </div>
+            <div class="packages-container" id="boostsContainer"></div>
         </div>
 
         <!-- OFFER VIEW -->
@@ -616,24 +531,6 @@
             <button class="back-btn" onclick="window.switchView('landing')">Back</button>
             <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--text-primary); margin-bottom:20px; border-left:4px solid var(--accent-red); padding-left:15px;">Admin Dashboard</div>
 
-            <div class="admin-give-credits">
-                <h3>Give Credits to User</h3>
-                <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:15px; align-items:end;">
-                    <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">User Email</label>
-                        <input type="email" class="admin-input" id="giveCreditEmail" placeholder="user@example.com">
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Credits</label>
-                        <input type="number" class="admin-input" id="giveCreditAmount" placeholder="e.g. 100">
-                    </div>
-                    <div>
-                        <button class="btn btn-purple" style="width:100%;" onclick="window.giveCredits()">Give Credits</button>
-                    </div>
-                </div>
-                <div id="giveCreditError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
-            </div>
-
             <div class="admin-controls">
                 <button class="btn btn-success btn-sm" onclick="window.openAddItemModal()">+ Add Item</button>
                 <button class="btn btn-secondary btn-sm" onclick="window.selectAllAdminItems()">Select All</button>
@@ -650,8 +547,8 @@
             </div>
 
             <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-purple); padding-left:15px;">Offer Items Management</div>
-            <div class="admin-credit-controls">
-                <h3>Add Offer Item</h3>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 12px; margin-bottom: 25px;">
+                <h3 style="font-family: var(--font-display); color: var(--accent-purple); margin-bottom: 15px; font-size: 1rem;">Add Offer Item</h3>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:15px;">
                     <div>
                         <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Item Name</label>
@@ -682,70 +579,61 @@
                 </table>
             </div>
 
-            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-purple); padding-left:15px;">Credit Shop (OFFs) Management</div>
-            <div class="admin-credit-controls">
-                <h3>Add Credit Shop Item</h3>
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-discord); padding-left:15px;">Discord Items Management</div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 12px; margin-bottom: 25px;">
+                <h3 style="font-family: var(--font-display); color: var(--accent-discord); margin-bottom: 15px; font-size: 1rem;">Add Discord Item</h3>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:15px;">
                     <div>
                         <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Item Name</label>
-                        <input type="text" class="admin-input" id="newCreditItemName" placeholder="e.g. 5% OFF">
+                        <input type="text" class="admin-input" id="newDiscordItemName" placeholder="e.g. Nitro Monthly">
                     </div>
                     <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Description</label>
-                        <input type="text" class="admin-input" id="newCreditItemDesc" placeholder="e.g. Get 5% discount">
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Category</label>
+                        <select class="admin-input" id="newDiscordItemCategory" style="cursor:pointer;">
+                            <option value="nitro">Nitro</option>
+                            <option value="boosts">Boosts</option>
+                        </select>
                     </div>
                     <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Credit Cost</label>
-                        <input type="number" class="admin-input" id="newCreditItemCost" placeholder="e.g. 620">
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Discount %</label>
-                        <input type="number" class="admin-input" id="newCreditItemDiscount" placeholder="e.g. 5">
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Price (INR)</label>
+                        <input type="number" class="admin-input" id="newDiscordItemPrice" placeholder="e.g. 150">
                     </div>
                     <div>
                         <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Stock</label>
-                        <input type="text" class="admin-input" id="newCreditItemStock" placeholder="e.g. Unlimited">
+                        <input type="text" class="admin-input" id="newDiscordItemStock" placeholder="e.g. 10 or Unlimited">
                     </div>
                     <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Tag Text (Optional)</label>
-                        <input type="text" class="admin-input" id="newCreditItemTag" placeholder="e.g. HOT">
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Tag (Optional)</label>
+                        <input type="text" class="admin-input" id="newDiscordItemTag" placeholder="e.g. HOT">
                     </div>
                 </div>
-                <button class="btn btn-purple btn-sm" style="margin-top:15px;" onclick="window.addCreditShopItem()">Add Credit Shop Item</button>
-                <div id="addCreditItemError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
+                <button class="btn btn-discord btn-sm" style="margin-top:15px;" onclick="window.addDiscordItem()">Add Discord Item</button>
+                <div id="addDiscordItemError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
             </div>
             <div style="overflow-x:auto; margin-top:20px;">
-                <table class="admin-credit-shop-table">
+                <table class="admin-table">
                     <thead>
-                        <tr><th>Name</th><th>Cost</th><th>Discount</th><th>Stock</th><th>Tag</th><th>Actions</th></tr>
+                        <tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Tag</th><th>Actions</th></tr>
                     </thead>
-                    <tbody id="adminCreditShopBody"></tbody>
+                    <tbody id="adminDiscordItemsBody"></tbody>
                 </table>
             </div>
 
-            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-blue); padding-left:15px;">AFK Rewards Management</div>
-            <div class="admin-credit-controls">
-                <h3>Add AFK Reward</h3>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:15px;">
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-blue); padding-left:15px;">Discord Category Descriptions</div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 12px; margin-bottom: 25px;">
+                <h3 style="font-family: var(--font-display); color: var(--accent-discord); margin-bottom: 15px; font-size: 1rem;">Set Category Descriptions</h3>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
                     <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Reward Name</label>
-                        <input type="text" class="admin-input" id="newAFKRewardName" placeholder="e.g. Bonus Credits">
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Nitro Description</label>
+                        <textarea class="admin-input" id="nitroDescInput" placeholder="Enter description for Nitro category..." style="min-height:80px;"></textarea>
                     </div>
                     <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Description</label>
-                        <input type="text" class="admin-input" id="newAFKRewardDesc" placeholder="e.g. Extra 5 credits">
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Credits Given</label>
-                        <input type="number" class="admin-input" id="newAFKRewardCredits" placeholder="e.g. 5">
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Duration (sec)</label>
-                        <input type="number" class="admin-input" id="newAFKRewardDuration" placeholder="e.g. 120">
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Boosts Description</label>
+                        <textarea class="admin-input" id="boostsDescInput" placeholder="Enter description for Boosts category..." style="min-height:80px;"></textarea>
                     </div>
                 </div>
-                <button class="btn btn-blue btn-sm" style="margin-top:15px;" onclick="window.addAFKReward()">Add AFK Reward</button>
-                <div id="addAFKRewardError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
+                <button class="btn btn-discord btn-sm" style="margin-top:15px;" onclick="window.saveDiscordDesc()">Save Descriptions</button>
+                <div id="saveDiscordDescError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
             </div>
 
             <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-gold); padding-left:15px;">Reviews Management</div>
@@ -801,11 +689,6 @@
             </div>
         </div>
         <div class="cart-footer">
-            <div class="cart-savings-banner" id="cartSavingsBanner">
-                <div class="savings-title">💰 Discount Applied!</div>
-                <div class="savings-amount" id="savingsAmount">-0 INR</div>
-                <div class="savings-detail" id="savingsDetail">You saved with your OFF!</div>
-            </div>
             <div class="cart-total"><span>Total:</span><strong id="cartTotal">0 INR</strong></div>
             <button class="btn btn-primary" style="width:100%;" onclick="window.checkoutCart()">Checkout</button>
         </div>
@@ -823,10 +706,6 @@
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-box" style="max-width:420px; padding:30px;">
             <h2>Complete Payment</h2>
-            <div id="discountBanner" style="display:none; background:rgba(46,213,115,0.1); border:1px solid rgba(46,213,115,0.3); border-radius:10px; padding:12px; margin-bottom:15px; text-align:center;">
-                <div style="font-family:var(--font-display); color:var(--accent-green); font-size:0.9rem;">Discount Applied!</div>
-                <p id="discountText" style="color:var(--text-secondary); font-size:0.85rem; margin:0;"></p>
-            </div>
             <div class="payment-category">
                 <div class="payment-category-title">UPI Payment</div>
                 <div class="payment-apps">
@@ -909,6 +788,8 @@
                     <option value="armory">Armory</option>
                     <option value="materials">Materials</option>
                     <option value="accounts">Accounts</option>
+                    <option value="nitro">Nitro</option>
+                    <option value="boosts">Boosts</option>
                 </select>
             </div>
             <div class="payment-input-group">
@@ -921,42 +802,6 @@
             </div>
             <button class="btn btn-success" style="width:100%; margin-top:10px;" onclick="window.addNewItem()">Add Item</button>
             <button class="modal-dismiss" onclick="window.closeAddItemModal()">Cancel</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="editCreditItemModal">
-        <div class="modal-box" style="border-color:var(--accent-gold); max-width:550px;">
-            <h2 style="color:var(--accent-gold);">Edit Credit Shop Item</h2>
-            <div id="editCreditItemError" style="color:var(--accent-red); margin-bottom:15px; min-height:20px;"></div>
-            <input type="hidden" id="editCreditItemId">
-            <div class="payment-input-group">
-                <label>Item Name</label>
-                <input type="text" class="payment-input" id="editCreditItemName" placeholder="e.g. 5% OFF">
-            </div>
-            <div class="payment-input-group">
-                <label>Description</label>
-                <input type="text" class="payment-input" id="editCreditItemDesc" placeholder="e.g. Get 5% discount">
-            </div>
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                <div class="payment-input-group">
-                    <label>Credit Cost</label>
-                    <input type="number" class="payment-input" id="editCreditItemCost" placeholder="e.g. 620">
-                </div>
-                <div class="payment-input-group">
-                    <label>Discount %</label>
-                    <input type="number" class="payment-input" id="editCreditItemDiscount" placeholder="e.g. 5">
-                </div>
-            </div>
-            <div class="payment-input-group">
-                <label>Stock</label>
-                <input type="text" class="payment-input" id="editCreditItemStock" placeholder="e.g. Unlimited">
-            </div>
-            <div class="payment-input-group">
-                <label>Tag Text (Optional)</label>
-                <input type="text" class="payment-input" id="editCreditItemTag" placeholder="e.g. HOT">
-            </div>
-            <button class="btn btn-gold" style="width:100%; margin-top:10px;" onclick="window.saveEditCreditItem()">Save Changes</button>
-            <button class="modal-dismiss" onclick="window.closeEditCreditItemModal()">Cancel</button>
         </div>
     </div>
 
@@ -988,6 +833,41 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="editDiscordItemModal">
+        <div class="modal-box" style="border-color:var(--accent-discord); max-width:500px;">
+            <h2 style="color:var(--accent-discord);">Edit Discord Item</h2>
+            <div id="editDiscordItemError" style="color:var(--accent-red); margin-bottom:15px; min-height:20px;"></div>
+            <input type="hidden" id="editDiscordItemId">
+            <div class="payment-input-group">
+                <label>Item Name</label>
+                <input type="text" class="payment-input" id="editDiscordItemName" placeholder="e.g. Nitro Monthly">
+            </div>
+            <div class="payment-input-group">
+                <label>Category</label>
+                <select class="payment-input" id="editDiscordItemCategory" style="cursor:pointer;">
+                    <option value="nitro">Nitro</option>
+                    <option value="boosts">Boosts</option>
+                </select>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                <div class="payment-input-group">
+                    <label>Price (INR)</label>
+                    <input type="number" class="payment-input" id="editDiscordItemPrice" placeholder="e.g. 150">
+                </div>
+                <div class="payment-input-group">
+                    <label>Stock</label>
+                    <input type="text" class="payment-input" id="editDiscordItemStock" placeholder="e.g. 10 or Unlimited">
+                </div>
+            </div>
+            <div class="payment-input-group">
+                <label>Tag (Optional)</label>
+                <input type="text" class="payment-input" id="editDiscordItemTag" placeholder="e.g. HOT">
+            </div>
+            <button class="btn btn-discord" style="width:100%; margin-top:10px;" onclick="window.saveEditDiscordItem()">Save Changes</button>
+            <button class="modal-dismiss" onclick="window.closeEditDiscordItemModal()">Cancel</button>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="authModal">
         <div class="modal-box" style="max-width:450px;">
             <h2 id="authTitle">MEMBER ACCESS</h2>
@@ -1010,7 +890,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, addDoc, query, where, orderBy, serverTimestamp, getDocs, updateDoc, deleteDoc, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, addDoc, query, where, orderBy, serverTimestamp, getDocs, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBel_TeEf1vjBfio9UyQXEAA775w-mXv4I",
@@ -1026,9 +906,14 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        // ===== ADMIN UIDs =====
+        const ADMIN_UIDS = [
+            "Uq5jZPeYZcPevW3GYMTV38V1u0d2",  // Original admin
+            "KKOJk8oCoMTciAIv3jv5QhHOPKa2"   // abhaydhillon59@gmail.com
+        ];
+
         const state = {
             user: null, isAdmin: false,
-            adminUID: "Uq5jZPeYZcPevW3GYMTV38V1u0d2",
             cart: [],
             wishlist: JSON.parse(localStorage.getItem('firemc_wishlist') || '[]'),
             products: {}, reviews: [],
@@ -1036,21 +921,12 @@
             selectedPaymentApp: null,
             authTab: 'login',
             isNavigating: false,
-            credits: 0,
-            userOffers: [],
-            afkTimer: null,
-            afkTimeRemaining: 60,
-            afkIsRunning: false,
-            afkAutoLoop: false,
-            afkSessionId: null,
-            sidebarOpen: false,
-            creditShopItems: [],
-            activeDiscount: 0,
-            discountEnabled: true,
-            afkRewards: [],
             username: null,
             usernames: new Set(),
-            offerItems: {}
+            offerItems: {},
+            discordItems: {},
+            discordDesc: { nitro: '', boosts: '' },
+            sidebarOpen: false
         };
 
         const catalog = {
@@ -1090,21 +966,16 @@
             accounts: [
                 { id: 'prem', name: 'Minecraft Premium Account FA', price: 250, stock: 12, category: 'accounts',
                   specs: ['Format: We Bought on ur Mail', 'Name Set and Changable', 'Lyt Warranty', 'Fresh account'] }
-            ]
+            ],
+            nitro: [],
+            boosts: []
         };
-
-        const defaultCreditItems = [
-            { id: '5off', name: '5% OFF', description: 'Get 5% discount on eligible purchases', cost: 620, stock: 'Unlimited', tag: 'HOT', discount: 5,
-              discountInfo: { money: '100M+ (Rs 50+)', items: 'Rs 50+ items', accounts: 'Any account' } },
-            { id: '15off', name: '15% OFF', description: 'Get 15% discount on eligible purchases', cost: 2680, stock: 'Unlimited', tag: 'BEST', discount: 15,
-              discountInfo: { money: '100M+ (Rs 50+)', items: 'Rs 50+ items', accounts: 'Any account' } }
-        ];
 
         function getHashView() {
             const hash = window.location.hash;
             if (hash && hash.startsWith('#/')) {
                 const view = hash.replace('#/', '');
-                if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'credits', 'offs', 'offers'].includes(view)) return view;
+                if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'discord', 'nitro', 'boosts', 'offers'].includes(view)) return view;
             }
             return 'landing';
         }
@@ -1122,12 +993,22 @@
         }
 
         function switchViewInternal(view, skipHashUpdate) {
-            if (view !== 'credits' && state.afkIsRunning) stopAFKInternal();
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            const map = { landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', accounts: 'viewAccounts', admin: 'viewAdmin', credits: 'viewCredits', offs: 'viewOffs', offers: 'viewOffers' };
-            if (map[view]) { setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-            if (view === 'admin') { renderAdminTable(); renderAdminReviews(); renderAdminCreditShopTable(); renderAdminOfferItemsTable(); }
-            if (view === 'offs') { renderOffShop(); updateCreditsDisplay(); updateOffsDiscountToggle(); }
+            const map = { 
+                landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', 
+                accounts: 'viewAccounts', admin: 'viewAdmin', discord: 'viewDiscord', 
+                nitro: 'viewNitro', boosts: 'viewBoosts', offers: 'viewOffers'
+            };
+            if (map[view]) { 
+                setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); 
+                window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            }
+            if (view === 'admin') { 
+                renderAdminTable(); renderAdminReviews(); renderAdminOfferItemsTable(); 
+                renderAdminDiscordItemsTable(); loadDiscordDesc(); 
+            }
+            if (view === 'nitro') { renderDiscordItems('nitro'); }
+            if (view === 'boosts') { renderDiscordItems('boosts'); }
             if (view === 'offers') { renderOfferItems(); }
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 link.classList.remove('active');
@@ -1141,11 +1022,9 @@
             setupProductsListener();
             renderProducts(); loadReviews(); setupAuth();
             updateWishlistUI(); setupStarRating();
-            setupMeteorAnimation();
-            await loadCreditShopItems();
-            await syncCreditShopPrices();
-            await loadAFKRewards();
             await loadOfferItems();
+            await loadDiscordItems();
+            await loadDiscordDesc();
             await loadAllUsernames();
             const initialView = getHashView();
             if (initialView !== 'landing') {
@@ -1164,6 +1043,12 @@
                         state.products[d.id].name = data.name || state.products[d.id].name;
                         state.products[d.id].price = data.price !== undefined ? data.price : state.products[d.id].price;
                         state.products[d.id].stock = data.stock !== undefined ? data.stock : state.products[d.id].stock;
+                        state.products[d.id].category = data.category || state.products[d.id].category;
+                    } else if (data.category) {
+                        // New item from Firestore that might not be in catalog
+                        state.products[d.id] = { id: d.id, ...data };
+                        if (!catalog[data.category]) catalog[data.category] = [];
+                        catalog[data.category].push(state.products[d.id]);
                     }
                 });
             } catch (e) { console.log('Products load error', e); }
@@ -1179,6 +1064,13 @@
                             state.products[id].name = data.name || state.products[id].name;
                             state.products[id].price = data.price !== undefined ? data.price : state.products[id].price;
                             state.products[id].stock = data.stock !== undefined ? data.stock : state.products[id].stock;
+                            state.products[id].category = data.category || state.products[id].category;
+                        } else if (data.category) {
+                            state.products[id] = { id, ...data };
+                            if (!catalog[data.category]) catalog[data.category] = [];
+                            if (!catalog[data.category].find(p => p.id === id)) {
+                                catalog[data.category].push(state.products[id]);
+                            }
                         }
                     }
                 });
@@ -1208,25 +1100,22 @@
         function setupAuth() {
             onAuthStateChanged(auth, async (user) => {
                 state.user = user;
-                state.isAdmin = user?.uid === state.adminUID;
+                state.isAdmin = user && ADMIN_UIDS.includes(user.uid);
                 updateUI();
                 if (user) {
                     document.getElementById('authTriggerBtn').textContent = 'Logout';
                     document.getElementById('authTriggerBtn').onclick = () => signOut(auth);
-                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Logout</span>';
+                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Logout</span>';
                     document.getElementById('sidebarAuthLink').onclick = () => signOut(auth);
                     closeAuthModal();
-                    await loadUserCredits();
-                    await loadUserOffers();
                     await loadUserUsername();
                 } else {
                     document.getElementById('authTriggerBtn').textContent = 'Login';
                     document.getElementById('authTriggerBtn').onclick = openAuthModal;
-                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Login</span>';
+                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Login</span>';
                     document.getElementById('sidebarAuthLink').onclick = openAuthModal;
-                    state.credits = 0; state.userOffers = []; state.activeDiscount = 0;
                     state.username = null;
-                    updateCreditsDisplay(); updateUsernameDisplay();
+                    updateUsernameDisplay();
                 }
                 const currentHash = getHashView();
                 if (currentHash === 'admin' && !state.isAdmin) {
@@ -1262,113 +1151,6 @@
             }
         }
 
-        async function loadUserCredits() {
-            if (!state.user) return;
-            try {
-                const userDoc = await getDoc(doc(db, 'users', state.user.uid));
-                if (userDoc.exists()) { state.credits = userDoc.data().credits || 0; }
-                else {
-                    await setDoc(doc(db, 'users', state.user.uid), { email: state.user.email, credits: 0, isAdmin: false, createdAt: serverTimestamp() }, { merge: true });
-                    state.credits = 0;
-                }
-                updateCreditsDisplay();
-            } catch (e) { console.log('Credits load error', e); }
-        }
-
-        async function loadUserOffers() {
-            if (!state.user) return;
-            try {
-                const offersSnap = await getDocs(collection(db, 'users', state.user.uid, 'offers'));
-                state.userOffers = offersSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-                let bestDiscount = 0;
-                state.userOffers.forEach(offer => { if (offer.discount > bestDiscount) bestDiscount = offer.discount; });
-                state.activeDiscount = bestDiscount;
-                updateActiveOffersBanner(); updateDiscountToggle(); updateOffsDiscountToggle(); renderOffShop();
-            } catch (e) { console.log('Offers load error', e); }
-        }
-
-        async function loadCreditShopItems() {
-            try {
-                const snap = await getDocs(collection(db, 'credit_shop'));
-                if (snap.empty) {
-                    for (const item of defaultCreditItems) { await setDoc(doc(db, 'credit_shop', item.id), { ...item, createdAt: serverTimestamp() }); }
-                    state.creditShopItems = [...defaultCreditItems];
-                } else { state.creditShopItems = snap.docs.map(d => ({ id: d.id, ...d.data() })); }
-            } catch (e) { state.creditShopItems = [...defaultCreditItems]; }
-        }
-
-        async function syncCreditShopPrices() {
-            try {
-                for (const defaultItem of defaultCreditItems) {
-                    const existingItem = state.creditShopItems.find(i => i.id === defaultItem.id);
-                    if (existingItem && existingItem.cost !== defaultItem.cost) {
-                        await updateDoc(doc(db, 'credit_shop', defaultItem.id), { cost: defaultItem.cost, updatedAt: serverTimestamp() });
-                        existingItem.cost = defaultItem.cost;
-                    }
-                }
-            } catch (e) { console.log('Price sync error', e); }
-        }
-
-        async function loadAFKRewards() {
-            try {
-                const snap = await getDocs(collection(db, 'afk_rewards'));
-                state.afkRewards = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            } catch (e) { state.afkRewards = []; }
-        }
-
-        async function loadOfferItems() {
-            try {
-                const snap = await getDocs(collection(db, 'offer_items'));
-                snap.forEach(d => { state.offerItems[d.id] = { id: d.id, ...d.data() }; });
-                renderOfferItems();
-            } catch (e) { console.log('Offer items load error', e); }
-        }
-
-        function updateCreditsDisplay() {
-            document.getElementById('sidebarCreditsValue').textContent = state.credits;
-            document.getElementById('offShopCreditsValue').textContent = state.credits;
-            document.getElementById('sidebarCredits').style.display = state.user ? 'block' : 'none';
-        }
-
-        function updateActiveOffersBanner() {
-            const banner = document.getElementById('activeOffersBanner');
-            const offsBanner = document.getElementById('offsActiveOffersBanner');
-            const list = document.getElementById('activeOffersList');
-            const offsList = document.getElementById('offsActiveOffersList');
-            if (state.userOffers.length === 0) { banner.style.display = 'none'; offsBanner.style.display = 'none'; return; }
-            banner.style.display = 'flex'; offsBanner.style.display = 'flex';
-            const offerNames = state.userOffers.map(o => { const offer = state.creditShopItems.find(i => i.id === o.id); return offer ? offer.name : o.id; });
-            list.textContent = offerNames.join(', '); offsList.textContent = offerNames.join(', ');
-        }
-
-        function updateDiscountToggle() {
-            const toggle = document.getElementById('discountToggle');
-            const toggleSwitch = document.getElementById('toggleSwitch');
-            const toggleStatus = document.getElementById('toggleStatus');
-            if (state.activeDiscount > 0) {
-                toggle.style.display = 'flex';
-                if (state.discountEnabled) { toggleSwitch.classList.add('active'); toggleStatus.textContent = 'ON'; toggleStatus.style.color = 'var(--accent-green)'; }
-                else { toggleSwitch.classList.remove('active'); toggleStatus.textContent = 'OFF'; toggleStatus.style.color = 'var(--accent-red)'; }
-            } else { toggle.style.display = 'none'; }
-        }
-
-        function updateOffsDiscountToggle() {
-            const toggle = document.getElementById('offsDiscountToggle');
-            const toggleSwitch = document.getElementById('offsToggleSwitch');
-            const toggleStatus = document.getElementById('offsToggleStatus');
-            if (state.activeDiscount > 0) {
-                toggle.style.display = 'flex';
-                if (state.discountEnabled) { toggleSwitch.classList.add('active'); toggleStatus.textContent = 'ON'; toggleStatus.style.color = 'var(--accent-green)'; }
-                else { toggleSwitch.classList.remove('active'); toggleStatus.textContent = 'OFF'; toggleStatus.style.color = 'var(--accent-red)'; }
-            } else { toggle.style.display = 'none'; }
-        }
-
-        window.toggleDiscount = () => {
-            state.discountEnabled = !state.discountEnabled;
-            updateDiscountToggle(); updateOffsDiscountToggle(); updateCartUI(); renderProducts();
-            showToast(`Discount ${state.discountEnabled ? 'ENABLED' : 'DISABLED'}`);
-        };
-
         function updateUI() {
             const isGuest = !state.user;
             document.getElementById('guestBanner').style.display = isGuest ? 'flex' : 'none';
@@ -1391,8 +1173,6 @@
         window.sidebarNavigate = (view) => {
             if (state.sidebarOpen) window.toggleSidebar();
             if (view === 'donutsmp') { window.showComingSoon(); return; }
-            if (view === 'credits' && !state.user) { showToast('Login to access Credits!'); openAuthModal(); return; }
-            if (view === 'offs' && !state.user) { showToast('Login to access OFFs!'); openAuthModal(); return; }
             if (view === 'admin' && !state.isAdmin) { showToast('Admin only!'); return; }
             switchView(view);
         };
@@ -1428,7 +1208,7 @@
                 if (state.authTab === 'login') { cred = await signInWithEmailAndPassword(auth, email, password); }
                 else {
                     cred = await createUserWithEmailAndPassword(auth, email, password);
-                    await setDoc(doc(db, 'users', cred.user.uid), { email, username, credits: 0, isAdmin: false, createdAt: serverTimestamp() });
+                    await setDoc(doc(db, 'users', cred.user.uid), { email, username, isAdmin: false, createdAt: serverTimestamp() }, { merge: true });
                     state.usernames.add(username);
                     state.username = username;
                     updateUsernameDisplay();
@@ -1446,6 +1226,7 @@
             document.getElementById('spawnersContainer').innerHTML = allProducts.filter(p => p.category === 'spawners').map((p, i) => makeCard(p, i)).join('');
             document.getElementById('armoryContainer').innerHTML = allProducts.filter(p => p.category === 'armory').map((p, i) => makeCard(p, i)).join('');
             document.getElementById('materialsContainer').innerHTML = allProducts.filter(p => p.category === 'materials').map((p, i) => makeCard(p, i)).join('');
+
             const acc = allProducts.find(p => p.category === 'accounts') || catalog.accounts[0];
             const specs = acc.specs ? `<ul style="text-align:left; margin:15px 0; background:rgba(255,255,255,0.02); padding:15px; border-radius:8px; list-style:none;">${acc.specs.map(s => `<li style="color:var(--text-secondary); margin-bottom:8px;">> ${s}</li>`).join('')}</ul>` : '';
             document.getElementById('accountsContainer').innerHTML = `<div class="pkg-card" style="max-width:380px; margin:0 auto; animation-delay:0s;"><button class="wishlist-btn ${state.wishlist.includes(acc.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${acc.id}', event)">❤️</button><div><div class="pkg-val" style="font-size:1.4rem;">${acc.name}</div><div class="stock-label">${acc.stock} in stock</div>${specs}</div><div><div class="pkg-cost">${acc.price} INR</div><button class="btn btn-success" style="width:100%;" onclick="window.addToCart('${acc.id}')">Add to Cart</button></div></div>`;
@@ -1457,14 +1238,7 @@
             const btnClass = isPromo ? 'btn-gold' : 'btn-primary';
             const btnText = isPromo ? 'Claim Promo' : 'Add to Cart';
             const displayName = p.name.replace(/(\d+M|Promo)/g, '<span style="color:var(--accent-red);">$1</span>');
-
-            // Discount tag on card (top right) - shows the discount % if user has an OFF
-            let discountTag = '';
-            if (state.activeDiscount > 0 && state.discountEnabled) {
-                discountTag = `<div class="discount-tag">${state.activeDiscount}% OFF</div>`;
-            }
-
-            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}${discountTag}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
+            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
         }
 
         window.addToCart = (id) => {
@@ -1488,36 +1262,14 @@
             updateCartUI();
         };
 
-        // CART DISCOUNT FIX: Only applies if TOTAL cart >= 50 INR AND user has active OFF AND discount enabled
         function calculateCartTotal() {
-            let subtotal = state.cart.reduce((s, i) => s + (i.price * i.qty), 0);
-            let discount = 0;
-
-            // Only apply discount if: total >= 50 AND user has active OFF AND discount is enabled
-            if (state.activeDiscount > 0 && state.discountEnabled && subtotal >= 50) {
-                discount = Math.round((subtotal * state.activeDiscount) / 100);
-            }
-
-            const final = subtotal - discount;
-            return { subtotal, discount, final };
+            return state.cart.reduce((s, i) => s + (i.price * i.qty), 0);
         }
 
         function updateCartUI() {
             document.getElementById('cartCount').textContent = state.cart.reduce((sum, i) => sum + i.qty, 0);
-            const totals = calculateCartTotal();
-            document.getElementById('cartTotal').textContent = totals.final + ' INR';
-
-            const savingsBanner = document.getElementById('cartSavingsBanner');
-            const savingsAmount = document.getElementById('savingsAmount');
-            const savingsDetail = document.getElementById('savingsDetail');
-
-            if (totals.discount > 0) {
-                savingsBanner.classList.add('visible');
-                savingsAmount.textContent = `-${totals.discount} INR Saved!`;
-                savingsDetail.textContent = `${state.activeDiscount}% OFF applied on total ${totals.subtotal} INR`;
-            } else {
-                savingsBanner.classList.remove('visible');
-            }
+            const total = calculateCartTotal();
+            document.getElementById('cartTotal').textContent = total + ' INR';
 
             if (state.cart.length === 0) {
                 document.getElementById('cartItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">🛒</div><p>Your cart is empty</p></div>';
@@ -1638,13 +1390,6 @@
 
         window.openPaymentModal = () => {
             hideCheckout(); 
-            const totals = calculateCartTotal();
-            const discountBanner = document.getElementById('discountBanner');
-            const discountText = document.getElementById('discountText');
-            if (totals.discount > 0) {
-                discountBanner.style.display = 'block';
-                discountText.textContent = `${state.activeDiscount}% OFF applied = -${totals.discount} INR (Final: ${totals.final} INR)`;
-            } else { discountBanner.style.display = 'none'; }
             document.getElementById('paymentModal').classList.add('active');
             state.selectedPaymentApp = null;
             document.querySelectorAll('.payment-app-btn').forEach(b => b.classList.remove('selected'));
@@ -1665,16 +1410,13 @@
             const email = document.getElementById('paymentEmail').value.trim();
             if (!state.selectedPaymentApp) { showToast('Select a payment app!'); return; }
             if (!email) { showToast('Enter your email!'); return; }
-            const totals = calculateCartTotal();
+            const total = calculateCartTotal();
             try {
                 await addDoc(collection(db, 'payments'), {
                     userId: state.user.uid, 
                     userEmail: email,
                     items: state.cart.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
-                    subtotal: totals.subtotal,
-                    discount: totals.discount,
-                    discountPercent: state.discountEnabled ? state.activeDiscount : 0,
-                    total: totals.final, 
+                    total: total, 
                     paymentApp: state.selectedPaymentApp,
                     status: 'pending', 
                     createdAt: serverTimestamp()
@@ -1700,169 +1442,15 @@
             switchViewInternal(view, true);
         };
 
-        // ===== AFK / CREDITS SYSTEM =====
-        function setupMeteorAnimation() {
-            const container = document.getElementById('meteorContainer');
-            if (!container) return;
-            for (let i = 0; i < 15; i++) {
-                const meteor = document.createElement('div');
-                meteor.className = 'meteor';
-                meteor.style.left = Math.random() * 100 + '%';
-                meteor.style.top = Math.random() * 50 + '%';
-                meteor.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                meteor.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(meteor);
-            }
-            for (let i = 0; i < 10; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                particle.style.animationDelay = Math.random() * 3 + 's';
-                container.appendChild(particle);
-            }
-        }
-
-        window.toggleAFK = () => {
-            if (state.afkIsRunning) stopAFKInternal();
-            else startAFKInternal();
-        };
-
-        function startAFKInternal() {
-            if (!state.user) { showToast('Login to earn credits!'); openAuthModal(); return; }
-            if (!document.getElementById('viewCredits').classList.contains('active')) { showToast('Stay on Credits page to earn!'); return; }
-            state.afkIsRunning = true;
-            state.afkAutoLoop = true;
-            state.afkTimeRemaining = 60;
-            const btn = document.getElementById('afkStartBtn');
-            const timerDisplay = document.getElementById('afkTimerDisplay');
-            const progressFill = document.getElementById('afkProgressFill');
-            const status = document.getElementById('afkStatus');
-            btn.innerHTML = '<span class="btn-shine"></span>STOP AFK';
-            timerDisplay.classList.add('running');
-            timerDisplay.classList.remove('complete');
-            progressFill.classList.add('running');
-            status.textContent = 'AFK running... Stay on this page!';
-            status.className = 'afk-status earning';
-            runAFKTimer();
-        }
-
-        function runAFKTimer() {
-            state.afkTimer = setInterval(() => {
-                if (!document.getElementById('viewCredits').classList.contains('active')) { stopAFKInternal(); return; }
-                state.afkTimeRemaining--;
-                const mins = Math.floor(state.afkTimeRemaining / 60);
-                const secs = state.afkTimeRemaining % 60;
-                document.getElementById('afkTimerDisplay').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                const progress = ((60 - state.afkTimeRemaining) / 60) * 100;
-                document.getElementById('afkProgressFill').style.width = progress + '%';
-                if (state.afkTimeRemaining <= 0) { clearInterval(state.afkTimer); completeAFK(); }
-            }, 1000);
-        }
-
-        function stopAFKInternal() {
-            if (!state.afkIsRunning) return;
-            clearInterval(state.afkTimer);
-            state.afkIsRunning = false;
-            state.afkAutoLoop = false;
-            state.afkTimeRemaining = 60;
-            const btn = document.getElementById('afkStartBtn');
-            const timerDisplay = document.getElementById('afkTimerDisplay');
-            const progressFill = document.getElementById('afkProgressFill');
-            const status = document.getElementById('afkStatus');
-            if (btn) btn.innerHTML = '<span class="btn-shine"></span>START AFK';
-            if (timerDisplay) { timerDisplay.textContent = '01:00'; timerDisplay.classList.remove('running', 'complete'); }
-            if (progressFill) { progressFill.style.width = '0%'; progressFill.classList.remove('running'); }
-            if (status) { status.textContent = 'AFK stopped.'; status.className = 'afk-status cancelled'; }
-        }
-
-        async function completeAFK() {
-            const timerDisplay = document.getElementById('afkTimerDisplay');
-            const progressFill = document.getElementById('afkProgressFill');
-            const status = document.getElementById('afkStatus');
-            if (timerDisplay) { timerDisplay.textContent = '00:00'; timerDisplay.classList.remove('running'); timerDisplay.classList.add('complete'); }
-            if (progressFill) { progressFill.style.width = '100%'; progressFill.classList.remove('running'); }
-            if (status) { status.textContent = '+1 Credit Earned! Restarting...'; status.className = 'afk-status success'; }
-            try {
-                state.credits += 1;
-                await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(1) });
-                updateCreditsDisplay();
-                showToast('+1 Credit Earned!');
-                setTimeout(() => {
-                    if (state.afkAutoLoop && document.getElementById('viewCredits').classList.contains('active')) {
-                        state.afkTimeRemaining = 60;
-                        document.getElementById('afkTimerDisplay').textContent = '01:00';
-                        document.getElementById('afkProgressFill').style.width = '0%';
-                        document.getElementById('afkStatus').textContent = 'AFK running... Stay on this page!';
-                        document.getElementById('afkStatus').className = 'afk-status earning';
-                        document.getElementById('afkTimerDisplay').classList.add('running');
-                        document.getElementById('afkProgressFill').classList.add('running');
-                        runAFKTimer();
-                    } else { stopAFKInternal(); }
-                }, 1500);
-            } catch (e) {
-                console.error('Credit update error', e);
-                showToast('Error saving credit. Contact admin.');
-                stopAFKInternal();
-            }
-        }
-
-        // ===== OFFs SHOP (Credit Shop) =====
-        function renderOffShop() {
-            const grid = document.getElementById('offShopGrid');
-            if (!grid) return;
-            if (state.creditShopItems.length === 0) {
-                grid.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">No OFFs available</div>';
-                return;
-            }
-            grid.innerHTML = state.creditShopItems.map((item, index) => {
-                const isOwned = state.userOffers.some(o => o.id === item.id);
-                const isOutOfStock = item.stock !== 'Unlimited' && parseInt(item.stock) <= 0;
-                const tagHtml = item.tag ? `<div class="discount-tag">${item.tag}</div>` : '';
-                const stockLabel = item.stock === 'Unlimited' ? '' : `<div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">${item.stock} left</div>`;
-                let discountInfoHtml = '';
-                if (item.discountInfo) {
-                    discountInfoHtml = `<div class="discount-info"><strong>APPLIES TO:</strong><ul><li>Money: ${item.discountInfo.money}</li><li>Items: ${item.discountInfo.items}</li><li>Accounts: ${item.discountInfo.accounts}</li></ul></div>`;
-                }
-                let btnClass = '';
-                let btnText = 'BUY NOW';
-                let btnDisabled = '';
-                if (isOwned) { btnClass = 'owned'; btnText = 'OWNED'; btnDisabled = 'disabled'; }
-                else if (isOutOfStock) { btnClass = 'out-of-stock'; btnText = 'OUT OF STOCK'; btnDisabled = 'disabled'; }
-                return `<div class="off-shop-item" style="animation-delay:${index * 0.1}s;">${tagHtml}<div class="shop-item-img">💰</div><div class="shop-item-name">${item.name}</div><div class="shop-item-desc">${item.description}</div>${discountInfoHtml}${stockLabel}<div class="shop-item-price">${item.cost} <span>CREDITS</span></div><button class="btn-buy-off ${btnClass}" id="buy${item.id}" onclick="window.buyCreditItem('${item.id}', ${item.cost})" ${btnDisabled}>${btnText}</button></div>`;
-            }).join('');
-        }
-
-        window.buyCreditItem = async (itemId, cost) => {
-            if (!state.user) { showToast('Login to buy OFFs!'); openAuthModal(); return; }
-            if (state.userOffers.some(o => o.id === itemId)) { showToast('You already own this OFF!'); return; }
-            const item = state.creditShopItems.find(i => i.id === itemId);
-            if (item && item.stock !== 'Unlimited' && parseInt(item.stock) <= 0) { showToast('This OFF is out of stock!'); return; }
-            if (state.credits < cost) { showToast(`Not enough credits! Need ${cost} credits.`); return; }
-            try {
-                const discount = item ? item.discount : 0;
-                state.credits -= cost;
-                await updateDoc(doc(db, 'users', state.user.uid), { credits: state.credits });
-                await setDoc(doc(db, 'users', state.user.uid, 'offers', itemId), { purchasedAt: serverTimestamp(), itemId: itemId, discount: discount });
-                if (item && item.stock !== 'Unlimited') {
-                    const newStock = Math.max(0, parseInt(item.stock) - 1);
-                    item.stock = newStock.toString();
-                    await updateDoc(doc(db, 'credit_shop', itemId), { stock: item.stock });
-                }
-                state.userOffers.push({ id: itemId, discount: discount });
-                let bestDiscount = 0;
-                state.userOffers.forEach(o => { if (o.discount > bestDiscount) bestDiscount = o.discount; });
-                state.activeDiscount = bestDiscount;
-                updateCreditsDisplay(); updateActiveOffersBanner(); updateDiscountToggle(); updateOffsDiscountToggle(); renderOffShop(); renderProducts();
-                showToast(`${item ? item.name : itemId} purchased! ${discount}% discount active!`);
-            } catch (e) {
-                console.error('Buy item error', e);
-                showToast('Purchase failed. Try again.');
-            }
-        };
-
         // ===== OFFER ITEMS =====
+        async function loadOfferItems() {
+            try {
+                const snap = await getDocs(collection(db, 'offer_items'));
+                snap.forEach(d => { state.offerItems[d.id] = { id: d.id, ...d.data() }; });
+                renderOfferItems();
+            } catch (e) { console.log('Offer items load error', e); }
+        }
+
         function renderOfferItems() {
             const container = document.getElementById('offersContainer');
             if (!container) return;
@@ -1880,7 +1468,6 @@
             return `<div class="offer-card" style="animation-delay:${index * 0.1}s;">${tagHtml}<button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button><div><div class="offer-val">${p.name}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="offer-cost">${p.price} INR</div><button class="btn btn-purple" style="width:100%;" onclick="window.addToCart('${p.id}')">Add to Cart</button></div></div>`;
         }
 
-        // ===== ADMIN: Offer Items Management =====
         window.addOfferItem = async () => {
             if (!state.isAdmin) return;
             const name = document.getElementById('newOfferItemName').value.trim();
@@ -1952,152 +1539,251 @@
             } catch (e) { showToast('Delete failed: ' + e.message); }
         };
 
-        // ===== ADMIN: Give Credits =====
-        window.giveCredits = async () => {
-            if (!state.isAdmin) { showToast('Admin only!'); return; }
-            const email = document.getElementById('giveCreditEmail').value.trim();
-            const amount = parseInt(document.getElementById('giveCreditAmount').value);
-            const errorDiv = document.getElementById('giveCreditError');
-            if (!email || !amount || amount <= 0) { errorDiv.textContent = 'Enter valid email and amount'; return; }
-            try {
-                const usersQuery = query(collection(db, 'users'), where('email', '==', email));
-                const usersSnap = await getDocs(usersQuery);
-                if (usersSnap.empty) { errorDiv.textContent = 'User not found with this email'; return; }
-                const userDoc = usersSnap.docs[0];
-                const userId = userDoc.id;
-                await updateDoc(doc(db, 'users', userId), { credits: increment(amount) });
-                errorDiv.textContent = '';
-                document.getElementById('giveCreditEmail').value = '';
-                document.getElementById('giveCreditAmount').value = '';
-                showToast(`${amount} credits given to ${email}`);
-                if (state.user && state.user.uid === userId) { await loadUserCredits(); }
-            } catch (e) { errorDiv.textContent = 'Error: ' + e.message; }
+        window.openEditOfferItemModal = (itemId) => {
+            const item = state.offerItems[itemId];
+            if (!item) return;
+            document.getElementById('editOfferItemId').value = itemId;
+            document.getElementById('editOfferItemName').value = item.name;
+            document.getElementById('editOfferItemPrice').value = item.price;
+            document.getElementById('editOfferItemStock').value = item.stock;
+            document.getElementById('editOfferItemTag').value = item.tag || '';
+            document.getElementById('editOfferItemError').textContent = '';
+            document.getElementById('editOfferItemModal').classList.add('active');
         };
 
-        // ===== ADMIN: Add Credit Shop Item =====
-        window.addCreditShopItem = async () => {
-            if (!state.isAdmin) return;
-            const name = document.getElementById('newCreditItemName').value.trim();
-            const desc = document.getElementById('newCreditItemDesc').value.trim();
-            const cost = parseInt(document.getElementById('newCreditItemCost').value);
-            const discount = parseInt(document.getElementById('newCreditItemDiscount').value);
-            const stock = document.getElementById('newCreditItemStock').value.trim();
-            const tag = document.getElementById('newCreditItemTag').value.trim();
-            const errorDiv = document.getElementById('addCreditItemError');
-            if (!name || !desc || !cost || !discount || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
-            const id = 'cs_' + Date.now().toString(36);
+        window.closeEditOfferItemModal = () => {
+            document.getElementById('editOfferItemModal').classList.remove('active');
+        };
+
+        window.saveEditOfferItem = async () => {
+            const itemId = document.getElementById('editOfferItemId').value;
+            const name = document.getElementById('editOfferItemName').value.trim();
+            const price = parseFloat(document.getElementById('editOfferItemPrice').value);
+            const stock = document.getElementById('editOfferItemStock').value.trim();
+            const tag = document.getElementById('editOfferItemTag').value.trim();
+            const errorDiv = document.getElementById('editOfferItemError');
+            if (!name || !price || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
             try {
-                const itemData = { name, description: desc, cost, discount, stock, discountInfo: { money: '100M+ (Rs 50+)', items: 'Rs 50+ items', accounts: 'Any account' }, createdAt: serverTimestamp() };
+                const updateData = { name, price, stock, updatedAt: serverTimestamp() };
+                if (tag) updateData.tag = tag;
+                await updateDoc(doc(db, 'offer_items', itemId), updateData);
+                state.offerItems[itemId] = { ...state.offerItems[itemId], ...updateData };
+                renderOfferItems(); renderAdminOfferItemsTable();
+                closeEditOfferItemModal();
+                showToast('Offer item updated!');
+            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
+        };
+
+        // ===== DISCORD ITEMS =====
+        async function loadDiscordItems() {
+            try {
+                const snap = await getDocs(collection(db, 'discord_items'));
+                snap.forEach(d => { 
+                    state.discordItems[d.id] = { id: d.id, ...d.data() }; 
+                    if (!catalog[d.data().category]) catalog[d.data().category] = [];
+                    catalog[d.data().category].push(state.discordItems[d.id]);
+                    state.products[d.id] = state.discordItems[d.id];
+                });
+            } catch (e) { console.log('Discord items load error', e); }
+        }
+
+        async function loadDiscordDesc() {
+            try {
+                const nitroDoc = await getDoc(doc(db, 'discord_desc', 'nitro'));
+                const boostsDoc = await getDoc(doc(db, 'discord_desc', 'boosts'));
+                if (nitroDoc.exists()) state.discordDesc.nitro = nitroDoc.data().text || '';
+                if (boostsDoc.exists()) state.discordDesc.boosts = boostsDoc.data().text || '';
+                updateDiscordDescUI();
+            } catch (e) { console.log('Discord desc load error', e); }
+        }
+
+        function updateDiscordDescUI() {
+            const nitroBox = document.getElementById('nitroDescBox');
+            const nitroText = document.getElementById('nitroDescText');
+            const boostsBox = document.getElementById('boostsDescBox');
+            const boostsText = document.getElementById('boostsDescText');
+            const nitroInput = document.getElementById('nitroDescInput');
+            const boostsInput = document.getElementById('boostsDescInput');
+
+            if (state.discordDesc.nitro) {
+                if (nitroBox) { nitroBox.style.display = 'block'; nitroText.textContent = state.discordDesc.nitro; }
+            } else { if (nitroBox) nitroBox.style.display = 'none'; }
+
+            if (state.discordDesc.boosts) {
+                if (boostsBox) { boostsBox.style.display = 'block'; boostsText.textContent = state.discordDesc.boosts; }
+            } else { if (boostsBox) boostsBox.style.display = 'none'; }
+
+            if (nitroInput) nitroInput.value = state.discordDesc.nitro;
+            if (boostsInput) boostsInput.value = state.discordDesc.boosts;
+        }
+
+        function renderDiscordItems(category) {
+            const container = document.getElementById(category + 'Container');
+            if (!container) return;
+            const items = Object.values(state.discordItems).filter(i => i.category === category);
+            if (items.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">💬</div><p>No items available right now</p></div>';
+                return;
+            }
+            container.innerHTML = items.map((p, i) => makeDiscordCard(p, i)).join('');
+        }
+
+        function makeDiscordCard(p, index) {
+            const stockClass = p.stock === 'Unlimited' || p.stock === '1 Time' ? '' : (parseInt(p.stock) <= 5 ? 'stock-label-low' : '');
+            const tagHtml = p.tag ? `<div class="offer-tag" style="background:linear-gradient(90deg,var(--accent-discord),#4752C4);">${p.tag}</div>` : '';
+            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;">${tagHtml}<button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button><div><div class="pkg-val" style="color:var(--accent-discord);">${p.name}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost" style="color:var(--accent-discord); background:rgba(88,101,242,0.05); border-color:rgba(88,101,242,0.1);">${p.price} INR</div><button class="btn btn-discord" style="width:100%;" onclick="window.addToCart('${p.id}')">Add to Cart</button></div></div>`;
+        }
+
+        window.addDiscordItem = async () => {
+            if (!state.isAdmin) return;
+            const name = document.getElementById('newDiscordItemName').value.trim();
+            const category = document.getElementById('newDiscordItemCategory').value;
+            const price = parseFloat(document.getElementById('newDiscordItemPrice').value);
+            const stock = document.getElementById('newDiscordItemStock').value.trim();
+            const tag = document.getElementById('newDiscordItemTag').value.trim();
+            const errorDiv = document.getElementById('addDiscordItemError');
+            if (!name || !price || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
+            const id = 'discord_' + Date.now().toString(36);
+            try {
+                const itemData = { name, category, price, stock, createdAt: serverTimestamp() };
                 if (tag) itemData.tag = tag;
-                await setDoc(doc(db, 'credit_shop', id), itemData);
-                state.creditShopItems.push({ id, ...itemData });
-                renderOffShop(); renderAdminCreditShopTable();
-                showToast('Credit shop item added!');
-                document.getElementById('newCreditItemName').value = '';
-                document.getElementById('newCreditItemDesc').value = '';
-                document.getElementById('newCreditItemCost').value = '';
-                document.getElementById('newCreditItemDiscount').value = '';
-                document.getElementById('newCreditItemStock').value = '';
-                document.getElementById('newCreditItemTag').value = '';
+                await setDoc(doc(db, 'discord_items', id), itemData);
+                state.discordItems[id] = { id, ...itemData };
+                if (!catalog[category]) catalog[category] = [];
+                catalog[category].push(state.discordItems[id]);
+                state.products[id] = state.discordItems[id];
+                renderDiscordItems(category); renderAdminDiscordItemsTable();
+                showToast('Discord item added!');
+                document.getElementById('newDiscordItemName').value = '';
+                document.getElementById('newDiscordItemPrice').value = '';
+                document.getElementById('newDiscordItemStock').value = '';
+                document.getElementById('newDiscordItemTag').value = '';
                 errorDiv.textContent = '';
             } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
         };
 
-        // ===== ADMIN: Edit/Delete Credit Shop Items =====
-        window.renderAdminCreditShopTable = () => {
-            const tbody = document.getElementById('adminCreditShopBody');
+        window.renderAdminDiscordItemsTable = () => {
+            const tbody = document.getElementById('adminDiscordItemsBody');
             if (!tbody) return;
-            tbody.innerHTML = state.creditShopItems.map(item => `
+            const items = Object.values(state.discordItems);
+            if (items.length === 0) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">No discord items</td></tr>'; return; }
+            tbody.innerHTML = items.map(item => `
                 <tr>
-                    <td><strong>${item.name}</strong></td>
-                    <td>${item.cost}</td>
-                    <td>${item.discount}%</td>
-                    <td>${item.stock}</td>
-                    <td>${item.tag || '-'}</td>
+                    <td><input class="admin-input" id="discord-name-${item.id}" value="${item.name}" style="min-width:150px;"></td>
                     <td>
-                        <button class="btn btn-gold btn-sm" onclick="window.openEditCreditItem('${item.id}')">Edit</button>
-                        <button class="btn btn-danger btn-sm" onclick="window.deleteCreditShopItem('${item.id}')">Delete</button>
+                        <select class="admin-input" id="discord-cat-${item.id}" style="cursor:pointer;">
+                            <option value="nitro" ${item.category === 'nitro' ? 'selected' : ''}>Nitro</option>
+                            <option value="boosts" ${item.category === 'boosts' ? 'selected' : ''}>Boosts</option>
+                        </select>
+                    </td>
+                    <td><input class="admin-input" id="discord-price-${item.id}" value="${item.price}" type="number" style="min-width:80px;"></td>
+                    <td><input class="admin-input" id="discord-stock-${item.id}" value="${item.stock}" style="min-width:80px;"></td>
+                    <td><input class="admin-input" id="discord-tag-${item.id}" value="${item.tag || ''}" style="min-width:80px;"></td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="window.saveDiscordItem('${item.id}')">Save</button>
+                        <button class="btn btn-danger btn-sm" onclick="window.deleteDiscordItem('${item.id}')">Delete</button>
                     </td>
                 </tr>
             `).join('');
         };
 
-        window.openEditCreditItem = (itemId) => {
-            const item = state.creditShopItems.find(i => i.id === itemId);
-            if (!item) return;
-            document.getElementById('editCreditItemId').value = itemId;
-            document.getElementById('editCreditItemName').value = item.name;
-            document.getElementById('editCreditItemDesc').value = item.description;
-            document.getElementById('editCreditItemCost').value = item.cost;
-            document.getElementById('editCreditItemDiscount').value = item.discount;
-            document.getElementById('editCreditItemStock').value = item.stock;
-            document.getElementById('editCreditItemTag').value = item.tag || '';
-            document.getElementById('editCreditItemError').textContent = '';
-            document.getElementById('editCreditItemModal').classList.add('active');
-        };
-
-        window.closeEditCreditItemModal = () => {
-            document.getElementById('editCreditItemModal').classList.remove('active');
-        };
-
-        window.saveEditCreditItem = async () => {
-            const itemId = document.getElementById('editCreditItemId').value;
-            const name = document.getElementById('editCreditItemName').value.trim();
-            const desc = document.getElementById('editCreditItemDesc').value.trim();
-            const cost = parseInt(document.getElementById('editCreditItemCost').value);
-            const discount = parseInt(document.getElementById('editCreditItemDiscount').value);
-            const stock = document.getElementById('editCreditItemStock').value.trim();
-            const tag = document.getElementById('editCreditItemTag').value.trim();
-            const errorDiv = document.getElementById('editCreditItemError');
-            if (!name || !desc || !cost || !discount || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
+        window.saveDiscordItem = async (itemId) => {
+            if (!state.isAdmin) return;
+            const name = document.getElementById(`discord-name-${itemId}`).value.trim();
+            const category = document.getElementById(`discord-cat-${itemId}`).value;
+            const price = parseFloat(document.getElementById(`discord-price-${itemId}`).value);
+            const stock = document.getElementById(`discord-stock-${itemId}`).value.trim();
+            const tag = document.getElementById(`discord-tag-${itemId}`).value.trim();
+            if (!name || !price || !stock) { showToast('Fill all fields'); return; }
             try {
-                const updateData = { name, description: desc, cost, discount, stock, updatedAt: serverTimestamp() };
+                const updateData = { name, category, price, stock, updatedAt: serverTimestamp() };
                 if (tag) updateData.tag = tag;
-                await updateDoc(doc(db, 'credit_shop', itemId), updateData);
-                const idx = state.creditShopItems.findIndex(i => i.id === itemId);
-                if (idx > -1) { state.creditShopItems[idx] = { ...state.creditShopItems[idx], ...updateData }; }
-                renderOffShop(); renderAdminCreditShopTable();
-                closeEditCreditItemModal();
-                showToast('Credit shop item updated!');
-            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
+                await updateDoc(doc(db, 'discord_items', itemId), updateData);
+                state.discordItems[itemId] = { ...state.discordItems[itemId], ...updateData };
+                state.products[itemId] = state.discordItems[itemId];
+                renderDiscordItems(category); renderAdminDiscordItemsTable();
+                showToast('Discord item saved!');
+            } catch (e) { showToast('Save failed: ' + e.message); }
         };
 
-        window.deleteCreditShopItem = async (itemId) => {
+        window.deleteDiscordItem = async (itemId) => {
             if (!state.isAdmin) { showToast('Admin only!'); return; }
-            if (!confirm('Delete this credit shop item?')) return;
+            if (!confirm('Delete this discord item?')) return;
             try {
-                await deleteDoc(doc(db, 'credit_shop', itemId));
-                state.creditShopItems = state.creditShopItems.filter(i => i.id !== itemId);
-                renderOffShop(); renderAdminCreditShopTable();
-                showToast('Credit shop item deleted!');
+                const item = state.discordItems[itemId];
+                await deleteDoc(doc(db, 'discord_items', itemId));
+                delete state.discordItems[itemId];
+                delete state.products[itemId];
+                if (item && catalog[item.category]) {
+                    catalog[item.category] = catalog[item.category].filter(p => p.id !== itemId);
+                }
+                renderDiscordItems('nitro'); renderDiscordItems('boosts'); renderAdminDiscordItemsTable();
+                showToast('Discord item deleted!');
             } catch (e) { showToast('Delete failed: ' + e.message); }
         };
 
-        // ===== ADMIN: Add AFK Reward =====
-        window.addAFKReward = async () => {
-            if (!state.isAdmin) return;
-            const name = document.getElementById('newAFKRewardName').value.trim();
-            const desc = document.getElementById('newAFKRewardDesc').value.trim();
-            const credits = parseInt(document.getElementById('newAFKRewardCredits').value);
-            const duration = parseInt(document.getElementById('newAFKRewardDuration').value);
-            const errorDiv = document.getElementById('addAFKRewardError');
-            if (!name || !desc || !credits || !duration) { errorDiv.textContent = 'Fill all required fields'; return; }
-            const id = 'afk_' + Date.now().toString(36);
+        window.openEditDiscordItemModal = (itemId) => {
+            const item = state.discordItems[itemId];
+            if (!item) return;
+            document.getElementById('editDiscordItemId').value = itemId;
+            document.getElementById('editDiscordItemName').value = item.name;
+            document.getElementById('editDiscordItemCategory').value = item.category;
+            document.getElementById('editDiscordItemPrice').value = item.price;
+            document.getElementById('editDiscordItemStock').value = item.stock;
+            document.getElementById('editDiscordItemTag').value = item.tag || '';
+            document.getElementById('editDiscordItemError').textContent = '';
+            document.getElementById('editDiscordItemModal').classList.add('active');
+        };
+
+        window.closeEditDiscordItemModal = () => {
+            document.getElementById('editDiscordItemModal').classList.remove('active');
+        };
+
+        window.saveEditDiscordItem = async () => {
+            const itemId = document.getElementById('editDiscordItemId').value;
+            const name = document.getElementById('editDiscordItemName').value.trim();
+            const category = document.getElementById('editDiscordItemCategory').value;
+            const price = parseFloat(document.getElementById('editDiscordItemPrice').value);
+            const stock = document.getElementById('editDiscordItemStock').value.trim();
+            const tag = document.getElementById('editDiscordItemTag').value.trim();
+            const errorDiv = document.getElementById('editDiscordItemError');
+            if (!name || !price || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
             try {
-                await setDoc(doc(db, 'afk_rewards', id), { name, description: desc, credits, duration, createdAt: serverTimestamp() });
-                state.afkRewards.push({ id, name, description: desc, credits, duration });
-                showToast('AFK reward added!');
-                document.getElementById('newAFKRewardName').value = '';
-                document.getElementById('newAFKRewardDesc').value = '';
-                document.getElementById('newAFKRewardCredits').value = '';
-                document.getElementById('newAFKRewardDuration').value = '';
+                const updateData = { name, category, price, stock, updatedAt: serverTimestamp() };
+                if (tag) updateData.tag = tag;
+                await updateDoc(doc(db, 'discord_items', itemId), updateData);
+                state.discordItems[itemId] = { ...state.discordItems[itemId], ...updateData };
+                state.products[itemId] = state.discordItems[itemId];
+                renderDiscordItems('nitro'); renderDiscordItems('boosts'); renderAdminDiscordItemsTable();
+                closeEditDiscordItemModal();
+                showToast('Discord item updated!');
+            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
+        };
+
+        window.saveDiscordDesc = async () => {
+            if (!state.isAdmin) { showToast('Admin only!'); return; }
+            const nitroDesc = document.getElementById('nitroDescInput').value.trim();
+            const boostsDesc = document.getElementById('boostsDescInput').value.trim();
+            const errorDiv = document.getElementById('saveDiscordDescError');
+            try {
+                if (nitroDesc) {
+                    await setDoc(doc(db, 'discord_desc', 'nitro'), { text: nitroDesc, updatedAt: serverTimestamp() });
+                    state.discordDesc.nitro = nitroDesc;
+                }
+                if (boostsDesc) {
+                    await setDoc(doc(db, 'discord_desc', 'boosts'), { text: boostsDesc, updatedAt: serverTimestamp() });
+                    state.discordDesc.boosts = boostsDesc;
+                }
+                updateDiscordDescUI();
+                showToast('Descriptions saved!');
                 errorDiv.textContent = '';
             } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
         };
 
+        // ===== ADMIN TABLE =====
         function renderAdminTable() {
             const tbody = document.getElementById('adminTableBody');
-            const categories = { money: 'Money', spawners: 'Spawners', armory: 'Armory', materials: 'Materials', accounts: 'Accounts' };
+            const categories = { money: 'Money', spawners: 'Spawners', armory: 'Armory', materials: 'Materials', accounts: 'Accounts', nitro: 'Nitro', boosts: 'Boosts' };
             tbody.innerHTML = Object.values(state.products).map(p => {
                 const catOptions = Object.entries(categories).map(([val, label]) => `<option value="${val}" ${p.category === val ? 'selected' : ''}>${label}</option>`).join('');
                 return `<tr><td><input type="checkbox" data-id="${p.id}"></td><td><input class="admin-input" id="name-${p.id}" value="${p.name}"></td><td><select class="admin-input" id="cat-${p.id}" style="cursor:pointer;">${catOptions}</select></td><td><input class="admin-input" id="stock-${p.id}" value="${p.stock}"></td><td><input class="admin-input" id="price-${p.id}" value="${p.price}" type="number"></td><td><button class="btn btn-primary btn-sm" onclick="window.saveItem('${p.id}')">Save</button> <button class="btn btn-danger btn-sm" onclick="window.deleteItem('${p.id}')">Delete</button></td></tr>`;
@@ -2157,8 +1843,7 @@
                 await deleteDoc(doc(db, 'products', id));
                 const p = state.products[id];
                 if (p && catalog[p.category]) {
-                    const idx = catalog[p.category].findIndex(x => x.id === id);
-                    if (idx > -1) catalog[p.category].splice(idx, 1);
+                    catalog[p.category] = catalog[p.category].filter(x => x.id !== id);
                 }
                 delete state.products[id];
                 renderProducts(); renderAdminTable(); showToast('Item deleted!');
@@ -2166,12 +1851,14 @@
         };
 
         window.filterProducts = (type) => {
-            const searchId = type === 'money' ? 'moneySearch' : type === 'items' ? 'itemSearch' : type === 'offers' ? 'offerSearch' : 'accountSearch';
+            const searchId = type === 'money' ? 'moneySearch' : type === 'items' ? 'itemSearch' : type === 'offers' ? 'offerSearch' : type === 'nitro' ? 'nitroSearch' : type === 'boosts' ? 'boostsSearch' : 'accountSearch';
             const query = document.getElementById(searchId).value.toLowerCase();
             let containers = [];
             if (type === 'money') containers = ['moneyContainer'];
             else if (type === 'items') containers = ['spawnersContainer', 'armoryContainer', 'materialsContainer'];
             else if (type === 'offers') containers = ['offersContainer'];
+            else if (type === 'nitro') containers = ['nitroContainer'];
+            else if (type === 'boosts') containers = ['boostsContainer'];
             else containers = ['accountsContainer'];
             containers.forEach(id => {
                 const container = document.getElementById(id); if (!container) return;
@@ -2194,3 +1881,4 @@
     </script>
 </body>
 </html>
+
