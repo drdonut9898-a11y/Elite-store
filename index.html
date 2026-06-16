@@ -32,6 +32,7 @@
             --accent-gold: #eab308; --accent-gold-glow: rgba(234,179,8,0.4);
             --accent-purple: #a855f7; --accent-purple-glow: rgba(168,85,247,0.4);
             --accent-discord: #5865F2; --accent-discord-glow: rgba(88,101,242,0.4);
+            --accent-donut: #ff6b9d; --accent-donut-glow: rgba(255,107,157,0.4);
             --font-display: 'Orbitron',sans-serif; --font-body: 'Rajdhani',sans-serif;
             --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
             --transition-smooth: all 0.4s cubic-bezier(0.25,1,0.5,1);
@@ -46,7 +47,7 @@
         }
         body.light-theme .pkg-card, body.light-theme .menu-card, body.light-theme .master-card,
         body.light-theme .review-card, body.light-theme .wishlist-item, body.light-theme .cart-item,
-        body.light-theme .sidebar, body.light-theme .offer-card {
+        body.light-theme .sidebar, body.light-theme .offer-card, body.light-theme .spawner-info-card {
             background: rgba(255,255,255,0.95); border-color: rgba(0,0,0,0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         body.light-theme .search-input, body.light-theme .payment-input, body.light-theme .admin-input {
@@ -82,7 +83,7 @@
         .sidebar-link .link-icon { font-size: 1.2rem; width: 28px; text-align: center; }
         .sidebar-category { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; letter-spacing: 2px; }
         .sidebar-category-firemc { color: var(--accent-red); }
-        .sidebar-category-donut { color: var(--accent-blue); }
+        .sidebar-category-donut { color: var(--accent-donut); }
         .sidebar-category-account { color: var(--accent-green); }
         .sidebar-category-discord { color: var(--accent-discord); }
         .sidebar-category-offers { color: var(--accent-purple); }
@@ -119,6 +120,8 @@
         .btn-purple:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px var(--accent-purple-glow); }
         .btn-discord { background:linear-gradient(135deg,var(--accent-discord),#4752C4); color:white; }
         .btn-discord:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px var(--accent-discord-glow); }
+        .btn-donut { background:linear-gradient(135deg,var(--accent-donut),#e84393); color:white; }
+        .btn-donut:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px var(--accent-donut-glow); }
         .btn-danger { background:linear-gradient(135deg,#ef4444,#dc2626); color:white; }
         .btn-danger:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px rgba(239,68,68,0.4); }
         .btn-sm { padding:6px 14px; font-size:0.7rem; }
@@ -150,6 +153,9 @@
         .master-card-discord { border-top-color:var(--accent-discord); border-color:rgba(88,101,242,0.3); }
         .master-card-discord h2 { color:var(--accent-discord); }
         .master-card-discord:hover { border-color:var(--accent-discord); box-shadow:0 20px 40px rgba(88,101,242,0.15); }
+        .master-card-donut { border-top-color:var(--accent-donut); border-color:rgba(255,107,157,0.3); }
+        .master-card-donut h2 { color:var(--accent-donut); }
+        .master-card-donut:hover { border-color:var(--accent-donut); box-shadow:0 20px 40px rgba(255,107,157,0.15); }
         .master-card-purple { border-top-color:var(--accent-purple); border-color:rgba(168,85,247,0.3); }
         .master-card-purple h2 { color:var(--accent-purple); }
         .master-card-purple:hover { border-color:var(--accent-purple); box-shadow:0 20px 40px rgba(168,85,247,0.15); }
@@ -171,6 +177,7 @@
         .billboard-blue { background:linear-gradient(90deg,rgba(0,210,255,0.08),transparent); border-color:rgba(0,210,255,0.3); border-left-color:var(--accent-blue); }
         .billboard-green { background:linear-gradient(90deg,rgba(46,213,115,0.08),transparent); border-color:rgba(46,213,115,0.3); border-left-color:var(--accent-green); }
         .billboard-discord { background:linear-gradient(90deg,rgba(88,101,242,0.08),transparent); border-color:rgba(88,101,242,0.3); border-left-color:var(--accent-discord); }
+        .billboard-donut { background:linear-gradient(90deg,rgba(255,107,157,0.08),transparent); border-color:rgba(255,107,157,0.3); border-left-color:var(--accent-donut); }
         .billboard-purple { background:linear-gradient(90deg,rgba(168,85,247,0.08),transparent); border-color:rgba(168,85,247,0.3); border-left-color:var(--accent-purple); }
         .rate-tag { font-size:1.3rem; font-weight:600; color:var(--text-secondary); }
         .rate-tag strong { color:var(--accent-red); font-family:var(--font-display); font-size:1.5rem; }
@@ -278,9 +285,39 @@
         .offer-card .offer-tag { position:absolute; top:15px; right:15px; background:linear-gradient(90deg,var(--accent-purple),#7c3aed); color:white; font-size:0.7rem; font-weight:900; padding:4px 12px; border-radius:6px; }
         .offer-card .offer-val { font-family:var(--font-display); font-size:2rem; font-weight:800; color:var(--accent-purple); }
         .offer-card .offer-cost { font-size:1.8rem; color:var(--accent-purple); font-weight:700; background:rgba(168,85,247,0.05); padding:10px 0; border-radius:8px; border:1px solid rgba(168,85,247,0.1); margin:15px 0; }
-        .discord-desc-box { background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
-        .discord-desc-box h4 { font-family: var(--font-display); color: var(--accent-discord); margin-bottom: 10px; font-size: 1.1rem; }
-        .discord-desc-box p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+
+        /* ===== DISCORD TAG FIX - SIDE POSITION ===== */
+        .discord-tag-side { position:absolute; top:15px; right:15px; background:linear-gradient(90deg,var(--accent-discord),#4752C4); color:white; font-size:0.75rem; font-weight:900; padding:6px 16px; border-radius:8px; text-transform:uppercase; letter-spacing:1px; box-shadow:0 4px 15px var(--accent-discord-glow); z-index:2; }
+
+        /* ===== DESCRIPTION BOX ===== */
+        .desc-box { background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
+        .desc-box h4 { font-family: var(--font-display); margin-bottom: 10px; font-size: 1.1rem; }
+        .desc-box p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+        .desc-box .desc-edit { margin-top: 10px; }
+        .desc-box .desc-edit textarea { width: 100%; min-height: 60px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.9rem; resize: vertical; }
+        .desc-box .desc-edit button { margin-top: 8px; }
+
+        /* ===== SPAWNER INFO CARD ===== */
+        .spawner-info-card { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px; padding:25px; text-align:center; display:flex; flex-direction:column; justify-content:space-between; min-height:350px; position:relative; transition:var(--transition-smooth); animation: cardAppear 0.6s ease-out backwards; }
+        .spawner-info-card:hover { border-color:rgba(255,107,157,0.5); transform:translateY(-10px) scale(1.02); box-shadow:0 20px 40px rgba(255,107,157,0.15); }
+        .spawner-info-card .spawner-img { width:100%; height:180px; object-fit:cover; border-radius:12px; margin-bottom:15px; border:2px solid var(--border-subtle); transition:var(--transition-smooth); }
+        .spawner-info-card:hover .spawner-img { border-color:var(--accent-donut); transform:scale(1.02); }
+        .spawner-info-card .spawner-name { font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:var(--accent-donut); margin-bottom:8px; }
+        .spawner-info-card .spawner-desc { color:var(--text-secondary); font-size:0.95rem; margin-bottom:12px; line-height:1.5; }
+        .spawner-info-card .spawner-price { font-size:1.6rem; color:var(--accent-donut); font-weight:700; background:rgba(255,107,157,0.05); padding:8px 0; border-radius:8px; border:1px solid rgba(255,107,157,0.1); margin:10px 0; }
+
+        /* ===== IMAGE UPLOAD & CROP ===== */
+        .image-upload-area { border:2px dashed var(--border-subtle); border-radius:12px; padding:30px; text-align:center; cursor:pointer; transition:var(--transition-smooth); margin-bottom:15px; }
+        .image-upload-area:hover { border-color:var(--accent-donut); background:rgba(255,107,157,0.05); }
+        .image-upload-area .upload-icon { font-size:2.5rem; margin-bottom:10px; }
+        .image-upload-area p { color:var(--text-muted); font-size:0.9rem; }
+        .image-upload-area input[type="file"] { display:none; }
+        .crop-preview { max-width:300px; max-height:300px; margin:15px auto; border-radius:12px; border:2px solid var(--border-subtle); }
+        .crop-container { position:relative; width:300px; height:300px; margin:15px auto; overflow:hidden; border-radius:12px; border:2px solid var(--border-subtle); }
+        .crop-container img { max-width:none; position:absolute; }
+        .crop-overlay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:200px; height:200px; border:2px dashed var(--accent-donut); box-shadow:0 0 0 999px rgba(0,0,0,0.5); pointer-events:none; }
+        .crop-controls { display:flex; gap:10px; justify-content:center; margin-top:15px; }
+
         @media (max-width:768px) {
             .home-wrapper { grid-template-columns:1fr; }
             .master-card-green { grid-column:span 1; max-width:100%; }
@@ -300,6 +337,7 @@
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <button class="sidebar-toggle" id="sidebarToggle" onclick="window.toggleSidebar()">☰</button>
@@ -317,7 +355,7 @@
             <a class="sidebar-link sidebar-category sidebar-category-firemc" onclick="window.sidebarNavigate('menu')" data-view="menu">
                 <span class="link-icon">🔥</span><span>FIREMC</span>
             </a>
-            <a class="sidebar-link sidebar-category sidebar-category-donut" onclick="window.sidebarNavigate('donutsmp')" data-view="donutsmp">
+            <a class="sidebar-link sidebar-category sidebar-category-donut" onclick="window.sidebarNavigate('donutmenu')" data-view="donutmenu">
                 <span class="link-icon">🍩</span><span>DONUTSMP</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-account" onclick="window.sidebarNavigate('accounts')" data-view="accounts">
@@ -372,9 +410,9 @@
                     <h2 style="color:var(--accent-red);">FIREMC CLASSIC</h2>
                     <p style="color:var(--accent-red);">Click to Enter Market</p>
                 </div>
-                <div class="master-card master-card-blue" onclick="window.showComingSoon()">
-                    <h2>DONUTSMP</h2>
-                    <p style="color:var(--accent-blue);">Market Offline</p>
+                <div class="master-card master-card-donut" onclick="window.handleCardClick('donutmenu')">
+                    <h2 style="color:var(--accent-donut);">DONUTSMP</h2>
+                    <p style="color:var(--accent-donut);">Click to Enter Market</p>
                 </div>
                 <div class="master-card master-card-green" onclick="window.handleCardClick('accounts')">
                     <h2>ACCOUNTS</h2>
@@ -398,7 +436,7 @@
             </div>
         </div>
 
-        <!-- MENU VIEW -->
+        <!-- MENU VIEW (FireMC) -->
         <div class="view-section" id="viewMenu">
             <button class="back-btn" onclick="window.switchView('landing')">Back</button>
             <div class="menu-grid">
@@ -421,6 +459,10 @@
                 <div class="rate-tag">Exchange: <strong>Premium Cash</strong></div>
                 <div class="warning-tag">Min: 40M</div>
             </div>
+            <div id="moneyDescBox" class="desc-box" style="display:none;">
+                <h4 style="color:var(--accent-red);">📋 About Money Buy</h4>
+                <p id="moneyDescText"></p>
+            </div>
             <div class="search-container">
                 <span class="search-icon">🔍</span>
                 <input type="text" class="search-input" id="moneySearch" placeholder="Search money..." onkeyup="window.filterProducts('money')">
@@ -434,6 +476,10 @@
             <div class="store-billboard">
                 <div class="rate-tag">Market: <strong>Classic Items</strong></div>
                 <div class="warning-tag">Minimum 50Inr</div>
+            </div>
+            <div id="itemsDescBox" class="desc-box" style="display:none;">
+                <h4 style="color:var(--accent-red);">📋 About Item Buy</h4>
+                <p id="itemsDescText"></p>
             </div>
             <div class="search-container">
                 <span class="search-icon">🔍</span>
@@ -454,11 +500,89 @@
                 <div class="rate-tag">Market: <strong>MC Accounts</strong></div>
                 <div class="warning-tag warning-tag-green">Secure</div>
             </div>
+            <div id="accountsDescBox" class="desc-box" style="display:none;">
+                <h4 style="color:var(--accent-green);">📋 About Accounts</h4>
+                <p id="accountsDescText"></p>
+            </div>
             <div class="search-container">
                 <span class="search-icon">🔍</span>
                 <input type="text" class="search-input" id="accountSearch" placeholder="Search..." onkeyup="window.filterProducts('accounts')">
             </div>
             <div class="packages-container" id="accountsContainer"></div>
+        </div>
+
+        <!-- DONUTSMP MENU VIEW -->
+        <div class="view-section" id="viewDonutMenu">
+            <button class="back-btn" onclick="window.switchView('landing')">Back</button>
+            <div class="menu-grid">
+                <div class="menu-card" onclick="window.handleCardClick('donutmoney')">
+                    <h3 style="color:var(--accent-donut);">MONEY Buy</h3>
+                    <p>Top-up your DonutSMP balance</p>
+                </div>
+                <div class="menu-card" onclick="window.handleCardClick('donutitems')">
+                    <h3 style="color:var(--accent-donut);">Item Buy</h3>
+                    <p>DonutSMP items and gear</p>
+                </div>
+                <div class="menu-card" onclick="window.handleCardClick('spawnerinfo')">
+                    <h3 style="color:var(--accent-donut);">SPAWNER INFO</h3>
+                    <p>Spawner details with images</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DONUTSMP MONEY VIEW -->
+        <div class="view-section" id="viewDonutMoney">
+            <button class="back-btn" onclick="window.switchView('donutmenu')">Back</button>
+            <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--accent-donut); margin-bottom:20px; text-align:center; letter-spacing:3px;">DONUTSMP</div>
+            <div class="store-billboard billboard-donut">
+                <div class="rate-tag">Exchange: <strong>DonutSMP Cash</strong></div>
+                <div class="warning-tag" style="animation: pulseGreen 2s infinite; background:rgba(46,213,115,0.1); color:var(--accent-green); border-color:rgba(46,213,115,0.4);">Min: 50M</div>
+            </div>
+            <div id="donutMoneyDescBox" class="desc-box" style="display:none;">
+                <h4 style="color:var(--accent-donut);">📋 About Money Buy</h4>
+                <p id="donutMoneyDescText"></p>
+            </div>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="donutMoneySearch" placeholder="Search money..." onkeyup="window.filterProducts('donutmoney')">
+            </div>
+            <div class="packages-container" id="donutMoneyContainer"></div>
+        </div>
+
+        <!-- DONUTSMP ITEMS VIEW -->
+        <div class="view-section" id="viewDonutItems">
+            <button class="back-btn" onclick="window.switchView('donutmenu')">Back</button>
+            <div class="store-billboard billboard-donut">
+                <div class="rate-tag">Market: <strong>DonutSMP Items</strong></div>
+                <div class="warning-tag" style="animation: pulseGreen 2s infinite; background:rgba(46,213,115,0.1); color:var(--accent-green); border-color:rgba(46,213,115,0.4);">Minimum 50Inr</div>
+            </div>
+            <div id="donutItemsDescBox" class="desc-box" style="display:none;">
+                <h4 style="color:var(--accent-donut);">📋 About Item Buy</h4>
+                <p id="donutItemsDescText"></p>
+            </div>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="donutItemSearch" placeholder="Search items..." onkeyup="window.filterProducts('donutitems')">
+            </div>
+            <div id="donutItemCategories"></div>
+        </div>
+
+        <!-- SPAWNER INFO VIEW -->
+        <div class="view-section" id="viewSpawnerInfo">
+            <button class="back-btn" onclick="window.switchView('donutmenu')">Back</button>
+            <div class="store-billboard billboard-donut">
+                <div class="rate-tag">Info: <strong>Spawner Details</strong></div>
+                <div class="warning-tag" style="animation: pulseGreen 2s infinite; background:rgba(46,213,115,0.1); color:var(--accent-green); border-color:rgba(46,213,115,0.4);">Visual Guide</div>
+            </div>
+            <div id="spawnerInfoDescBox" class="desc-box" style="display:none;">
+                <h4 style="color:var(--accent-donut);">📋 About Spawner Info</h4>
+                <p id="spawnerInfoDescText"></p>
+            </div>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="spawnerInfoSearch" placeholder="Search spawners..." onkeyup="window.filterProducts('spawnerinfo')">
+            </div>
+            <div class="packages-container" id="spawnerInfoContainer"></div>
         </div>
 
         <!-- DISCORD VIEW -->
@@ -483,8 +607,8 @@
                 <div class="rate-tag">Market: <strong>Discord Nitro</strong></div>
                 <div class="warning-tag" style="animation: pulseGreen 2s infinite; background:rgba(46,213,115,0.1); color:var(--accent-green); border-color:rgba(46,213,115,0.4);">Instant</div>
             </div>
-            <div id="nitroDescBox" class="discord-desc-box" style="display:none;">
-                <h4>📋 About Nitro</h4>
+            <div id="nitroDescBox" class="desc-box" style="display:none;">
+                <h4 style="color:var(--accent-discord);">📋 About Nitro</h4>
                 <p id="nitroDescText"></p>
             </div>
             <div class="search-container">
@@ -501,8 +625,8 @@
                 <div class="rate-tag">Market: <strong>Server Boosts</strong></div>
                 <div class="warning-tag" style="animation: pulseGreen 2s infinite; background:rgba(46,213,115,0.1); color:var(--accent-green); border-color:rgba(46,213,115,0.4);">Instant</div>
             </div>
-            <div id="boostsDescBox" class="discord-desc-box" style="display:none;">
-                <h4>📋 About Boosts</h4>
+            <div id="boostsDescBox" class="desc-box" style="display:none;">
+                <h4 style="color:var(--accent-discord);">📋 About Boosts</h4>
                 <p id="boostsDescText"></p>
             </div>
             <div class="search-container">
@@ -540,7 +664,7 @@
             <div style="overflow-x:auto;">
                 <table class="admin-table">
                     <thead>
-                        <tr><th style="width:60px;">Select</th><th>Name</th><th>Category</th><th>Stock</th><th>Price</th><th>Action</th></tr>
+                        <tr><th style="width:60px;">Select</th><th>Name</th><th>Category</th><th>Stock</th><th>Price</th><th>Desc</th><th>Action</th></tr>
                     </thead>
                     <tbody id="adminTableBody"></tbody>
                 </table>
@@ -567,13 +691,17 @@
                         <input type="text" class="admin-input" id="newOfferItemTag" placeholder="e.g. HOT">
                     </div>
                 </div>
+                <div style="margin-top:15px;">
+                    <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Description (Optional)</label>
+                    <textarea class="admin-input" id="newOfferItemDesc" placeholder="Item description..." style="min-height:60px; resize:vertical;"></textarea>
+                </div>
                 <button class="btn btn-purple btn-sm" style="margin-top:15px;" onclick="window.addOfferItem()">Add Offer Item</button>
                 <div id="addOfferItemError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
             </div>
             <div style="overflow-x:auto; margin-top:20px;">
                 <table class="admin-table">
                     <thead>
-                        <tr><th>Name</th><th>Price</th><th>Stock</th><th>Tag</th><th>Actions</th></tr>
+                        <tr><th>Name</th><th>Price</th><th>Stock</th><th>Tag</th><th>Desc</th><th>Actions</th></tr>
                     </thead>
                     <tbody id="adminOfferItemsBody"></tbody>
                 </table>
@@ -607,33 +735,127 @@
                         <input type="text" class="admin-input" id="newDiscordItemTag" placeholder="e.g. HOT">
                     </div>
                 </div>
+                <div style="margin-top:15px;">
+                    <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Description (Optional)</label>
+                    <textarea class="admin-input" id="newDiscordItemDesc" placeholder="Item description..." style="min-height:60px; resize:vertical;"></textarea>
+                </div>
                 <button class="btn btn-discord btn-sm" style="margin-top:15px;" onclick="window.addDiscordItem()">Add Discord Item</button>
                 <div id="addDiscordItemError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
             </div>
             <div style="overflow-x:auto; margin-top:20px;">
                 <table class="admin-table">
                     <thead>
-                        <tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Tag</th><th>Actions</th></tr>
+                        <tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Tag</th><th>Desc</th><th>Actions</th></tr>
                     </thead>
                     <tbody id="adminDiscordItemsBody"></tbody>
                 </table>
             </div>
 
-            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-blue); padding-left:15px;">Discord Category Descriptions</div>
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-donut); padding-left:15px;">DonutSMP Items Management</div>
             <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 12px; margin-bottom: 25px;">
-                <h3 style="font-family: var(--font-display); color: var(--accent-discord); margin-bottom: 15px; font-size: 1rem;">Set Category Descriptions</h3>
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                <h3 style="font-family: var(--font-display); color: var(--accent-donut); margin-bottom: 15px; font-size: 1rem;">Add DonutSMP Item</h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:15px;">
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Item Name</label>
+                        <input type="text" class="admin-input" id="newDonutItemName" placeholder="e.g. 50M Money">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Category</label>
+                        <select class="admin-input" id="newDonutItemCategory" style="cursor:pointer;">
+                            <option value="donutmoney">Donut Money</option>
+                            <option value="donutitems">Donut Items</option>
+                            <option value="spawnerinfo">Spawner Info</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Price (INR)</label>
+                        <input type="number" class="admin-input" id="newDonutItemPrice" placeholder="e.g. 50">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Stock</label>
+                        <input type="text" class="admin-input" id="newDonutItemStock" placeholder="e.g. 10 or Unlimited">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Tag (Optional)</label>
+                        <input type="text" class="admin-input" id="newDonutItemTag" placeholder="e.g. HOT">
+                    </div>
+                </div>
+                <div style="margin-top:15px;">
+                    <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Description (Optional)</label>
+                    <textarea class="admin-input" id="newDonutItemDesc" placeholder="Item description..." style="min-height:60px; resize:vertical;"></textarea>
+                </div>
+                <div id="donutImageUpload" style="margin-top:15px; display:none;">
+                    <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Spawner Image (Optional)</label>
+                    <div class="image-upload-area" onclick="document.getElementById('donutItemImage').click()">
+                        <div class="upload-icon">📷</div>
+                        <p>Click to upload image</p>
+                        <input type="file" id="donutItemImage" accept="image/*" onchange="window.handleImageUpload(this)">
+                    </div>
+                    <div id="cropArea" style="display:none;">
+                        <div class="crop-container" id="cropContainer">
+                            <img id="cropImage" src="" alt="Crop">
+                            <div class="crop-overlay"></div>
+                        </div>
+                        <div class="crop-controls">
+                            <button class="btn btn-sm" onclick="window.zoomImage(0.1)">🔍+</button>
+                            <button class="btn btn-sm" onclick="window.zoomImage(-0.1)">🔍-</button>
+                            <button class="btn btn-donut btn-sm" onclick="window.saveCroppedImage()">✓ Save</button>
+                            <button class="btn btn-danger btn-sm" onclick="window.cancelCrop()">✕ Cancel</button>
+                        </div>
+                    </div>
+                    <img id="croppedPreview" class="crop-preview" style="display:none;">
+                </div>
+                <button class="btn btn-donut btn-sm" style="margin-top:15px;" onclick="window.addDonutItem()">Add DonutSMP Item</button>
+                <div id="addDonutItemError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
+            </div>
+            <div style="overflow-x:auto; margin-top:20px;">
+                <table class="admin-table">
+                    <thead>
+                        <tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Tag</th><th>Desc</th><th>Image</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody id="adminDonutItemsBody"></tbody>
+                </table>
+            </div>
+
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-blue); padding-left:15px;">Category Descriptions</div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 12px; margin-bottom: 25px;">
+                <h3 style="font-family: var(--font-display); color: var(--accent-blue); margin-bottom: 15px; font-size: 1rem;">Set Category Descriptions</h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:15px;">
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Money Buy Description</label>
+                        <textarea class="admin-input" id="moneyDescInput" placeholder="Enter description..." style="min-height:60px; resize:vertical;"></textarea>
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Item Buy Description</label>
+                        <textarea class="admin-input" id="itemsDescInput" placeholder="Enter description..." style="min-height:60px; resize:vertical;"></textarea>
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Accounts Description</label>
+                        <textarea class="admin-input" id="accountsDescInput" placeholder="Enter description..." style="min-height:60px; resize:vertical;"></textarea>
+                    </div>
                     <div>
                         <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Nitro Description</label>
-                        <textarea class="admin-input" id="nitroDescInput" placeholder="Enter description for Nitro category..." style="min-height:80px;"></textarea>
+                        <textarea class="admin-input" id="nitroDescInput" placeholder="Enter description..." style="min-height:60px; resize:vertical;"></textarea>
                     </div>
                     <div>
                         <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Boosts Description</label>
-                        <textarea class="admin-input" id="boostsDescInput" placeholder="Enter description for Boosts category..." style="min-height:80px;"></textarea>
+                        <textarea class="admin-input" id="boostsDescInput" placeholder="Enter description..." style="min-height:60px; resize:vertical;"></textarea>
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Donut Money Description</label>
+                        <textarea class="admin-input" id="donutMoneyDescInput" placeholder="Enter description..." style="min-height:60px; resize:vertical;"></textarea>
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Donut Items Description</label>
+                        <textarea class="admin-input" id="donutItemsDescInput" placeholder="Enter description..." style="min-height:60px; resize:vertical;"></textarea>
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Spawner Info Description</label>
+                        <textarea class="admin-input" id="spawnerInfoDescInput" placeholder="Enter description..." style="min-height:60px; resize:vertical;"></textarea>
                     </div>
                 </div>
-                <button class="btn btn-discord btn-sm" style="margin-top:15px;" onclick="window.saveDiscordDesc()">Save Descriptions</button>
-                <div id="saveDiscordDescError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
+                <button class="btn btn-blue btn-sm" style="margin-top:15px;" onclick="window.saveAllDesc()">Save All Descriptions</button>
+                <div id="saveAllDescError" style="color:var(--accent-red); margin-top:10px; font-size:0.9rem;"></div>
             </div>
 
             <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-gold); padding-left:15px;">Reviews Management</div>
@@ -790,6 +1012,9 @@
                     <option value="accounts">Accounts</option>
                     <option value="nitro">Nitro</option>
                     <option value="boosts">Boosts</option>
+                    <option value="donutmoney">Donut Money</option>
+                    <option value="donutitems">Donut Items</option>
+                    <option value="spawnerinfo">Spawner Info</option>
                 </select>
             </div>
             <div class="payment-input-group">
@@ -799,6 +1024,10 @@
             <div class="payment-input-group">
                 <label>Stock</label>
                 <input type="text" class="payment-input" id="newItemStock" placeholder="e.g. 10 or Unlimited">
+            </div>
+            <div class="payment-input-group">
+                <label>Description (Optional)</label>
+                <textarea class="payment-input" id="newItemDesc" placeholder="Item description..." style="min-height:60px; resize:vertical;"></textarea>
             </div>
             <button class="btn btn-success" style="width:100%; margin-top:10px;" onclick="window.addNewItem()">Add Item</button>
             <button class="modal-dismiss" onclick="window.closeAddItemModal()">Cancel</button>
@@ -827,6 +1056,10 @@
             <div class="payment-input-group">
                 <label>Tag (Optional)</label>
                 <input type="text" class="payment-input" id="editOfferItemTag" placeholder="e.g. HOT">
+            </div>
+            <div class="payment-input-group">
+                <label>Description (Optional)</label>
+                <textarea class="payment-input" id="editOfferItemDesc" placeholder="Item description..." style="min-height:60px; resize:vertical;"></textarea>
             </div>
             <button class="btn btn-purple" style="width:100%; margin-top:10px;" onclick="window.saveEditOfferItem()">Save Changes</button>
             <button class="modal-dismiss" onclick="window.closeEditOfferItemModal()">Cancel</button>
@@ -863,8 +1096,52 @@
                 <label>Tag (Optional)</label>
                 <input type="text" class="payment-input" id="editDiscordItemTag" placeholder="e.g. HOT">
             </div>
+            <div class="payment-input-group">
+                <label>Description (Optional)</label>
+                <textarea class="payment-input" id="editDiscordItemDesc" placeholder="Item description..." style="min-height:60px; resize:vertical;"></textarea>
+            </div>
             <button class="btn btn-discord" style="width:100%; margin-top:10px;" onclick="window.saveEditDiscordItem()">Save Changes</button>
             <button class="modal-dismiss" onclick="window.closeEditDiscordItemModal()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="editDonutItemModal">
+        <div class="modal-box" style="border-color:var(--accent-donut); max-width:500px;">
+            <h2 style="color:var(--accent-donut);">Edit DonutSMP Item</h2>
+            <div id="editDonutItemError" style="color:var(--accent-red); margin-bottom:15px; min-height:20px;"></div>
+            <input type="hidden" id="editDonutItemId">
+            <div class="payment-input-group">
+                <label>Item Name</label>
+                <input type="text" class="payment-input" id="editDonutItemName" placeholder="e.g. 50M Money">
+            </div>
+            <div class="payment-input-group">
+                <label>Category</label>
+                <select class="payment-input" id="editDonutItemCategory" style="cursor:pointer;">
+                    <option value="donutmoney">Donut Money</option>
+                    <option value="donutitems">Donut Items</option>
+                    <option value="spawnerinfo">Spawner Info</option>
+                </select>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                <div class="payment-input-group">
+                    <label>Price (INR)</label>
+                    <input type="number" class="payment-input" id="editDonutItemPrice" placeholder="e.g. 50">
+                </div>
+                <div class="payment-input-group">
+                    <label>Stock</label>
+                    <input type="text" class="payment-input" id="editDonutItemStock" placeholder="e.g. 10 or Unlimited">
+                </div>
+            </div>
+            <div class="payment-input-group">
+                <label>Tag (Optional)</label>
+                <input type="text" class="payment-input" id="editDonutItemTag" placeholder="e.g. HOT">
+            </div>
+            <div class="payment-input-group">
+                <label>Description (Optional)</label>
+                <textarea class="payment-input" id="editDonutItemDesc" placeholder="Item description..." style="min-height:60px; resize:vertical;"></textarea>
+            </div>
+            <button class="btn btn-donut" style="width:100%; margin-top:10px;" onclick="window.saveEditDonutItem()">Save Changes</button>
+            <button class="modal-dismiss" onclick="window.closeEditDonutItemModal()">Cancel</button>
         </div>
     </div>
 
@@ -887,906 +1164,174 @@
 
     <div class="toast" id="toast"></div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot, addDoc, query, where, orderBy, serverTimestamp, getDocs, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBel_TeEf1vjBfio9UyQXEAA775w-mXv4I",
-            authDomain: "firemc-store.firebaseapp.com",
-            projectId: "firemc-store",
-            storageBucket: "firemc-store.firebasestorage.app",
-            messagingSenderId: "344086472924",
-            appId: "1:344086472924:web:68c86022adfbe830b56c19",
-            measurementId: "G-J4SHF2W091"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        // ===== ADMIN UIDs =====
-        const ADMIN_UIDS = [
-            "Uq5jZPeYZcPevW3GYMTV38V1u0d2",  // Original admin
-            "KKOJk8oCoMTciAIv3jv5QhHOPKa2"   // abhaydhillon59@gmail.com
-        ];
-
-        const state = {
-            user: null, isAdmin: false,
-            cart: [],
-            wishlist: JSON.parse(localStorage.getItem('firemc_wishlist') || '[]'),
-            products: {}, reviews: [],
-            currentRating: 0,
-            selectedPaymentApp: null,
-            authTab: 'login',
-            isNavigating: false,
-            username: null,
-            usernames: new Set(),
-            offerItems: {},
-            discordItems: {},
-            discordDesc: { nitro: '', boosts: '' },
-            sidebarOpen: false
-        };
-
-        const catalog = {
-            money: [
-                { id: 'm10', name: '10M Money', price: 5, stock: 'Unlimited', category: 'money' },
-                { id: 'm20', name: '20M Money', price: 10, stock: 'Unlimited', category: 'money' },
-                { id: 'm40', name: '40M Money', price: 20, stock: 'Unlimited', minOrder: 40, category: 'money' },
-                { id: 'm70', name: '70M Money', price: 35, stock: 'Unlimited', category: 'money' },
-                { id: 'm100', name: '100M Money', price: 50, stock: 'Unlimited', category: 'money' },
-                { id: 'm1b', name: '1B Money', price: 500, stock: 'Unlimited', category: 'money' },
-                { id: 'm125', name: '125M Promo', price: 50, stock: '1 Time', promo: true, category: 'money' }
-            ],
-            spawners: [
-                { id: 'skel', name: 'Skeleton Spawner', price: 13, stock: 72, category: 'spawners' },
-                { id: 'ward', name: 'Warden Spawner', price: 12, stock: 53, category: 'spawners' },
-                { id: 'spid', name: 'Spider Spawner', price: 7, stock: 32, category: 'spawners' },
-                { id: 'drag', name: 'Ender Dragon Spawner', price: 15, stock: 53, category: 'spawners' }
-            ],
-            armory: [
-                { id: 'evok', name: 'Evoker Egg/Pack', price: 350, stock: 4, category: 'armory' },
-                { id: 'dset', name: 'Dragon Set', price: 450, stock: 5, category: 'armory' },
-                { id: 'dswd', name: 'Dragon Sword', price: 150, stock: 4, category: 'armory' },
-                { id: 'daxe', name: 'Dragon Axe', price: 70, stock: 5, category: 'armory' },
-                { id: 'dbow', name: 'Dragon Bow', price: 40, stock: 9, category: 'armory' },
-                { id: 'dpick', name: 'Dragon Pickaxe', price: 90, stock: 5, category: 'armory' },
-                { id: 'mace', name: 'Mace', price: 60, stock: 18, category: 'armory' },
-                { id: 'saxe', name: 'Supreme Axe', price: 20, stock: 30, category: 'armory' },
-                { id: 'shelm', name: 'Supreme Helmet', price: 20, stock: 5, category: 'armory' },
-                { id: 'schest', name: 'Supreme Chestplate', price: 23, stock: 7, category: 'armory' },
-                { id: 'sleg', name: 'Supreme Leggings', price: 22, stock: 11, category: 'armory' },
-                { id: 'sboot', name: 'Supreme Boots', price: 20, stock: 5, category: 'armory' }
-            ],
-            materials: [
-                { id: 'apple', name: 'Enchanted Apple', price: 10, stock: 64, category: 'materials' },
-                { id: 'nether', name: 'Netherite Ingots', price: 12, stock: 5, category: 'materials' }
-            ],
-            accounts: [
-                { id: 'prem', name: 'Minecraft Premium Account FA', price: 250, stock: 12, category: 'accounts',
-                  specs: ['Format: We Bought on ur Mail', 'Name Set and Changable', 'Lyt Warranty', 'Fresh account'] }
-            ],
-            nitro: [],
-            boosts: []
-        };
-
-        function getHashView() {
-            const hash = window.location.hash;
-            if (hash && hash.startsWith('#/')) {
-                const view = hash.replace('#/', '');
-                if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'discord', 'nitro', 'boosts', 'offers'].includes(view)) return view;
-            }
-            return 'landing';
-        }
-
-        function updateHash(view) {
-            if (view === 'landing') { if (window.location.hash) window.location.hash = ''; }
-            else { const newHash = '#/' + view; if (window.location.hash !== newHash) window.location.hash = newHash; }
-        }
-
-        function handleHashChange() {
-            if (state.isNavigating) return;
-            const view = getHashView();
-            if (view === 'admin' && !state.isAdmin) { showToast('Admin only!'); window.location.hash = ''; return; }
-            switchViewInternal(view, true);
-        }
-
-        function switchViewInternal(view, skipHashUpdate) {
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            const map = { 
-                landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', 
-                accounts: 'viewAccounts', admin: 'viewAdmin', discord: 'viewDiscord', 
-                nitro: 'viewNitro', boosts: 'viewBoosts', offers: 'viewOffers'
-            };
-            if (map[view]) { 
-                setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); 
-                window.scrollTo({ top: 0, behavior: 'smooth' }); 
-            }
-            if (view === 'admin') { 
-                renderAdminTable(); renderAdminReviews(); renderAdminOfferItemsTable(); 
-                renderAdminDiscordItemsTable(); loadDiscordDesc(); 
-            }
-            if (view === 'nitro') { renderDiscordItems('nitro'); }
-            if (view === 'boosts') { renderDiscordItems('boosts'); }
-            if (view === 'offers') { renderOfferItems(); }
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.dataset.view === view) link.classList.add('active');
-            });
-        }
-
-        async function init() {
-            Object.values(catalog).forEach(cat => cat.forEach(p => state.products[p.id] = { ...p }));
-            await loadProductsFromFirestore();
-            setupProductsListener();
-            renderProducts(); loadReviews(); setupAuth();
-            updateWishlistUI(); setupStarRating();
-            await loadOfferItems();
-            await loadDiscordItems();
-            await loadDiscordDesc();
-            await loadAllUsernames();
-            const initialView = getHashView();
-            if (initialView !== 'landing') {
-                if (initialView === 'admin' && !state.isAdmin) window.location.hash = '';
-                else switchViewInternal(initialView, true);
-            }
-            window.addEventListener('hashchange', handleHashChange);
-        }
-
-        async function loadProductsFromFirestore() {
-            try {
-                const snap = await getDocs(collection(db, 'products'));
-                snap.forEach(d => {
-                    const data = d.data();
-                    if (state.products[d.id]) {
-                        state.products[d.id].name = data.name || state.products[d.id].name;
-                        state.products[d.id].price = data.price !== undefined ? data.price : state.products[d.id].price;
-                        state.products[d.id].stock = data.stock !== undefined ? data.stock : state.products[d.id].stock;
-                        state.products[d.id].category = data.category || state.products[d.id].category;
-                    } else if (data.category) {
-                        // New item from Firestore that might not be in catalog
-                        state.products[d.id] = { id: d.id, ...data };
-                        if (!catalog[data.category]) catalog[data.category] = [];
-                        catalog[data.category].push(state.products[d.id]);
-                    }
-                });
-            } catch (e) { console.log('Products load error', e); }
-        }
-
-        function setupProductsListener() {
-            onSnapshot(collection(db, 'products'), (snap) => {
-                snap.docChanges().forEach(change => {
-                    if (change.type === 'added' || change.type === 'modified') {
-                        const data = change.doc.data();
-                        const id = change.doc.id;
-                        if (state.products[id]) {
-                            state.products[id].name = data.name || state.products[id].name;
-                            state.products[id].price = data.price !== undefined ? data.price : state.products[id].price;
-                            state.products[id].stock = data.stock !== undefined ? data.stock : state.products[id].stock;
-                            state.products[id].category = data.category || state.products[id].category;
-                        } else if (data.category) {
-                            state.products[id] = { id, ...data };
-                            if (!catalog[data.category]) catalog[data.category] = [];
-                            if (!catalog[data.category].find(p => p.id === id)) {
-                                catalog[data.category].push(state.products[id]);
-                            }
-                        }
-                    }
-                });
-                renderProducts();
-                if (document.getElementById('viewAdmin').classList.contains('active')) renderAdminTable();
-            });
-        }
-
-        async function loadAllUsernames() {
-            try {
-                const snap = await getDocs(collection(db, 'users'));
-                snap.forEach(d => { const data = d.data(); if (data.username) state.usernames.add(data.username.toLowerCase()); });
-            } catch (e) { console.log('Username load error', e); }
-        }
-
-        async function isUsernameTaken(username) {
-            if (!username) return true;
-            const lower = username.toLowerCase().trim();
-            if (state.usernames.has(lower)) return true;
-            try {
-                const q = query(collection(db, 'users'), where('username', '==', lower));
-                const snap = await getDocs(q);
-                return !snap.empty;
-            } catch (e) { return false; }
-        }
-
-        function setupAuth() {
-            onAuthStateChanged(auth, async (user) => {
-                state.user = user;
-                state.isAdmin = user && ADMIN_UIDS.includes(user.uid);
-                updateUI();
-                if (user) {
-                    document.getElementById('authTriggerBtn').textContent = 'Logout';
-                    document.getElementById('authTriggerBtn').onclick = () => signOut(auth);
-                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Logout</span>';
-                    document.getElementById('sidebarAuthLink').onclick = () => signOut(auth);
-                    closeAuthModal();
-                    await loadUserUsername();
-                } else {
-                    document.getElementById('authTriggerBtn').textContent = 'Login';
-                    document.getElementById('authTriggerBtn').onclick = openAuthModal;
-                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Login</span>';
-                    document.getElementById('sidebarAuthLink').onclick = openAuthModal;
-                    state.username = null;
-                    updateUsernameDisplay();
-                }
-                const currentHash = getHashView();
-                if (currentHash === 'admin' && !state.isAdmin) {
-                    window.location.hash = ''; switchViewInternal('landing', true);
-                }
-            });
-        }
-
-        async function loadUserUsername() {
-            if (!state.user) return;
-            try {
-                const userDoc = await getDoc(doc(db, 'users', state.user.uid));
-                if (userDoc.exists()) {
-                    state.username = userDoc.data().username || null;
-                    updateUsernameDisplay();
-                }
-            } catch (e) { console.log('Username load error', e); }
-        }
-
-        function updateUsernameDisplay() {
-            const navUsername = document.getElementById('navUsername');
-            const navUsernameValue = document.getElementById('navUsernameValue');
-            const sidebarUsername = document.getElementById('sidebarUsername');
-            const sidebarUsernameValue = document.getElementById('sidebarUsernameValue');
-            if (state.username && state.user) {
-                navUsernameValue.textContent = state.username;
-                navUsername.classList.add('visible');
-                sidebarUsernameValue.textContent = state.username;
-                sidebarUsername.style.display = 'block';
-            } else {
-                navUsername.classList.remove('visible');
-                sidebarUsername.style.display = 'none';
-            }
-        }
-
-        function updateUI() {
-            const isGuest = !state.user;
-            document.getElementById('guestBanner').style.display = isGuest ? 'flex' : 'none';
-            document.getElementById('wishlistWidget').style.display = isGuest ? 'none' : 'block';
-            document.getElementById('cartWidget').style.display = isGuest ? 'none' : 'block';
-            document.getElementById('adminBadge').classList.toggle('visible', state.isAdmin);
-            document.getElementById('sidebarAdminLink').style.display = state.isAdmin ? 'flex' : 'none';
-            if (!state.isAdmin && document.getElementById('viewAdmin').classList.contains('active')) switchView('landing');
-        }
-
-        window.toggleSidebar = () => {
-            const sidebar = document.getElementById('sidebar');
-            const toggle = document.getElementById('sidebarToggle');
-            const appContainer = document.getElementById('appContainer');
-            state.sidebarOpen = !state.sidebarOpen;
-            if (state.sidebarOpen) { sidebar.classList.add('open'); toggle.classList.add('sidebar-open'); appContainer.classList.add('sidebar-open'); }
-            else { sidebar.classList.remove('open'); toggle.classList.remove('sidebar-open'); appContainer.classList.remove('sidebar-open'); }
-        };
-
-        window.sidebarNavigate = (view) => {
-            if (state.sidebarOpen) window.toggleSidebar();
-            if (view === 'donutsmp') { window.showComingSoon(); return; }
-            if (view === 'admin' && !state.isAdmin) { showToast('Admin only!'); return; }
-            switchView(view);
-        };
-
-        window.toggleTheme = () => document.body.classList.toggle('light-theme');
-        window.openAuthModal = () => document.getElementById('authModal').classList.add('active');
-        window.closeAuthModal = () => document.getElementById('authModal').classList.remove('active');
-        window.switchAuthTab = (tab) => {
-            document.getElementById('loginTab').style.background = tab === 'login' ? 'var(--accent-red)' : 'var(--bg-glass)';
-            document.getElementById('loginTab').style.color = tab === 'login' ? 'white' : 'var(--text-muted)';
-            document.getElementById('registerTab').style.background = tab === 'register' ? 'var(--accent-red)' : 'var(--bg-glass)';
-            document.getElementById('registerTab').style.color = tab === 'register' ? 'white' : 'var(--text-muted)';
-            document.getElementById('authTitle').textContent = tab === 'login' ? 'MEMBER ACCESS' : 'CREATE ACCOUNT';
-            document.getElementById('authBtn').textContent = tab === 'login' ? 'Authenticate' : 'Register';
-            state.authTab = tab;
-        };
-
-        window.handleAuth = async () => {
-            const username = document.getElementById('authUsername').value.trim().toLowerCase();
-            const email = document.getElementById('authEmail').value.trim();
-            const password = document.getElementById('authPassword').value;
-            const errorDiv = document.getElementById('authError');
-            if (state.authTab === 'register') {
-                if (!username) { errorDiv.textContent = 'Username is required'; return; }
-                if (username.length < 3) { errorDiv.textContent = 'Username must be at least 3 characters'; return; }
-                if (!/^[a-z0-9_]+$/.test(username)) { errorDiv.textContent = 'Username: letters, numbers, underscores only'; return; }
-                const taken = await isUsernameTaken(username);
-                if (taken) { errorDiv.textContent = 'Username already taken! Choose another.'; return; }
-            }
-            if (!email || !password) { errorDiv.textContent = 'Enter email and password'; return; }
-            try {
-                let cred;
-                if (state.authTab === 'login') { cred = await signInWithEmailAndPassword(auth, email, password); }
-                else {
-                    cred = await createUserWithEmailAndPassword(auth, email, password);
-                    await setDoc(doc(db, 'users', cred.user.uid), { email, username, isAdmin: false, createdAt: serverTimestamp() }, { merge: true });
-                    state.usernames.add(username);
-                    state.username = username;
-                    updateUsernameDisplay();
-                }
-                errorDiv.textContent = ''; closeAuthModal();
-            } catch (err) {
-                const errors = { 'auth/invalid-email': 'Invalid email', 'auth/user-not-found': 'User not found', 'auth/wrong-password': 'Wrong password', 'auth/email-already-in-use': 'Email already registered', 'auth/weak-password': 'Password too weak (min 6 chars)', 'auth/invalid-credential': 'Invalid credentials' };
-                errorDiv.textContent = errors[err.code] || 'Authentication failed: ' + err.message;
-            }
-        };
-
-        function renderProducts() {
-            const allProducts = Object.values(state.products);
-            document.getElementById('moneyContainer').innerHTML = allProducts.filter(p => p.category === 'money').map((p, i) => makeCard(p, i)).join('');
-            document.getElementById('spawnersContainer').innerHTML = allProducts.filter(p => p.category === 'spawners').map((p, i) => makeCard(p, i)).join('');
-            document.getElementById('armoryContainer').innerHTML = allProducts.filter(p => p.category === 'armory').map((p, i) => makeCard(p, i)).join('');
-            document.getElementById('materialsContainer').innerHTML = allProducts.filter(p => p.category === 'materials').map((p, i) => makeCard(p, i)).join('');
-
-            const acc = allProducts.find(p => p.category === 'accounts') || catalog.accounts[0];
-            const specs = acc.specs ? `<ul style="text-align:left; margin:15px 0; background:rgba(255,255,255,0.02); padding:15px; border-radius:8px; list-style:none;">${acc.specs.map(s => `<li style="color:var(--text-secondary); margin-bottom:8px;">> ${s}</li>`).join('')}</ul>` : '';
-            document.getElementById('accountsContainer').innerHTML = `<div class="pkg-card" style="max-width:380px; margin:0 auto; animation-delay:0s;"><button class="wishlist-btn ${state.wishlist.includes(acc.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${acc.id}', event)">❤️</button><div><div class="pkg-val" style="font-size:1.4rem;">${acc.name}</div><div class="stock-label">${acc.stock} in stock</div>${specs}</div><div><div class="pkg-cost">${acc.price} INR</div><button class="btn btn-success" style="width:100%;" onclick="window.addToCart('${acc.id}')">Add to Cart</button></div></div>`;
-        }
-
-        function makeCard(p, index) {
-            const isPromo = p.promo;
-            const stockClass = p.stock === 'Unlimited' || p.stock === '1 Time' ? '' : (parseInt(p.stock) <= 5 ? 'stock-label-low' : '');
-            const btnClass = isPromo ? 'btn-gold' : 'btn-primary';
-            const btnText = isPromo ? 'Claim Promo' : 'Add to Cart';
-            const displayName = p.name.replace(/(\d+M|Promo)/g, '<span style="color:var(--accent-red);">$1</span>');
-            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
-        }
-
-        window.addToCart = (id) => {
-            if (!state.user) { showToast('Login to add items!'); openAuthModal(); return; }
-            const p = state.products[id]; if (!p) return;
-            if (p.promo && state.cart.some(i => i.id === id)) { showToast('Promo only once!'); return; }
-            if (p.promo && state.cart.length === 0) { showToast('Add regular item first!'); return; }
-            const existingIndex = state.cart.findIndex(item => item.id === id);
-            if (existingIndex > -1) { state.cart[existingIndex].qty += 1; }
-            else { state.cart.push({ id: p.id, name: p.name, price: p.price, qty: 1 }); }
-            updateCartUI(); showToast(`${p.name} added to cart!`);
-        };
-
-        window.removeFromCart = (idx) => { state.cart.splice(idx, 1); updateCartUI(); };
-
-        window.updateCartQty = (idx, change) => {
-            const item = state.cart[idx];
-            if (!item) return;
-            item.qty += change;
-            if (item.qty <= 0) { state.cart.splice(idx, 1); }
-            updateCartUI();
-        };
-
-        function calculateCartTotal() {
-            return state.cart.reduce((s, i) => s + (i.price * i.qty), 0);
-        }
-
-        function updateCartUI() {
-            document.getElementById('cartCount').textContent = state.cart.reduce((sum, i) => sum + i.qty, 0);
-            const total = calculateCartTotal();
-            document.getElementById('cartTotal').textContent = total + ' INR';
-
-            if (state.cart.length === 0) {
-                document.getElementById('cartItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">🛒</div><p>Your cart is empty</p></div>';
-                return;
-            }
-
-            document.getElementById('cartItems').innerHTML = state.cart.map((item, i) => {
-                const itemTotal = item.price * item.qty;
-                return `<div class="cart-item"><div class="cart-item-info"><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} INR x ${item.qty} = ${itemTotal} INR</p></div><div style="display:flex; align-items:center; gap:8px;"><div class="cart-item-qty"><button onclick="window.updateCartQty(${i}, -1)">−</button><span>${item.qty}</span><button onclick="window.updateCartQty(${i}, 1)">+</button></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div></div>`;
-            }).join('');
-        }
-
-        window.toggleCart = () => { 
-            document.getElementById('cartPanel').classList.toggle('open'); 
-            document.getElementById('cartOverlay').classList.toggle('active'); 
-        };
-
-        window.checkoutCart = () => {
-            if (state.cart.length === 0) { showToast('Cart is empty!'); return; }
-            toggleCart(); 
-            document.getElementById('checkoutModal').classList.add('active');
-        };
-
-        window.toggleWishlistItem = (id, e) => {
-            if (e) e.stopPropagation();
-            const idx = state.wishlist.indexOf(id);
-            if (idx > -1) state.wishlist.splice(idx, 1); else state.wishlist.push(id);
-            localStorage.setItem('firemc_wishlist', JSON.stringify(state.wishlist));
-            updateWishlistUI(); renderProducts();
-        };
-
-        function updateWishlistUI() {
-            document.getElementById('wishlistCount').textContent = state.wishlist.length;
-            if (state.wishlist.length === 0) {
-                document.getElementById('wishlistItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">❤️</div><p>Your wishlist is empty</p></div>';
-                return;
-            }
-            document.getElementById('wishlistItems').innerHTML = state.wishlist.map(id => {
-                const p = state.products[id]; if (!p) return '';
-                return `<div class="wishlist-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${p.name}</h4><p style="color:var(--accent-red); font-weight:700;">${p.price} INR</p></div><div style="display:flex; gap:8px;"><button class="btn btn-primary btn-sm" onclick="window.addToCart('${p.id}'); window.toggleWishlist()">Add</button><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.toggleWishlistItem('${p.id}')">🗑️</button></div></div>`;
-            }).join('');
-        }
-
-        window.toggleWishlist = () => {
-            document.getElementById('wishlistPanel').classList.toggle('open');
-            const overlay = document.getElementById('wishlistOverlay');
-            overlay.style.opacity = overlay.style.opacity === '1' ? '0' : '1';
-            overlay.style.pointerEvents = overlay.style.pointerEvents === 'auto' ? 'none' : 'auto';
-        };
-
-        async function loadReviews() {
-            try {
-                const q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'));
-                const snap = await getDocs(q);
-                state.reviews = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-                renderReviews();
-            } catch (e) { console.log('Reviews load error', e); }
-        }
-
-        function renderReviews() {
-            const container = document.getElementById('reviewsContainer');
-            if (state.reviews.length === 0) { container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No reviews yet. Be the first!</p>'; return; }
-            container.innerHTML = state.reviews.map((r, i) => `<div class="review-card" style="animation-delay:${i * 0.1}s;"><div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span style="font-family:var(--font-display); font-weight:700;">${r.name || 'Anonymous'}</span><span style="font-size:0.8rem; color:var(--text-muted);">${r.createdAt ? new Date(r.createdAt.toDate()).toLocaleDateString() : ''}</span></div><div class="review-stars">${'⭐'.repeat(r.rating || 5)}${'☆'.repeat(5 - (r.rating || 5))}</div><div class="review-text">${r.text || ''}</div>${r.product ? `<div style="margin-top:10px; font-size:0.85rem; color:var(--accent-red);">Purchased: ${r.product}</div>` : ''}</div>`).join('');
-        }
-
-        function renderAdminReviews() {
-            const tbody = document.getElementById('adminReviewsBody');
-            if (!tbody) return;
-            tbody.innerHTML = state.reviews.map(r => `
-                <tr><td>${r.name || 'Anonymous'}</td><td>${'⭐'.repeat(r.rating || 5)}</td><td>${r.product || '-'}</td><td>${r.text || ''}</td><td>${r.createdAt ? new Date(r.createdAt.toDate()).toLocaleDateString() : ''}</td><td><button class="btn btn-danger btn-sm" onclick="window.deleteReview('${r.id}')">🗑️ Delete</button></td></tr>
-            `).join('');
-        }
-
-        window.deleteReview = async (reviewId) => {
-            if (!state.isAdmin) { showToast('Admin only!'); return; }
-            if (!confirm('Delete this review?')) return;
-            try {
-                await deleteDoc(doc(db, 'reviews', reviewId));
-                state.reviews = state.reviews.filter(r => r.id !== reviewId);
-                renderReviews(); renderAdminReviews();
-                showToast('Review deleted!');
-            } catch (e) { showToast('Delete failed: ' + e.message); }
-        };
-
-        function setupStarRating() {
-            document.querySelectorAll('#starRatingInput span').forEach(star => {
-                star.addEventListener('click', function() {
-                    state.currentRating = parseInt(this.dataset.rating);
-                    document.querySelectorAll('#starRatingInput span').forEach((s, i) => { s.style.color = i < state.currentRating ? 'var(--accent-gold)' : 'var(--text-muted)'; });
-                });
-            });
-        }
-
-        window.openReviewModal = () => {
-            document.getElementById('reviewModal').classList.add('active'); 
-            state.currentRating = 0;
-            document.querySelectorAll('#starRatingInput span').forEach(s => s.style.color = 'var(--text-muted)');
-        };
-
-        window.closeReviewModal = () => document.getElementById('reviewModal').classList.remove('active');
-
-        window.submitReview = async () => {
-            const name = document.getElementById('reviewerName').value.trim();
-            const product = document.getElementById('reviewProduct').value.trim();
-            const text = document.getElementById('reviewText').value.trim();
-            if (!name || !text || state.currentRating === 0) { showToast('Fill all fields and select rating'); return; }
-            try {
-                await addDoc(collection(db, 'reviews'), { name, product, text, rating: state.currentRating, createdAt: serverTimestamp() });
-                closeReviewModal(); 
-                document.getElementById('reviewerName').value = ''; 
-                document.getElementById('reviewProduct').value = ''; 
-                document.getElementById('reviewText').value = '';
-                state.currentRating = 0; 
-                loadReviews(); 
-                showToast('Review submitted!');
-            } catch (e) { showToast('Failed to submit review'); }
-        };
-
-        window.openPaymentModal = () => {
-            hideCheckout(); 
-            document.getElementById('paymentModal').classList.add('active');
-            state.selectedPaymentApp = null;
-            document.querySelectorAll('.payment-app-btn').forEach(b => b.classList.remove('selected'));
-        };
-
-        window.hidePaymentModal = () => {
-            document.getElementById('paymentModal').classList.remove('active'); 
-            state.selectedPaymentApp = null;
-        };
-
-        window.selectPaymentApp = function(el) {
-            document.querySelectorAll('.payment-app-btn').forEach(b => b.classList.remove('selected'));
-            el.classList.add('selected'); 
-            state.selectedPaymentApp = el.dataset.app;
-        };
-
-        window.submitPayment = async () => {
-            const email = document.getElementById('paymentEmail').value.trim();
-            if (!state.selectedPaymentApp) { showToast('Select a payment app!'); return; }
-            if (!email) { showToast('Enter your email!'); return; }
-            const total = calculateCartTotal();
-            try {
-                await addDoc(collection(db, 'payments'), {
-                    userId: state.user.uid, 
-                    userEmail: email,
-                    items: state.cart.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
-                    total: total, 
-                    paymentApp: state.selectedPaymentApp,
-                    status: 'pending', 
-                    createdAt: serverTimestamp()
-                });
-                hidePaymentModal(); 
-                state.cart = []; 
-                updateCartUI();
-                showToast('Payment request sent! Admin will contact you via email.');
-            } catch (e) { 
-                showToast('Payment failed. Try again.'); 
-                console.error(e); 
-            }
-        };
-
-        window.handleCardClick = (view) => {
-            if (!state.user) { showToast('Login to access!'); openAuthModal(); return; }
-            switchView(view);
-        };
-
-        window.switchView = (view) => {
-            if (view === 'admin' && !state.isAdmin) { showToast('Admin only!'); return; }
-            updateHash(view);
-            switchViewInternal(view, true);
-        };
-
-        // ===== OFFER ITEMS =====
-        async function loadOfferItems() {
-            try {
-                const snap = await getDocs(collection(db, 'offer_items'));
-                snap.forEach(d => { state.offerItems[d.id] = { id: d.id, ...d.data() }; });
-                renderOfferItems();
-            } catch (e) { console.log('Offer items load error', e); }
-        }
-
-        function renderOfferItems() {
-            const container = document.getElementById('offersContainer');
-            if (!container) return;
-            const items = Object.values(state.offerItems);
-            if (items.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">🎁</div><p>No offers available right now</p></div>';
-                return;
-            }
-            container.innerHTML = items.map((p, i) => makeOfferCard(p, i)).join('');
-        }
-
-        function makeOfferCard(p, index) {
-            const stockClass = p.stock === 'Unlimited' || p.stock === '1 Time' ? '' : (parseInt(p.stock) <= 5 ? 'stock-label-low' : '');
-            const tagHtml = p.tag ? `<div class="offer-tag">${p.tag}</div>` : '';
-            return `<div class="offer-card" style="animation-delay:${index * 0.1}s;">${tagHtml}<button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button><div><div class="offer-val">${p.name}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="offer-cost">${p.price} INR</div><button class="btn btn-purple" style="width:100%;" onclick="window.addToCart('${p.id}')">Add to Cart</button></div></div>`;
-        }
-
-        window.addOfferItem = async () => {
-            if (!state.isAdmin) return;
-            const name = document.getElementById('newOfferItemName').value.trim();
-            const price = parseFloat(document.getElementById('newOfferItemPrice').value);
-            const stock = document.getElementById('newOfferItemStock').value.trim();
-            const tag = document.getElementById('newOfferItemTag').value.trim();
-            const errorDiv = document.getElementById('addOfferItemError');
-            if (!name || !price || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
-            const id = 'offer_' + Date.now().toString(36);
-            try {
-                const itemData = { name, price, stock, createdAt: serverTimestamp() };
-                if (tag) itemData.tag = tag;
-                await setDoc(doc(db, 'offer_items', id), itemData);
-                state.offerItems[id] = { id, ...itemData };
-                renderOfferItems(); renderAdminOfferItemsTable();
-                showToast('Offer item added!');
-                document.getElementById('newOfferItemName').value = '';
-                document.getElementById('newOfferItemPrice').value = '';
-                document.getElementById('newOfferItemStock').value = '';
-                document.getElementById('newOfferItemTag').value = '';
                 errorDiv.textContent = '';
             } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
         };
 
-        window.renderAdminOfferItemsTable = () => {
-            const tbody = document.getElementById('adminOfferItemsBody');
+        window.renderAdminDonutItemsTable = () => {
+            const tbody = document.getElementById('adminDonutItemsBody');
             if (!tbody) return;
-            const items = Object.values(state.offerItems);
-            if (items.length === 0) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">No offer items</td></tr>'; return; }
+            const items = Object.values(state.donutItems);
+            if (items.length === 0) { tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted);">No DonutSMP items</td></tr>'; return; }
             tbody.innerHTML = items.map(item => `
                 <tr>
-                    <td><input class="admin-input" id="offer-name-${item.id}" value="${item.name}" style="min-width:150px;"></td>
-                    <td><input class="admin-input" id="offer-price-${item.id}" value="${item.price}" type="number" style="min-width:80px;"></td>
-                    <td><input class="admin-input" id="offer-stock-${item.id}" value="${item.stock}" style="min-width:80px;"></td>
-                    <td><input class="admin-input" id="offer-tag-${item.id}" value="${item.tag || ''}" style="min-width:80px;"></td>
+                    <td><input class="admin-input" id="donut-name-${item.id}" value="${item.name}" style="min-width:150px;"></td>
                     <td>
-                        <button class="btn btn-primary btn-sm" onclick="window.saveOfferItem('${item.id}')">Save</button>
-                        <button class="btn btn-danger btn-sm" onclick="window.deleteOfferItem('${item.id}')">Delete</button>
-                    </td>
-                </tr>
-            `).join('');
-        };
-
-        window.saveOfferItem = async (itemId) => {
-            if (!state.isAdmin) return;
-            const name = document.getElementById(`offer-name-${itemId}`).value.trim();
-            const price = parseFloat(document.getElementById(`offer-price-${itemId}`).value);
-            const stock = document.getElementById(`offer-stock-${itemId}`).value.trim();
-            const tag = document.getElementById(`offer-tag-${itemId}`).value.trim();
-            if (!name || !price || !stock) { showToast('Fill all fields'); return; }
-            try {
-                const updateData = { name, price, stock, updatedAt: serverTimestamp() };
-                if (tag) updateData.tag = tag;
-                await updateDoc(doc(db, 'offer_items', itemId), updateData);
-                state.offerItems[itemId] = { ...state.offerItems[itemId], ...updateData };
-                renderOfferItems(); renderAdminOfferItemsTable();
-                showToast('Offer item saved!');
-            } catch (e) { showToast('Save failed: ' + e.message); }
-        };
-
-        window.deleteOfferItem = async (itemId) => {
-            if (!state.isAdmin) { showToast('Admin only!'); return; }
-            if (!confirm('Delete this offer item?')) return;
-            try {
-                await deleteDoc(doc(db, 'offer_items', itemId));
-                delete state.offerItems[itemId];
-                renderOfferItems(); renderAdminOfferItemsTable();
-                showToast('Offer item deleted!');
-            } catch (e) { showToast('Delete failed: ' + e.message); }
-        };
-
-        window.openEditOfferItemModal = (itemId) => {
-            const item = state.offerItems[itemId];
-            if (!item) return;
-            document.getElementById('editOfferItemId').value = itemId;
-            document.getElementById('editOfferItemName').value = item.name;
-            document.getElementById('editOfferItemPrice').value = item.price;
-            document.getElementById('editOfferItemStock').value = item.stock;
-            document.getElementById('editOfferItemTag').value = item.tag || '';
-            document.getElementById('editOfferItemError').textContent = '';
-            document.getElementById('editOfferItemModal').classList.add('active');
-        };
-
-        window.closeEditOfferItemModal = () => {
-            document.getElementById('editOfferItemModal').classList.remove('active');
-        };
-
-        window.saveEditOfferItem = async () => {
-            const itemId = document.getElementById('editOfferItemId').value;
-            const name = document.getElementById('editOfferItemName').value.trim();
-            const price = parseFloat(document.getElementById('editOfferItemPrice').value);
-            const stock = document.getElementById('editOfferItemStock').value.trim();
-            const tag = document.getElementById('editOfferItemTag').value.trim();
-            const errorDiv = document.getElementById('editOfferItemError');
-            if (!name || !price || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
-            try {
-                const updateData = { name, price, stock, updatedAt: serverTimestamp() };
-                if (tag) updateData.tag = tag;
-                await updateDoc(doc(db, 'offer_items', itemId), updateData);
-                state.offerItems[itemId] = { ...state.offerItems[itemId], ...updateData };
-                renderOfferItems(); renderAdminOfferItemsTable();
-                closeEditOfferItemModal();
-                showToast('Offer item updated!');
-            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
-        };
-
-        // ===== DISCORD ITEMS =====
-        async function loadDiscordItems() {
-            try {
-                const snap = await getDocs(collection(db, 'discord_items'));
-                snap.forEach(d => { 
-                    state.discordItems[d.id] = { id: d.id, ...d.data() }; 
-                    if (!catalog[d.data().category]) catalog[d.data().category] = [];
-                    catalog[d.data().category].push(state.discordItems[d.id]);
-                    state.products[d.id] = state.discordItems[d.id];
-                });
-            } catch (e) { console.log('Discord items load error', e); }
-        }
-
-        async function loadDiscordDesc() {
-            try {
-                const nitroDoc = await getDoc(doc(db, 'discord_desc', 'nitro'));
-                const boostsDoc = await getDoc(doc(db, 'discord_desc', 'boosts'));
-                if (nitroDoc.exists()) state.discordDesc.nitro = nitroDoc.data().text || '';
-                if (boostsDoc.exists()) state.discordDesc.boosts = boostsDoc.data().text || '';
-                updateDiscordDescUI();
-            } catch (e) { console.log('Discord desc load error', e); }
-        }
-
-        function updateDiscordDescUI() {
-            const nitroBox = document.getElementById('nitroDescBox');
-            const nitroText = document.getElementById('nitroDescText');
-            const boostsBox = document.getElementById('boostsDescBox');
-            const boostsText = document.getElementById('boostsDescText');
-            const nitroInput = document.getElementById('nitroDescInput');
-            const boostsInput = document.getElementById('boostsDescInput');
-
-            if (state.discordDesc.nitro) {
-                if (nitroBox) { nitroBox.style.display = 'block'; nitroText.textContent = state.discordDesc.nitro; }
-            } else { if (nitroBox) nitroBox.style.display = 'none'; }
-
-            if (state.discordDesc.boosts) {
-                if (boostsBox) { boostsBox.style.display = 'block'; boostsText.textContent = state.discordDesc.boosts; }
-            } else { if (boostsBox) boostsBox.style.display = 'none'; }
-
-            if (nitroInput) nitroInput.value = state.discordDesc.nitro;
-            if (boostsInput) boostsInput.value = state.discordDesc.boosts;
-        }
-
-        function renderDiscordItems(category) {
-            const container = document.getElementById(category + 'Container');
-            if (!container) return;
-            const items = Object.values(state.discordItems).filter(i => i.category === category);
-            if (items.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">💬</div><p>No items available right now</p></div>';
-                return;
-            }
-            container.innerHTML = items.map((p, i) => makeDiscordCard(p, i)).join('');
-        }
-
-        function makeDiscordCard(p, index) {
-            const stockClass = p.stock === 'Unlimited' || p.stock === '1 Time' ? '' : (parseInt(p.stock) <= 5 ? 'stock-label-low' : '');
-            const tagHtml = p.tag ? `<div class="offer-tag" style="background:linear-gradient(90deg,var(--accent-discord),#4752C4);">${p.tag}</div>` : '';
-            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;">${tagHtml}<button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button><div><div class="pkg-val" style="color:var(--accent-discord);">${p.name}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost" style="color:var(--accent-discord); background:rgba(88,101,242,0.05); border-color:rgba(88,101,242,0.1);">${p.price} INR</div><button class="btn btn-discord" style="width:100%;" onclick="window.addToCart('${p.id}')">Add to Cart</button></div></div>`;
-        }
-
-        window.addDiscordItem = async () => {
-            if (!state.isAdmin) return;
-            const name = document.getElementById('newDiscordItemName').value.trim();
-            const category = document.getElementById('newDiscordItemCategory').value;
-            const price = parseFloat(document.getElementById('newDiscordItemPrice').value);
-            const stock = document.getElementById('newDiscordItemStock').value.trim();
-            const tag = document.getElementById('newDiscordItemTag').value.trim();
-            const errorDiv = document.getElementById('addDiscordItemError');
-            if (!name || !price || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
-            const id = 'discord_' + Date.now().toString(36);
-            try {
-                const itemData = { name, category, price, stock, createdAt: serverTimestamp() };
-                if (tag) itemData.tag = tag;
-                await setDoc(doc(db, 'discord_items', id), itemData);
-                state.discordItems[id] = { id, ...itemData };
-                if (!catalog[category]) catalog[category] = [];
-                catalog[category].push(state.discordItems[id]);
-                state.products[id] = state.discordItems[id];
-                renderDiscordItems(category); renderAdminDiscordItemsTable();
-                showToast('Discord item added!');
-                document.getElementById('newDiscordItemName').value = '';
-                document.getElementById('newDiscordItemPrice').value = '';
-                document.getElementById('newDiscordItemStock').value = '';
-                document.getElementById('newDiscordItemTag').value = '';
-                errorDiv.textContent = '';
-            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
-        };
-
-        window.renderAdminDiscordItemsTable = () => {
-            const tbody = document.getElementById('adminDiscordItemsBody');
-            if (!tbody) return;
-            const items = Object.values(state.discordItems);
-            if (items.length === 0) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">No discord items</td></tr>'; return; }
-            tbody.innerHTML = items.map(item => `
-                <tr>
-                    <td><input class="admin-input" id="discord-name-${item.id}" value="${item.name}" style="min-width:150px;"></td>
-                    <td>
-                        <select class="admin-input" id="discord-cat-${item.id}" style="cursor:pointer;">
-                            <option value="nitro" ${item.category === 'nitro' ? 'selected' : ''}>Nitro</option>
-                            <option value="boosts" ${item.category === 'boosts' ? 'selected' : ''}>Boosts</option>
+                        <select class="admin-input" id="donut-cat-${item.id}" style="cursor:pointer;">
+                            <option value="donutmoney" ${item.category === 'donutmoney' ? 'selected' : ''}>Donut Money</option>
+                            <option value="donutitems" ${item.category === 'donutitems' ? 'selected' : ''}>Donut Items</option>
+                            <option value="spawnerinfo" ${item.category === 'spawnerinfo' ? 'selected' : ''}>Spawner Info</option>
                         </select>
                     </td>
-                    <td><input class="admin-input" id="discord-price-${item.id}" value="${item.price}" type="number" style="min-width:80px;"></td>
-                    <td><input class="admin-input" id="discord-stock-${item.id}" value="${item.stock}" style="min-width:80px;"></td>
-                    <td><input class="admin-input" id="discord-tag-${item.id}" value="${item.tag || ''}" style="min-width:80px;"></td>
+                    <td><input class="admin-input" id="donut-price-${item.id}" value="${item.price}" type="number" style="min-width:80px;"></td>
+                    <td><input class="admin-input" id="donut-stock-${item.id}" value="${item.stock}" style="min-width:80px;"></td>
+                    <td><input class="admin-input" id="donut-tag-${item.id}" value="${item.tag || ''}" style="min-width:80px;"></td>
+                    <td><input class="admin-input" id="donut-desc-${item.id}" value="${item.description || ''}" style="min-width:150px;"></td>
+                    <td>${item.image ? '<span style="color:var(--accent-green);">✓</span>' : '-'}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm" onclick="window.saveDiscordItem('${item.id}')">Save</button>
-                        <button class="btn btn-danger btn-sm" onclick="window.deleteDiscordItem('${item.id}')">Delete</button>
+                        <button class="btn btn-primary btn-sm" onclick="window.saveDonutItem('${item.id}')">Save</button>
+                        <button class="btn btn-danger btn-sm" onclick="window.deleteDonutItem('${item.id}')">Delete</button>
                     </td>
                 </tr>
             `).join('');
         };
 
-        window.saveDiscordItem = async (itemId) => {
+        window.saveDonutItem = async (itemId) => {
             if (!state.isAdmin) return;
-            const name = document.getElementById(`discord-name-${itemId}`).value.trim();
-            const category = document.getElementById(`discord-cat-${itemId}`).value;
-            const price = parseFloat(document.getElementById(`discord-price-${itemId}`).value);
-            const stock = document.getElementById(`discord-stock-${itemId}`).value.trim();
-            const tag = document.getElementById(`discord-tag-${itemId}`).value.trim();
+            const name = document.getElementById(`donut-name-${itemId}`).value.trim();
+            const category = document.getElementById(`donut-cat-${itemId}`).value;
+            const price = parseFloat(document.getElementById(`donut-price-${itemId}`).value);
+            const stock = document.getElementById(`donut-stock-${itemId}`).value.trim();
+            const tag = document.getElementById(`donut-tag-${itemId}`).value.trim();
+            const description = document.getElementById(`donut-desc-${itemId}`).value.trim();
             if (!name || !price || !stock) { showToast('Fill all fields'); return; }
             try {
                 const updateData = { name, category, price, stock, updatedAt: serverTimestamp() };
                 if (tag) updateData.tag = tag;
-                await updateDoc(doc(db, 'discord_items', itemId), updateData);
-                state.discordItems[itemId] = { ...state.discordItems[itemId], ...updateData };
-                state.products[itemId] = state.discordItems[itemId];
-                renderDiscordItems(category); renderAdminDiscordItemsTable();
-                showToast('Discord item saved!');
+                if (description) updateData.description = description;
+                await updateDoc(doc(db, 'donut_items', itemId), updateData);
+                state.donutItems[itemId] = { ...state.donutItems[itemId], ...updateData };
+                state.products[itemId] = state.donutItems[itemId];
+                renderDonutItems(category); renderAdminDonutItemsTable();
+                showToast('DonutSMP item saved!');
             } catch (e) { showToast('Save failed: ' + e.message); }
         };
 
-        window.deleteDiscordItem = async (itemId) => {
+        window.deleteDonutItem = async (itemId) => {
             if (!state.isAdmin) { showToast('Admin only!'); return; }
-            if (!confirm('Delete this discord item?')) return;
+            if (!confirm('Delete this DonutSMP item?')) return;
             try {
-                const item = state.discordItems[itemId];
-                await deleteDoc(doc(db, 'discord_items', itemId));
-                delete state.discordItems[itemId];
+                const item = state.donutItems[itemId];
+                await deleteDoc(doc(db, 'donut_items', itemId));
+                delete state.donutItems[itemId];
                 delete state.products[itemId];
                 if (item && catalog[item.category]) {
                     catalog[item.category] = catalog[item.category].filter(p => p.id !== itemId);
                 }
-                renderDiscordItems('nitro'); renderDiscordItems('boosts'); renderAdminDiscordItemsTable();
-                showToast('Discord item deleted!');
+                renderDonutItems('donutmoney'); renderDonutItems('donutitems'); renderDonutItems('spawnerinfo'); renderAdminDonutItemsTable();
+                showToast('DonutSMP item deleted!');
             } catch (e) { showToast('Delete failed: ' + e.message); }
         };
 
-        window.openEditDiscordItemModal = (itemId) => {
-            const item = state.discordItems[itemId];
+        window.openEditDonutItemModal = (itemId) => {
+            const item = state.donutItems[itemId];
             if (!item) return;
-            document.getElementById('editDiscordItemId').value = itemId;
-            document.getElementById('editDiscordItemName').value = item.name;
-            document.getElementById('editDiscordItemCategory').value = item.category;
-            document.getElementById('editDiscordItemPrice').value = item.price;
-            document.getElementById('editDiscordItemStock').value = item.stock;
-            document.getElementById('editDiscordItemTag').value = item.tag || '';
-            document.getElementById('editDiscordItemError').textContent = '';
-            document.getElementById('editDiscordItemModal').classList.add('active');
+            document.getElementById('editDonutItemId').value = itemId;
+            document.getElementById('editDonutItemName').value = item.name;
+            document.getElementById('editDonutItemCategory').value = item.category;
+            document.getElementById('editDonutItemPrice').value = item.price;
+            document.getElementById('editDonutItemStock').value = item.stock;
+            document.getElementById('editDonutItemTag').value = item.tag || '';
+            document.getElementById('editDonutItemDesc').value = item.description || '';
+            document.getElementById('editDonutItemError').textContent = '';
+            document.getElementById('editDonutItemModal').classList.add('active');
         };
 
-        window.closeEditDiscordItemModal = () => {
-            document.getElementById('editDiscordItemModal').classList.remove('active');
+        window.closeEditDonutItemModal = () => {
+            document.getElementById('editDonutItemModal').classList.remove('active');
         };
 
-        window.saveEditDiscordItem = async () => {
-            const itemId = document.getElementById('editDiscordItemId').value;
-            const name = document.getElementById('editDiscordItemName').value.trim();
-            const category = document.getElementById('editDiscordItemCategory').value;
-            const price = parseFloat(document.getElementById('editDiscordItemPrice').value);
-            const stock = document.getElementById('editDiscordItemStock').value.trim();
-            const tag = document.getElementById('editDiscordItemTag').value.trim();
-            const errorDiv = document.getElementById('editDiscordItemError');
+        window.saveEditDonutItem = async () => {
+            const itemId = document.getElementById('editDonutItemId').value;
+            const name = document.getElementById('editDonutItemName').value.trim();
+            const category = document.getElementById('editDonutItemCategory').value;
+            const price = parseFloat(document.getElementById('editDonutItemPrice').value);
+            const stock = document.getElementById('editDonutItemStock').value.trim();
+            const tag = document.getElementById('editDonutItemTag').value.trim();
+            const description = document.getElementById('editDonutItemDesc').value.trim();
+            const errorDiv = document.getElementById('editDonutItemError');
             if (!name || !price || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
             try {
                 const updateData = { name, category, price, stock, updatedAt: serverTimestamp() };
                 if (tag) updateData.tag = tag;
-                await updateDoc(doc(db, 'discord_items', itemId), updateData);
-                state.discordItems[itemId] = { ...state.discordItems[itemId], ...updateData };
-                state.products[itemId] = state.discordItems[itemId];
-                renderDiscordItems('nitro'); renderDiscordItems('boosts'); renderAdminDiscordItemsTable();
-                closeEditDiscordItemModal();
-                showToast('Discord item updated!');
+                if (description) updateData.description = description;
+                await updateDoc(doc(db, 'donut_items', itemId), updateData);
+                state.donutItems[itemId] = { ...state.donutItems[itemId], ...updateData };
+                state.products[itemId] = state.donutItems[itemId];
+                renderDonutItems('donutmoney'); renderDonutItems('donutitems'); renderDonutItems('spawnerinfo'); renderAdminDonutItemsTable();
+                closeEditDonutItemModal();
+                showToast('DonutSMP item updated!');
             } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
         };
 
-        window.saveDiscordDesc = async () => {
-            if (!state.isAdmin) { showToast('Admin only!'); return; }
-            const nitroDesc = document.getElementById('nitroDescInput').value.trim();
-            const boostsDesc = document.getElementById('boostsDescInput').value.trim();
-            const errorDiv = document.getElementById('saveDiscordDescError');
-            try {
-                if (nitroDesc) {
-                    await setDoc(doc(db, 'discord_desc', 'nitro'), { text: nitroDesc, updatedAt: serverTimestamp() });
-                    state.discordDesc.nitro = nitroDesc;
-                }
-                if (boostsDesc) {
-                    await setDoc(doc(db, 'discord_desc', 'boosts'), { text: boostsDesc, updatedAt: serverTimestamp() });
-                    state.discordDesc.boosts = boostsDesc;
-                }
-                updateDiscordDescUI();
-                showToast('Descriptions saved!');
-                errorDiv.textContent = '';
-            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
+        // ===== IMAGE UPLOAD & CROP =====
+        window.handleImageUpload = (input) => {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                state.cropImageSrc = e.target.result;
+                state.cropZoom = 1;
+                document.getElementById('cropImage').src = state.cropImageSrc;
+                document.getElementById('cropArea').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
         };
+
+        window.zoomImage = (delta) => {
+            state.cropZoom += delta;
+            if (state.cropZoom < 0.5) state.cropZoom = 0.5;
+            if (state.cropZoom > 3) state.cropZoom = 3;
+            document.getElementById('cropImage').style.transform = `scale(${state.cropZoom})`;
+        };
+
+        window.saveCroppedImage = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 300;
+            canvas.height = 300;
+            const ctx = canvas.getContext('2d');
+            const img = document.getElementById('cropImage');
+            ctx.drawImage(img, 0, 0, 300, 300, 0, 0, 300, 300);
+            state.currentCroppedImage = canvas.toDataURL('image/jpeg', 0.8);
+            document.getElementById('croppedPreview').src = state.currentCroppedImage;
+            document.getElementById('croppedPreview').style.display = 'block';
+            document.getElementById('cropArea').style.display = 'none';
+            showToast('Image cropped!');
+        };
+
+        window.cancelCrop = () => {
+            document.getElementById('cropArea').style.display = 'none';
+            state.cropImageSrc = null;
+        };
+
+        // Show/hide image upload based on category selection
+        document.getElementById('newDonutItemCategory').addEventListener('change', function() {
+            const uploadDiv = document.getElementById('donutImageUpload');
+            if (this.value === 'spawnerinfo') {
+                uploadDiv.style.display = 'block';
+            } else {
+                uploadDiv.style.display = 'none';
+            }
+        });
 
         // ===== ADMIN TABLE =====
         function renderAdminTable() {
             const tbody = document.getElementById('adminTableBody');
-            const categories = { money: 'Money', spawners: 'Spawners', armory: 'Armory', materials: 'Materials', accounts: 'Accounts', nitro: 'Nitro', boosts: 'Boosts' };
+            const categories = { money: 'Money', spawners: 'Spawners', armory: 'Armory', materials: 'Materials', accounts: 'Accounts', nitro: 'Nitro', boosts: 'Boosts', donutmoney: 'Donut Money', donutitems: 'Donut Items', spawnerinfo: 'Spawner Info' };
             tbody.innerHTML = Object.values(state.products).map(p => {
                 const catOptions = Object.entries(categories).map(([val, label]) => `<option value="${val}" ${p.category === val ? 'selected' : ''}>${label}</option>`).join('');
-                return `<tr><td><input type="checkbox" data-id="${p.id}"></td><td><input class="admin-input" id="name-${p.id}" value="${p.name}"></td><td><select class="admin-input" id="cat-${p.id}" style="cursor:pointer;">${catOptions}</select></td><td><input class="admin-input" id="stock-${p.id}" value="${p.stock}"></td><td><input class="admin-input" id="price-${p.id}" value="${p.price}" type="number"></td><td><button class="btn btn-primary btn-sm" onclick="window.saveItem('${p.id}')">Save</button> <button class="btn btn-danger btn-sm" onclick="window.deleteItem('${p.id}')">Delete</button></td></tr>`;
+                const desc = p.description || '';
+                return `<tr><td><input type="checkbox" data-id="${p.id}"></td><td><input class="admin-input" id="name-${p.id}" value="${p.name}"></td><td><select class="admin-input" id="cat-${p.id}" style="cursor:pointer;">${catOptions}</select></td><td><input class="admin-input" id="stock-${p.id}" value="${p.stock}"></td><td><input class="admin-input" id="price-${p.id}" value="${p.price}" type="number"></td><td><input class="admin-input" id="desc-${p.id}" value="${desc}" placeholder="Description..."></td><td><button class="btn btn-primary btn-sm" onclick="window.saveItem('${p.id}')">Save</button> <button class="btn btn-danger btn-sm" onclick="window.deleteItem('${p.id}')">Delete</button></td></tr>`;
             }).join('');
         }
 
@@ -1795,10 +1340,14 @@
             const stock = document.getElementById(`stock-${id}`).value;
             const price = parseFloat(document.getElementById(`price-${id}`).value);
             const category = document.getElementById(`cat-${id}`).value;
+            const description = document.getElementById(`desc-${id}`).value.trim();
             const oldCategory = state.products[id].category;
             state.products[id].name = name; state.products[id].stock = stock; state.products[id].price = price; state.products[id].category = category;
+            if (description) state.products[id].description = description;
             try {
-                await setDoc(doc(db, 'products', id), { name, stock, price, category, updatedAt: serverTimestamp() }, { merge: true });
+                const updateData = { name, stock, price, category, updatedAt: serverTimestamp() };
+                if (description) updateData.description = description;
+                await setDoc(doc(db, 'products', id), updateData, { merge: true });
                 if (oldCategory !== category) {
                     if (catalog[oldCategory]) catalog[oldCategory] = catalog[oldCategory].filter(p => p.id !== id);
                     if (!catalog[category]) catalog[category] = [];
@@ -1824,12 +1373,16 @@
             const category = document.getElementById('newItemCategory').value;
             const price = parseFloat(document.getElementById('newItemPrice').value);
             const stock = document.getElementById('newItemStock').value.trim();
+            const description = document.getElementById('newItemDesc').value.trim();
             const errorDiv = document.getElementById('addItemError');
             if (!name || !price || !stock) { errorDiv.textContent = 'Fill all fields'; return; }
             const id = category + '_' + Date.now().toString(36);
             try {
-                await setDoc(doc(db, 'products', id), { name, category, price, stock, createdAt: serverTimestamp() });
+                const itemData = { name, category, price, stock, createdAt: serverTimestamp() };
+                if (description) itemData.description = description;
+                await setDoc(doc(db, 'products', id), itemData);
                 const newProduct = { id, name, category, price, stock };
+                if (description) newProduct.description = description;
                 state.products[id] = newProduct;
                 if (!catalog[category]) catalog[category] = [];
                 catalog[category].push(newProduct);
@@ -1851,7 +1404,7 @@
         };
 
         window.filterProducts = (type) => {
-            const searchId = type === 'money' ? 'moneySearch' : type === 'items' ? 'itemSearch' : type === 'offers' ? 'offerSearch' : type === 'nitro' ? 'nitroSearch' : type === 'boosts' ? 'boostsSearch' : 'accountSearch';
+            const searchId = type === 'money' ? 'moneySearch' : type === 'items' ? 'itemSearch' : type === 'offers' ? 'offerSearch' : type === 'nitro' ? 'nitroSearch' : type === 'boosts' ? 'boostsSearch' : type === 'donutmoney' ? 'donutMoneySearch' : type === 'donutitems' ? 'donutItemSearch' : type === 'spawnerinfo' ? 'spawnerInfoSearch' : 'accountSearch';
             const query = document.getElementById(searchId).value.toLowerCase();
             let containers = [];
             if (type === 'money') containers = ['moneyContainer'];
@@ -1859,10 +1412,13 @@
             else if (type === 'offers') containers = ['offersContainer'];
             else if (type === 'nitro') containers = ['nitroContainer'];
             else if (type === 'boosts') containers = ['boostsContainer'];
+            else if (type === 'donutmoney') containers = ['donutMoneyContainer'];
+            else if (type === 'donutitems') containers = ['donutItemCategories'];
+            else if (type === 'spawnerinfo') containers = ['spawnerInfoContainer'];
             else containers = ['accountsContainer'];
             containers.forEach(id => {
                 const container = document.getElementById(id); if (!container) return;
-                container.querySelectorAll('.pkg-card, .offer-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(query) ? 'flex' : 'none'; });
+                container.querySelectorAll('.pkg-card, .offer-card, .spawner-info-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(query) ? 'flex' : 'none'; });
             });
         };
 
@@ -1881,4 +1437,3 @@
     </script>
 </body>
 </html>
-
