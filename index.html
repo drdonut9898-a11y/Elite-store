@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FireMC Store - Buy Minecraft Items, Accounts & Discord</title>
+    <title>Elite Store - Buy Minecraft Items, Accounts & Discord</title>
     <meta name="description" content="Best Minecraft Store - Buy items, accounts, Discord Nitro, Boosts. Cheap prices, secure payment via bKash/UPI. Instant delivery!">
-    <meta name="keywords" content="minecraft store, buy minecraft items, minecraft accounts, discord nitro, discord boost, firemc, firemc store, store, firemc irl, firemc irl store, firemc irl trading, minecraft firemc store">
-    <meta name="author" content="FireMC Store">
+    <meta name="keywords" content="minecraft store, buy minecraft items, minecraft accounts, discord nitro, discord boost, elite store, elite, elite store minecraft, elite store trading, minecraft elite store">
+    <meta name="author" content="Elite Store">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="FireMC Store - Minecraft Items & Discord">
+    <meta property="og:title" content="Elite Store - Minecraft Items & Discord">
     <meta property="og:description" content="Buy Minecraft items, accounts, and Discord perks at best prices. Secure payments.">
     <meta property="og:image" content="https://raw.githubusercontent.com/drdonut9898-a11y/Firemc-store/main/favicon.jpg">
     <meta property="og:url" content="https://drdonut9898-a11y.github.io/Firemc-store/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FireMC Store">
+    <meta name="twitter:title" content="Elite Store">
     <meta name="twitter:description" content="Best Minecraft Store - Items, Accounts, Discord">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/drdonut9898-a11y/Firemc-store/main/favicon.jpg">
@@ -23,7 +23,7 @@
 {
   "@context": "https://schema.org/",
   "@type": "Store",
-  "name": "FireMC Store",
+  "name": "Elite Store",
   "description": "Buy Minecraft items, accounts, spawners and Discord products.",
   "url": "https://drdonut9898-a11y.github.io/Firemc-store/"
 }
@@ -314,7 +314,7 @@
     <button class="sidebar-toggle" id="sidebarToggle" onclick="window.toggleSidebar()">☰</button>
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="sidebar-brand">FIRE<span>MC</span></div>
+            <div class="sidebar-brand">ELI<span>TE</span></div>
         </div>
         <div class="sidebar-username" id="sidebarUsername" style="display:none;">
             <div class="username-label">Username</div>
@@ -324,7 +324,7 @@
         <div class="sidebar-section">
             <div class="sidebar-section-title">Categories</div>
             <a class="sidebar-link sidebar-category sidebar-category-firemc" onclick="window.sidebarNavigate('menu')" data-view="menu">
-                <span class="link-icon">🔥</span><span>FIREMC</span>
+                <span class="link-icon">🔥</span><span>ELITE CLASSIC</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-donut" onclick="window.sidebarNavigate('donutsmp')" data-view="donutsmp">
                 <span class="link-icon">🍩</span><span>DONUTSMP</span>
@@ -358,7 +358,7 @@
     </nav>
     <div class="app-container" id="appContainer">
         <div class="top-navbar">
-            <div class="nav-brand">FireMc Store</div>
+            <div class="nav-brand">Elite Store</div>
             <div class="nav-actions">
                 <div class="nav-username" id="navUsername"><span id="navUsernameValue">-</span></div>
                 <button class="btn btn-secondary btn-sm" onclick="window.toggleTheme()">Theme</button>
@@ -367,7 +367,7 @@
             </div>
         </div>
         <div class="header-container">
-            <h1 class="header-title">FIREMC <span>STORE</span></h1>
+            <h1 class="header-title">ELITE <span>STORE</span></h1>
         </div>
         <div class="guest-banner" id="guestBanner" style="display:none;">
             <p>Guest Mode - View Only</p>
@@ -378,7 +378,7 @@
         <div class="view-section active" id="viewLanding">
             <div class="home-wrapper">
                 <div class="master-card" onclick="window.handleCardClick('menu')">
-                    <h2 style="color:var(--accent-red);">FIREMC CLASSIC</h2>
+                    <h2 style="color:var(--accent-red);">ELITE CLASSIC</h2>
                     <p style="color:var(--accent-red);">Click to Enter Market</p>
                 </div>
                 <div class="master-card master-card-blue" onclick="window.showComingSoon()">
@@ -425,7 +425,7 @@
         <!-- MONEY VIEW -->
         <div class="view-section" id="viewMoney">
             <button class="back-btn" onclick="window.switchView('menu')">Back</button>
-            <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--accent-red); margin-bottom:20px; text-align:center; letter-spacing:3px;">FIREMC CLASSIC</div>
+            <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--accent-red); margin-bottom:20px; text-align:center; letter-spacing:3px;">ELITE CLASSIC</div>
             <div class="store-billboard">
                 <div class="rate-tag">Exchange: <strong>Premium Cash</strong></div>
                 <div class="warning-tag">Min: 40M</div>
@@ -924,7 +924,7 @@
         const state = {
             user: null, isAdmin: false,
             cart: [],
-            wishlist: JSON.parse(localStorage.getItem('firemc_wishlist') || '[]'),
+            wishlist: JSON.parse(localStorage.getItem('elite_wishlist') || '[]'),
             products: {}, reviews: [],
             currentRating: 0,
             selectedPaymentApp: null,
@@ -1306,7 +1306,7 @@
             if (e) e.stopPropagation();
             const idx = state.wishlist.indexOf(id);
             if (idx > -1) state.wishlist.splice(idx, 1); else state.wishlist.push(id);
-            localStorage.setItem('firemc_wishlist', JSON.stringify(state.wishlist));
+            localStorage.setItem('elite_wishlist', JSON.stringify(state.wishlist));
             updateWishlistUI(); renderProducts();
         };
 
