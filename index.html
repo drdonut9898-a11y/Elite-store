@@ -324,35 +324,35 @@
         <div class="sidebar-section">
             <div class="sidebar-section-title">Categories</div>
             <a class="sidebar-link sidebar-category sidebar-category-firemc" onclick="window.sidebarNavigate('menu')" data-view="menu">
-                <span class="link-icon">🔥</span><span>FIREMC CLASSIC</span>
+                <span class="link-icon"></span><span>FIREMC CLASSIC</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-donut" onclick="window.sidebarNavigate('donutsmp')" data-view="donutsmp">
-                <span class="link-icon">🍩</span><span>DONUTSMP</span>
+                <span class="link-icon"></span><span>DONUTSMP</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-account" onclick="window.sidebarNavigate('accounts')" data-view="accounts">
-                <span class="link-icon">👤</span><span>ACCOUNT</span>
+                <span class="link-icon"></span><span>ACCOUNT</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-discord" onclick="window.sidebarNavigate('discord')" data-view="discord">
-                <span class="link-icon">💬</span><span>DISCORD</span>
+                <span class="link-icon"></span><span>DISCORD</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-offers" onclick="window.sidebarNavigate('offers')" data-view="offers">
-                <span class="link-icon">🎁</span><span>OFFER</span>
+                <span class="link-icon"></span><span>OFFER</span>
             </a>
             <a class="sidebar-link sidebar-category sidebar-category-admin" id="sidebarAdminLink" onclick="window.sidebarNavigate('admin')" data-view="admin" style="display:none;">
-                <span class="link-icon">⚙️</span><span>ADMIN</span>
+                <span class="link-icon"></span><span>ADMIN</span>
             </a>
         </div>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section">
             <div class="sidebar-section-title">Quick Links</div>
             <a class="sidebar-link" onclick="window.sidebarNavigate('landing')">
-                <span class="link-icon">🏠</span><span>Home</span>
+                <span class="link-icon"></span><span>Home</span>
             </a>
             <a class="sidebar-link" onclick="window.toggleTheme()">
-                <span class="link-icon">🎨</span><span>Theme</span>
+                <span class="link-icon"></span><span>Theme</span>
             </a>
             <a class="sidebar-link" onclick="window.openAuthModal()" id="sidebarAuthLink">
-                <span>Login</span>
+                <span class="link-icon"></span><span>Login</span>
             </a>
         </div>
     </nav>
@@ -1114,14 +1114,14 @@
                 if (user) {
                     document.getElementById('authTriggerBtn').textContent = 'Logout';
                     document.getElementById('authTriggerBtn').onclick = () => signOut(auth);
-                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Logout</span>';
+                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Logout</span>';
                     document.getElementById('sidebarAuthLink').onclick = () => signOut(auth);
                     closeAuthModal();
                     await loadUserUsername();
                 } else {
                     document.getElementById('authTriggerBtn').textContent = 'Login';
                     document.getElementById('authTriggerBtn').onclick = openAuthModal;
-                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Login</span>';
+                    document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Login</span>';
                     document.getElementById('sidebarAuthLink').onclick = openAuthModal;
                     state.username = null;
                     updateUsernameDisplay();
@@ -1465,7 +1465,7 @@
             if (!container) return;
             const items = Object.values(state.offerItems);
             if (items.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">🎁</div><p>No offers available right now</p></div>';
+                container.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;"></div><p>No offers available right now</p></div>';
                 return;
             }
             container.innerHTML = items.map((p, i) => makeOfferCard(p, i)).join('');
@@ -1631,7 +1631,7 @@
             if (!container) return;
             const items = Object.values(state.discordItems).filter(i => i.category === category);
             if (items.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">💬</div><p>No items available right now</p></div>';
+                container.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;"></div><p>No items available right now</p></div>';
                 return;
             }
             container.innerHTML = items.map((p, i) => makeDiscordCard(p, i)).join('');
