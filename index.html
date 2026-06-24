@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Store - Buy Minecraft Items, Accounts & Discord</title>
+    <title>te Store - Buy Minecraft Items, Accounts & Discord</title>
     <meta name="description" content="Best Minecraft Store - Buy items, accounts, Discord Nitro, Boosts. Cheap prices, secure payment via bKash/UPI. Instant delivery!">
     <meta name="keywords" content="minecraft store, buy minecraft items, minecraft accounts, discord nitro, discord boost, elite store, elite, elite store minecraft, elite store trading, minecraft elite store">
     <meta name="author" content="Elite Store">
@@ -94,7 +94,7 @@
         .sidebar-category-donut { color: var(--accent-blue); }
         .sidebar-category-account { color: var(--accent-green); }
         .sidebar-category-discord { color: var(--accent-discord); }
-        .sidebar-category-offers { color: var(--accent-purple); }
+        .sidebar-category- { color: var(--accent-purple); }
         .sidebar-category-admin { color: var(--accent-purple); }
         .sidebar-toggle { position: fixed; top: 20px; left: 20px; z-index: 1001; width: 45px; height: 45px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: var(--transition-smooth); box-shadow: var(--shadow-md); }
         .sidebar-toggle:hover { background: var(--accent-red); color: white; transform: scale(1.1); }
@@ -314,7 +314,7 @@
     <button class="sidebar-toggle" id="sidebarToggle" onclick="window.toggleSidebar()">☰</button>
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="sidebar-brand">ELI<span>TE</span></div>
+            <div class="sidebar-brand">ELITE</div>
         </div>
         <div class="sidebar-username" id="sidebarUsername" style="display:none;">
             <div class="username-label">Username</div>
@@ -395,7 +395,7 @@
                 </div>
                 <div class="master-card master-card-purple" onclick="window.handleCardClick('offers')">
                     <h2 style="color:var(--accent-purple);">OFFER</h2>
-                    <p style="color:var(--accent-purple);">Special Deals</p>
+                    <p style="color:var(--accent-purple);">Special Deals For FireMc Classic Season 3</p>
                 </div>
             </div>
             <div class="reviews-section">
@@ -1322,7 +1322,7 @@
             if (e) e.stopPropagation();
             const idx = state.wishlist.indexOf(id);
             if (idx > -1) state.wishlist.splice(idx, 1); else state.wishlist.push(id);
-            localStorage.setItem('elite_wishlist', JSON.stringify(state.wishlist));
+            localStorage.setItem('te_wishlist', JSON.stringify(state.wishlist));
             updateWishlistUI(); renderProducts();
         };
 
