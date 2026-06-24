@@ -1,43 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELITE STORE - Redirecting...</title>
-    <script>
-        // ============================================
-        // ELITE STORE - GitHub Pages SPA Redirect
-        // ============================================
-        // Ye trick GitHub Pages pe SPA ko handle karti hai
-        // Jab koi /items, /money wagera direct access kare toh
-        // redirect kar ke index.html pe bhej deti hai
-        // ============================================
-
-        (function() {
-            // URL ka path lo
-            var path = window.location.pathname;
-
-            // Path ko hash mein convert karo
-            // e.g., /items -> /#/items
-            // e.g., /money -> /#/money
-            var redirectPath = '/#/' + path.split('/').filter(Boolean).join('/');
-
-            // Redirect to index.html with hash
-            window.location.replace(
-                window.location.protocol + '//' + 
-                window.location.hostname + 
-                (window.location.port ? ':' + window.location.port : '') + 
-                redirectPath + 
-                window.location.hash
-            );
-        })();
-    </script>
-<base target="_blank">
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="0;url=/Elite-store/">
+<script>(function(){var p=location.pathname.replace('/Elite-store/','').replace(/\/$/,'');if(p)location.replace('/Elite-store/#/'+p)})()</script>
 </head>
-<body style="background:#050508; color:#ff4757; font-family:monospace; display:flex; align-items:center; justify-content:center; height:100vh; margin:0;">
-    <div style="text-align:center;">
-        <h2>ELITE STORE</h2>
-        <p>Redirecting...</p>
-    </div>
-</body>
+<body style="background:#050508;margin:0"></body>
 </html>
