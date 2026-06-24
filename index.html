@@ -564,8 +564,15 @@
                         <input type="text" class="admin-input" id="newOfferItemName" placeholder="e.g. Special Bundle">
                     </div>
                     <div>
-                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Price (INR)</label>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Price</label>
                         <input type="number" class="admin-input" id="newOfferItemPrice" placeholder="e.g. 100">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Currency</label>
+                        <select class="admin-input" id="newOfferItemCurrency" style="cursor:pointer;">
+                            <option value="INR">INR</option>
+                            <option value="Credits">Credits</option>
+                        </select>
                     </div>
                     <div>
                         <label style="display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600;">Stock</label>
@@ -582,7 +589,7 @@
             <div style="overflow-x:auto; margin-top:20px;">
                 <table class="admin-table">
                     <thead>
-                        <tr><th>Name</th><th>Price</th><th>Stock</th><th>Tag</th><th>Actions</th></tr>
+                        <tr><th>Name</th><th>Price</th><th>Currency</th><th>Stock</th><th>Tag</th><th>Actions</th></tr>
                     </thead>
                     <tbody id="adminOfferItemsBody"></tbody>
                 </table>
@@ -823,10 +830,17 @@
                 <label>Item Name</label>
                 <input type="text" class="payment-input" id="editOfferItemName" placeholder="e.g. Special Bundle">
             </div>
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:15px;">
                 <div class="payment-input-group">
-                    <label>Price (INR)</label>
+                    <label>Price</label>
                     <input type="number" class="payment-input" id="editOfferItemPrice" placeholder="e.g. 100">
+                </div>
+                <div class="payment-input-group">
+                    <label>Currency</label>
+                    <select class="payment-input" id="editOfferItemCurrency" style="cursor:pointer;">
+                        <option value="INR">INR</option>
+                        <option value="Credits">Credits</option>
+                    </select>
                 </div>
                 <div class="payment-input-group">
                     <label>Stock</label>
@@ -1257,7 +1271,7 @@
             if (p.promo && state.cart.length === 0) { showToast('Add regular item first!'); return; }
             const existingIndex = state.cart.findIndex(item => item.id === id);
             if (existingIndex > -1) { state.cart[existingIndex].qty += 1; }
-            else { state.cart.push({ id: p.id, name: p.name, price: p.price, qty: 1 }); }
+            else { state.cart.push({ id: p.id, name: p.name, price: p.price, currency: p.currency || 'INR', qty: 1 }); }
             updateCartUI(); showToast(`${p.name} added to cart!`);
         };
 
@@ -1278,7 +1292,8 @@
         function updateCartUI() {
             document.getElementById('cartCount').textContent = state.cart.reduce((sum, i) => sum + i.qty, 0);
             const total = calculateCartTotal();
-            document.getElementById('cartTotal').textContent = total + ' INR';
+            const currency = state.cart.length > 0 ? (state.cart[0].currency || 'INR') : 'INR';
+            document.getElementById('cartTotal').textContent = total + ' ' + currency;
 
             if (state.cart.length === 0) {
                 document.getElementById('cartItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">🛒</div><p>Your cart is empty</p></div>';
@@ -1287,7 +1302,8 @@
 
             document.getElementById('cartItems').innerHTML = state.cart.map((item, i) => {
                 const itemTotal = item.price * item.qty;
-                return `<div class="cart-item"><div class="cart-item-info"><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} INR x ${item.qty} = ${itemTotal} INR</p></div><div style="display:flex; align-items:center; gap:8px;"><div class="cart-item-qty"><button onclick="window.updateCartQty(${i}, -1)">−</button><span>${item.qty}</span><button onclick="window.updateCartQty(${i}, 1)">+</button></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div></div>`;
+                const itemCurrency = item.currency || 'INR';
+                return `<div class="cart-item"><div class="cart-item-info"><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} ${itemCurrency} x ${item.qty} = ${itemTotal} ${itemCurrency}</p></div><div style="display:flex; align-items:center; gap:8px;"><div class="cart-item-qty"><button onclick="window.updateCartQty(${i}, -1)">−</button><span>${item.qty}</span><button onclick="window.updateCartQty(${i}, 1)">+</button></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div></div>`;
             }).join('');
         }
 
@@ -1474,20 +1490,22 @@
         function makeOfferCard(p, index) {
             const stockClass = p.stock === 'Unlimited' || p.stock === '1 Time' ? '' : (parseInt(p.stock) <= 5 ? 'stock-label-low' : '');
             const tagHtml = p.tag ? `<div class="offer-tag">${p.tag}</div>` : '';
-            return `<div class="offer-card" style="animation-delay:${index * 0.1}s;">${tagHtml}<button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button><div><div class="offer-val">${p.name}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="offer-cost">${p.price} INR</div><button class="btn btn-purple" style="width:100%;" onclick="window.addToCart('${p.id}')">Add to Cart</button></div></div>`;
+            const currency = p.currency || 'INR';
+            return `<div class="offer-card" style="animation-delay:${index * 0.1}s;">${tagHtml}<button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button><div><div class="offer-val">${p.name}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="offer-cost">${p.price} ${currency}</div><button class="btn btn-purple" style="width:100%;" onclick="window.addToCart('${p.id}')">Add to Cart</button></div></div>`;
         }
 
         window.addOfferItem = async () => {
             if (!state.isAdmin) return;
             const name = document.getElementById('newOfferItemName').value.trim();
             const price = parseFloat(document.getElementById('newOfferItemPrice').value);
+            const currency = document.getElementById('newOfferItemCurrency').value;
             const stock = document.getElementById('newOfferItemStock').value.trim();
             const tag = document.getElementById('newOfferItemTag').value.trim();
             const errorDiv = document.getElementById('addOfferItemError');
             if (!name || !price || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
             const id = 'offer_' + Date.now().toString(36);
             try {
-                const itemData = { name, price, stock, createdAt: serverTimestamp() };
+                const itemData = { name, price, currency, stock, createdAt: serverTimestamp() };
                 if (tag) itemData.tag = tag;
                 await setDoc(doc(db, 'offer_items', id), itemData);
                 state.offerItems[id] = { id, ...itemData };
@@ -1497,6 +1515,7 @@
                 document.getElementById('newOfferItemPrice').value = '';
                 document.getElementById('newOfferItemStock').value = '';
                 document.getElementById('newOfferItemTag').value = '';
+                document.getElementById('newOfferItemCurrency').value = 'INR';
                 errorDiv.textContent = '';
             } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
         };
@@ -1505,11 +1524,17 @@
             const tbody = document.getElementById('adminOfferItemsBody');
             if (!tbody) return;
             const items = Object.values(state.offerItems);
-            if (items.length === 0) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">No offer items</td></tr>'; return; }
+            if (items.length === 0) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">No offer items</td></tr>'; return; }
             tbody.innerHTML = items.map(item => `
                 <tr>
                     <td><input class="admin-input" id="offer-name-${item.id}" value="${item.name}" style="min-width:150px;"></td>
                     <td><input class="admin-input" id="offer-price-${item.id}" value="${item.price}" type="number" style="min-width:80px;"></td>
+                    <td>
+                        <select class="admin-input" id="offer-currency-${item.id}" style="cursor:pointer; min-width:90px;">
+                            <option value="INR" ${item.currency === 'INR' || !item.currency ? 'selected' : ''}>INR</option>
+                            <option value="Credits" ${item.currency === 'Credits' ? 'selected' : ''}>Credits</option>
+                        </select>
+                    </td>
                     <td><input class="admin-input" id="offer-stock-${item.id}" value="${item.stock}" style="min-width:80px;"></td>
                     <td><input class="admin-input" id="offer-tag-${item.id}" value="${item.tag || ''}" style="min-width:80px;"></td>
                     <td>
@@ -1524,11 +1549,12 @@
             if (!state.isAdmin) return;
             const name = document.getElementById(`offer-name-${itemId}`).value.trim();
             const price = parseFloat(document.getElementById(`offer-price-${itemId}`).value);
+            const currency = document.getElementById(`offer-currency-${itemId}`).value;
             const stock = document.getElementById(`offer-stock-${itemId}`).value.trim();
             const tag = document.getElementById(`offer-tag-${itemId}`).value.trim();
             if (!name || !price || !stock) { showToast('Fill all fields'); return; }
             try {
-                const updateData = { name, price, stock, updatedAt: serverTimestamp() };
+                const updateData = { name, price, currency, stock, updatedAt: serverTimestamp() };
                 if (tag) updateData.tag = tag;
                 await updateDoc(doc(db, 'offer_items', itemId), updateData);
                 state.offerItems[itemId] = { ...state.offerItems[itemId], ...updateData };
@@ -1554,6 +1580,7 @@
             document.getElementById('editOfferItemId').value = itemId;
             document.getElementById('editOfferItemName').value = item.name;
             document.getElementById('editOfferItemPrice').value = item.price;
+            document.getElementById('editOfferItemCurrency').value = item.currency || 'INR';
             document.getElementById('editOfferItemStock').value = item.stock;
             document.getElementById('editOfferItemTag').value = item.tag || '';
             document.getElementById('editOfferItemError').textContent = '';
@@ -1568,12 +1595,13 @@
             const itemId = document.getElementById('editOfferItemId').value;
             const name = document.getElementById('editOfferItemName').value.trim();
             const price = parseFloat(document.getElementById('editOfferItemPrice').value);
+            const currency = document.getElementById('editOfferItemCurrency').value;
             const stock = document.getElementById('editOfferItemStock').value.trim();
             const tag = document.getElementById('editOfferItemTag').value.trim();
             const errorDiv = document.getElementById('editOfferItemError');
             if (!name || !price || !stock) { errorDiv.textContent = 'Fill all required fields'; return; }
             try {
-                const updateData = { name, price, stock, updatedAt: serverTimestamp() };
+                const updateData = { name, price, currency, stock, updatedAt: serverTimestamp() };
                 if (tag) updateData.tag = tag;
                 await updateDoc(doc(db, 'offer_items', itemId), updateData);
                 state.offerItems[itemId] = { ...state.offerItems[itemId], ...updateData };
