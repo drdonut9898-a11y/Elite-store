@@ -307,7 +307,30 @@
         ::-webkit-scrollbar-thumb:hover { background:var(--accent-red); }
         .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 12px 24px; border-radius: 12px; font-family: var(--font-display); font-size: 0.85rem; z-index: 10000; opacity: 0; transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    </style>
+            .credits-badge { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, var(--accent-gold), #ca8a04); color:#000; padding:6px 14px; border-radius:20px; font-family:var(--font-display); font-size:0.75rem; font-weight:800; letter-spacing:1px; animation: glowPulse 2s ease-in-out infinite; }
+        .credits-display { font-family:var(--font-display); font-size:0.85rem; color:var(--accent-gold); font-weight:700; display:none; align-items:center; gap:6px; }
+        .credits-display.visible { display:flex; }
+        .credits-section { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; padding:20px; margin-bottom:25px; }
+        .credits-section h3 { font-family:var(--font-display); color:var(--accent-gold); margin-bottom:15px; font-size:1rem; }
+        .credits-input-group { margin-bottom:15px; }
+        .credits-input-group label { display:block; margin-bottom:6px; color:var(--text-secondary); font-size:0.85rem; font-weight:600; }
+        .credits-balance-big { font-family:var(--font-display); font-size:2rem; color:var(--accent-gold); font-weight:800; }
+        .order-card { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:12px; padding:20px; margin-bottom:15px; transition:var(--transition-smooth); }
+        .order-card:hover { border-color:var(--accent-gold); transform:translateX(5px); }
+        .order-status { display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:700; }
+        .order-status-pending { background:rgba(255,159,67,0.1); color:#ff9f43; border:1px solid rgba(255,159,67,0.3); }
+        .order-status-completed { background:rgba(46,213,115,0.1); color:var(--accent-green); border:1px solid rgba(46,213,115,0.3); }
+        .order-status-cancelled { background:rgba(255,71,87,0.1); color:var(--accent-red); border:1px solid rgba(255,71,87,0.3); }
+        .cart-credits-section { background:rgba(234,179,8,0.05); border:1px solid rgba(234,179,8,0.2); border-radius:12px; padding:15px; margin-bottom:15px; }
+        .cart-credits-section h4 { font-family:var(--font-display); color:var(--accent-gold); font-size:0.9rem; margin-bottom:10px; }
+        .cart-inr-section { background:rgba(255,71,87,0.05); border:1px solid rgba(255,71,87,0.2); border-radius:12px; padding:15px; margin-bottom:15px; }
+        .cart-inr-section h4 { font-family:var(--font-display); color:var(--accent-red); font-size:0.9rem; margin-bottom:10px; }
+        .btn-credits { background:linear-gradient(135deg, var(--accent-gold), #ca8a04); color:#000; }
+        .btn-credits:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 8px 25px var(--accent-gold-glow); }
+        .mixed-cart-warning { background:rgba(255,159,67,0.1); border:1px solid rgba(255,159,67,0.3); color:#ff9f43; padding:10px 15px; border-radius:8px; font-size:0.85rem; margin-bottom:15px; }
+
+        </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -319,6 +342,10 @@
         <div class="sidebar-username" id="sidebarUsername" style="display:none;">
             <div class="username-label">Username</div>
             <div class="username-value" id="sidebarUsernameValue">-</div>
+        </div>
+        <div class="sidebar-username" id="sidebarCredits" style="display:none;">
+            <div class="username-label">Credits Balance</div>
+            <div class="username-value" id="sidebarCreditsValue" style="color:var(--accent-gold);">0 Credits</div>
         </div>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section">
@@ -361,7 +388,9 @@
             <div class="nav-brand">Elite Store</div>
             <div class="nav-actions">
                 <div class="nav-username" id="navUsername"><span id="navUsernameValue">-</span></div>
+                <div class="credits-display" id="navCredits"><span>💰</span><span id="navCreditsValue">0</span> Credits</div>
                 <button class="btn btn-secondary btn-sm" onclick="window.toggleTheme()">Theme</button>
+                <button class="btn btn-gold btn-sm" id="ordersBtn" style="display:none;" onclick="window.openOrdersModal()">My Orders</button>
                 <button class="btn btn-glass btn-sm" id="authTriggerBtn" onclick="window.openAuthModal()">Login</button>
                 <button class="admin-badge" id="adminBadge" onclick="window.switchView('admin')"> Admin Panel</button>
             </div>
@@ -661,7 +690,45 @@
                     <tbody id="adminReviewsBody"></tbody>
                 </table>
             </div>
-        </div>
+        
+
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-gold); padding-left:15px;">Credits Management</div>
+            <div class="credits-section">
+                <h3>Manage User Credits</h3>
+                <div style="display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:15px; margin-bottom:15px;">
+                    <div class="credits-input-group">
+                        <label>User Email</label>
+                        <input type="email" class="admin-input" id="creditsUserEmail" placeholder="user@email.com">
+                    </div>
+                    <div class="credits-input-group">
+                        <label>Amount</label>
+                        <input type="number" class="admin-input" id="creditsAmount" placeholder="e.g. 100">
+                    </div>
+                    <div class="credits-input-group">
+                        <label>Action</label>
+                        <select class="admin-input" id="creditsAction" style="cursor:pointer;">
+                            <option value="add">Add Credits</option>
+                            <option value="remove">Remove Credits</option>
+                        </select>
+                    </div>
+                    <div class="credits-input-group" style="display:flex; align-items:flex-end;">
+                        <button class="btn btn-gold" style="width:100%;" onclick="window.manageUserCredits()">Apply</button>
+                    </div>
+                </div>
+                <div id="creditsManageError" style="color:var(--accent-red); font-size:0.9rem; min-height:20px;"></div>
+                <div id="creditsManageSuccess" style="color:var(--accent-green); font-size:0.9rem; min-height:20px;"></div>
+            </div>
+
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-gold); padding-left:15px;">Orders Management</div>
+            <div style="overflow-x:auto; margin-top:20px;">
+                <table class="admin-table">
+                    <thead>
+                        <tr><th>User</th><th>Email</th><th>Items</th><th>Total</th><th>Type</th><th>Status</th><th>Date</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody id="adminOrdersBody"></tbody>
+                </table>
+            </div>
+</div>
     </div>
 
     <div class="wishlist-widget" id="wishlistWidget" style="display:none;">
@@ -705,8 +772,10 @@
             </div>
         </div>
         <div class="cart-footer">
+            <div id="cartSummary"></div>
             <div class="cart-total"><span>Total:</span><strong id="cartTotal">0 INR</strong></div>
-            <button class="btn btn-primary" style="width:100%;" onclick="window.checkoutCart()">Checkout</button>
+            <button class="btn btn-primary" style="width:100%; margin-bottom:8px;" id="cartCheckoutBtn" onclick="window.checkoutCart()">Checkout</button>
+            <button class="btn btn-credits" style="width:100%; display:none;" id="cartCreditsBtn" onclick="window.placeCreditsOrder()">Place Order (Credits)</button>
         </div>
     </div>
 
@@ -768,6 +837,17 @@
             <p>Under development. Stay tuned!</p>
             <button class="btn btn-blue" onclick="window.hideComingSoon()">OK</button>
         </div>
+
+    <div class="modal-overlay" id="ordersModal">
+        <div class="modal-box" style="border-color:var(--accent-gold); max-width:600px; max-height:80vh; overflow-y:auto;">
+            <h2 style="color:var(--accent-gold);">My Orders</h2>
+            <div id="userOrdersList" style="text-align:left; margin-top:15px;">
+                <p style="text-align:center; color:var(--text-muted);">No orders yet</p>
+            </div>
+            <button class="modal-dismiss" onclick="window.closeOrdersModal()">Close</button>
+        </div>
+    </div>
+
     </div>
 
     <div class="modal-overlay" id="reviewModal">
@@ -949,7 +1029,9 @@
             offerItems: {},
             discordItems: {},
             discordDesc: { nitro: '', boosts: '' },
-            sidebarOpen: false
+            sidebarOpen: false,
+            creditsBalance: 0,
+            userOrders: []
         };
 
         const catalog = {
@@ -1130,15 +1212,24 @@
                     document.getElementById('authTriggerBtn').onclick = () => signOut(auth);
                     document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Logout</span>';
                     document.getElementById('sidebarAuthLink').onclick = () => signOut(auth);
+                    document.getElementById('ordersBtn').style.display = 'inline-flex';
                     closeAuthModal();
                     await loadUserUsername();
+                    await loadUserCredits();
+                    await loadUserOrders();
+                    if (state.isAdmin) {
+                        setupOrdersListener();
+                    }
                 } else {
                     document.getElementById('authTriggerBtn').textContent = 'Login';
                     document.getElementById('authTriggerBtn').onclick = openAuthModal;
                     document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Login</span>';
                     document.getElementById('sidebarAuthLink').onclick = openAuthModal;
+                    document.getElementById('ordersBtn').style.display = 'none';
                     state.username = null;
+                    state.creditsBalance = 0;
                     updateUsernameDisplay();
+                    updateCreditsDisplay();
                 }
                 const currentHash = getHashView();
                 if (currentHash === 'admin' && !state.isAdmin) {
@@ -1269,9 +1360,18 @@
             const p = state.products[id]; if (!p) return;
             if (p.promo && state.cart.some(i => i.id === id)) { showToast('Promo only once!'); return; }
             if (p.promo && state.cart.length === 0) { showToast('Add regular item first!'); return; }
+
+            const itemCurrency = p.currency || 'INR';
+            const existingCurrency = state.cart.length > 0 ? (state.cart[0].currency || 'INR') : null;
+
+            if (existingCurrency && existingCurrency !== itemCurrency) {
+                showToast(`Cannot mix ${existingCurrency} and ${itemCurrency} items! Checkout or clear cart first.`);
+                return;
+            }
+
             const existingIndex = state.cart.findIndex(item => item.id === id);
             if (existingIndex > -1) { state.cart[existingIndex].qty += 1; }
-            else { state.cart.push({ id: p.id, name: p.name, price: p.price, currency: p.currency || 'INR', qty: 1 }); }
+            else { state.cart.push({ id: p.id, name: p.name, price: p.price, currency: itemCurrency, qty: 1 }); }
             updateCartUI(); showToast(`${p.name} added to cart!`);
         };
 
@@ -1291,9 +1391,37 @@
 
         function updateCartUI() {
             document.getElementById('cartCount').textContent = state.cart.reduce((sum, i) => sum + i.qty, 0);
-            const total = calculateCartTotal();
-            const currency = state.cart.length > 0 ? (state.cart[0].currency || 'INR') : 'INR';
-            document.getElementById('cartTotal').textContent = total + ' ' + currency;
+
+            const inrItems = state.cart.filter(i => (i.currency || 'INR') === 'INR');
+            const creditsItems = state.cart.filter(i => i.currency === 'Credits');
+
+            const inrTotal = inrItems.reduce((s, i) => s + (i.price * i.qty), 0);
+            const creditsTotal = creditsItems.reduce((s, i) => s + (i.price * i.qty), 0);
+
+            if (inrItems.length > 0 && creditsItems.length > 0) {
+                document.getElementById('cartTotal').textContent = `${inrTotal} INR + ${creditsTotal} Credits`;
+            } else if (creditsItems.length > 0) {
+                document.getElementById('cartTotal').textContent = `${creditsTotal} Credits`;
+            } else {
+                document.getElementById('cartTotal').textContent = `${inrTotal} INR`;
+            }
+
+            const checkoutBtn = document.getElementById('cartCheckoutBtn');
+            const creditsBtn = document.getElementById('cartCreditsBtn');
+
+            if (creditsItems.length > 0 && inrItems.length === 0) {
+                checkoutBtn.style.display = 'none';
+                creditsBtn.style.display = 'block';
+            } else if (inrItems.length > 0 && creditsItems.length === 0) {
+                checkoutBtn.style.display = 'block';
+                creditsBtn.style.display = 'none';
+            } else if (inrItems.length > 0 && creditsItems.length > 0) {
+                checkoutBtn.style.display = 'none';
+                creditsBtn.style.display = 'none';
+            } else {
+                checkoutBtn.style.display = 'block';
+                creditsBtn.style.display = 'none';
+            }
 
             if (state.cart.length === 0) {
                 document.getElementById('cartItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">🛒</div><p>Your cart is empty</p></div>';
@@ -1303,7 +1431,8 @@
             document.getElementById('cartItems').innerHTML = state.cart.map((item, i) => {
                 const itemTotal = item.price * item.qty;
                 const itemCurrency = item.currency || 'INR';
-                return `<div class="cart-item"><div class="cart-item-info"><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} ${itemCurrency} x ${item.qty} = ${itemTotal} ${itemCurrency}</p></div><div style="display:flex; align-items:center; gap:8px;"><div class="cart-item-qty"><button onclick="window.updateCartQty(${i}, -1)">−</button><span>${item.qty}</span><button onclick="window.updateCartQty(${i}, 1)">+</button></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div></div>`;
+                const color = itemCurrency === 'Credits' ? 'var(--accent-gold)' : 'var(--accent-red)';
+                return `<div class="cart-item"><div class="cart-item-info"><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:${color}; font-weight:700;">${item.price} ${itemCurrency} x ${item.qty} = ${itemTotal} ${itemCurrency}</p></div><div style="display:flex; align-items:center; gap:8px;"><div class="cart-item-qty"><button onclick="window.updateCartQty(${i}, -1)">−</button><span>${item.qty}</span><button onclick="window.updateCartQty(${i}, 1)">+</button></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div></div>`;
             }).join('');
         }
 
@@ -1314,6 +1443,8 @@
 
         window.checkoutCart = () => {
             if (state.cart.length === 0) { showToast('Cart is empty!'); return; }
+            const inrItems = state.cart.filter(i => (i.currency || 'INR') === 'INR');
+            if (inrItems.length === 0) { showToast('No INR items to checkout!'); return; }
             toggleCart(); 
             document.getElementById('checkoutModal').classList.add('active');
         };
@@ -1914,7 +2045,172 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        init();
+        
+        async function loadUserCredits() {
+            if (!state.user) return;
+            try {
+                const userDoc = await getDoc(doc(db, 'users', state.user.uid));
+                if (userDoc.exists()) {
+                    state.creditsBalance = userDoc.data().credits || 0;
+                    updateCreditsDisplay();
+                }
+            } catch (e) { console.log('Credits load error', e); }
+        }
+
+        function updateCreditsDisplay() {
+            const navCredits = document.getElementById('navCredits');
+            const navCreditsValue = document.getElementById('navCreditsValue');
+            const sidebarCredits = document.getElementById('sidebarCredits');
+            const sidebarCreditsValue = document.getElementById('sidebarCreditsValue');
+
+            if (state.user) {
+                navCreditsValue.textContent = state.creditsBalance;
+                navCredits.classList.add('visible');
+                sidebarCreditsValue.textContent = state.creditsBalance + ' Credits';
+                sidebarCredits.style.display = 'block';
+            } else {
+                navCredits.classList.remove('visible');
+                sidebarCredits.style.display = 'none';
+            }
+        }
+
+        window.placeCreditsOrder = async () => {
+            if (state.cart.length === 0) { showToast('Cart is empty!'); return; }
+            const creditsItems = state.cart.filter(i => i.currency === 'Credits');
+            if (creditsItems.length === 0) { showToast('No credits items in cart!'); return; }
+
+            const totalCredits = creditsItems.reduce((s, i) => s + (i.price * i.qty), 0);
+
+            if (state.creditsBalance < totalCredits) {
+                showToast(`Insufficient credits! You have ${state.creditsBalance}, need ${totalCredits}`);
+                return;
+            }
+
+            try {
+                const orderData = {
+                    userId: state.user.uid,
+                    userEmail: state.user.email,
+                    username: state.username || state.user.email,
+                    items: creditsItems.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
+                    total: totalCredits,
+                    currency: 'Credits',
+                    status: 'pending',
+                    createdAt: serverTimestamp()
+                };
+
+                await addDoc(collection(db, 'orders'), orderData);
+
+                state.cart = state.cart.filter(i => (i.currency || 'INR') === 'INR');
+                updateCartUI();
+                toggleCart();
+                showToast('Order placed! Admin will process it. Your credits will be deducted by admin.');
+                loadUserOrders();
+            } catch (e) {
+                showToast('Order failed: ' + e.message);
+            }
+        };
+
+        window.manageUserCredits = async () => {
+            if (!state.isAdmin) { showToast('Admin only!'); return; }
+            const email = document.getElementById('creditsUserEmail').value.trim().toLowerCase();
+            const amount = parseFloat(document.getElementById('creditsAmount').value);
+            const action = document.getElementById('creditsAction').value;
+            const errorDiv = document.getElementById('creditsManageError');
+            const successDiv = document.getElementById('creditsManageSuccess');
+
+            errorDiv.textContent = '';
+            successDiv.textContent = '';
+
+            if (!email || !amount || amount <= 0) { errorDiv.textContent = 'Enter valid email and amount'; return; }
+
+            try {
+                const q = query(collection(db, 'users'), where('email', '==', email));
+                const snap = await getDocs(q);
+
+                if (snap.empty) { errorDiv.textContent = 'User not found with this email!'; return; }
+
+                const userDoc = snap.docs[0];
+                const userId = userDoc.id;
+                const currentCredits = userDoc.data().credits || 0;
+                let newCredits = currentCredits;
+
+                if (action === 'add') {
+                    newCredits = currentCredits + amount;
+                } else {
+                    newCredits = currentCredits - amount;
+                    if (newCredits < 0) { errorDiv.textContent = 'Cannot remove more than user has!'; return; }
+                }
+
+                await updateDoc(doc(db, 'users', userId), { credits: newCredits });
+                successDiv.textContent = `Success! User now has ${newCredits} credits (${action === 'add' ? '+' : '-'}${amount})`;
+                document.getElementById('creditsUserEmail').value = '';
+                document.getElementById('creditsAmount').value = '';
+            } catch (e) { errorDiv.textContent = 'Failed: ' + e.message; }
+        };
+
+        async function loadUserOrders() {
+            if (!state.user) return;
+            try {
+                const q = query(collection(db, 'orders'), where('userId', '==', state.user.uid), orderBy('createdAt', 'desc'));
+                const snap = await getDocs(q);
+                state.userOrders = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                renderUserOrders();
+            } catch (e) { console.log('Orders load error', e); }
+        }
+
+        function renderUserOrders() {
+            const container = document.getElementById('userOrdersList');
+            if (state.userOrders.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:var(--text-muted);">No orders yet</p>';
+                return;
+            }
+
+            container.innerHTML = state.userOrders.map(o => {
+                const statusClass = o.status === 'completed' ? 'order-status-completed' : o.status === 'cancelled' ? 'order-status-cancelled' : 'order-status-pending';
+                const date = o.createdAt ? new Date(o.createdAt.toDate()).toLocaleDateString() : '';
+                const items = o.items.map(i => `${i.name} x${i.qty}`).join(', ');
+                return `<div class="order-card"><div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span style="font-family:var(--font-display); font-weight:700;">Order #${o.id.slice(-6)}</span><span class="order-status ${statusClass}">${o.status.toUpperCase()}</span></div><div style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:8px;">${items}</div><div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:0.8rem;"><span>${date}</span><span style="color:var(--accent-gold); font-weight:700;">${o.total} ${o.currency}</span></div></div>`;
+            }).join('');
+        }
+
+        window.openOrdersModal = () => {
+            document.getElementById('ordersModal').classList.add('active');
+            loadUserOrders();
+        };
+
+        window.closeOrdersModal = () => {
+            document.getElementById('ordersModal').classList.remove('active');
+        };
+
+        function setupOrdersListener() {
+            onSnapshot(query(collection(db, 'orders'), orderBy('createdAt', 'desc')), (snap) => {
+                const orders = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                renderAdminOrders(orders);
+            });
+        }
+
+        function renderAdminOrders(orders) {
+            const tbody = document.getElementById('adminOrdersBody');
+            if (!tbody) return;
+            if (orders.length === 0) { tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted);">No orders</td></tr>'; return; }
+
+            tbody.innerHTML = orders.map(o => {
+                const statusClass = o.status === 'completed' ? 'order-status-completed' : o.status === 'cancelled' ? 'order-status-cancelled' : 'order-status-pending';
+                const date = o.createdAt ? new Date(o.createdAt.toDate()).toLocaleDateString() : '';
+                const items = o.items.map(i => `${i.name} x${i.qty}`).join(', ');
+                return `<tr><td>${o.username || '-'}</td><td>${o.userEmail || '-'}</td><td>${items}</td><td>${o.total} ${o.currency}</td><td>${o.currency}</td><td><span class="order-status ${statusClass}">${o.status.toUpperCase()}</span></td><td>${date}</td><td><button class="btn btn-success btn-sm" onclick="window.updateOrderStatus('${o.id}', 'completed')">Complete</button><button class="btn btn-danger btn-sm" onclick="window.updateOrderStatus('${o.id}', 'cancelled')">Cancel</button></td></tr>`;
+            }).join('');
+        }
+
+        window.updateOrderStatus = async (orderId, status) => {
+            if (!state.isAdmin) return;
+            try {
+                await updateDoc(doc(db, 'orders', orderId), { status: status, updatedAt: serverTimestamp() });
+                showToast(`Order ${status}!`);
+            } catch (e) { showToast('Update failed: ' + e.message); }
+        };
+
+init();
     </script>
 </body>
 </html>
