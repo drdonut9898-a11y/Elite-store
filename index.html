@@ -310,8 +310,6 @@
         .invoice-code-box { background: var(--bg-secondary); border: 2px dashed var(--accent-purple); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; animation: pulsePurple 2s infinite; }
         @keyframes pulsePurple { 0%, 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0.4); } 50% { box-shadow: 0 0 0 10px rgba(168,85,247,0); } }
         .invoice-code-text { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: var(--accent-purple); letter-spacing: 3px; }
-        .nav-credits { color: var(--accent-gold); font-weight: 700; font-size: 0.85rem; }
-        .sidebar-credits-value { color: var(--accent-gold); font-weight: 700; }
     </style>
 <base target="_blank">
 <base target="_blank">
@@ -371,7 +369,7 @@
             <div class="nav-brand">Elite Store</div>
             <div class="nav-actions">
                 <div class="nav-username" id="navUsername"><span id="navUsernameValue">-</span></div>
-                <div class="nav-username" id="navCredits" style="display:none;"><span class="nav-credits">0 Credits</span></div>
+                <div class="nav-username" id="navCredits" style="display:none; color:var(--accent-gold); font-weight:700;"><span>0 Credits</span></div>
                 <button class="btn btn-secondary btn-sm" onclick="window.toggleTheme()">Theme</button>
                 <button class="btn btn-glass btn-sm" id="authTriggerBtn" onclick="window.openAuthModal()">Login</button>
                 <button class="admin-badge" id="adminBadge" onclick="window.switchView('admin')"> Admin Panel</button>
@@ -1088,6 +1086,7 @@
             Object.values(catalog).forEach(cat => cat.forEach(p => state.products[p.id] = { ...p }));
             await loadProductsFromFirestore();
             setupProductsListener();
+            setupInvoicesListener();
             renderProducts(); loadReviews(); setupAuth();
             updateWishlistUI(); setupStarRating();
             await loadOfferItems();
@@ -2036,7 +2035,6 @@ async function loadUserCredits() {
         window.showComingSoon = () => document.getElementById('comingSoonModal').classList.add('active');
         window.hideComingSoon = () => document.getElementById('comingSoonModal').classList.remove('active');
         window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('active'); };
-        window.hideInvoiceModal = () => { document.getElementById('invoiceModal').classList.remove('active'); };
 
         function showToast(message) {
             const toast = document.getElementById('toast');
@@ -2120,7 +2118,7 @@ async function loadUserCredits() {
             const tbody = document.getElementById('adminInvoicesBody');
             if (!tbody) return;
             if (state.invoices.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">No invoices yet</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted);">No invoices yet</td></tr>';
                 return;
             }
             tbody.innerHTML = state.invoices.map(inv => {
@@ -2146,7 +2144,7 @@ async function loadUserCredits() {
             if (!code) { renderAdminInvoices(); return; }
             const found = state.invoices.filter(i => i.code && i.code.toUpperCase().includes(code));
             if (found.length === 0) {
-                document.getElementById('adminInvoicesBody').innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--accent-red);">No invoice found with code: ' + code + '</td></tr>';
+                document.getElementById('adminInvoicesBody').innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--accent-red);">No invoice found with code: ' + code + '</td></tr>';
                 return;
             }
             document.getElementById('adminInvoicesBody').innerHTML = found.map(inv => {
