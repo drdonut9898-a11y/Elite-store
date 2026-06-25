@@ -1071,7 +1071,7 @@
             }
             if (view === 'admin') { 
                 renderAdminTable(); renderAdminReviews(); renderAdminOfferItemsTable(); 
-                renderAdminDiscordItemsTable(); loadDiscordDesc(); loadInvoices();
+                renderAdminDiscordItemsTable(); loadDiscordDesc(); loadInvoices(); 
             }
             if (view === 'nitro') { renderDiscordItems('nitro'); }
             if (view === 'boosts') { renderDiscordItems('boosts'); }
@@ -1180,11 +1180,9 @@
             const lower = username.toLowerCase().trim();
             if (state.usernames.has(lower)) return true;
             try {
-                // Check exact match (case-insensitive via query)
                 const q = query(collection(db, 'users'), where('username', '==', lower));
                 const snap = await getDocs(q);
                 if (!snap.empty) return true;
-                // Also check if any user has this username (case-insensitive)
                 const allUsers = await getDocs(collection(db, 'users'));
                 for (const doc of allUsers.docs) {
                     const data = doc.data();
@@ -1368,7 +1366,8 @@ async function loadUserCredits() {
             const p = state.products[id]; if (!p) return;
 
             // Check credits for credit-based items
-            if ((p.currency === 'Credits' || p.currency === 'credits') && state.userCredits < p.price) {
+            const itemCurrency = p.currency || 'INR';
+            if (itemCurrency === 'Credits' && state.userCredits < p.price) {
                 showToast('Not enough credits! You have ' + state.userCredits + ' credits.');
                 return;
             }
@@ -1377,7 +1376,7 @@ async function loadUserCredits() {
             if (p.promo && state.cart.length === 0) { showToast('Add regular item first!'); return; }
             const existingIndex = state.cart.findIndex(item => item.id === id);
             if (existingIndex > -1) { state.cart[existingIndex].qty += 1; }
-            else { state.cart.push({ id: p.id, name: p.name, price: p.price, currency: p.currency || 'INR', qty: 1 }); }
+            else { state.cart.push({ id: p.id, name: p.name, price: p.price, currency: itemCurrency, qty: 1 }); }
             updateCartUI(); showToast(`${p.name} added to cart!`);
         };
 
@@ -1426,9 +1425,8 @@ async function loadUserCredits() {
         window.checkoutCart = () => {
             if (state.cart.length === 0) { showToast('Cart is empty!'); return; }
 
-            // Check if cart has only credit items or mixed
-            const hasCreditItems = state.cart.some(item => item.currency === 'Credits' || item.currency === 'credits');
-            const hasInrItems = state.cart.some(item => !item.currency || item.currency === 'INR');
+            const hasCreditItems = state.cart.some(item => item.currency === 'Credits');
+            const hasInrItems = state.cart.some(item => item.currency === 'INR');
 
             if (hasCreditItems && hasInrItems) {
                 showToast('Cannot mix INR and Credits in same order!');
@@ -1438,10 +1436,8 @@ async function loadUserCredits() {
             toggleCart();
 
             if (hasCreditItems) {
-                // Credits checkout - show invoice modal
                 processCreditsCheckout();
             } else {
-                // INR checkout - show existing checkout modal
                 document.getElementById('checkoutModal').classList.add('active');
             }
         };
