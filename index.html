@@ -103,6 +103,9 @@
         .sidebar-username.visible { display: block; }
         .sidebar-username .username-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3px; }
         .sidebar-username .username-value { font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--text-secondary); }
+        .sidebar-credits { margin: 0 20px 15px; padding: 10px 15px; text-align: center; background: rgba(234,179,8,0.1); border: 1px solid rgba(234,179,8,0.2); border-radius: 10px; }
+        .sidebar-credits .credits-label { font-size: 0.7rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3px; }
+        .sidebar-credits .credits-value { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; color: var(--accent-gold); }
         .top-navbar { display:flex; justify-content:space-between; align-items:center; padding:20px 0; margin-bottom:20px; flex-wrap:wrap; gap:15px; animation: slideDown 0.6s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         .nav-brand { font-family:var(--font-display); font-size:1.2rem; font-weight:800; letter-spacing:2px; color:var(--accent-red); text-shadow:0 0 20px var(--accent-red-glow); animation: glowPulse 2s ease-in-out infinite; }
@@ -110,6 +113,8 @@
         .nav-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
         .nav-username { font-family: var(--font-body); font-size: 0.9rem; color: var(--text-secondary); font-weight: 600; display: none; align-items: center; gap: 6px; }
         .nav-username.visible { display: flex; }
+        .nav-credits { font-family: var(--font-display); font-size: 0.85rem; color: var(--accent-gold); font-weight: 700; display: none; align-items: center; gap: 4px; background: rgba(234,179,8,0.1); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(234,179,8,0.2); }
+        .nav-credits.visible { display: flex; }
         .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 20px; border-radius:8px; font-family:var(--font-display); font-size:0.8rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; border:none; transition:var(--transition-smooth); position:relative; overflow:hidden; }
         .btn:hover { transform: translateY(-2px); }
         .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
@@ -290,6 +295,28 @@
         .discord-desc-box { background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
         .discord-desc-box h4 { font-family: var(--font-display); color: var(--accent-discord); margin-bottom: 10px; font-size: 1.1rem; }
         .discord-desc-box p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+        .invoice-code { font-family: var(--font-display); font-size: 2rem; color: var(--accent-gold); letter-spacing: 4px; margin: 20px 0; padding: 15px; background: rgba(234,179,8,0.1); border: 2px dashed var(--accent-gold); border-radius: 12px; }
+        .maintenance-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; z-index: 99999; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+        .maintenance-box { text-align: center; padding: 40px; max-width: 500px; }
+        .maintenance-box h1 { font-family: var(--font-display); font-size: 3rem; color: #1a1a2e; margin-bottom: 20px; }
+        .maintenance-box p { font-family: var(--font-body); font-size: 1.2rem; color: #4a4a6a; margin-bottom: 30px; }
+        .maintenance-box .maintenance-icon { font-size: 5rem; margin-bottom: 20px; }
+        .maintenance-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .maintenance-btn { padding: 12px 30px; border-radius: 8px; font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.3s; }
+        .maintenance-btn-got { background: #1a1a2e; color: white; }
+        .maintenance-btn-got:hover { background: #333; }
+        .maintenance-btn-admin { background: transparent; color: #1a1a2e; border: 2px solid #1a1a2e; }
+        .maintenance-btn-admin:hover { background: #1a1a2e; color: white; }
+        .admin-maintenance-toggle { display: flex; align-items: center; gap: 15px; background: rgba(255,71,87,0.1); border: 2px solid var(--accent-red); padding: 20px; border-radius: 12px; margin-bottom: 30px; }
+        .admin-maintenance-toggle label { font-family: var(--font-display); font-size: 1rem; color: var(--accent-red); font-weight: 700; }
+        .toggle-switch { position: relative; width: 60px; height: 30px; background: var(--bg-secondary); border-radius: 15px; cursor: pointer; border: 2px solid var(--border-subtle); transition: var(--transition-smooth); }
+        .toggle-switch.active { background: var(--accent-red); border-color: var(--accent-red); }
+        .toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; background: white; border-radius: 50%; transition: var(--transition-smooth); }
+        .toggle-switch.active::after { left: 32px; }
+        .invoice-search-box { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
+        .invoice-search-box h3 { font-family: var(--font-display); color: var(--accent-gold); margin-bottom: 15px; font-size: 1rem; }
+        .confirm-modal-text { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 20px; line-height: 1.6; }
+        .confirm-modal-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
         @media (max-width:768px) {
             .home-wrapper { grid-template-columns:1fr; }
             .master-card-green { grid-column:span 1; max-width:100%; }
@@ -307,26 +334,50 @@
         ::-webkit-scrollbar-thumb:hover { background:var(--accent-red); }
         .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 12px 24px; border-radius: 12px; font-family: var(--font-display); font-size: 0.85rem; z-index: 10000; opacity: 0; transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .invoice-code-box { background: var(--bg-secondary); border: 2px dashed var(--accent-purple); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; animation: pulsePurple 2s infinite; }
-        @keyframes pulsePurple { 0%, 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0.4); } 50% { box-shadow: 0 0 0 10px rgba(168,85,247,0); } }
-        .invoice-code-text { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: var(--accent-purple); letter-spacing: 3px; }
+        .toast.error { border-color: var(--accent-red); color: var(--accent-red); }
     </style>
 <base target="_blank">
 <base target="_blank">
 </head>
 <body>
+    <!-- MAINTENANCE OVERLAY -->
+    <div id="maintenanceOverlay" class="maintenance-overlay" style="display:none;">
+        <div class="maintenance-box">
+            <div class="maintenance-icon">🔧</div>
+            <h1>Error</h1>
+            <p>Website is under development, please try again later</p>
+            <div class="maintenance-actions">
+                <button class="maintenance-btn maintenance-btn-got" onclick="window.location.reload()">Got it</button>
+                <button class="maintenance-btn maintenance-btn-admin" onclick="window.showAdminLogin()">I'm Admin</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN FOR MAINTENANCE -->
+    <div class="modal-overlay" id="maintenanceAdminModal">
+        <div class="modal-box" style="border-color:var(--accent-red);">
+            <h2>Admin Access</h2>
+            <p>Enter admin credentials to bypass maintenance</p>
+            <div id="maintenanceAdminError" style="color:var(--accent-red); margin-bottom:15px; min-height:20px;"></div>
+            <input type="email" class="payment-input" id="maintenanceAdminEmail" placeholder="Admin Email" style="margin-bottom:10px;">
+            <input type="password" class="payment-input" id="maintenanceAdminPassword" placeholder="Password" style="margin-bottom:15px;">
+            <button class="btn btn-primary" style="width:100%;" onclick="window.bypassMaintenance()">Access</button>
+            <button class="modal-dismiss" onclick="window.hideMaintenanceAdminModal()">Cancel</button>
+        </div>
+    </div>
+
     <button class="sidebar-toggle" id="sidebarToggle" onclick="window.toggleSidebar()">☰</button>
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-brand">ELITE</div>
         </div>
-        <div class="sidebar-username" id="sidebarUsername" style="display:none; margin-bottom:5px;">
+        <div class="sidebar-username" id="sidebarUsername" style="display:none;">
             <div class="username-label">Username</div>
-            <div class="username-value" id="sidebarUsernameValue" style="font-weight:700; color:var(--text-primary);">-</div>
+            <div class="username-value" id="sidebarUsernameValue">-</div>
         </div>
-        <div class="sidebar-username" id="sidebarCreditsBox" style="display:none; margin-top:5px;">
-            <div class="username-label">Credits</div>
-            <div class="username-value" id="sidebarCredits" style="color:var(--accent-gold); font-weight:700;">0 Credits</div>
+        <div class="sidebar-credits" id="sidebarCredits" style="display:none;">
+            <div class="credits-label">Credits</div>
+            <div class="credits-value" id="sidebarCreditsValue">0</div>
         </div>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section">
@@ -369,7 +420,7 @@
             <div class="nav-brand">Elite Store</div>
             <div class="nav-actions">
                 <div class="nav-username" id="navUsername"><span id="navUsernameValue">-</span></div>
-                <div class="nav-username" id="navCredits" style="display:none; color:var(--accent-gold); font-weight:700;"><span>0 Credits</span></div>
+                <div class="nav-credits" id="navCredits"><span>💰</span><span id="navCreditsValue">0</span></div>
                 <button class="btn btn-secondary btn-sm" onclick="window.toggleTheme()">Theme</button>
                 <button class="btn btn-glass btn-sm" id="authTriggerBtn" onclick="window.openAuthModal()">Login</button>
                 <button class="admin-badge" id="adminBadge" onclick="window.switchView('admin')"> Admin Panel</button>
@@ -549,6 +600,34 @@
             <button class="back-btn" onclick="window.switchView('landing')">Back</button>
             <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--text-primary); margin-bottom:20px; border-left:4px solid var(--accent-red); padding-left:15px;">Admin Dashboard</div>
 
+            <!-- MAINTENANCE MODE TOGGLE -->
+            <div class="admin-maintenance-toggle">
+                <label>🔧 MAINTENANCE MODE</label>
+                <div class="toggle-switch" id="maintenanceToggle" onclick="window.toggleMaintenance()"></div>
+                <span id="maintenanceStatus" style="font-family:var(--font-display); font-size:0.9rem; color:var(--text-muted);">OFF</span>
+            </div>
+
+            <!-- INVOICE MANAGEMENT (TOP) -->
+            <div style="margin-top:20px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-gold); padding-left:15px;">Invoice Management</div>
+            <div class="invoice-search-box">
+                <h3>🔍 Search Invoice</h3>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <input type="text" class="admin-input" id="invoiceSearchInput" placeholder="Enter invoice code (e.g. ORD-123456)" style="flex:1; min-width:200px;">
+                    <button class="btn btn-gold btn-sm" onclick="window.searchInvoice()">Search</button>
+                    <button class="btn btn-secondary btn-sm" onclick="window.clearInvoiceSearch()">Clear</button>
+                </div>
+                <div id="invoiceSearchResult" style="margin-top:15px;"></div>
+            </div>
+            <div style="overflow-x:auto; margin-top:20px;">
+                <table class="admin-table">
+                    <thead>
+                        <tr><th>Code</th><th>Username</th><th>Email</th><th>Items</th><th>Total</th><th>Status</th><th>Date</th><th>Action</th></tr>
+                    </thead>
+                    <tbody id="adminInvoicesBody"></tbody>
+                </table>
+            </div>
+
+            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-red); padding-left:15px;">Products Management</div>
             <div class="admin-controls">
                 <button class="btn btn-success btn-sm" onclick="window.openAddItemModal()">+ Add Item</button>
                 <button class="btn btn-secondary btn-sm" onclick="window.selectAllAdminItems()">Select All</button>
@@ -670,24 +749,6 @@
                     <tbody id="adminReviewsBody"></tbody>
                 </table>
             </div>
-
-            <div style="margin-top:40px; font-family:var(--font-display); font-size:1.2rem; color:var(--text-primary); border-left:4px solid var(--accent-purple); padding-left:15px;">Invoice Management</div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 12px; margin-bottom: 25px;">
-                <h3 style="font-family: var(--font-display); color: var(--accent-purple); margin-bottom: 15px; font-size: 1rem;">Search Invoice</h3>
-                <div style="display:flex; gap:15px; margin-bottom:15px;">
-                    <input type="text" class="admin-input" id="invoiceSearchInput" placeholder="Enter invoice code (e.g. ORD-XXXXXX)" style="flex:1;">
-                    <button class="btn btn-purple btn-sm" onclick="window.searchInvoice()">Search</button>
-                    <button class="btn btn-secondary btn-sm" onclick="window.loadInvoices()">Refresh All</button>
-                </div>
-            </div>
-            <div style="overflow-x:auto; margin-top:20px;">
-                <table class="admin-table">
-                    <thead>
-                        <tr><th>Code</th><th>Username</th><th>Email</th><th>Items</th><th>Total</th><th>Status</th><th>Date</th><th>Action</th></tr>
-                    </thead>
-                    <tbody id="adminInvoicesBody"></tbody>
-                </table>
-            </div>
         </div>
     </div>
 
@@ -737,12 +798,43 @@
         </div>
     </div>
 
+    <!-- INR CHECKOUT MODAL -->
     <div class="modal-overlay" id="checkoutModal">
         <div class="modal-box">
             <h2>Order Instructions</h2>
             <p>Open a "Buying" ticket in Discord and ping Owner with order details.</p>
             <a href="https://discord.gg/7d3DMHSQRp" target="_blank" class="discord-btn" onclick="window.hideCheckout()">Continue in Discord</a>
             <button class="modal-dismiss" onclick="window.hideCheckout()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- CREDITS CONFIRM MODAL -->
+    <div class="modal-overlay" id="creditsConfirmModal">
+        <div class="modal-box" style="border-color:var(--accent-gold);">
+            <h2 style="color:var(--accent-gold);">Confirm Purchase</h2>
+            <div class="confirm-modal-text" id="creditsConfirmText">
+                Do you want to buy <strong id="creditsConfirmItemName">Item</strong> for <strong id="creditsConfirmItemPrice">0 Credits</strong>?
+            </div>
+            <div class="confirm-modal-buttons">
+                <button class="btn btn-success" onclick="window.confirmCreditsPurchase()">Yes, Buy Now</button>
+                <button class="btn btn-secondary" onclick="window.closeCreditsConfirmModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CREDITS INVOICE MODAL -->
+    <div class="modal-overlay" id="creditsInvoiceModal">
+        <div class="modal-box" style="border-color:var(--accent-gold); max-width:500px;">
+            <h2 style="color:var(--accent-gold);">Order Instructions</h2>
+            <p>Open a "Buying" ticket in Discord and ping Owner then give him this Code</p>
+            <div class="invoice-code" id="invoiceCodeDisplay">ORD-XXXXXX</div>
+            <div style="background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:10px; padding:15px; margin:15px 0; text-align:left;">
+                <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:8px;"><strong>Item:</strong> <span id="invoiceItemName">-</span></p>
+                <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:8px;"><strong>Price:</strong> <span id="invoiceItemPrice">-</span> Credits</p>
+                <p style="color:var(--text-secondary); font-size:0.9rem;"><strong>Status:</strong> <span style="color:var(--accent-green);">Pending</span></p>
+            </div>
+            <a href="https://discord.gg/7d3DMHSQRp" target="_blank" class="discord-btn" onclick="window.closeCreditsInvoice()">Continue in Discord</a>
+            <button class="modal-dismiss" onclick="window.closeCreditsInvoice()">Cancel</button>
         </div>
     </div>
 
@@ -787,20 +879,6 @@
             <button class="modal-dismiss" onclick="window.hidePaymentModal()">Cancel</button>
         </div>
     </div>
-    <div class="modal-overlay" id="invoiceModal">
-        <div class="modal-box" style="border-color:var(--accent-purple); max-width:500px;">
-            <h2 style="color:var(--accent-purple);">Order Instructions</h2>
-            <p style="color:var(--text-secondary); margin-bottom:20px;">Open a "Buying" ticket in Discord and ping Owner then give him this Code</p>
-            <div style="background:var(--bg-secondary); border:2px dashed var(--accent-purple); border-radius:12px; padding:20px; margin:20px 0; text-align:center;">
-                <div style="font-family:var(--font-display); font-size:1.8rem; font-weight:900; color:var(--accent-purple); letter-spacing:3px;" id="invoiceCode">ORD-XXXXXX</div>
-            </div>
-            <div style="display:flex; gap:15px; margin-top:20px;">
-                <a href="https://discord.gg/7d3DMHSQRp" target="_blank" class="discord-btn" style="flex:1; justify-content:center;" onclick="window.hideInvoiceModal()">Continue in Discord</a>
-                <button class="btn btn-secondary" style="flex:1;" onclick="window.hideInvoiceModal()">Cancel</button>
-            </div>
-        </div>
-    </div>
-
 
     <div class="modal-overlay" id="comingSoonModal">
         <div class="modal-box" style="border-color:var(--accent-blue);">
@@ -972,8 +1050,8 @@
 
         // ===== ADMIN UIDs =====
         const ADMIN_UIDS = [
-            "Uq5jZPeYZcPevW3GYMTV38V1u0d2",  // Original admin
-            "i87yjJSqXNSDD96Q90XhLwsA1lN2"   // ambypurero22@gmail.com
+            "Uq5jZPeYZcPevW3GYMTV38V1u0d2",
+            "i87yjJSqXNSDD96Q90XhLwsA1lN2"
         ];
 
         const state = {
@@ -986,13 +1064,15 @@
             authTab: 'login',
             isNavigating: false,
             username: null,
+            credits: 0,
             usernames: new Set(),
             offerItems: {},
             discordItems: {},
             discordDesc: { nitro: '', boosts: '' },
             sidebarOpen: false,
-            userCredits: 0,
-            invoices: []
+            maintenanceMode: false,
+            invoices: [],
+            pendingCreditsItem: null
         };
 
         const catalog = {
@@ -1071,7 +1151,7 @@
             }
             if (view === 'admin') { 
                 renderAdminTable(); renderAdminReviews(); renderAdminOfferItemsTable(); 
-                renderAdminDiscordItemsTable(); loadDiscordDesc(); loadInvoices(); 
+                renderAdminDiscordItemsTable(); loadDiscordDesc(); renderAdminInvoices();
             }
             if (view === 'nitro') { renderDiscordItems('nitro'); }
             if (view === 'boosts') { renderDiscordItems('boosts'); }
@@ -1086,13 +1166,14 @@
             Object.values(catalog).forEach(cat => cat.forEach(p => state.products[p.id] = { ...p }));
             await loadProductsFromFirestore();
             setupProductsListener();
-            setupInvoicesListener();
             renderProducts(); loadReviews(); setupAuth();
             updateWishlistUI(); setupStarRating();
             await loadOfferItems();
             await loadDiscordItems();
             await loadDiscordDesc();
             await loadAllUsernames();
+            await loadMaintenanceMode();
+            await loadInvoices();
             const initialView = getHashView();
             if (initialView !== 'landing') {
                 if (initialView === 'admin' && !state.isAdmin) window.location.hash = '';
@@ -1112,35 +1193,12 @@
                         state.products[d.id].stock = data.stock !== undefined ? data.stock : state.products[d.id].stock;
                         state.products[d.id].category = data.category || state.products[d.id].category;
                     } else if (data.category) {
-                        // New item from Firestore that might not be in catalog
                         state.products[d.id] = { id: d.id, ...data };
                         if (!catalog[data.category]) catalog[data.category] = [];
                         catalog[data.category].push(state.products[d.id]);
                     }
                 });
             } catch (e) { console.log('Products load error', e); }
-        }
-
-        function setupInvoicesListener() {
-            onSnapshot(collection(db, 'invoices'), (snap) => {
-                snap.docChanges().forEach(change => {
-                    if (change.type === 'added' || change.type === 'modified') {
-                        const data = change.doc.data();
-                        const existing = state.invoices.find(i => i.id === change.doc.id);
-                        if (existing) {
-                            Object.assign(existing, data);
-                        } else {
-                            state.invoices.push({ id: change.doc.id, ...data });
-                        }
-                    }
-                    if (change.type === 'removed') {
-                        state.invoices = state.invoices.filter(i => i.id !== change.doc.id);
-                    }
-                });
-                if (document.getElementById('viewAdmin').classList.contains('active')) {
-                    renderAdminInvoices();
-                }
-            });
         }
 
         function setupProductsListener() {
@@ -1182,16 +1240,292 @@
             try {
                 const q = query(collection(db, 'users'), where('username', '==', lower));
                 const snap = await getDocs(q);
-                if (!snap.empty) return true;
-                const allUsers = await getDocs(collection(db, 'users'));
-                for (const doc of allUsers.docs) {
-                    const data = doc.data();
-                    if (data.username && data.username.toLowerCase().trim() === lower) return true;
-                }
-                return false;
+                return !snap.empty;
             } catch (e) { return false; }
         }
 
+        // ===== MAINTENANCE MODE =====
+        async function loadMaintenanceMode() {
+            try {
+                const docRef = await getDoc(doc(db, 'settings', 'maintenance'));
+                if (docRef.exists()) {
+                    state.maintenanceMode = docRef.data().enabled || false;
+                    checkMaintenanceMode();
+                }
+            } catch (e) { console.log('Maintenance load error', e); }
+        }
+
+        function checkMaintenanceMode() {
+            if (state.maintenanceMode && !state.isAdmin) {
+                document.getElementById('maintenanceOverlay').style.display = 'flex';
+            } else {
+                document.getElementById('maintenanceOverlay').style.display = 'none';
+            }
+            if (state.isAdmin) {
+                const toggle = document.getElementById('maintenanceToggle');
+                const status = document.getElementById('maintenanceStatus');
+                if (toggle && status) {
+                    if (state.maintenanceMode) {
+                        toggle.classList.add('active');
+                        status.textContent = 'ON';
+                        status.style.color = 'var(--accent-red)';
+                    } else {
+                        toggle.classList.remove('active');
+                        status.textContent = 'OFF';
+                        status.style.color = 'var(--text-muted)';
+                    }
+                }
+            }
+        }
+
+        window.toggleMaintenance = async () => {
+            if (!state.isAdmin) return;
+            try {
+                state.maintenanceMode = !state.maintenanceMode;
+                await setDoc(doc(db, 'settings', 'maintenance'), { 
+                    enabled: state.maintenanceMode, 
+                    updatedAt: serverTimestamp(),
+                    updatedBy: state.user.uid
+                });
+                checkMaintenanceMode();
+                showToast(state.maintenanceMode ? 'Maintenance Mode ON' : 'Maintenance Mode OFF');
+            } catch (e) { showToast('Failed: ' + e.message); }
+        };
+
+        window.showAdminLogin = () => {
+            document.getElementById('maintenanceAdminModal').classList.add('active');
+            document.getElementById('maintenanceAdminError').textContent = '';
+        };
+
+        window.hideMaintenanceAdminModal = () => {
+            document.getElementById('maintenanceAdminModal').classList.remove('active');
+        };
+
+        window.bypassMaintenance = async () => {
+            const email = document.getElementById('maintenanceAdminEmail').value.trim();
+            const password = document.getElementById('maintenanceAdminPassword').value;
+            const errorDiv = document.getElementById('maintenanceAdminError');
+            if (!email || !password) { errorDiv.textContent = 'Enter email and password'; return; }
+            try {
+                const cred = await signInWithEmailAndPassword(auth, email, password);
+                if (ADMIN_UIDS.includes(cred.user.uid)) {
+                    document.getElementById('maintenanceOverlay').style.display = 'none';
+                    hideMaintenanceAdminModal();
+                    showToast('Admin access granted!');
+                } else {
+                    await signOut(auth);
+                    errorDiv.textContent = 'Not authorized!';
+                }
+            } catch (err) {
+                errorDiv.textContent = 'Invalid credentials!';
+            }
+        };
+
+        // ===== INVOICE SYSTEM =====
+        async function loadInvoices() {
+            try {
+                const q = query(collection(db, 'invoices'), orderBy('createdAt', 'desc'));
+                const snap = await getDocs(q);
+                state.invoices = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            } catch (e) { console.log('Invoices load error', e); }
+        }
+
+        function generateInvoiceCode() {
+            const random = Math.floor(100000 + Math.random() * 900000);
+            return 'ORD-' + random;
+        }
+
+        async function createInvoice(item, userId, username, email) {
+            const code = generateInvoiceCode();
+            const invoiceData = {
+                code: code,
+                userId: userId,
+                username: username || 'Unknown',
+                email: email || 'Unknown',
+                itemName: item.name,
+                itemId: item.id,
+                price: item.price,
+                currency: item.currency || 'Credits',
+                status: 'pending',
+                createdAt: serverTimestamp()
+            };
+            try {
+                await addDoc(collection(db, 'invoices'), invoiceData);
+                state.invoices.unshift({ id: code, ...invoiceData });
+                return code;
+            } catch (e) { throw e; }
+        }
+
+        function renderAdminInvoices() {
+            const tbody = document.getElementById('adminInvoicesBody');
+            if (!tbody) return;
+            if (state.invoices.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted); padding:20px;">No invoices yet</td></tr>';
+                return;
+            }
+            tbody.innerHTML = state.invoices.map(inv => {
+                const date = inv.createdAt ? new Date(inv.createdAt.toDate()).toLocaleDateString() : 'N/A';
+                const statusColor = inv.status === 'pending' ? 'var(--accent-gold)' : inv.status === 'completed' ? 'var(--accent-green)' : 'var(--accent-red)';
+                return `<tr>
+                    <td style="font-family:var(--font-display); color:var(--accent-gold); font-weight:700;">${inv.code}</td>
+                    <td>${inv.username}</td>
+                    <td>${inv.email}</td>
+                    <td>${inv.itemName}</td>
+                    <td>${inv.price} ${inv.currency}</td>
+                    <td style="color:${statusColor}; text-transform:uppercase; font-weight:700;">${inv.status}</td>
+                    <td>${date}</td>
+                    <td><button class="btn btn-danger btn-sm" onclick="window.deleteInvoice('${inv.id}')">🗑️ Delete</button></td>
+                </tr>`;
+            }).join('');
+        }
+
+        window.searchInvoice = () => {
+            const query = document.getElementById('invoiceSearchInput').value.trim().toUpperCase();
+            const resultDiv = document.getElementById('invoiceSearchResult');
+            if (!query) { resultDiv.innerHTML = ''; return; }
+            const found = state.invoices.find(inv => inv.code === query);
+            if (!found) {
+                resultDiv.innerHTML = '<p style="color:var(--accent-red); font-weight:700;">❌ Invoice not found!</p>';
+                return;
+            }
+            const date = found.createdAt ? new Date(found.createdAt.toDate()).toLocaleString() : 'N/A';
+            const statusColor = found.status === 'pending' ? 'var(--accent-gold)' : found.status === 'completed' ? 'var(--accent-green)' : 'var(--accent-red)';
+            resultDiv.innerHTML = `
+                <div style="background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:12px; padding:20px; margin-top:10px;">
+                    <h4 style="font-family:var(--font-display); color:var(--accent-gold); margin-bottom:15px;">📋 Invoice Details</h4>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                        <p style="color:var(--text-secondary);"><strong>Code:</strong> <span style="color:var(--accent-gold); font-family:var(--font-display);">${found.code}</span></p>
+                        <p style="color:var(--text-secondary);"><strong>Username:</strong> ${found.username}</p>
+                        <p style="color:var(--text-secondary);"><strong>Email:</strong> ${found.email}</p>
+                        <p style="color:var(--text-secondary);"><strong>Item:</strong> ${found.itemName}</p>
+                        <p style="color:var(--text-secondary);"><strong>Total:</strong> ${found.price} ${found.currency}</p>
+                        <p style="color:var(--text-secondary);"><strong>Status:</strong> <span style="color:${statusColor}; font-weight:700;">${found.status.toUpperCase()}</span></p>
+                        <p style="color:var(--text-secondary);"><strong>Date:</strong> ${date}</p>
+                        <p style="color:var(--text-secondary);"><strong>User ID:</strong> ${found.userId}</p>
+                    </div>
+                </div>
+            `;
+        };
+
+        window.clearInvoiceSearch = () => {
+            document.getElementById('invoiceSearchInput').value = '';
+            document.getElementById('invoiceSearchResult').innerHTML = '';
+        };
+
+        window.deleteInvoice = async (invoiceId) => {
+            if (!state.isAdmin) { showToast('Admin only!'); return; }
+            if (!confirm('Delete this invoice?')) return;
+            try {
+                await deleteDoc(doc(db, 'invoices', invoiceId));
+                state.invoices = state.invoices.filter(i => i.id !== invoiceId);
+                renderAdminInvoices();
+                showToast('Invoice deleted!');
+            } catch (e) { showToast('Delete failed: ' + e.message); }
+        };
+
+        // ===== CREDITS SYSTEM =====
+        async function loadUserCredits() {
+            if (!state.user) { state.credits = 0; updateCreditsDisplay(); return; }
+            try {
+                const userDoc = await getDoc(doc(db, 'users', state.user.uid));
+                if (userDoc.exists()) {
+                    state.credits = userDoc.data().credits || 0;
+                    updateCreditsDisplay();
+                }
+            } catch (e) { console.log('Credits load error', e); }
+        }
+
+        async function updateUserCredits(newCredits) {
+            if (!state.user) return;
+            try {
+                await setDoc(doc(db, 'users', state.user.uid), { credits: newCredits }, { merge: true });
+                state.credits = newCredits;
+                updateCreditsDisplay();
+            } catch (e) { console.log('Credits update error', e); }
+        }
+
+        function updateCreditsDisplay() {
+            const sidebarCredits = document.getElementById('sidebarCredits');
+            const sidebarCreditsValue = document.getElementById('sidebarCreditsValue');
+            const navCredits = document.getElementById('navCredits');
+            const navCreditsValue = document.getElementById('navCreditsValue');
+
+            if (state.user) {
+                sidebarCredits.style.display = 'block';
+                sidebarCreditsValue.textContent = state.credits;
+                navCredits.classList.add('visible');
+                navCreditsValue.textContent = state.credits + ' Credits';
+            } else {
+                sidebarCredits.style.display = 'none';
+                navCredits.classList.remove('visible');
+            }
+        }
+
+        // ===== CREDITS PURCHASE FLOW =====
+        window.buyWithCredits = (id) => {
+            if (!state.user) { showToast('Login to buy!'); openAuthModal(); return; }
+            const p = state.products[id];
+            if (!p) return;
+
+            if (p.currency === 'Credits') {
+                // Credits item - show confirmation, NOT add to cart
+                if (state.credits < p.price) {
+                    showToast('Not enough credits! You have ' + state.credits + ' Credits', true);
+                    return;
+                }
+                state.pendingCreditsItem = p;
+                document.getElementById('creditsConfirmItemName').textContent = p.name;
+                document.getElementById('creditsConfirmItemPrice').textContent = p.price + ' Credits';
+                document.getElementById('creditsConfirmModal').classList.add('active');
+            } else {
+                // INR item - add to cart as before
+                window.addToCart(id);
+            }
+        };
+
+        window.confirmCreditsPurchase = async () => {
+            if (!state.pendingCreditsItem || !state.user) return;
+            const p = state.pendingCreditsItem;
+
+            if (state.credits < p.price) {
+                showToast('Not enough credits!', true);
+                closeCreditsConfirmModal();
+                return;
+            }
+
+            try {
+                // Deduct credits immediately
+                const newCredits = state.credits - p.price;
+                await updateUserCredits(newCredits);
+
+                // Create invoice
+                const code = await createInvoice(p, state.user.uid, state.username, state.user.email);
+
+                // Show invoice modal
+                document.getElementById('invoiceCodeDisplay').textContent = code;
+                document.getElementById('invoiceItemName').textContent = p.name;
+                document.getElementById('invoiceItemPrice').textContent = p.price;
+
+                closeCreditsConfirmModal();
+                document.getElementById('creditsInvoiceModal').classList.add('active');
+                showToast('Purchase successful! Invoice: ' + code);
+
+                state.pendingCreditsItem = null;
+            } catch (e) {
+                showToast('Purchase failed: ' + e.message, true);
+            }
+        };
+
+        window.closeCreditsConfirmModal = () => {
+            document.getElementById('creditsConfirmModal').classList.remove('active');
+            state.pendingCreditsItem = null;
+        };
+
+        window.closeCreditsInvoice = () => {
+            document.getElementById('creditsInvoiceModal').classList.remove('active');
+        };
+
+        // ===== AUTH & USERNAME =====
         function setupAuth() {
             onAuthStateChanged(auth, async (user) => {
                 state.user = user;
@@ -1211,8 +1545,11 @@
                     document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon"></span><span>Login</span>';
                     document.getElementById('sidebarAuthLink').onclick = openAuthModal;
                     state.username = null;
+                    state.credits = 0;
                     updateUsernameDisplay();
+                    updateCreditsDisplay();
                 }
+                checkMaintenanceMode();
                 const currentHash = getHashView();
                 if (currentHash === 'admin' && !state.isAdmin) {
                     window.location.hash = ''; switchViewInternal('landing', true);
@@ -1231,43 +1568,19 @@
             } catch (e) { console.log('Username load error', e); }
         }
 
-async function loadUserCredits() {
-            if (!state.user) return;
-            try {
-                const userDoc = await getDoc(doc(db, 'users', state.user.uid));
-                if (userDoc.exists()) {
-                    state.userCredits = userDoc.data().credits || 0;
-                    updateCreditsDisplay();
-                }
-            } catch (e) { console.log('Credits load error', e); }
-        }
-
-        function updateCreditsDisplay() {
-            const navCredits = document.getElementById('navCredits');
-            const sidebarCredits = document.getElementById('sidebarCredits');
-            if (navCredits) navCredits.textContent = state.userCredits + ' Credits';
-            if (sidebarCredits) sidebarCredits.textContent = state.userCredits + ' Credits';
-        }
-
         function updateUsernameDisplay() {
             const navUsername = document.getElementById('navUsername');
             const navUsernameValue = document.getElementById('navUsernameValue');
             const sidebarUsername = document.getElementById('sidebarUsername');
             const sidebarUsernameValue = document.getElementById('sidebarUsernameValue');
-            const navCredits = document.getElementById('navCredits');
-            const sidebarCreditsBox = document.getElementById('sidebarCreditsBox');
             if (state.username && state.user) {
                 navUsernameValue.textContent = state.username;
                 navUsername.classList.add('visible');
                 sidebarUsernameValue.textContent = state.username;
                 sidebarUsername.style.display = 'block';
-                if (navCredits) navCredits.style.display = 'flex';
-                if (sidebarCreditsBox) sidebarCreditsBox.style.display = 'block';
             } else {
                 navUsername.classList.remove('visible');
                 sidebarUsername.style.display = 'none';
-                if (navCredits) navCredits.style.display = 'none';
-                if (sidebarCreditsBox) sidebarCreditsBox.style.display = 'none';
             }
         }
 
@@ -1328,10 +1641,18 @@ async function loadUserCredits() {
                 if (state.authTab === 'login') { cred = await signInWithEmailAndPassword(auth, email, password); }
                 else {
                     cred = await createUserWithEmailAndPassword(auth, email, password);
-                    await setDoc(doc(db, 'users', cred.user.uid), { email, username, isAdmin: false, credits: 0, createdAt: serverTimestamp() }, { merge: true });
+                    await setDoc(doc(db, 'users', cred.user.uid), { 
+                        email, 
+                        username, 
+                        isAdmin: false, 
+                        credits: 0,
+                        createdAt: serverTimestamp() 
+                    }, { merge: true });
                     state.usernames.add(username);
                     state.username = username;
+                    state.credits = 0;
                     updateUsernameDisplay();
+                    updateCreditsDisplay();
                 }
                 errorDiv.textContent = ''; closeAuthModal();
             } catch (err) {
@@ -1340,6 +1661,7 @@ async function loadUserCredits() {
             }
         };
 
+        // ===== PRODUCTS & RENDERING =====
         function renderProducts() {
             const allProducts = Object.values(state.products);
             document.getElementById('moneyContainer').innerHTML = allProducts.filter(p => p.category === 'money').map((p, i) => makeCard(p, i)).join('');
@@ -1355,28 +1677,25 @@ async function loadUserCredits() {
         function makeCard(p, index) {
             const isPromo = p.promo;
             const stockClass = p.stock === 'Unlimited' || p.stock === '1 Time' ? '' : (parseInt(p.stock) <= 5 ? 'stock-label-low' : '');
-            const btnClass = isPromo ? 'btn-gold' : 'btn-primary';
-            const btnText = isPromo ? 'Claim Promo' : 'Add to Cart';
+            const isCredits = p.currency === 'Credits';
+            const btnClass = isCredits ? 'btn-gold' : (isPromo ? 'btn-gold' : 'btn-primary');
+            const btnText = isCredits ? 'Buy with Credits' : (isPromo ? 'Claim Promo' : 'Add to Cart');
             const displayName = p.name.replace(/(\d+M|Promo)/g, '<span style="color:var(--accent-red);">$1</span>');
-            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost">${p.price} INR</div><button class="btn ${btnClass}" style="width:100%;" onclick="window.addToCart('${p.id}')">${btnText}</button></div></div>`;
+            const priceDisplay = p.price + ' ' + (p.currency || 'INR');
+            const onClick = isCredits ? `window.buyWithCredits('${p.id}')` : `window.addToCart('${p.id}')`;
+            return `<div class="pkg-card" style="animation-delay:${index * 0.1}s;"><button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button>${isPromo ? '<span class="promo-badge">1-Time</span>' : ''}${isCredits ? '<span class="promo-badge" style="background:linear-gradient(90deg,var(--accent-gold),#ca8a04); right:auto; left:15px;">💰 CREDITS</span>' : ''}<div><div class="pkg-val">${displayName}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="pkg-cost" style="${isCredits ? 'color:var(--accent-gold); background:rgba(234,179,8,0.05); border-color:rgba(234,179,8,0.1);' : ''}">${priceDisplay}</div><button class="btn ${btnClass}" style="width:100%;" onclick="${onClick}">${btnText}</button></div></div>`;
         }
 
+        // ===== CART (INR ONLY) =====
         window.addToCart = (id) => {
             if (!state.user) { showToast('Login to add items!'); openAuthModal(); return; }
             const p = state.products[id]; if (!p) return;
-
-            // Check credits for credit-based items
-            const itemCurrency = p.currency || 'INR';
-            if (itemCurrency === 'Credits' && state.userCredits < p.price) {
-                showToast('Not enough credits! You have ' + state.userCredits + ' credits.');
-                return;
-            }
-
+            if (p.currency === 'Credits') { showToast('Credits items cannot be added to cart!'); return; }
             if (p.promo && state.cart.some(i => i.id === id)) { showToast('Promo only once!'); return; }
             if (p.promo && state.cart.length === 0) { showToast('Add regular item first!'); return; }
             const existingIndex = state.cart.findIndex(item => item.id === id);
             if (existingIndex > -1) { state.cart[existingIndex].qty += 1; }
-            else { state.cart.push({ id: p.id, name: p.name, price: p.price, currency: itemCurrency, qty: 1 }); }
+            else { state.cart.push({ id: p.id, name: p.name, price: p.price, currency: 'INR', qty: 1 }); }
             updateCartUI(); showToast(`${p.name} added to cart!`);
         };
 
@@ -1394,16 +1713,10 @@ async function loadUserCredits() {
             return state.cart.reduce((s, i) => s + (i.price * i.qty), 0);
         }
 
-        function getCartCurrency() {
-            if (state.cart.length === 0) return 'INR';
-            return state.cart[0].currency || 'INR';
-        }
-
         function updateCartUI() {
             document.getElementById('cartCount').textContent = state.cart.reduce((sum, i) => sum + i.qty, 0);
             const total = calculateCartTotal();
-            const currency = state.cart.length > 0 ? (state.cart[0].currency || 'INR') : 'INR';
-            document.getElementById('cartTotal').textContent = total + ' ' + getCartCurrency();
+            document.getElementById('cartTotal').textContent = total + ' INR';
 
             if (state.cart.length === 0) {
                 document.getElementById('cartItems').innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);"><div style="font-size:3rem; margin-bottom:15px;">🛒</div><p>Your cart is empty</p></div>';
@@ -1412,8 +1725,7 @@ async function loadUserCredits() {
 
             document.getElementById('cartItems').innerHTML = state.cart.map((item, i) => {
                 const itemTotal = item.price * item.qty;
-                const itemCurrency = item.currency || 'INR';
-                return `<div class="cart-item"><div class="cart-item-info"><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} ${itemCurrency} x ${item.qty} = ${itemTotal} ${itemCurrency}</p></div><div style="display:flex; align-items:center; gap:8px;"><div class="cart-item-qty"><button onclick="window.updateCartQty(${i}, -1)">−</button><span>${item.qty}</span><button onclick="window.updateCartQty(${i}, 1)">+</button></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div></div>`;
+                return `<div class="cart-item"><div class="cart-item-info"><h4 style="font-family:var(--font-display); font-size:0.95rem;">${item.name}</h4><p style="color:var(--accent-red); font-weight:700;">${item.price} INR x ${item.qty} = ${itemTotal} INR</p></div><div style="display:flex; align-items:center; gap:8px;"><div class="cart-item-qty"><button onclick="window.updateCartQty(${i}, -1)">−</button><span>${item.qty}</span><button onclick="window.updateCartQty(${i}, 1)">+</button></div><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.removeFromCart(${i})">🗑️</button></div></div>`;
             }).join('');
         }
 
@@ -1424,29 +1736,15 @@ async function loadUserCredits() {
 
         window.checkoutCart = () => {
             if (state.cart.length === 0) { showToast('Cart is empty!'); return; }
-
-            const hasCreditItems = state.cart.some(item => item.currency === 'Credits');
-            const hasInrItems = state.cart.some(item => item.currency === 'INR');
-
-            if (hasCreditItems && hasInrItems) {
-                showToast('Cannot mix INR and Credits in same order!');
-                return;
-            }
-
-            toggleCart();
-
-            if (hasCreditItems) {
-                processCreditsCheckout();
-            } else {
-                document.getElementById('checkoutModal').classList.add('active');
-            }
+            toggleCart(); 
+            document.getElementById('checkoutModal').classList.add('active');
         };
 
         window.toggleWishlistItem = (id, e) => {
             if (e) e.stopPropagation();
             const idx = state.wishlist.indexOf(id);
             if (idx > -1) state.wishlist.splice(idx, 1); else state.wishlist.push(id);
-            localStorage.setItem('te_wishlist', JSON.stringify(state.wishlist));
+            localStorage.setItem('elite_wishlist', JSON.stringify(state.wishlist));
             updateWishlistUI(); renderProducts();
         };
 
@@ -1458,7 +1756,11 @@ async function loadUserCredits() {
             }
             document.getElementById('wishlistItems').innerHTML = state.wishlist.map(id => {
                 const p = state.products[id]; if (!p) return '';
-                return `<div class="wishlist-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${p.name}</h4><p style="color:var(--accent-red); font-weight:700;">${p.price} INR</p></div><div style="display:flex; gap:8px;"><button class="btn btn-primary btn-sm" onclick="window.addToCart('${p.id}'); window.toggleWishlist()">Add</button><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.toggleWishlistItem('${p.id}')">🗑️</button></div></div>`;
+                const isCredits = p.currency === 'Credits';
+                const btnAction = isCredits ? `window.buyWithCredits('${p.id}'); window.toggleWishlist()` : `window.addToCart('${p.id}'); window.toggleWishlist()`;
+                const btnText = isCredits ? 'Buy with Credits' : 'Add to Cart';
+                const btnClass = isCredits ? 'btn-gold' : 'btn-primary';
+                return `<div class="wishlist-item"><div><h4 style="font-family:var(--font-display); font-size:0.95rem;">${p.name}</h4><p style="color:var(--accent-red); font-weight:700;">${p.price} ${p.currency || 'INR'}</p></div><div style="display:flex; gap:8px;"><button class="btn ${btnClass} btn-sm" onclick="${btnAction}">${btnText}</button><button class="btn btn-sm" style="background:rgba(255,71,87,0.1); color:var(--accent-red); border:none; width:32px; height:32px; border-radius:8px; cursor:pointer;" onclick="window.toggleWishlistItem('${p.id}')">🗑️</button></div></div>`;
             }).join('');
         }
 
@@ -1469,6 +1771,7 @@ async function loadUserCredits() {
             overlay.style.pointerEvents = overlay.style.pointerEvents === 'auto' ? 'none' : 'auto';
         };
 
+        // ===== REVIEWS =====
         async function loadReviews() {
             try {
                 const q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'));
@@ -1537,6 +1840,7 @@ async function loadUserCredits() {
             } catch (e) { showToast('Failed to submit review'); }
         };
 
+        // ===== PAYMENT (INR) =====
         window.openPaymentModal = () => {
             hideCheckout(); 
             document.getElementById('paymentModal').classList.add('active');
@@ -1615,7 +1919,11 @@ async function loadUserCredits() {
             const stockClass = p.stock === 'Unlimited' || p.stock === '1 Time' ? '' : (parseInt(p.stock) <= 5 ? 'stock-label-low' : '');
             const tagHtml = p.tag ? `<div class="offer-tag">${p.tag}</div>` : '';
             const currency = p.currency || 'INR';
-            return `<div class="offer-card" style="animation-delay:${index * 0.1}s;">${tagHtml}<button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button><div><div class="offer-val">${p.name}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="offer-cost">${p.price} ${currency}</div><button class="btn btn-purple" style="width:100%;" onclick="window.addToCart('${p.id}')">Add to Cart</button></div></div>`;
+            const isCredits = currency === 'Credits';
+            const btnClass = isCredits ? 'btn-gold' : 'btn-purple';
+            const btnText = isCredits ? 'Buy with Credits' : 'Add to Cart';
+            const onClick = isCredits ? `window.buyWithCredits('${p.id}')` : `window.addToCart('${p.id}')`;
+            return `<div class="offer-card" style="animation-delay:${index * 0.1}s;">${tagHtml}<button class="wishlist-btn ${state.wishlist.includes(p.id) ? 'active' : ''}" onclick="window.toggleWishlistItem('${p.id}', event)">❤️</button><div><div class="offer-val">${p.name}</div><div class="stock-label ${stockClass}">${p.stock} in stock</div></div><div><div class="offer-cost" style="${isCredits ? 'color:var(--accent-gold); background:rgba(234,179,8,0.05); border-color:rgba(234,179,8,0.1);' : ''}">${p.price} ${currency}</div><button class="btn ${btnClass}" style="width:100%;" onclick="${onClick}">${btnText}</button></div></div>`;
         }
 
         window.addOfferItem = async () => {
@@ -2032,123 +2340,14 @@ async function loadUserCredits() {
         window.hideComingSoon = () => document.getElementById('comingSoonModal').classList.remove('active');
         window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('active'); };
 
-        function showToast(message) {
+        function showToast(message, isError) {
             const toast = document.getElementById('toast');
-            toast.textContent = message; toast.classList.add('show');
+            toast.textContent = message; 
+            toast.classList.remove('error');
+            if (isError) toast.classList.add('error');
+            toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
-
-
-        // ===== INVOICE SYSTEM =====
-        function generateInvoiceCode() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let code = 'ORD-';
-            for (let i = 0; i < 6; i++) {
-                code += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return code;
-        }
-
-        async function processCreditsCheckout() {
-            if (state.cart.length === 0) { showToast('Cart is empty!'); return; }
-
-            const totalCredits = state.cart.reduce((s, i) => s + (i.price * i.qty), 0);
-
-            if (state.userCredits < totalCredits) {
-                showToast('Not enough credits! You have ' + state.userCredits + ' credits. Need ' + totalCredits);
-                return;
-            }
-
-            const invoiceCode = generateInvoiceCode();
-            const items = state.cart.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty }));
-
-            try {
-                // Deduct credits from user
-                const newCredits = state.userCredits - totalCredits;
-                await updateDoc(doc(db, 'users', state.user.uid), { credits: newCredits });
-                state.userCredits = newCredits;
-                updateCreditsDisplay();
-
-                // Save invoice to Firestore
-                await setDoc(doc(db, 'invoices', invoiceCode), {
-                    code: invoiceCode,
-                    userId: state.user.uid,
-                    username: state.username || state.user.email,
-                    email: state.user.email,
-                    items: items,
-                    totalCredits: totalCredits,
-                    status: 'pending',
-                    createdAt: serverTimestamp()
-                });
-
-                // Clear cart
-                state.cart = [];
-                updateCartUI();
-
-                // Show invoice modal
-                document.getElementById('invoiceCode').textContent = invoiceCode;
-                document.getElementById('invoiceModal').classList.add('active');
-
-                showToast('Order placed! Invoice: ' + invoiceCode);
-            } catch (e) {
-                showToast('Checkout failed: ' + e.message);
-                console.error(e);
-            }
-        }
-
-        window.hideInvoiceModal = () => {
-            document.getElementById('invoiceModal').classList.remove('active');
-        };
-
-        async function loadInvoices() {
-            if (!state.isAdmin) return;
-            try {
-                const q = query(collection(db, 'invoices'), orderBy('createdAt', 'desc'));
-                const snap = await getDocs(q);
-                state.invoices = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-                renderAdminInvoices();
-            } catch (e) { console.log('Invoices load error', e); }
-        }
-
-        function renderAdminInvoices() {
-            const tbody = document.getElementById('adminInvoicesBody');
-            if (!tbody) return;
-            if (state.invoices.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted);">No invoices yet</td></tr>';
-                return;
-            }
-            tbody.innerHTML = state.invoices.map(inv => {
-                const items = inv.items ? inv.items.map(i => i.name + ' x' + i.qty).join(', ') : '-';
-                const date = inv.createdAt ? new Date(inv.createdAt.toDate()).toLocaleString() : '-';
-                return `<tr><td><strong style="color:var(--accent-purple); font-family:var(--font-display);">${inv.code}</strong></td><td>${inv.username || '-'}</td><td>${inv.email || '-'}</td><td>${items}</td><td style="color:var(--accent-gold); font-weight:700;">${inv.totalCredits} Credits</td><td><span style="background:rgba(255,159,67,0.1); color:#ff9f43; padding:4px 10px; border-radius:6px; font-size:0.8rem; font-weight:700;">${inv.status || 'pending'}</span></td><td>${date}</td><td><button class="btn btn-danger btn-sm" onclick="window.deleteInvoice('${inv.id}')">Delete</button></td></tr>`;
-            }).join('');
-        }
-
-        window.deleteInvoice = async (invoiceId) => {
-            if (!state.isAdmin) { showToast('Admin only!'); return; }
-            if (!confirm('Delete this invoice?')) return;
-            try {
-                await deleteDoc(doc(db, 'invoices', invoiceId));
-                state.invoices = state.invoices.filter(i => i.id !== invoiceId);
-                renderAdminInvoices();
-                showToast('Invoice deleted!');
-            } catch (e) { showToast('Delete failed: ' + e.message); }
-        };
-
-        window.searchInvoice = () => {
-            const code = document.getElementById('invoiceSearchInput').value.trim().toUpperCase();
-            if (!code) { renderAdminInvoices(); return; }
-            const found = state.invoices.filter(i => i.code && i.code.toUpperCase().includes(code));
-            if (found.length === 0) {
-                document.getElementById('adminInvoicesBody').innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--accent-red);">No invoice found with code: ' + code + '</td></tr>';
-                return;
-            }
-            document.getElementById('adminInvoicesBody').innerHTML = found.map(inv => {
-                const items = inv.items ? inv.items.map(i => i.name + ' x' + i.qty).join(', ') : '-';
-                const date = inv.createdAt ? new Date(inv.createdAt.toDate()).toLocaleString() : '-';
-                return `<tr><td><strong style="color:var(--accent-purple); font-family:var(--font-display);">${inv.code}</strong></td><td>${inv.username || '-'}</td><td>${inv.email || '-'}</td><td>${items}</td><td style="color:var(--accent-gold); font-weight:700;">${inv.totalCredits} Credits</td><td><span style="background:rgba(255,159,67,0.1); color:#ff9f43; padding:4px 10px; border-radius:6px; font-size:0.8rem; font-weight:700;">${inv.status || 'pending'}</span></td><td>${date}</td><td><button class="btn btn-danger btn-sm" onclick="window.deleteInvoice('${inv.id}')">Delete</button></td></tr>`;
-            }).join('');
-        };
 
         init();
     </script>
