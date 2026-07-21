@@ -1237,12 +1237,14 @@ const state = {
 
 // ===== NUMBER FORMATTING =====
 function formatNumber(num) {
-    if (num >= 100000000) return (num / 100000000).toFixed(num % 100000000 === 0 ? 0 : 1) + 'M';
-    if (num >= 10000000) return (num / 1000000).toFixed(num % 1000000 === 0 ? 0 : 1) + 'M';
-    if (num >= 1000000) return (num / 1000000).toFixed(num % 1000000 === 0 ? 0 : 1) + 'M';
-    if (num >= 100000) return (num / 1000).toFixed(num % 1000 === 0 ? 0 : 1) + 'k';
-    if (num >= 10000) return (num / 1000).toFixed(num % 1000 === 0 ? 0 : 1) + 'k';
-    if (num >= 1000) return (num / 1000).toFixed(num % 1000 === 0 ? 0 : 1) + 'k';
+    const absNum = Math.abs(num);
+    if (absNum >= 1000000000) return (num / 1000000000).toFixed(absNum % 1000000000 === 0 ? 0 : (absNum % 100000000 === 0 ? 0 : 1)) + 'B';
+    if (absNum >= 100000000) return (num / 100000000).toFixed(absNum % 100000000 === 0 ? 0 : 1) + 'M';
+    if (absNum >= 10000000) return (num / 10000000).toFixed(absNum % 10000000 === 0 ? 0 : 1) + 'M';
+    if (absNum >= 1000000) return (num / 1000000).toFixed(absNum % 1000000 === 0 ? 0 : 1) + 'M';
+    if (absNum >= 100000) return (num / 1000).toFixed(absNum % 1000 === 0 ? 0 : 1) + 'k';
+    if (absNum >= 10000) return (num / 1000).toFixed(absNum % 1000 === 0 ? 0 : 1) + 'k';
+    if (absNum >= 1000) return (num / 1000).toFixed(absNum % 1000 === 0 ? 0 : 1) + 'k';
     return num.toString();
 }
 
@@ -1261,8 +1263,9 @@ function parseBetInput(input) {
 
 window.formatBetInput = function(el) {
     const val = parseBetInput(el.value);
-    if (val > 0) {
-        document.getElementById('potentialWin').textContent = formatNumber(val * 2);
+    const potentialEl = document.getElementById('potentialWin');
+    if (potentialEl && val > 0) {
+        potentialEl.textContent = formatNumber(val * 2);
     }
 };
 
@@ -1283,7 +1286,7 @@ function getHashView() {
     const hash = window.location.hash;
     if (hash && hash.startsWith('#/')) {
         const view = hash.replace('#/', '');
-        if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'discord', 'nitro', 'boosts', 'offers', 'games', 'coinflip', 'profile'].includes(view)) return view;
+        if (view && ['menu', 'money', 'items', 'accounts', 'admin', 'discord', 'nitro', 'boosts', 'offers', 'games', 'coinflip', 'crash', 'dice', 'profile'].includes(view)) return view;
     }
     return 'landing';
 }
@@ -1307,7 +1310,8 @@ function switchViewInternal(view, skipHashUpdate) {
         landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', 
         accounts: 'viewAccounts', admin: 'viewAdmin', discord: 'viewDiscord', 
         nitro: 'viewNitro', boosts: 'viewBoosts', offers: 'viewOffers',
-        games: 'viewGames', coinflip: 'viewCoinflip', profile: 'viewProfile'
+        games: 'viewGames', coinflip: 'viewCoinflip', crash: 'viewCrash', dice: 'viewDice',
+        profile: 'viewProfile'
     };
     if (map[view]) { 
         setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); 
@@ -1322,6 +1326,8 @@ function switchViewInternal(view, skipHashUpdate) {
     if (view === 'boosts') { renderDiscordItems('boosts'); }
     if (view === 'offers') { renderOfferItems(); }
     if (view === 'coinflip') { renderCoinflipHistory(); }
+    if (view === 'crash') { renderCrashHistory(); }
+    if (view === 'dice') { window.updateDicePayout(); renderDiceHistory(); }
     if (view === 'profile') { renderProfile(); }
     document.querySelectorAll('.sidebar-link').forEach(link => {
         link.classList.remove('active');
@@ -1649,6 +1655,162 @@ window.flipCoin = async function() {
     await addXp(state.levelSettings.xpPerGame, 'game');
     return originalFlipCoin();
 };
+
+
+// ===== CRASH GAME =====
+let crashState = { running: false, multiplier: 1.0, bet: 0, autoCashout: 0, interval: null, history: JSON.parse(localStorage.getItem('elite_crash') || '[]') };
+
+window.updateCrashPotential = function() {
+    const bet = parseBetInput(document.getElementById('crashBetAmount').value);
+    const auto = parseFloat(document.getElementById('crashAutoCashout').value) || 0;
+    // No display element for potential in crash, handled in game
+};
+
+function generateCrashPoint() {
+    const r = Math.random();
+    if (r < 0.02) return 1.0;
+    return Math.max(1.0, 0.98 / (1 - r));
+}
+
+window.startCrash = async function() {
+    if (!state.user) { showToast('Login to play!'); openAuthModal(); return; }
+    if (crashState.running) return;
+    const bet = parseBetInput(document.getElementById('crashBetAmount').value);
+    const autoCashout = parseFloat(document.getElementById('crashAutoCashout').value) || 0;
+    if (!bet || bet < 10000) { showToast('Min bet is 10k credits'); return; }
+    if (bet > 100000000) { showToast('Max bet is 100M credits'); return; }
+    if (bet > state.credits) { showToast('Not enough credits!'); return; }
+    await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(-bet) });
+    state.credits -= bet; updateCreditDisplay();
+    await addXp(state.levelSettings.xpPerGame, 'game');
+    crashState.running = true; crashState.bet = bet; crashState.autoCashout = autoCashout; crashState.multiplier = 1.0;
+    document.getElementById('crashStartBtn').style.display = 'none';
+    document.getElementById('crashCashoutBtn').style.display = 'block';
+    document.getElementById('crashStatus').textContent = 'Game in progress... Click CASHOUT!';
+    document.getElementById('crashStatus').style.color = 'var(--accent-green)';
+    document.getElementById('crashMultiplier').classList.remove('crash');
+    const crashPoint = generateCrashPoint();
+    let startTime = Date.now();
+    crashState.interval = setInterval(() => {
+        const elapsed = (Date.now() - startTime) / 1000;
+        crashState.multiplier = Math.pow(1.015, elapsed * 15);
+        crashState.multiplier = Math.min(crashState.multiplier, crashPoint);
+        document.getElementById('crashMultiplier').textContent = crashState.multiplier.toFixed(2) + 'x';
+        if (crashState.autoCashout > 1.01 && crashState.multiplier >= crashState.autoCashout) { window.cashoutCrash(); return; }
+        if (crashState.multiplier >= crashPoint) { endCrash(false, crashPoint); }
+    }, 50);
+};
+
+window.cashoutCrash = async function() {
+    if (!crashState.running) return;
+    endCrash(true, crashState.multiplier);
+};
+
+async function endCrash(won, finalMultiplier) {
+    if (!crashState.running) return;
+    crashState.running = false; clearInterval(crashState.interval);
+    const multEl = document.getElementById('crashMultiplier');
+    const statusEl = document.getElementById('crashStatus');
+    if (won) {
+        const winAmount = Math.floor(crashState.bet * finalMultiplier);
+        const profit = winAmount - crashState.bet;
+        await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(winAmount) });
+        state.credits += winAmount; updateCreditDisplay();
+        multEl.textContent = finalMultiplier.toFixed(2) + 'x';
+        statusEl.textContent = '🎉 CASHED OUT! +' + formatNumber(profit) + ' credits';
+        statusEl.style.color = 'var(--accent-green)';
+        showToast('Cashed out at ' + finalMultiplier.toFixed(2) + 'x! +' + formatNumber(profit));
+        crashState.history.unshift({ result: 'win', multiplier: finalMultiplier, profit: profit, time: Date.now() });
+    } else {
+        multEl.classList.add('crash');
+        multEl.textContent = finalMultiplier.toFixed(2) + 'x';
+        statusEl.textContent = '💥 CRASHED! Lost ' + formatNumber(crashState.bet) + ' credits';
+        statusEl.style.color = 'var(--accent-red)';
+        showToast('Crashed at ' + finalMultiplier.toFixed(2) + 'x!');
+        crashState.history.unshift({ result: 'loss', multiplier: finalMultiplier, profit: -crashState.bet, time: Date.now() });
+    }
+    if (crashState.history.length > 20) crashState.history = crashState.history.slice(0, 20);
+    localStorage.setItem('elite_crash', JSON.stringify(crashState.history));
+    renderCrashHistory();
+    document.getElementById('crashStartBtn').style.display = 'block';
+    document.getElementById('crashCashoutBtn').style.display = 'none';
+}
+
+function renderCrashHistory() {
+    const container = document.getElementById('crashHistory');
+    if (!container) return;
+    if (crashState.history.length === 0) { container.innerHTML = '<p style="color:var(--text-muted);">No games yet</p>'; return; }
+    container.innerHTML = crashState.history.slice(0, 10).map(h =>
+        '<div class="crash-history-item ' + (h.result === 'win' ? 'crash-history-win' : 'crash-history-loss') + '">' + h.multiplier.toFixed(2) + 'x</div>'
+    ).join('');
+}
+
+// ===== DICE GAME =====
+let diceState = { rolling: false, history: JSON.parse(localStorage.getItem('elite_dice') || '[]') };
+
+window.updateDicePayout = function() {
+    const target = parseInt(document.getElementById('diceTarget').value) || 50;
+    const clamped = Math.max(1, Math.min(99, target));
+    const payout = (99 / clamped).toFixed(2);
+    document.getElementById('dicePayout').textContent = 'Payout: ' + payout + 'x | Win Chance: ' + clamped + '%';
+};
+
+window.rollDice = async function() {
+    if (!state.user) { showToast('Login to play!'); openAuthModal(); return; }
+    if (diceState.rolling) return;
+    const bet = parseBetInput(document.getElementById('diceBetAmount').value);
+    const target = parseInt(document.getElementById('diceTarget').value) || 50;
+    if (!bet || bet < 10000) { showToast('Min bet is 10k credits'); return; }
+    if (bet > 100000000) { showToast('Max bet is 100M credits'); return; }
+    if (bet > state.credits) { showToast('Not enough credits!'); return; }
+    if (target < 1 || target > 99) { showToast('Target must be 1-99'); return; }
+    diceState.rolling = true;
+    const btn = document.getElementById('diceRollBtn');
+    const display = document.getElementById('diceDisplay');
+    const resultDiv = document.getElementById('diceResult');
+    btn.disabled = true; btn.textContent = 'ROLLING...';
+    display.classList.add('rolling'); resultDiv.textContent = ''; resultDiv.className = 'dice-result';
+    await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(-bet) });
+    state.credits -= bet; updateCreditDisplay();
+    await addXp(state.levelSettings.xpPerGame, 'game');
+    let rollValue = 0;
+    const rollInterval = setInterval(() => { rollValue = Math.floor(Math.random() * 100) + 1; display.textContent = rollValue; }, 80);
+    setTimeout(async () => {
+        clearInterval(rollInterval); display.classList.remove('rolling');
+        const finalRoll = Math.floor(Math.random() * 100) + 1;
+        display.textContent = finalRoll;
+        const won = finalRoll <= target;
+        const payout = parseFloat((99 / target).toFixed(2));
+        if (won) {
+            const winAmount = Math.floor(bet * payout);
+            const profit = winAmount - bet;
+            await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(winAmount) });
+            state.credits += winAmount; updateCreditDisplay();
+            resultDiv.textContent = '🎉 WIN! Rolled ' + finalRoll + ' (Target: ' + target + ') +' + formatNumber(profit) + ' credits';
+            resultDiv.className = 'dice-result win';
+            showToast('You won ' + formatNumber(profit) + ' credits!');
+            diceState.history.unshift({ result: 'win', roll: finalRoll, target: target, profit: profit, time: Date.now() });
+        } else {
+            resultDiv.textContent = '😢 LOSE! Rolled ' + finalRoll + ' (Target: ' + target + ') -' + formatNumber(bet) + ' credits';
+            resultDiv.className = 'dice-result loss';
+            showToast('You lost ' + formatNumber(bet) + ' credits');
+            diceState.history.unshift({ result: 'loss', roll: finalRoll, target: target, profit: -bet, time: Date.now() });
+        }
+        if (diceState.history.length > 20) diceState.history = diceState.history.slice(0, 20);
+        localStorage.setItem('elite_dice', JSON.stringify(diceState.history));
+        renderDiceHistory();
+        diceState.rolling = false; btn.disabled = false; btn.textContent = '🎲 ROLL DICE';
+    }, 2000);
+};
+
+function renderDiceHistory() {
+    const container = document.getElementById('diceHistory');
+    if (!container) return;
+    if (diceState.history.length === 0) { container.innerHTML = '<p style="color:var(--text-muted);">No rolls yet</p>'; return; }
+    container.innerHTML = diceState.history.slice(0, 10).map(h =>
+        '<div class="dice-history-item ' + (h.result === 'win' ? 'dice-history-win' : 'dice-history-loss') + '">' + h.roll + '</div>'
+    ).join('');
+}
 
 async function init() {
     Object.values(catalog).forEach(cat => cat.forEach(p => state.products[p.id] = { ...p }));
@@ -2489,9 +2651,13 @@ function renderCoinflipHistory() {
 
 // Update potential win display
 setInterval(() => {
-    const bet = parseBetInput(document.getElementById('betAmount').value);
-    if (bet > 0) {
-        document.getElementById('potentialWin').textContent = formatNumber(bet * 2);
+    const betInput = document.getElementById('betAmount');
+    const potentialEl = document.getElementById('potentialWin');
+    if (betInput && potentialEl) {
+        const bet = parseBetInput(betInput.value);
+        if (bet > 0) {
+            potentialEl.textContent = formatNumber(bet * 2);
+        }
     }
 }, 500);
 
