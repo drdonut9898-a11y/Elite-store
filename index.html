@@ -404,7 +404,63 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 12px 24px; border-radius: 12px; font-family: var(--font-display); font-size: 0.85rem; z-index: 10000; opacity: 0; transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .toast.error { border-color: var(--accent-red); color: var(--accent-red); }
+
+/* ===== CHAT SYSTEM STYLES ===== */
+.chat-widget { position:fixed; bottom:30px; left:30px; z-index:100; animation: floatIn 0.6s ease-out; }
+.chat-btn { width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg,var(--accent-blue),#0088ff); border:none; color:white; font-size:1.5rem; cursor:pointer; box-shadow:0 4px 20px var(--accent-blue-glow); display:flex; align-items:center; justify-content:center; position:relative; transition: var(--transition-bounce); }
+.chat-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow:0 8px 30px var(--accent-blue-glow); }
+.chat-btn .chat-unread { position:absolute; top:-5px; right:-5px; background:var(--accent-red); color:white; font-size:0.7rem; font-weight:900; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; animation: bounce 0.5s ease-out; }
+.chat-panel { position:fixed; bottom:100px; left:30px; width:380px; max-width:90vw; height:500px; max-height:70vh; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:16px; z-index:1000; display:none; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.5); transition:all 0.4s cubic-bezier(0.25,1,0.5,1); opacity:0; transform:translateY(20px) scale(0.95); }
+.chat-panel.open { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+.chat-header { padding:15px 20px; border-bottom:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center; background:linear-gradient(135deg,rgba(0,210,255,0.1),transparent); border-radius:16px 16px 0 0; }
+.chat-header h3 { font-family:var(--font-display); color:var(--accent-blue); font-size:1rem; letter-spacing:2px; }
+.chat-close { background:none; border:none; color:var(--text-muted); font-size:1.2rem; cursor:pointer; transition: var(--transition-smooth); }
+.chat-close:hover { color:var(--accent-red); transform:scale(1.2); }
+.chat-messages { flex:1; overflow-y:auto; padding:15px; display:flex; flex-direction:column; gap:10px; }
+.chat-message { display:flex; gap:10px; align-items:flex-start; animation: messageSlide 0.3s ease-out; }
+@keyframes messageSlide { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+.chat-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--accent-red),#ff2e44); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:0.85rem; font-weight:700; color:white; flex-shrink:0; }
+.chat-content { flex:1; }
+.chat-username { font-family:var(--font-display); font-size:0.85rem; font-weight:700; display:flex; align-items:center; gap:6px; }
+.chat-level-badge { font-size:0.65rem; padding:2px 8px; border-radius:10px; font-weight:700; letter-spacing:1px; }
+.chat-text { color:var(--text-secondary); font-size:0.9rem; line-height:1.4; margin-top:2px; word-break:break-word; }
+.chat-time { font-size:0.7rem; color:var(--text-muted); margin-top:2px; }
+.chat-input-area { padding:15px; border-top:1px solid var(--border-subtle); display:flex; gap:10px; }
+.chat-input { flex:1; padding:10px 14px; border-radius:10px; background:var(--bg-card); border:1px solid var(--border-subtle); color:var(--text-primary); font-size:0.9rem; transition: var(--transition-smooth); }
+.chat-input:focus { outline:none; border-color:var(--accent-blue); box-shadow:0 0 15px rgba(0,210,255,0.2); }
+.chat-send-btn { padding:10px 18px; border-radius:10px; background:linear-gradient(135deg,var(--accent-blue),#0088ff); border:none; color:white; font-family:var(--font-display); font-size:0.8rem; font-weight:700; cursor:pointer; transition: var(--transition-smooth); }
+.chat-send-btn:hover { transform:scale(1.05); box-shadow:0 5px 20px var(--accent-blue-glow); }
+.chat-send-btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+.chat-system-msg { text-align:center; color:var(--text-muted); font-size:0.8rem; padding:8px; background:var(--bg-glass); border-radius:8px; margin:5px 0; }
+.chat-levelup-notify { text-align:center; padding:10px; background:linear-gradient(135deg,rgba(234,179,8,0.1),rgba(234,179,8,0.05)); border:1px solid rgba(234,179,8,0.3); border-radius:10px; margin:5px 0; animation: glowPulse 2s ease-in-out infinite; }
+.chat-levelup-notify span { font-family:var(--font-display); color:var(--accent-gold); font-weight:700; }
+
+/* ===== LEVEL BADGE STYLES ===== */
+.level-badge-gray { background:#6b7280; color:white; }
+.level-badge-green { background:#22c55e; color:white; }
+.level-badge-red { background:#ef4444; color:white; }
+.level-badge-darkred { background:#991b1b; color:white; }
+.level-badge-purple { background:#a855f7; color:white; }
+.level-badge-gold { background:linear-gradient(135deg,#eab308,#ca8a04); color:#000; }
+
+/* ===== XP BAR STYLES ===== */
+.xp-bar-container { width:100%; height:6px; background:var(--bg-secondary); border-radius:3px; margin-top:4px; overflow:hidden; }
+.xp-bar-fill { height:100%; background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple)); border-radius:3px; transition:width 0.5s ease; }
+
+/* ===== LEVEL POPUP ===== */
+.level-popup { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0); background:var(--bg-card); border:2px solid var(--accent-gold); border-radius:20px; padding:40px; text-align:center; z-index:10000; box-shadow:0 0 60px rgba(234,179,8,0.3); transition:transform 0.5s cubic-bezier(0.68,-0.55,0.265,1.55); }
+.level-popup.show { transform:translate(-50%,-50%) scale(1); }
+.level-popup h2 { font-family:var(--font-display); color:var(--accent-gold); font-size:2rem; margin-bottom:10px; }
+.level-popup .level-number { font-size:4rem; font-weight:900; color:var(--accent-gold); text-shadow:0 0 30px var(--accent-gold-glow); }
+.level-popup .level-reward { color:var(--text-secondary); margin-top:10px; }
+
+/* Sidebar level display */
+.sidebar-level { margin:0 20px 10px; padding:10px 15px; background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(168,85,247,0.05)); border:1px solid rgba(168,85,247,0.2); border-radius:10px; text-align:center; }
+.sidebar-level .level-label { font-size:0.7rem; color:var(--accent-purple); text-transform:uppercase; letter-spacing:2px; margin-bottom:3px; font-weight:700; }
+.sidebar-level .level-value { font-family:var(--font-display); font-size:1.3rem; font-weight:800; }
+.sidebar-level .xp-text { font-size:0.75rem; color:var(--text-muted); margin-top:3px; }
 </style>
+<base target="_blank">
 <base target="_blank">
 <base target="_blank">
 </head>
@@ -439,6 +495,11 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 <div class="sidebar-username" id="sidebarUsername" style="display:none;">
 <div class="username-label">Username</div>
 <div class="username-value" id="sidebarUsernameValue">-</div>
+</div>
+<div class="sidebar-level" id="sidebarLevel" style="display:none;">
+<div class="level-label">Level</div>
+<div class="level-value" id="sidebarLevelValue">Lv.1 ⚪</div>
+<div id="sidebarXp"></div>
 </div>
 </nav>
 <div class="app-container" id="appContainer">
@@ -555,6 +616,50 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 <div class="menu-card" onclick="window.handleCardClick('coinflip')" style="border-color:rgba(234,179,8,0.3);">
 <h3 style="color:var(--accent-gold);">🪙 COINFLIP</h3>
 <p style="color:var(--accent-gold);">Double your credits! 50% Win Chance</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">🎁 CASES</h3>
+<p style="color:var(--accent-gold);">Open cases to win rare items!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">⚔️ CASE BATTLES</h3>
+<p style="color:var(--accent-gold);">Compete in case openings!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">📈 CRASH</h3>
+<p style="color:var(--accent-gold);">Cash out before it crashes!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">🎡 ROULETTE</h3>
+<p style="color:var(--accent-gold);">Classic roulette wheel!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">🃏 BLACKJACK</h3>
+<p style="color:var(--accent-gold);">Hit or stand to win!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">🏗️ TOWERS</h3>
+<p style="color:var(--accent-gold);">Climb towers, avoid bombs!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">🔵 PLINKO</h3>
+<p style="color:var(--accent-gold);">Drop the ball, win big!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">🎲 DICE</h3>
+<p style="color:var(--accent-gold);">Roll the dice!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">💣 MINES</h3>
+<p style="color:var(--accent-gold);">Avoid mines, collect gems!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">💰 JACKPOT</h3>
+<p style="color:var(--accent-gold);">Pool betting, winner takes all!</p>
+</div>
+<div class="menu-card" onclick="window.showComingSoon()" style="border-color:rgba(234,179,8,0.3);">
+<h3 style="color:var(--accent-gold);">🐔 CHICKEN ROAD</h3>
+<p style="color:var(--accent-gold);">Cross the road safely!</p>
 </div>
 </div>
 </div>
@@ -1109,7 +1214,25 @@ const state = {
     coinflipHistory: JSON.parse(localStorage.getItem('elite_coinflip') || '[]'),
     rigSettings: { loss5m: 60, loss10m: 80, loss50m: 100, minBet: 10000, maxBet: 100000000 },
     profileOrders: [],
-    profileTab: 'orders'
+    profileTab: 'orders',
+    // ===== CHAT & LEVEL SYSTEM =====
+    chatOpen: false,
+    chatMessages: [],
+    chatUnread: 0,
+    userLevel: { level: 1, xp: 0, totalXp: 0 },
+    levelSettings: {
+        xpPerChat: 5,
+        xpPerBuy: 50,
+        xpPerGame: 25,
+        xpPerLevel: 100
+    },
+    levelColors: {
+        0: '#6b7280', 10: '#22c55e', 20: '#ef4444', 30: '#991b1b',
+        40: '#a855f7', 50: '#eab308'
+    },
+    levelRewards: {
+        5: 100, 10: 500, 20: 2000, 30: 5000, 50: 10000
+    }
 };
 
 // ===== NUMBER FORMATTING =====
@@ -1206,6 +1329,327 @@ function switchViewInternal(view, skipHashUpdate) {
     });
 }
 
+
+// ===== LEVEL SYSTEM FUNCTIONS =====
+function getLevelFromXp(xp) {
+    return Math.floor(xp / state.levelSettings.xpPerLevel) + 1;
+}
+
+function getXpForNextLevel(level) {
+    return level * state.levelSettings.xpPerLevel;
+}
+
+function getLevelColor(level) {
+    if (level >= 50) return state.levelColors[50];
+    if (level >= 40) return state.levelColors[40];
+    if (level >= 30) return state.levelColors[30];
+    if (level >= 20) return state.levelColors[20];
+    if (level >= 10) return state.levelColors[10];
+    return state.levelColors[0];
+}
+
+function getLevelBadgeClass(level) {
+    if (level >= 50) return 'level-badge-gold';
+    if (level >= 40) return 'level-badge-purple';
+    if (level >= 30) return 'level-badge-darkred';
+    if (level >= 20) return 'level-badge-red';
+    if (level >= 10) return 'level-badge-green';
+    return 'level-badge-gray';
+}
+
+function formatLevelBadge(level) {
+    const color = getLevelColor(level);
+    const emoji = level >= 50 ? '🟡' : level >= 40 ? '🟣' : level >= 30 ? '🔴🔴' : level >= 20 ? '🔴' : level >= 10 ? '🟢' : '⚪';
+    return { color, emoji };
+}
+
+async function addXp(amount, source) {
+    if (!state.user) return;
+    const oldLevel = getLevelFromXp(state.userLevel.totalXp);
+    state.userLevel.totalXp += amount;
+    const newLevel = getLevelFromXp(state.userLevel.totalXp);
+    state.userLevel.level = newLevel;
+    state.userLevel.xp = state.userLevel.totalXp % state.levelSettings.xpPerLevel;
+
+    // Save to Firestore
+    try {
+        await updateDoc(doc(db, 'users', state.user.uid), {
+            totalXp: state.userLevel.totalXp,
+            level: newLevel
+        });
+    } catch (e) { console.log('XP save error', e); }
+
+    // Check level up
+    if (newLevel > oldLevel) {
+        await handleLevelUp(oldLevel, newLevel);
+    }
+
+    updateLevelDisplay();
+}
+
+async function handleLevelUp(oldLevel, newLevel) {
+    const reward = state.levelRewards[newLevel];
+    if (reward) {
+        try {
+            await updateDoc(doc(db, 'users', state.user.uid), {
+                credits: increment(reward)
+            });
+            state.credits += reward;
+            updateCreditDisplay();
+        } catch (e) { console.log('Reward error', e); }
+    }
+
+    // Show popup
+    showLevelUpPopup(newLevel, reward);
+
+    // Send system message to chat
+    const username = state.username || 'Player';
+    const { color, emoji } = formatLevelBadge(newLevel);
+    const rewardText = reward ? ` +${reward} Credits!` : '';
+    await sendChatMessageInternal({
+        type: 'levelup',
+        username: username,
+        level: newLevel,
+        text: `reached Level ${newLevel} ${emoji}!${rewardText}`,
+        color: color,
+        timestamp: Date.now()
+    });
+}
+
+function showLevelUpPopup(level, reward) {
+    const popup = document.getElementById('levelPopup');
+    const numberEl = document.getElementById('levelPopupNumber');
+    const rewardEl = document.getElementById('levelPopupReward');
+
+    numberEl.textContent = level;
+    if (reward) {
+        rewardEl.innerHTML = `<span style="color:var(--accent-gold); font-family:var(--font-display); font-size:1.2rem;">🎁 Reward: ${reward} Credits!</span>`;
+    } else {
+        rewardEl.textContent = '';
+    }
+
+    popup.classList.add('show');
+    setTimeout(() => popup.classList.remove('show'), 3000);
+}
+
+function updateLevelDisplay() {
+    const sidebarLevel = document.getElementById('sidebarLevel');
+    const sidebarLevelValue = document.getElementById('sidebarLevelValue');
+    const sidebarXp = document.getElementById('sidebarXp');
+
+    if (state.user && sidebarLevel) {
+        const level = state.userLevel.level;
+        const { color, emoji } = formatLevelBadge(level);
+        sidebarLevelValue.innerHTML = `Lv.${level} ${emoji}`;
+        sidebarLevelValue.style.color = color;
+        sidebarLevel.style.display = 'block';
+
+        const nextLevelXp = getXpForNextLevel(level);
+        const currentLevelBaseXp = (level - 1) * state.levelSettings.xpPerLevel;
+        const xpInLevel = state.userLevel.totalXp - currentLevelBaseXp;
+        const xpNeeded = state.levelSettings.xpPerLevel;
+        const progress = Math.min(100, (xpInLevel / xpNeeded) * 100);
+
+        if (sidebarXp) {
+            sidebarXp.innerHTML = `<div class="xp-bar-container"><div class="xp-bar-fill" style="width:${progress}%"></div></div><div style="font-size:0.7rem; color:var(--text-muted); margin-top:3px;">${xpInLevel}/${xpNeeded} XP</div>`;
+        }
+    } else if (sidebarLevel) {
+        sidebarLevel.style.display = 'none';
+    }
+}
+
+async function loadUserLevel() {
+    if (!state.user) return;
+    try {
+        const userDoc = await getDoc(doc(db, 'users', state.user.uid));
+        if (userDoc.exists()) {
+            const data = userDoc.data();
+            state.userLevel.totalXp = data.totalXp || 0;
+            state.userLevel.level = data.level || getLevelFromXp(state.userLevel.totalXp);
+            state.userLevel.xp = state.userLevel.totalXp % state.levelSettings.xpPerLevel;
+            updateLevelDisplay();
+        }
+    } catch (e) { console.log('Level load error', e); }
+}
+
+// ===== CHAT SYSTEM FUNCTIONS =====
+window.toggleChat = function() {
+    const panel = document.getElementById('chatPanel');
+    state.chatOpen = !state.chatOpen;
+    if (state.chatOpen) {
+        panel.classList.add('open');
+        state.chatUnread = 0;
+        document.getElementById('chatUnread').style.display = 'none';
+    } else {
+        panel.classList.remove('open');
+    }
+}
+
+window.sendChatMessage = async function() {
+    const input = document.getElementById('chatInput');
+    const btn = document.getElementById('chatSendBtn');
+    const text = input.value.trim();
+
+    if (!text || !state.user) return;
+    if (!state.username) { showToast('Set a username first!'); return; }
+
+    btn.disabled = true;
+
+    // Add XP for chatting
+    await addXp(state.levelSettings.xpPerChat, 'chat');
+
+    const { color, emoji } = formatLevelBadge(state.userLevel.level);
+
+    await sendChatMessageInternal({
+        type: 'user',
+        username: state.username,
+        level: state.userLevel.level,
+        text: text,
+        color: color,
+        emoji: emoji,
+        timestamp: Date.now()
+    });
+
+    input.value = '';
+    btn.disabled = false;
+}
+
+async function sendChatMessageInternal(msgData) {
+    try {
+        await addDoc(collection(db, 'chat_messages'), {
+            ...msgData,
+            createdAt: serverTimestamp()
+        });
+    } catch (e) {
+        console.log('Chat send error', e);
+        showToast('Failed to send message');
+    }
+}
+
+function renderChatMessage(msg) {
+    const container = document.getElementById('chatMessages');
+    if (!container) return;
+
+    const div = document.createElement('div');
+    if (msg.id) div.dataset.msgId = msg.id;
+
+    if (msg.type === 'levelup') {
+        div.className = 'chat-levelup-notify';
+        div.innerHTML = `<span>🎉 ${escapeHtml(msg.username || 'Player')}</span> ${escapeHtml(msg.text || '')}`;
+    } else if (msg.type === 'system') {
+        div.className = 'chat-system-msg';
+        div.textContent = msg.text || '';
+    } else {
+        const badgeClass = getLevelBadgeClass(msg.level || 1);
+        const msgColor = msg.color || '#6b7280';
+        div.className = 'chat-message';
+        div.innerHTML = `
+            <div class="chat-avatar" style="background:${msgColor};">${(msg.username || '?').charAt(0).toUpperCase()}</div>
+            <div class="chat-content">
+                <div class="chat-username">
+                    ${escapeHtml(msg.username || 'Unknown')}
+                    <span class="chat-level-badge ${badgeClass}">Lv.${msg.level || 1} ${msg.emoji || '⚪'}</span>
+                </div>
+                <div class="chat-text">${escapeHtml(msg.text || '')}</div>
+                <div class="chat-time">${msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : ''}</div>
+            </div>
+        `;
+    }
+
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+
+async function loadInitialChatMessages() {
+    try {
+        const q = query(collection(db, 'chat_messages'), orderBy('timestamp', 'desc'), limit(30));
+        const snap = await getDocs(q);
+        const container = document.getElementById('chatMessages');
+        if (!container) return;
+
+        // Clear existing (keep welcome message)
+        const welcomeMsg = container.querySelector('.chat-system-msg');
+        container.innerHTML = '';
+        if (welcomeMsg) container.appendChild(welcomeMsg);
+
+        const messages = [];
+        snap.forEach(d => {
+            messages.push({ id: d.id, ...d.data() });
+        });
+        // Reverse to show oldest first
+        messages.reverse().forEach(msg => {
+            state.chatMessages.push(msg);
+            renderChatMessage(msg);
+        });
+    } catch (e) { console.log('Initial chat load error', e); }
+}
+function setupChatListener() {
+    const q = query(collection(db, 'chat_messages'), orderBy('timestamp', 'desc'), limit(50));
+    onSnapshot(q, (snapshot) => {
+        const container = document.getElementById('chatMessages');
+        if (!container) return;
+
+        snapshot.docChanges().forEach(change => {
+            if (change.type === 'added') {
+                const msg = change.doc.data();
+                // Check if already rendered by ID
+                const alreadyRendered = Array.from(container.children).some(el => el.dataset && el.dataset.msgId === change.doc.id);
+                if (!alreadyRendered) {
+                    msg.id = change.doc.id;
+                    state.chatMessages.push(msg);
+                    renderChatMessage(msg);
+
+                    // Increment unread if chat closed and not own message
+                    if (!state.chatOpen && msg.username !== state.username) {
+                        state.chatUnread++;
+                        const unreadEl = document.getElementById('chatUnread');
+                        if (unreadEl) {
+                            unreadEl.textContent = state.chatUnread;
+                            unreadEl.style.display = 'flex';
+                        }
+                    }
+                }
+            }
+        });
+
+        // Keep only last 50 in state
+        if (state.chatMessages.length > 50) {
+            state.chatMessages = state.chatMessages.slice(-50);
+        }
+    });
+}
+
+// ===== XP TRIGGERS =====
+const originalAddToCart = window.addToCart;
+window.addToCart = async function(id) {
+    const result = await originalAddToCart(id);
+    // XP added on successful purchase, not on add to cart
+    return result;
+};
+
+// Override checkout to add XP
+const originalCheckoutCart = window.checkoutCart;
+window.checkoutCart = async function() {
+    if (state.cart.length > 0) {
+        await addXp(state.levelSettings.xpPerBuy * state.cart.length, 'purchase');
+    }
+    return originalCheckoutCart();
+};
+
+// Override coinflip to add XP
+const originalFlipCoin = window.flipCoin;
+window.flipCoin = async function() {
+    await addXp(state.levelSettings.xpPerGame, 'game');
+    return originalFlipCoin();
+};
+
 async function init() {
     Object.values(catalog).forEach(cat => cat.forEach(p => state.products[p.id] = { ...p }));
     await loadProductsFromFirestore();
@@ -1217,6 +1661,7 @@ async function init() {
     await loadDiscordDesc();
     await loadAllUsernames();
     await loadRigSettings();
+    setupChatListener(); // Setup chat real-time listener
     const initialView = getHashView();
     if (initialView !== 'landing') {
         if (initialView === 'admin' && !state.isAdmin) window.location.hash = '';
@@ -1224,6 +1669,8 @@ async function init() {
         else switchViewInternal(initialView, true);
     }
     window.addEventListener('hashchange', handleHashChange);
+    // Load initial chat messages
+    loadInitialChatMessages();
 }
 
 async function loadProductsFromFirestore() {
@@ -1305,10 +1752,14 @@ function setupAuth() {
             document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Logout</span>';
             document.getElementById('sidebarAuthLink').onclick = () => signOut(auth);
             document.getElementById('sidebarProfileLink').style.display = 'flex';
+            document.getElementById('chatWidget').style.display = 'block'; // Show chat widget
             closeAuthModal();
             await loadUserData();
             await loadUserOrders();
+            await loadUserLevel(); // Load user level data
         } else {
+            document.getElementById('chatWidget').style.display = 'none'; // Hide chat widget
+            state.userLevel = { level: 1, xp: 0, totalXp: 0 };
             document.getElementById('authTriggerBtn').textContent = 'Login';
             document.getElementById('authTriggerBtn').onclick = openAuthModal;
             document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Login</span>';
@@ -2778,5 +3229,32 @@ function showToast(message) {
 
 init();
 </script>
+
+<!-- CHAT WIDGET -->
+<div class="chat-widget" id="chatWidget" style="display:none;">
+<button class="chat-btn" onclick="window.toggleChat()" id="chatToggleBtn">💬<span class="chat-unread" id="chatUnread" style="display:none;">0</span></button>
+</div>
+
+<div class="chat-panel" id="chatPanel">
+<div class="chat-header">
+<h3>💬 LIVE CHAT</h3>
+<button class="chat-close" onclick="window.toggleChat()">✕</button>
+</div>
+<div class="chat-messages" id="chatMessages">
+<div class="chat-system-msg">Welcome to Elite Store Chat! Be respectful.</div>
+</div>
+<div class="chat-input-area">
+<input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." maxlength="200" onkeypress="if(event.key==='Enter')window.sendChatMessage()">
+<button class="chat-send-btn" id="chatSendBtn" onclick="window.sendChatMessage()">Send</button>
+</div>
+</div>
+
+<!-- LEVEL UP POPUP -->
+<div class="level-popup" id="levelPopup">
+<h2>🎉 LEVEL UP!</h2>
+<div class="level-number" id="levelPopupNumber">5</div>
+<p style="color:var(--text-secondary); margin-top:10px;">Congratulations!</p>
+<div class="level-reward" id="levelPopupReward"></div>
+</div>
 </body>
 </html>
