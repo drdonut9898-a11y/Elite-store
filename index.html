@@ -404,104 +404,6 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--bg-card); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 12px 24px; border-radius: 12px; font-family: var(--font-display); font-size: 0.85rem; z-index: 10000; opacity: 0; transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .toast.error { border-color: var(--accent-red); color: var(--accent-red); }
-
-/* ===== CHAT SYSTEM ===== */
-.chat-widget { position:fixed; bottom:30px; left:30px; z-index:100; }
-.chat-btn { width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg,var(--accent-blue),#0088ff); border:none; color:white; font-size:1.5rem; cursor:pointer; box-shadow:0 4px 20px var(--accent-blue-glow); display:flex; align-items:center; justify-content:center; position:relative; transition:all 0.3s; }
-.chat-btn:hover { transform:scale(1.1); }
-.chat-btn .chat-unread { position:absolute; top:-5px; right:-5px; background:var(--accent-red); color:white; font-size:0.7rem; font-weight:900; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
-.chat-panel { position:fixed; bottom:100px; left:30px; width:380px; max-width:90vw; height:500px; max-height:70vh; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:16px; z-index:1000; display:none; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.5); transition:all 0.4s; opacity:0; transform:translateY(20px); }
-.chat-panel.open { display:flex; opacity:1; transform:translateY(0); }
-.chat-header { padding:15px 20px; border-bottom:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center; background:linear-gradient(135deg,rgba(0,210,255,0.1),transparent); border-radius:16px 16px 0 0; }
-.chat-header h3 { font-family:var(--font-display); color:var(--accent-blue); font-size:1rem; }
-.chat-close { background:none; border:none; color:var(--text-muted); font-size:1.2rem; cursor:pointer; }
-.chat-close:hover { color:var(--accent-red); }
-.chat-messages { flex:1; overflow-y:auto; padding:15px; display:flex; flex-direction:column; gap:10px; }
-.chat-message { display:flex; gap:10px; align-items:flex-start; animation:messageSlide 0.3s ease; }
-@keyframes messageSlide { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
-.chat-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--accent-red),#ff2e44); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:0.85rem; font-weight:700; color:white; flex-shrink:0; }
-.chat-content { flex:1; }
-.chat-username { font-family:var(--font-display); font-size:0.85rem; font-weight:700; display:flex; align-items:center; gap:6px; }
-.chat-level-badge { font-size:0.65rem; padding:2px 8px; border-radius:10px; font-weight:700; }
-.chat-text { color:var(--text-secondary); font-size:0.9rem; line-height:1.4; margin-top:2px; word-break:break-word; }
-.chat-time { font-size:0.7rem; color:var(--text-muted); margin-top:2px; }
-.chat-input-area { padding:15px; border-top:1px solid var(--border-subtle); display:flex; gap:10px; }
-.chat-input { flex:1; padding:10px 14px; border-radius:10px; background:var(--bg-card); border:1px solid var(--border-subtle); color:var(--text-primary); font-size:0.9rem; }
-.chat-input:focus { outline:none; border-color:var(--accent-blue); }
-.chat-send-btn { padding:10px 18px; border-radius:10px; background:linear-gradient(135deg,var(--accent-blue),#0088ff); border:none; color:white; font-family:var(--font-display); font-size:0.8rem; font-weight:700; cursor:pointer; }
-.chat-send-btn:disabled { opacity:0.5; }
-.chat-system-msg { text-align:center; color:var(--text-muted); font-size:0.8rem; padding:8px; background:var(--bg-glass); border-radius:8px; }
-.chat-levelup-notify { text-align:center; padding:10px; background:linear-gradient(135deg,rgba(234,179,8,0.1),rgba(234,179,8,0.05)); border:1px solid rgba(234,179,8,0.3); border-radius:10px; margin:5px 0; }
-.chat-levelup-notify span { font-family:var(--font-display); color:var(--accent-gold); font-weight:700; }
-
-/* ===== LEVEL BADGES ===== */
-.level-badge-gray { background:#6b7280; color:white; }
-.level-badge-green { background:#22c55e; color:white; }
-.level-badge-red { background:#ef4444; color:white; }
-.level-badge-darkred { background:#991b1b; color:white; }
-.level-badge-purple { background:#a855f7; color:white; }
-.level-badge-gold { background:linear-gradient(135deg,#eab308,#ca8a04); color:#000; }
-
-/* ===== XP BAR ===== */
-.xp-bar-container { width:100%; height:6px; background:var(--bg-secondary); border-radius:3px; margin-top:4px; overflow:hidden; }
-.xp-bar-fill { height:100%; background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple)); border-radius:3px; transition:width 0.5s; }
-
-/* ===== LEVEL POPUP ===== */
-.level-popup { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0); background:var(--bg-card); border:2px solid var(--accent-gold); border-radius:20px; padding:40px; text-align:center; z-index:10000; box-shadow:0 0 60px rgba(234,179,8,0.3); transition:transform 0.5s; }
-.level-popup.show { transform:translate(-50%,-50%) scale(1); }
-.level-popup h2 { font-family:var(--font-display); color:var(--accent-gold); font-size:2rem; }
-.level-popup .level-number { font-size:4rem; font-weight:900; color:var(--accent-gold); text-shadow:0 0 30px var(--accent-gold-glow); }
-
-/* Sidebar level */
-.sidebar-level { margin:0 20px 10px; padding:10px 15px; background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(168,85,247,0.05)); border:1px solid rgba(168,85,247,0.2); border-radius:10px; text-align:center; }
-.sidebar-level .level-label { font-size:0.7rem; color:var(--accent-purple); text-transform:uppercase; letter-spacing:2px; font-weight:700; }
-.sidebar-level .level-value { font-family:var(--font-display); font-size:1.3rem; font-weight:800; }
-.sidebar-level .xp-text { font-size:0.75rem; color:var(--text-muted); margin-top:3px; }
-
-/* ===== GOLD COIN FOR COINFLIP ===== */
-.coin-gold { background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700); border: 4px solid #B8860B; box-shadow: 0 0 40px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.3); }
-.coin-gold::after { content: ''; position: absolute; width: 80%; height: 80%; border-radius: 50%; border: 2px solid rgba(184, 134, 11, 0.5); top: 10%; left: 10%; }
-.coin-gold .coin-text { color: #8B4513; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); }
-
-/* ===== CRASH GAME ===== */
-.crash-container { max-width:700px; margin:0 auto; text-align:center; }
-.crash-graph { background:var(--bg-card); border:2px solid rgba(46,213,115,0.3); border-radius:20px; padding:30px; position:relative; height:300px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-.crash-multiplier { font-family:var(--font-display); font-size:4rem; font-weight:900; color:var(--accent-green); text-shadow:0 0 30px var(--accent-green-glow); }
-.crash-multiplier.crash { color:var(--accent-red); text-shadow:0 0 30px var(--accent-red-glow); animation:crashShake 0.5s ease; }
-@keyframes crashShake { 0%,100%{transform:translateX(0);}25%{transform:translateX(-10px);}75%{transform:translateX(10px);} }
-.crash-status { font-family:var(--font-display); font-size:1rem; color:var(--text-muted); margin-top:10px; }
-.crash-controls { margin-top:25px; display:grid; grid-template-columns:1fr 1fr; gap:15px; }
-.crash-bet-input, .crash-auto-cashout { width:100%; padding:14px; border-radius:12px; background:var(--bg-secondary); border:2px solid var(--border-subtle); color:var(--text-primary); font-family:var(--font-display); font-size:1.1rem; text-align:center; }
-.crash-btn-start { width:100%; padding:16px; border-radius:12px; background:linear-gradient(135deg,var(--accent-green),#26af5f); color:white; font-family:var(--font-display); font-size:1rem; font-weight:800; cursor:pointer; border:none; margin-top:15px; }
-.crash-btn-start:disabled { opacity:0.5; }
-.crash-btn-cashout { width:100%; padding:16px; border-radius:12px; background:linear-gradient(135deg,var(--accent-gold),#ca8a04); color:#000; font-family:var(--font-display); font-size:1rem; font-weight:800; cursor:pointer; border:none; margin-top:15px; display:none; animation:pulseGold 1s infinite; }
-@keyframes pulseGold { 0%,100%{box-shadow:0 4px 20px var(--accent-gold-glow);}50%{box-shadow:0 8px 40px rgba(234,179,8,0.6);} }
-.crash-history { margin-top:30px; }
-.crash-history-list { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
-.crash-history-item { padding:8px 14px; border-radius:8px; font-family:var(--font-display); font-weight:700; font-size:0.85rem; }
-.crash-history-win { background:rgba(46,213,115,0.15); border:1px solid var(--accent-green); color:var(--accent-green); }
-.crash-history-loss { background:rgba(255,71,87,0.15); border:1px solid var(--accent-red); color:var(--accent-red); }
-
-/* ===== DICE GAME ===== */
-.dice-container { max-width:600px; margin:0 auto; text-align:center; }
-.dice-game-card { background:var(--bg-card); border:2px solid rgba(0,210,255,0.3); border-radius:24px; padding:45px 35px; }
-.dice-display { font-family:var(--font-display); font-size:5rem; font-weight:900; color:var(--accent-blue); text-shadow:0 0 30px var(--accent-blue-glow); margin:20px 0; min-height:100px; display:flex; align-items:center; justify-content:center; }
-.dice-display.rolling { animation:diceShake 0.5s ease infinite; }
-@keyframes diceShake { 0%,100%{transform:rotate(0deg);}25%{transform:rotate(-15deg);}75%{transform:rotate(15deg);} }
-.dice-range { display:flex; align-items:center; justify-content:center; gap:15px; margin:20px 0; }
-.dice-range input { width:80px; padding:12px; border-radius:10px; background:var(--bg-secondary); border:2px solid var(--border-subtle); color:var(--text-primary); font-family:var(--font-display); font-size:1.2rem; text-align:center; }
-.dice-payout { font-family:var(--font-display); font-size:1.3rem; color:var(--accent-gold); margin:15px 0; }
-.dice-result { font-family:var(--font-display); font-size:1.2rem; margin:15px 0; min-height:30px; }
-.dice-result.win { color:var(--accent-green); }
-.dice-result.loss { color:var(--accent-red); }
-.dice-bet-input { width:100%; max-width:300px; padding:14px; border-radius:12px; background:var(--bg-secondary); border:2px solid var(--border-subtle); color:var(--text-primary); font-family:var(--font-display); font-size:1.1rem; text-align:center; margin:15px auto; display:block; }
-.dice-btn { width:100%; max-width:300px; padding:16px; border-radius:12px; background:linear-gradient(135deg,var(--accent-blue),#0088ff); color:white; font-family:var(--font-display); font-size:1rem; font-weight:800; cursor:pointer; border:none; margin:0 auto; display:block; }
-.dice-btn:disabled { opacity:0.5; }
-.dice-history { margin-top:30px; }
-.dice-history-list { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
-.dice-history-item { width:45px; height:45px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:0.9rem; }
-.dice-history-win { background:rgba(46,213,115,0.2); border:2px solid var(--accent-green); color:var(--accent-green); }
-.dice-history-loss { background:rgba(255,71,87,0.2); border:2px solid var(--accent-red); color:var(--accent-red); }
 </style>
 <base target="_blank">
 <base target="_blank">
@@ -538,11 +440,6 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 <div class="sidebar-username" id="sidebarUsername" style="display:none;">
 <div class="username-label">Username</div>
 <div class="username-value" id="sidebarUsernameValue">-</div>
-</div>
-<div class="sidebar-level" id="sidebarLevel" style="display:none;">
-<div class="level-label">Level</div>
-<div class="level-value" id="sidebarLevelValue">Lv.1 ⚪</div>
-<div id="sidebarXp"></div>
 </div>
 </nav>
 <div class="app-container" id="appContainer">
@@ -657,8 +554,75 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--accent-gold); margin-bottom:20px; text-align:center; letter-spacing:3px;">🎮 GAMES</div>
 <div class="menu-grid">
 <div class="menu-card" onclick="window.handleCardClick('coinflip')" style="border-color:rgba(234,179,8,0.3);">
-<h3 style="color:var(--accent-gold);">🪙 COINFLIP</h3>
+<h3 style="color:var(--accent-gold);">COINFLIP</h3>
 <p style="color:var(--accent-gold);">Double your credits! 50% Win Chance</p>
+</div>
+<div class="menu-card" onclick="window.handleCardClick('crash')" style="border-color:rgba(255,71,87,0.3);">
+<h3 style="color:var(--accent-red);">CRASH</h3>
+<p style="color:var(--accent-red);">Cash out before the crash!</p>
+</div>
+<div class="menu-card" onclick="window.handleCardClick('dice')" style="border-color:rgba(0,210,255,0.3);">
+<h3 style="color:var(--accent-blue);">DICE</h3>
+<p style="color:var(--accent-blue);">Roll under target to win!</p>
+</div>
+</div>
+</div>
+
+<!-- CRASH GAME VIEW -->
+<div class="view-section" id="viewCrash">
+<button class="back-btn" onclick="window.switchView('games')">← Back</button>
+<div class="game-container">
+<div class="game-card" style="border-color:rgba(255,71,87,0.3);">
+<h2 style="font-family:var(--font-display); color:var(--accent-red); margin-bottom:10px;">CRASH</h2>
+<p style="color:var(--text-secondary); margin-bottom:20px;">Cash out before the multiplier crashes!</p>
+<div style="background:var(--bg-secondary); border:2px solid var(--border-subtle); border-radius:16px; padding:30px; margin:20px 0; position:relative; overflow:hidden; min-height:200px; display:flex; align-items:center; justify-content:center;">
+<div id="crashGraph" style="width:100%; height:180px; position:relative;">
+<canvas id="crashCanvas" width="500" height="180" style="width:100%; height:100%;"></canvas>
+<div id="crashMultiplier" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:var(--font-display); font-size:3rem; font-weight:900; color:var(--accent-red); text-shadow:0 0 20px var(--accent-red-glow);">1.00x</div>
+</div>
+</div>
+<div class="game-result" id="crashResult"></div>
+<input type="text" class="bet-input" id="crashBetAmount" placeholder="Enter bet (e.g. 10k, 1M, 50M)" oninput="window.updateCrashPotential()">
+<div class="bet-info">
+<div class="bet-info-item"><div class="bet-info-value" id="crashMinBet">10k</div><div class="bet-info-label">Min Bet</div></div>
+<div class="bet-info-item"><div class="bet-info-value" id="crashMaxBet">100M</div><div class="bet-info-label">Max Bet</div></div>
+<div class="bet-info-item"><div class="bet-info-value" id="crashPotentialWin">0</div><div class="bet-info-label">Potential Win</div></div>
+</div>
+<div style="display:flex; gap:15px; margin-top:20px;">
+<button class="btn btn-danger btn-lg" style="flex:1;" onclick="window.startCrash()" id="crashStartBtn">START</button>
+<button class="btn btn-success btn-lg" style="flex:1; display:none;" onclick="window.cashoutCrash()" id="crashCashoutBtn">CASHOUT</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- DICE GAME VIEW -->
+<div class="view-section" id="viewDice">
+<button class="back-btn" onclick="window.switchView('games')">← Back</button>
+<div class="game-container">
+<div class="game-card" style="border-color:rgba(0,210,255,0.3);">
+<h2 style="font-family:var(--font-display); color:var(--accent-blue); margin-bottom:10px;">DICE</h2>
+<p style="color:var(--text-secondary); margin-bottom:20px;">Roll under the target to win!</p>
+<div style="background:var(--bg-secondary); border:2px solid var(--border-subtle); border-radius:16px; padding:40px; margin:20px 0; text-align:center;">
+<div id="diceDisplay" style="font-family:var(--font-display); font-size:5rem; font-weight:900; color:var(--accent-blue); text-shadow:0 0 30px var(--accent-blue-glow); min-height:100px; display:flex; align-items:center; justify-content:center;">🎲</div>
+<div id="diceResultNumber" style="font-family:var(--font-display); font-size:2rem; font-weight:700; color:var(--text-primary); margin-top:10px; min-height:40px;">-</div>
+</div>
+<div class="game-result" id="diceResult"></div>
+<input type="text" class="bet-input" id="diceBetAmount" placeholder="Enter bet (e.g. 10k, 1M, 50M)" oninput="window.updateDicePotential()">
+<div style="margin:20px 0;">
+<label style="display:block; margin-bottom:10px; color:var(--text-secondary); font-size:0.9rem; font-weight:600;">Roll Under (Target): <span id="diceTargetValue" style="color:var(--accent-blue); font-family:var(--font-display); font-size:1.2rem;">50</span></label>
+<input type="range" id="diceTarget" min="2" max="98" value="50" style="width:100%; accent-color:var(--accent-blue);" oninput="window.updateDiceTarget()">
+<div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.8rem; color:var(--text-muted);">
+<span>2 (High Risk)</span><span>50 (Medium)</span><span>98 (Low Risk)</span>
+</div>
+</div>
+<div class="bet-info">
+<div class="bet-info-item"><div class="bet-info-value" id="diceMinBet">10k</div><div class="bet-info-label">Min Bet</div></div>
+<div class="bet-info-item"><div class="bet-info-value" id="diceMaxBet">100M</div><div class="bet-info-label">Max Bet</div></div>
+<div class="bet-info-item"><div class="bet-info-value" id="diceMultiplier">1.98x</div><div class="bet-info-label">Multiplier</div></div>
+<div class="bet-info-item"><div class="bet-info-value" id="dicePotentialWin">0</div><div class="bet-info-label">Potential Win</div></div>
+</div>
+<button class="btn btn-blue btn-lg" style="width:100%; margin-top:20px;" onclick="window.rollDice()" id="diceRollBtn">ROLL DICE</button>
 </div>
 </div>
 </div>
@@ -668,13 +632,13 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 <button class="back-btn" onclick="window.switchView('games')">← Back</button>
 <div class="game-container">
 <div class="game-card">
-<h2 style="font-family:var(--font-display); color:var(--accent-gold); margin-bottom:10px;">🪙 COINFLIP</h2>
+<h2 style="font-family:var(--font-display); color:var(--accent-gold); margin-bottom:10px;">COINFLIP</h2>
 <p style="color:var(--text-secondary); margin-bottom:20px;">Double your credits! Win 2x your bet</p>
 
 <div class="coin-container">
 <div class="coin" id="coin">
-<div class="coin-face coin-gold"><span class="coin-text">WIN</span></div>
-<div class="coin-face coin-gold" style="transform: rotateY(180deg);"><span class="coin-text" style="color:var(--accent-red);">LOSE</span></div>
+<div class="coin-face coin-heads"><div style="width:80%;height:80%;border-radius:50%;border:3px solid rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%,#fde047,#ca8a04);"><span style="font-size:2.5rem;text-shadow:0 2px 4px rgba(0,0,0,0.3);">$</span></div></div>
+<div class="coin-face coin-tails"><div style="width:80%;height:80%;border-radius:50%;border:3px solid rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%,#ff6b7a,#dc2626);"><span style="font-size:2.5rem;text-shadow:0 2px 4px rgba(0,0,0,0.3);">✕</span></div></div>
 </div>
 </div>
 
@@ -701,7 +665,7 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 </div>
 </div>
 
-<button class="btn btn-gold btn-lg" style="width:100%; margin-top:20px;" onclick="window.flipCoin()" id="flipBtn">🪙 FLIP COIN</button>
+<button class="btn btn-gold btn-lg" style="width:100%; margin-top:20px;" onclick="window.flipCoin()" id="flipBtn">FLIP COIN</button>
 
 <div class="game-history">
 <h3>📊 Recent Flips</h3>
@@ -711,49 +675,6 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 </div>
 </div>
 
-
-<!-- CRASH GAME VIEW -->
-<div class="view-section" id="viewCrash">
-<button class="back-btn" onclick="window.switchView('games')">← Back</button>
-<div class="crash-container">
-<div class="game-card" style="border-color:rgba(46,213,115,0.3);">
-<h2 style="font-family:var(--font-display);color:var(--accent-green);margin-bottom:10px;">📈 CRASH</h2>
-<p style="color:var(--text-secondary);margin-bottom:20px;">Cash out before the crash! Multiplier increases over time.</p>
-<div class="crash-graph">
-<div class="crash-multiplier" id="crashMultiplier">1.00x</div>
-<div class="crash-status" id="crashStatus">Place your bet to start</div>
-</div>
-<div class="crash-controls">
-<div><input type="text" class="crash-bet-input" id="crashBetAmount" placeholder="Bet (e.g. 10k, 1M, 50M)"></div>
-<div><input type="text" class="crash-auto-cashout" id="crashAutoCashout" placeholder="Auto cashout (e.g. 2x)"></div>
-</div>
-<button class="crash-btn-start" id="crashStartBtn" onclick="window.startCrash()">START GAME</button>
-<button class="crash-btn-cashout" id="crashCashoutBtn" onclick="window.cashoutCrash()">💰 CASHOUT NOW</button>
-<div class="crash-history"><h3>📊 Recent Crashes</h3><div class="crash-history-list" id="crashHistory"></div></div>
-</div>
-</div>
-</div>
-
-<!-- DICE GAME VIEW -->
-<div class="view-section" id="viewDice">
-<button class="back-btn" onclick="window.switchView('games')">← Back</button>
-<div class="dice-container">
-<div class="dice-game-card">
-<h2 style="font-family:var(--font-display);color:var(--accent-blue);margin-bottom:10px;">🎲 DICE</h2>
-<p style="color:var(--text-secondary);margin-bottom:20px;">Roll under your target number to win!</p>
-<div class="dice-display" id="diceDisplay">🎲</div>
-<div class="dice-range">
-<span class="dice-range-label">Roll Under</span>
-<input type="number" id="diceTarget" value="50" min="1" max="99" onchange="window.updateDicePayout()">
-</div>
-<div class="dice-payout" id="dicePayout">Payout: 1.98x | Win Chance: 50%</div>
-<input type="text" class="dice-bet-input" id="diceBetAmount" placeholder="Enter bet (e.g. 10k, 1M, 50M)">
-<button class="dice-btn" id="diceRollBtn" onclick="window.rollDice()">🎲 ROLL DICE</button>
-<div class="dice-result" id="diceResult"></div>
-<div class="dice-history"><h3>📊 Roll History</h3><div class="dice-history-list" id="diceHistory"></div></div>
-</div>
-</div>
-</div>
 <!-- PROFILE VIEW -->
 <div class="view-section" id="viewProfile">
 <button class="back-btn" onclick="window.switchView('landing')">← Back</button>
@@ -938,7 +859,7 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 
 <!-- COINFLIP RIG SETTINGS -->
 <div style="margin-bottom:40px;">
-<div style="font-family:var(--font-display); font-size:1.2rem; color:var(--accent-gold); margin-bottom:20px; border-left:4px solid var(--accent-gold); padding-left:15px;">🪙 Coinflip Rig Settings</div>
+<div style="font-family:var(--font-display); font-size:1.2rem; color:var(--accent-gold); margin-bottom:20px; border-left:4px solid var(--accent-gold); padding-left:15px;">Coinflip Rig Settings</div>
 <div class="rig-row">
 <h3 style="font-family: var(--font-display); color: var(--accent-gold); margin-bottom: 15px; font-size: 1rem;">Loss Probability Settings</h3>
 <div class="rig-input-group">
@@ -1256,45 +1177,35 @@ const state = {
     coinflipHistory: JSON.parse(localStorage.getItem('elite_coinflip') || '[]'),
     rigSettings: { loss5m: 60, loss10m: 80, loss50m: 100, minBet: 10000, maxBet: 100000000 },
     profileOrders: [],
-    profileTab: 'orders',
-    chatOpen: false, chatMessages: [], chatUnread: 0,
-    userLevel: { level: 1, xp: 0, totalXp: 0 },
-    levelSettings: { xpPerChat: 5, xpPerBuy: 50, xpPerGame: 25, xpPerLevel: 100 },
-    levelColors: { 0: '#6b7280', 10: '#22c55e', 20: '#ef4444', 30: '#991b1b', 40: '#a855f7', 50: '#eab308' },
-    levelRewards: { 5: 100, 10: 500, 20: 2000, 30: 5000, 50: 10000 }
+    profileTab: 'orders'
 };
 
 // ===== NUMBER FORMATTING =====
 function formatNumber(num) {
+    if (num === 0 || num == null) return '0';
     const absNum = Math.abs(num);
-    if (absNum >= 1000000000) return (num / 1000000000).toFixed(absNum % 1000000000 === 0 ? 0 : (absNum % 100000000 === 0 ? 0 : 1)) + 'B';
-    if (absNum >= 100000000) return (num / 100000000).toFixed(absNum % 100000000 === 0 ? 0 : 1) + 'M';
-    if (absNum >= 10000000) return (num / 10000000).toFixed(absNum % 10000000 === 0 ? 0 : 1) + 'M';
-    if (absNum >= 1000000) return (num / 1000000).toFixed(absNum % 1000000 === 0 ? 0 : 1) + 'M';
-    if (absNum >= 100000) return (num / 1000).toFixed(absNum % 1000 === 0 ? 0 : 1) + 'k';
-    if (absNum >= 10000) return (num / 1000).toFixed(absNum % 1000 === 0 ? 0 : 1) + 'k';
-    if (absNum >= 1000) return (num / 1000).toFixed(absNum % 1000 === 0 ? 0 : 1) + 'k';
+    if (absNum >= 1e15) return (num / 1e15).toFixed(2).replace(/\.00$/, '') + 'Q';
+    if (absNum >= 1e12) return (num / 1e12).toFixed(2).replace(/\.00$/, '') + 'T';
+    if (absNum >= 1e9) return (num / 1e9).toFixed(2).replace(/\.00$/, '') + 'B';
+    if (absNum >= 1e6) return (num / 1e6).toFixed(2).replace(/\.00$/, '') + 'M';
+    if (absNum >= 1e3) return (num / 1e3).toFixed(2).replace(/\.00$/, '') + 'k';
     return num.toString();
 }
 
 function parseBetInput(input) {
     input = input.toString().toLowerCase().replace(/\s/g, '');
-    if (input.endsWith('m')) {
-        const val = parseFloat(input.slice(0, -1));
-        return isNaN(val) ? 0 : val * 1000000;
-    }
-    if (input.endsWith('k')) {
-        const val = parseFloat(input.slice(0, -1));
-        return isNaN(val) ? 0 : val * 1000;
-    }
+    if (input.endsWith('q')) { const val = parseFloat(input.slice(0, -1)); return isNaN(val) ? 0 : val * 1e15; }
+    if (input.endsWith('t')) { const val = parseFloat(input.slice(0, -1)); return isNaN(val) ? 0 : val * 1e12; }
+    if (input.endsWith('b')) { const val = parseFloat(input.slice(0, -1)); return isNaN(val) ? 0 : val * 1e9; }
+    if (input.endsWith('m')) { const val = parseFloat(input.slice(0, -1)); return isNaN(val) ? 0 : val * 1e6; }
+    if (input.endsWith('k')) { const val = parseFloat(input.slice(0, -1)); return isNaN(val) ? 0 : val * 1e3; }
     return parseInt(input) || 0;
 }
 
 window.formatBetInput = function(el) {
     const val = parseBetInput(el.value);
-    if (val > 0) {
-        document.getElementById('potentialWin').textContent = formatNumber(val * 2);
-    }
+    const pw = document.getElementById('potentialWin');
+    if (pw) pw.textContent = val > 0 ? formatNumber(val * 2) : '0';
 };
 
 const catalog = {
@@ -1338,8 +1249,7 @@ function switchViewInternal(view, skipHashUpdate) {
         landing: 'viewLanding', menu: 'viewMenu', money: 'viewMoney', items: 'viewItems', 
         accounts: 'viewAccounts', admin: 'viewAdmin', discord: 'viewDiscord', 
         nitro: 'viewNitro', boosts: 'viewBoosts', offers: 'viewOffers',
-        games: 'viewGames', coinflip: 'viewCoinflip', crash: 'viewCrash', dice: 'viewDice',
-        profile: 'viewProfile'
+        games: 'viewGames', coinflip: 'viewCoinflip', crash: 'viewCrash', dice: 'viewDice', profile: 'viewProfile'
     };
     if (map[view]) { 
         setTimeout(() => document.getElementById(map[view]).classList.add('active'), 50); 
@@ -1354,332 +1264,13 @@ function switchViewInternal(view, skipHashUpdate) {
     if (view === 'boosts') { renderDiscordItems('boosts'); }
     if (view === 'offers') { renderOfferItems(); }
     if (view === 'coinflip') { renderCoinflipHistory(); }
-    if (view === 'crash') { renderCrashHistory(); }
-    if (view === 'dice') { window.updateDicePayout(); renderDiceHistory(); }
+    if (view === 'crash') { if(window.resetCrashGame) window.resetCrashGame(); }
+    if (view === 'dice') { if(window.resetDiceGame) window.resetDiceGame(); }
     if (view === 'profile') { renderProfile(); }
     document.querySelectorAll('.sidebar-link').forEach(link => {
         link.classList.remove('active');
         if (link.dataset.view === view) link.classList.add('active');
     });
-}
-
-
-// ===== LEVEL SYSTEM =====
-function getLevelFromXp(xp) { return Math.floor(xp / state.levelSettings.xpPerLevel) + 1; }
-function getXpForNextLevel(level) { return level * state.levelSettings.xpPerLevel; }
-function getLevelColor(level) {
-    if (level >= 50) return state.levelColors[50];
-    if (level >= 40) return state.levelColors[40];
-    if (level >= 30) return state.levelColors[30];
-    if (level >= 20) return state.levelColors[20];
-    if (level >= 10) return state.levelColors[10];
-    return state.levelColors[0];
-}
-function getLevelBadgeClass(level) {
-    if (level >= 50) return 'level-badge-gold';
-    if (level >= 40) return 'level-badge-purple';
-    if (level >= 30) return 'level-badge-darkred';
-    if (level >= 20) return 'level-badge-red';
-    if (level >= 10) return 'level-badge-green';
-    return 'level-badge-gray';
-}
-function formatLevelBadge(level) {
-    const color = getLevelColor(level);
-    const emoji = level >= 50 ? '🟡' : level >= 40 ? '🟣' : level >= 30 ? '🔴🔴' : level >= 20 ? '🔴' : level >= 10 ? '🟢' : '⚪';
-    return { color, emoji };
-}
-async function addXp(amount, source) {
-    if (!state.user) return;
-    const oldLevel = getLevelFromXp(state.userLevel.totalXp);
-    state.userLevel.totalXp += amount;
-    const newLevel = getLevelFromXp(state.userLevel.totalXp);
-    state.userLevel.level = newLevel;
-    state.userLevel.xp = state.userLevel.totalXp % state.levelSettings.xpPerLevel;
-    try {
-        await updateDoc(doc(db, 'users', state.user.uid), { totalXp: state.userLevel.totalXp, level: newLevel });
-    } catch (e) { console.log('XP save error', e); }
-    if (newLevel > oldLevel) await handleLevelUp(oldLevel, newLevel);
-    updateLevelDisplay();
-}
-async function handleLevelUp(oldLevel, newLevel) {
-    const reward = state.levelRewards[newLevel];
-    if (reward) {
-        try { await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(reward) }); state.credits += reward; updateCreditDisplay(); }
-        catch (e) { console.log('Reward error', e); }
-    }
-    showLevelUpPopup(newLevel, reward);
-    const { color, emoji } = formatLevelBadge(newLevel);
-    const rewardText = reward ? ' +' + reward + ' Credits!' : '';
-    await sendChatMessageInternal({ type: 'levelup', username: state.username || 'Player', level: newLevel, text: 'reached Level ' + newLevel + ' ' + emoji + '!' + rewardText, color: color, timestamp: Date.now() });
-}
-function showLevelUpPopup(level, reward) {
-    const popup = document.getElementById('levelPopup');
-    const numberEl = document.getElementById('levelPopupNumber');
-    const rewardEl = document.getElementById('levelPopupReward');
-    numberEl.textContent = level;
-    if (reward) rewardEl.innerHTML = '<span style="color:var(--accent-gold);font-family:var(--font-display);font-size:1.2rem;">🎁 Reward: ' + reward + ' Credits!</span>';
-    else rewardEl.textContent = '';
-    popup.classList.add('show');
-    setTimeout(() => popup.classList.remove('show'), 3000);
-}
-function updateLevelDisplay() {
-    const sidebarLevel = document.getElementById('sidebarLevel');
-    const sidebarLevelValue = document.getElementById('sidebarLevelValue');
-    const sidebarXp = document.getElementById('sidebarXp');
-    if (state.user && sidebarLevel) {
-        const level = state.userLevel.level;
-        const { color, emoji } = formatLevelBadge(level);
-        sidebarLevelValue.innerHTML = 'Lv.' + level + ' ' + emoji;
-        sidebarLevelValue.style.color = color;
-        sidebarLevel.style.display = 'block';
-        const nextLevelXp = getXpForNextLevel(level);
-        const currentLevelBaseXp = (level - 1) * state.levelSettings.xpPerLevel;
-        const xpInLevel = state.userLevel.totalXp - currentLevelBaseXp;
-        const xpNeeded = state.levelSettings.xpPerLevel;
-        const progress = Math.min(100, (xpInLevel / xpNeeded) * 100);
-        if (sidebarXp) sidebarXp.innerHTML = '<div class="xp-bar-container"><div class="xp-bar-fill" style="width:' + progress + '%"></div></div><div style="font-size:0.7rem;color:var(--text-muted);margin-top:3px;">' + xpInLevel + '/' + xpNeeded + ' XP</div>';
-    } else if (sidebarLevel) { sidebarLevel.style.display = 'none'; }
-}
-async function loadUserLevel() {
-    if (!state.user) return;
-    try {
-        const userDoc = await getDoc(doc(db, 'users', state.user.uid));
-        if (userDoc.exists()) {
-            const data = userDoc.data();
-            state.userLevel.totalXp = data.totalXp || 0;
-            state.userLevel.level = data.level || getLevelFromXp(state.userLevel.totalXp);
-            state.userLevel.xp = state.userLevel.totalXp % state.levelSettings.xpPerLevel;
-            updateLevelDisplay();
-        }
-    } catch (e) { console.log('Level load error', e); }
-}
-
-// ===== CHAT SYSTEM =====
-window.toggleChat = function() {
-    const panel = document.getElementById('chatPanel');
-    state.chatOpen = !state.chatOpen;
-    if (state.chatOpen) {
-        panel.style.display = 'flex';
-        setTimeout(() => panel.classList.add('open'), 10);
-        state.chatUnread = 0;
-        const unreadEl = document.getElementById('chatUnread');
-        if (unreadEl) unreadEl.style.display = 'none';
-        const msgs = document.getElementById('chatMessages');
-        if (msgs) msgs.scrollTop = msgs.scrollHeight;
-    } else {
-        panel.classList.remove('open');
-        setTimeout(() => panel.style.display = 'none', 400);
-    }
-};
-window.sendChatMessage = async function() {
-    const input = document.getElementById('chatInput');
-    const btn = document.getElementById('chatSendBtn');
-    if (!input || !btn) return;
-    const text = input.value.trim();
-    if (!text || !state.user) return;
-    if (!state.username) { showToast('Set a username first!'); return; }
-    btn.disabled = true;
-    await addXp(state.levelSettings.xpPerChat, 'chat');
-    const { color, emoji } = formatLevelBadge(state.userLevel.level);
-    await sendChatMessageInternal({ type: 'user', username: state.username, level: state.userLevel.level, text: text, color: color, emoji: emoji, timestamp: Date.now() });
-    input.value = '';
-    btn.disabled = false;
-};
-async function sendChatMessageInternal(msgData) {
-    try {
-        await addDoc(collection(db, 'chat_messages'), { ...msgData, createdAt: serverTimestamp() });
-    } catch (e) { console.log('Chat send error', e); showToast('Failed to send message'); }
-}
-function renderChatMessage(msg) {
-    const container = document.getElementById('chatMessages');
-    if (!container) return;
-    const div = document.createElement('div');
-    if (msg.id) div.dataset.msgId = msg.id;
-    if (msg.type === 'levelup') {
-        div.className = 'chat-levelup-notify';
-        div.innerHTML = '<span>🎉 ' + escapeHtml(msg.username || 'Player') + '</span> ' + escapeHtml(msg.text || '');
-    } else if (msg.type === 'system') {
-        div.className = 'chat-system-msg';
-        div.textContent = msg.text || '';
-    } else {
-        const badgeClass = getLevelBadgeClass(msg.level || 1);
-        const msgColor = msg.color || '#6b7280';
-        div.className = 'chat-message';
-        div.innerHTML = '<div class="chat-avatar" style="background:' + msgColor + ';">' + (msg.username || '?').charAt(0).toUpperCase() + '</div><div class="chat-content"><div class="chat-username">' + escapeHtml(msg.username || 'Unknown') + '<span class="chat-level-badge ' + badgeClass + '">Lv.' + (msg.level || 1) + ' ' + (msg.emoji || '⚪') + '</span></div><div class="chat-text">' + escapeHtml(msg.text || '') + '</div><div class="chat-time">' + (msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : '') + '</div></div>';
-    }
-    container.appendChild(div);
-    container.scrollTop = container.scrollHeight;
-}
-function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
-function setupChatListener() {
-    try {
-        const q = query(collection(db, 'chat_messages'), orderBy('timestamp', 'desc'), limit(50));
-        onSnapshot(q, (snapshot) => {
-            const container = document.getElementById('chatMessages');
-            if (!container) return;
-            snapshot.docChanges().forEach(change => {
-                if (change.type === 'added') {
-                    const msg = change.doc.data();
-                    const alreadyRendered = Array.from(container.children).some(el => el.dataset && el.dataset.msgId === change.doc.id);
-                    if (!alreadyRendered) {
-                        msg.id = change.doc.id;
-                        state.chatMessages.push(msg);
-                        renderChatMessage(msg);
-                        if (!state.chatOpen && msg.username !== state.username) {
-                            state.chatUnread++;
-                            const unreadEl = document.getElementById('chatUnread');
-                            if (unreadEl) { unreadEl.textContent = state.chatUnread; unreadEl.style.display = 'flex'; }
-                        }
-                    }
-                }
-            });
-            if (state.chatMessages.length > 50) state.chatMessages = state.chatMessages.slice(-50);
-        });
-    } catch (e) { console.log('Chat listener error', e); }
-}
-async function loadInitialChatMessages() {
-    try {
-        const q = query(collection(db, 'chat_messages'), orderBy('timestamp', 'desc'), limit(30));
-        const snap = await getDocs(q);
-        const container = document.getElementById('chatMessages');
-        if (!container) return;
-        const welcomeMsg = container.querySelector('.chat-system-msg');
-        container.innerHTML = '';
-        if (welcomeMsg) container.appendChild(welcomeMsg);
-        const messages = [];
-        snap.forEach(d => { messages.push({ id: d.id, ...d.data() }); });
-        messages.reverse().forEach(msg => { state.chatMessages.push(msg); renderChatMessage(msg); });
-    } catch (e) { console.log('Initial chat load error', e); }
-}
-
-// ===== CRASH GAME =====
-let crashState = { running: false, multiplier: 1.0, bet: 0, autoCashout: 0, interval: null, history: JSON.parse(localStorage.getItem('elite_crash') || '[]') };
-function generateCrashPoint() { const r = Math.random(); if (r < 0.02) return 1.0; return Math.max(1.0, 0.98 / (1 - r)); }
-window.startCrash = async function() {
-    if (!state.user) { showToast('Login to play!'); openAuthModal(); return; }
-    if (crashState.running) return;
-    const bet = parseBetInput(document.getElementById('crashBetAmount').value);
-    const autoCashout = parseFloat(document.getElementById('crashAutoCashout').value) || 0;
-    if (!bet || bet < 10000) { showToast('Min bet is 10k credits'); return; }
-    if (bet > 100000000) { showToast('Max bet is 100M credits'); return; }
-    if (bet > state.credits) { showToast('Not enough credits!'); return; }
-    await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(-bet) });
-    state.credits -= bet; updateCreditDisplay();
-    await addXp(state.levelSettings.xpPerGame, 'game');
-    crashState.running = true; crashState.bet = bet; crashState.autoCashout = autoCashout; crashState.multiplier = 1.0;
-    document.getElementById('crashStartBtn').style.display = 'none';
-    document.getElementById('crashCashoutBtn').style.display = 'block';
-    document.getElementById('crashStatus').textContent = 'Game in progress... Click CASHOUT!';
-    document.getElementById('crashStatus').style.color = 'var(--accent-green)';
-    document.getElementById('crashMultiplier').classList.remove('crash');
-    const crashPoint = generateCrashPoint();
-    let startTime = Date.now();
-    crashState.interval = setInterval(() => {
-        const elapsed = (Date.now() - startTime) / 1000;
-        crashState.multiplier = Math.pow(1.015, elapsed * 15);
-        crashState.multiplier = Math.min(crashState.multiplier, crashPoint);
-        document.getElementById('crashMultiplier').textContent = crashState.multiplier.toFixed(2) + 'x';
-        if (crashState.autoCashout > 1.01 && crashState.multiplier >= crashState.autoCashout) { window.cashoutCrash(); return; }
-        if (crashState.multiplier >= crashPoint) { endCrash(false, crashPoint); }
-    }, 50);
-};
-window.cashoutCrash = async function() { if (!crashState.running) return; endCrash(true, crashState.multiplier); };
-async function endCrash(won, finalMultiplier) {
-    if (!crashState.running) return;
-    crashState.running = false; clearInterval(crashState.interval);
-    const multEl = document.getElementById('crashMultiplier');
-    const statusEl = document.getElementById('crashStatus');
-    if (won) {
-        const winAmount = Math.floor(crashState.bet * finalMultiplier);
-        const profit = winAmount - crashState.bet;
-        await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(winAmount) });
-        state.credits += winAmount; updateCreditDisplay();
-        multEl.textContent = finalMultiplier.toFixed(2) + 'x';
-        statusEl.textContent = '🎉 CASHED OUT! +' + formatNumber(profit) + ' credits';
-        statusEl.style.color = 'var(--accent-green)';
-        showToast('Cashed out at ' + finalMultiplier.toFixed(2) + 'x! +' + formatNumber(profit));
-        crashState.history.unshift({ result: 'win', multiplier: finalMultiplier, profit: profit, time: Date.now() });
-    } else {
-        multEl.classList.add('crash');
-        multEl.textContent = finalMultiplier.toFixed(2) + 'x';
-        statusEl.textContent = '💥 CRASHED! Lost ' + formatNumber(crashState.bet) + ' credits';
-        statusEl.style.color = 'var(--accent-red)';
-        showToast('Crashed at ' + finalMultiplier.toFixed(2) + 'x!');
-        crashState.history.unshift({ result: 'loss', multiplier: finalMultiplier, profit: -crashState.bet, time: Date.now() });
-    }
-    if (crashState.history.length > 20) crashState.history = crashState.history.slice(0, 20);
-    localStorage.setItem('elite_crash', JSON.stringify(crashState.history));
-    renderCrashHistory();
-    document.getElementById('crashStartBtn').style.display = 'block';
-    document.getElementById('crashCashoutBtn').style.display = 'none';
-}
-function renderCrashHistory() {
-    const container = document.getElementById('crashHistory');
-    if (!container) return;
-    if (crashState.history.length === 0) { container.innerHTML = '<p style="color:var(--text-muted);">No games yet</p>'; return; }
-    container.innerHTML = crashState.history.slice(0, 10).map(h => '<div class="crash-history-item ' + (h.result === 'win' ? 'crash-history-win' : 'crash-history-loss') + '">' + h.multiplier.toFixed(2) + 'x</div>').join('');
-}
-
-// ===== DICE GAME =====
-let diceState = { rolling: false, history: JSON.parse(localStorage.getItem('elite_dice') || '[]') };
-window.updateDicePayout = function() {
-    const target = parseInt(document.getElementById('diceTarget').value) || 50;
-    const clamped = Math.max(1, Math.min(99, target));
-    const payout = (99 / clamped).toFixed(2);
-    document.getElementById('dicePayout').textContent = 'Payout: ' + payout + 'x | Win Chance: ' + clamped + '%';
-};
-window.rollDice = async function() {
-    if (!state.user) { showToast('Login to play!'); openAuthModal(); return; }
-    if (diceState.rolling) return;
-    const bet = parseBetInput(document.getElementById('diceBetAmount').value);
-    const target = parseInt(document.getElementById('diceTarget').value) || 50;
-    if (!bet || bet < 10000) { showToast('Min bet is 10k credits'); return; }
-    if (bet > 100000000) { showToast('Max bet is 100M credits'); return; }
-    if (bet > state.credits) { showToast('Not enough credits!'); return; }
-    if (target < 1 || target > 99) { showToast('Target must be 1-99'); return; }
-    diceState.rolling = true;
-    const btn = document.getElementById('diceRollBtn');
-    const display = document.getElementById('diceDisplay');
-    const resultDiv = document.getElementById('diceResult');
-    btn.disabled = true; btn.textContent = 'ROLLING...';
-    display.classList.add('rolling'); resultDiv.textContent = ''; resultDiv.className = 'dice-result';
-    await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(-bet) });
-    state.credits -= bet; updateCreditDisplay();
-    await addXp(state.levelSettings.xpPerGame, 'game');
-    let rollValue = 0;
-    const rollInterval = setInterval(() => { rollValue = Math.floor(Math.random() * 100) + 1; display.textContent = rollValue; }, 80);
-    setTimeout(async () => {
-        clearInterval(rollInterval); display.classList.remove('rolling');
-        const finalRoll = Math.floor(Math.random() * 100) + 1;
-        display.textContent = finalRoll;
-        const won = finalRoll <= target;
-        const payout = parseFloat((99 / target).toFixed(2));
-        if (won) {
-            const winAmount = Math.floor(bet * payout);
-            const profit = winAmount - bet;
-            await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(winAmount) });
-            state.credits += winAmount; updateCreditDisplay();
-            resultDiv.textContent = '🎉 WIN! Rolled ' + finalRoll + ' (Target: ' + target + ') +' + formatNumber(profit) + ' credits';
-            resultDiv.className = 'dice-result win';
-            showToast('You won ' + formatNumber(profit) + ' credits!');
-            diceState.history.unshift({ result: 'win', roll: finalRoll, target: target, profit: profit, time: Date.now() });
-        } else {
-            resultDiv.textContent = '😢 LOSE! Rolled ' + finalRoll + ' (Target: ' + target + ') -' + formatNumber(bet) + ' credits';
-            resultDiv.className = 'dice-result loss';
-            showToast('You lost ' + formatNumber(bet) + ' credits');
-            diceState.history.unshift({ result: 'loss', roll: finalRoll, target: target, profit: -bet, time: Date.now() });
-        }
-        if (diceState.history.length > 20) diceState.history = diceState.history.slice(0, 20);
-        localStorage.setItem('elite_dice', JSON.stringify(diceState.history));
-        renderDiceHistory();
-        diceState.rolling = false; btn.disabled = false; btn.textContent = '🎲 ROLL DICE';
-    }, 2000);
-};
-function renderDiceHistory() {
-    const container = document.getElementById('diceHistory');
-    if (!container) return;
-    if (diceState.history.length === 0) { container.innerHTML = '<p style="color:var(--text-muted);">No rolls yet</p>'; return; }
-    container.innerHTML = diceState.history.slice(0, 10).map(h => '<div class="dice-history-item ' + (h.result === 'win' ? 'dice-history-win' : 'dice-history-loss') + '">' + h.roll + '</div>').join('');
 }
 
 async function init() {
@@ -1693,8 +1284,6 @@ async function init() {
     await loadDiscordDesc();
     await loadAllUsernames();
     await loadRigSettings();
-    setupChatListener();
-    loadInitialChatMessages();
     const initialView = getHashView();
     if (initialView !== 'landing') {
         if (initialView === 'admin' && !state.isAdmin) window.location.hash = '';
@@ -1783,14 +1372,10 @@ function setupAuth() {
             document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Logout</span>';
             document.getElementById('sidebarAuthLink').onclick = () => signOut(auth);
             document.getElementById('sidebarProfileLink').style.display = 'flex';
-            document.getElementById('chatWidget').style.display = 'block';
             closeAuthModal();
             await loadUserData();
             await loadUserOrders();
-            await loadUserLevel();
         } else {
-            document.getElementById('chatWidget').style.display = 'none';
-            state.userLevel = { level: 1, xp: 0, totalXp: 0 };
             document.getElementById('authTriggerBtn').textContent = 'Login';
             document.getElementById('authTriggerBtn').onclick = openAuthModal;
             document.getElementById('sidebarAuthLink').innerHTML = '<span class="link-icon">🔑</span><span>Login</span>';
@@ -2446,7 +2031,7 @@ window.flipCoin = async () => {
     if (bet > state.credits) { showToast('Not enough credits!'); return; }
 
     flipBtn.disabled = true;
-    flipBtn.textContent = '🪙 Flipping...';
+    flipBtn.textContent = 'Flipping...';
     resultDiv.textContent = '';
     resultDiv.className = 'game-result';
 
@@ -2503,7 +2088,7 @@ window.flipCoin = async () => {
 
         renderCoinflipHistory();
         flipBtn.disabled = false;
-        flipBtn.textContent = '🪙 FLIP COIN';
+        flipBtn.textContent = 'FLIP COIN';
     }, 3000);
 };
 
@@ -2518,13 +2103,7 @@ function renderCoinflipHistory() {
     ).join('');
 }
 
-// Update potential win display
-setInterval(() => {
-    const bet = parseBetInput(document.getElementById('betAmount').value);
-    if (bet > 0) {
-        document.getElementById('potentialWin').textContent = formatNumber(bet * 2);
-    }
-}, 500);
+
 
 // ===== RIG SETTINGS =====
 async function loadRigSettings() {
@@ -3258,18 +2837,181 @@ function showToast(message) {
     setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
+
+// ===== CRASH GAME =====
+let crashState = { running: false, multiplier: 1.0, bet: 0, interval: null, ctx: null };
+
+window.updateCrashPotential = function() {
+    const val = parseBetInput(document.getElementById('crashBetAmount').value);
+    const el = document.getElementById('crashPotentialWin');
+    if (el) el.textContent = val > 0 ? formatNumber(val * 2) : '0';
+};
+
+window.resetCrashGame = function() {
+    crashState.running = false; crashState.multiplier = 1.0;
+    if (crashState.interval) clearInterval(crashState.interval);
+    const multEl = document.getElementById('crashMultiplier');
+    if (multEl) multEl.textContent = '1.00x';
+    const resEl = document.getElementById('crashResult');
+    if (resEl) { resEl.textContent = ''; resEl.className = 'game-result'; }
+    const startBtn = document.getElementById('crashStartBtn');
+    const cashBtn = document.getElementById('crashCashoutBtn');
+    const betInp = document.getElementById('crashBetAmount');
+    if (startBtn) startBtn.style.display = 'block';
+    if (cashBtn) cashBtn.style.display = 'none';
+    if (betInp) betInp.disabled = false;
+    const canvas = document.getElementById('crashCanvas');
+    if (canvas) { const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height); }
+};
+
+window.startCrash = async function() {
+    if (!state.user) { showToast('Login to play!'); openAuthModal(); return; }
+    const bet = parseBetInput(document.getElementById('crashBetAmount').value);
+    if (!bet || bet < 10000) { showToast('Min bet is 10k credits'); return; }
+    if (bet > 100000000) { showToast('Max bet is 100M credits'); return; }
+    if (bet > state.credits) { showToast('Not enough credits!'); return; }
+    await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(-bet) });
+    state.credits -= bet; updateCreditDisplay();
+    crashState.bet = bet; crashState.running = true; crashState.multiplier = 1.0;
+    document.getElementById('crashStartBtn').style.display = 'none';
+    document.getElementById('crashCashoutBtn').style.display = 'block';
+    document.getElementById('crashBetAmount').disabled = true;
+    const resEl = document.getElementById('crashResult');
+    if (resEl) { resEl.textContent = ''; resEl.className = 'game-result'; }
+    const canvas = document.getElementById('crashCanvas');
+    crashState.ctx = canvas.getContext('2d');
+    const crashPoint = Math.max(1.1, 1.0 + Math.pow(Math.random(), 2) * 9.0);
+    let time = 0;
+    crashState.interval = setInterval(() => {
+        time += 0.05;
+        crashState.multiplier = 1.0 + Math.pow(time, 1.5) * 0.5;
+        const multEl = document.getElementById('crashMultiplier');
+        if (multEl) multEl.textContent = crashState.multiplier.toFixed(2) + 'x';
+        const ctx = crashState.ctx;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#ff4757'; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(0, canvas.height);
+        for (let t = 0; t <= time; t += 0.01) {
+            const m = 1.0 + Math.pow(t, 1.5) * 0.5;
+            const x = (t / 5) * canvas.width;
+            const y = canvas.height - ((m - 1) / 4) * canvas.height;
+            ctx.lineTo(x, Math.max(0, y));
+        }
+        ctx.stroke();
+        if (crashState.multiplier >= crashPoint) {
+            clearInterval(crashState.interval); crashState.running = false;
+            document.getElementById('crashCashoutBtn').style.display = 'none';
+            document.getElementById('crashStartBtn').style.display = 'block';
+            document.getElementById('crashBetAmount').disabled = false;
+            const resultDiv = document.getElementById('crashResult');
+            resultDiv.textContent = 'CRASHED AT ' + crashState.multiplier.toFixed(2) + 'x! You lost ' + formatNumber(crashState.bet) + ' credits';
+            resultDiv.className = 'game-result loss';
+            showToast('Crashed! You lost ' + formatNumber(crashState.bet) + ' credits');
+        }
+    }, 50);
+};
+
+window.cashoutCrash = async function() {
+    if (!crashState.running) return;
+    clearInterval(crashState.interval); crashState.running = false;
+    const winAmount = Math.floor(crashState.bet * crashState.multiplier);
+    const profit = winAmount - crashState.bet;
+    await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(winAmount) });
+    state.credits += winAmount; updateCreditDisplay();
+    document.getElementById('crashCashoutBtn').style.display = 'none';
+    document.getElementById('crashStartBtn').style.display = 'block';
+    document.getElementById('crashBetAmount').disabled = false;
+    const resultDiv = document.getElementById('crashResult');
+    resultDiv.textContent = 'CASHED OUT AT ' + crashState.multiplier.toFixed(2) + 'x! Won ' + formatNumber(profit) + ' credits';
+    resultDiv.className = 'game-result win';
+    showToast('Cashed out! Won ' + formatNumber(profit) + ' credits');
+};
+
+// ===== DICE GAME =====
+let diceState = { rolling: false };
+
+window.updateDicePotential = function() {
+    const val = parseBetInput(document.getElementById('diceBetAmount').value);
+    const target = parseInt(document.getElementById('diceTarget').value) || 50;
+    const multiplier = (98 / target).toFixed(2);
+    const el = document.getElementById('dicePotentialWin');
+    if (el) el.textContent = val > 0 ? formatNumber(Math.floor(val * parseFloat(multiplier))) : '0';
+};
+
+window.updateDiceTarget = function() {
+    const target = parseInt(document.getElementById('diceTarget').value);
+    const tv = document.getElementById('diceTargetValue');
+    if (tv) tv.textContent = target;
+    const mult = (98 / target).toFixed(2);
+    const multEl = document.getElementById('diceMultiplier');
+    if (multEl) multEl.textContent = mult + 'x';
+    window.updateDicePotential();
+};
+
+window.resetDiceGame = function() {
+    diceState.rolling = false;
+    const disp = document.getElementById('diceDisplay');
+    if (disp) disp.textContent = '🎲';
+    const resNum = document.getElementById('diceResultNumber');
+    if (resNum) resNum.textContent = '-';
+    const res = document.getElementById('diceResult');
+    if (res) { res.textContent = ''; res.className = 'game-result'; }
+    const btn = document.getElementById('diceRollBtn');
+    const inp = document.getElementById('diceBetAmount');
+    if (btn) btn.disabled = false;
+    if (inp) inp.disabled = false;
+};
+
+window.rollDice = async function() {
+    if (!state.user) { showToast('Login to play!'); openAuthModal(); return; }
+    if (diceState.rolling) return;
+    const bet = parseBetInput(document.getElementById('diceBetAmount').value);
+    const target = parseInt(document.getElementById('diceTarget').value);
+    if (!bet || bet < 10000) { showToast('Min bet is 10k credits'); return; }
+    if (bet > 100000000) { showToast('Max bet is 100M credits'); return; }
+    if (bet > state.credits) { showToast('Not enough credits!'); return; }
+    diceState.rolling = true;
+    document.getElementById('diceRollBtn').disabled = true;
+    document.getElementById('diceBetAmount').disabled = true;
+    const resEl = document.getElementById('diceResult');
+    if (resEl) { resEl.textContent = ''; resEl.className = 'game-result'; }
+    await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(-bet) });
+    state.credits -= bet; updateCreditDisplay();
+    const display = document.getElementById('diceDisplay');
+    const resultNum = document.getElementById('diceResultNumber');
+    let rollCount = 0;
+    const rollInterval = setInterval(() => {
+        if (display) display.textContent = Math.floor(Math.random() * 100);
+        rollCount++;
+        if (rollCount > 20) {
+            clearInterval(rollInterval);
+            const roll = Math.floor(Math.random() * 100) + 1;
+            if (display) display.textContent = roll;
+            if (resultNum) resultNum.textContent = 'Rolled: ' + roll;
+            const multiplier = 98 / target;
+            if (roll < target) {
+                const winAmount = Math.floor(bet * multiplier);
+                const profit = winAmount - bet;
+                updateDoc(doc(db, 'users', state.user.uid), { credits: increment(winAmount) });
+                state.credits += winAmount; updateCreditDisplay();
+                const resultDiv = document.getElementById('diceResult');
+                resultDiv.textContent = 'WIN! ' + roll + ' < ' + target + ' | Won ' + formatNumber(profit) + ' credits';
+                resultDiv.className = 'game-result win';
+                showToast('You won ' + formatNumber(profit) + ' credits!');
+            } else {
+                const resultDiv = document.getElementById('diceResult');
+                resultDiv.textContent = 'LOSE! ' + roll + ' >= ' + target + ' | Lost ' + formatNumber(bet) + ' credits';
+                resultDiv.className = 'game-result loss';
+                showToast('You lost ' + formatNumber(bet) + ' credits');
+            }
+            diceState.rolling = false;
+            document.getElementById('diceRollBtn').disabled = false;
+            document.getElementById('diceBetAmount').disabled = false;
+        }
+    }, 100);
+};
+
 init();
 </script>
-
-<!-- CHAT WIDGET -->
-<div class="chat-widget" id="chatWidget" style="display:none;">
-<button class="chat-btn" onclick="window.toggleChat()">💬<span class="chat-unread" id="chatUnread" style="display:none;">0</span></button>
-</div>
-<div class="chat-panel" id="chatPanel">
-<div class="chat-header"><h3>💬 LIVE CHAT</h3><button class="chat-close" onclick="window.toggleChat()">✕</button></div>
-<div class="chat-messages" id="chatMessages"><div class="chat-system-msg">Welcome to Elite Store Chat! Be respectful.</div></div>
-<div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." maxlength="200" onkeypress="if(event.key==='Enter')window.sendChatMessage()"><button class="chat-send-btn" id="chatSendBtn" onclick="window.sendChatMessage()">Send</button></div>
-</div>
-<div class="level-popup" id="levelPopup"><h2>🎉 LEVEL UP!</h2><div class="level-number" id="levelPopupNumber">5</div><p style="color:var(--text-secondary);margin-top:10px;">Congratulations!</p><div class="level-reward" id="levelPopupReward"></div></div>
 </body>
 </html>
