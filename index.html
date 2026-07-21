@@ -458,6 +458,11 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 .sidebar-level .level-value { font-family:var(--font-display); font-size:1.3rem; font-weight:800; }
 .sidebar-level .xp-text { font-size:0.75rem; color:var(--text-muted); margin-top:3px; }
 
+/* ===== GOLD COIN FOR COINFLIP ===== */
+.coin-gold { background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700); border: 4px solid #B8860B; box-shadow: 0 0 40px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.3); }
+.coin-gold::after { content: ''; position: absolute; width: 80%; height: 80%; border-radius: 50%; border: 2px solid rgba(184, 134, 11, 0.5); top: 10%; left: 10%; }
+.coin-gold .coin-text { color: #8B4513; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); }
+
 /* ===== CRASH GAME ===== */
 .crash-container { max-width:700px; margin:0 auto; text-align:center; }
 .crash-graph { background:var(--bg-card); border:2px solid rgba(46,213,115,0.3); border-radius:20px; padding:30px; position:relative; height:300px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
@@ -668,8 +673,8 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 
 <div class="coin-container">
 <div class="coin" id="coin">
-<div class="coin-face coin-heads">WIN</div>
-<div class="coin-face coin-tails">LOSE</div>
+<div class="coin-face coin-gold"><span class="coin-text">WIN</span></div>
+<div class="coin-face coin-gold" style="transform: rotateY(180deg);"><span class="coin-text" style="color:var(--accent-red);">LOSE</span></div>
 </div>
 </div>
 
@@ -713,14 +718,14 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 <div class="crash-container">
 <div class="game-card" style="border-color:rgba(46,213,115,0.3);">
 <h2 style="font-family:var(--font-display);color:var(--accent-green);margin-bottom:10px;">📈 CRASH</h2>
-<p style="color:var(--text-secondary);margin-bottom:20px;">Cash out before the crash!</p>
+<p style="color:var(--text-secondary);margin-bottom:20px;">Cash out before the crash! Multiplier increases over time.</p>
 <div class="crash-graph">
 <div class="crash-multiplier" id="crashMultiplier">1.00x</div>
 <div class="crash-status" id="crashStatus">Place your bet to start</div>
 </div>
 <div class="crash-controls">
-<div><input type="text" class="crash-bet-input" id="crashBetAmount" placeholder="Bet (e.g. 10k, 1M)" oninput="window.updateCrashPotential()"></div>
-<div><input type="text" class="crash-auto-cashout" id="crashAutoCashout" placeholder="Auto cashout (e.g. 2x)" oninput="window.updateCrashPotential()"></div>
+<div><input type="text" class="crash-bet-input" id="crashBetAmount" placeholder="Bet (e.g. 10k, 1M, 50M)"></div>
+<div><input type="text" class="crash-auto-cashout" id="crashAutoCashout" placeholder="Auto cashout (e.g. 2x)"></div>
 </div>
 <button class="crash-btn-start" id="crashStartBtn" onclick="window.startCrash()">START GAME</button>
 <button class="crash-btn-cashout" id="crashCashoutBtn" onclick="window.cashoutCrash()">💰 CASHOUT NOW</button>
@@ -735,7 +740,7 @@ pointer-events: none; z-index: -1; animation: bgPulse 8s ease-in-out infinite;
 <div class="dice-container">
 <div class="dice-game-card">
 <h2 style="font-family:var(--font-display);color:var(--accent-blue);margin-bottom:10px;">🎲 DICE</h2>
-<p style="color:var(--text-secondary);margin-bottom:20px;">Roll under your target number!</p>
+<p style="color:var(--text-secondary);margin-bottom:20px;">Roll under your target number to win!</p>
 <div class="dice-display" id="diceDisplay">🎲</div>
 <div class="dice-range">
 <span class="dice-range-label">Roll Under</span>
@@ -1252,7 +1257,6 @@ const state = {
     rigSettings: { loss5m: 60, loss10m: 80, loss50m: 100, minBet: 10000, maxBet: 100000000 },
     profileOrders: [],
     profileTab: 'orders',
-    // CHAT & LEVEL SYSTEM
     chatOpen: false, chatMessages: [], chatUnread: 0,
     userLevel: { level: 1, xp: 0, totalXp: 0 },
     levelSettings: { xpPerChat: 5, xpPerBuy: 50, xpPerGame: 25, xpPerLevel: 100 },
@@ -1288,9 +1292,8 @@ function parseBetInput(input) {
 
 window.formatBetInput = function(el) {
     const val = parseBetInput(el.value);
-    const potentialEl = document.getElementById('potentialWin');
-    if (potentialEl && val > 0) {
-        potentialEl.textContent = formatNumber(val * 2);
+    if (val > 0) {
+        document.getElementById('potentialWin').textContent = formatNumber(val * 2);
     }
 };
 
@@ -1394,7 +1397,7 @@ async function addXp(amount, source) {
     state.userLevel.xp = state.userLevel.totalXp % state.levelSettings.xpPerLevel;
     try {
         await updateDoc(doc(db, 'users', state.user.uid), { totalXp: state.userLevel.totalXp, level: newLevel });
-    } catch (e) {}
+    } catch (e) { console.log('XP save error', e); }
     if (newLevel > oldLevel) await handleLevelUp(oldLevel, newLevel);
     updateLevelDisplay();
 }
@@ -1402,7 +1405,7 @@ async function handleLevelUp(oldLevel, newLevel) {
     const reward = state.levelRewards[newLevel];
     if (reward) {
         try { await updateDoc(doc(db, 'users', state.user.uid), { credits: increment(reward) }); state.credits += reward; updateCreditDisplay(); }
-        catch (e) {}
+        catch (e) { console.log('Reward error', e); }
     }
     showLevelUpPopup(newLevel, reward);
     const { color, emoji } = formatLevelBadge(newLevel);
@@ -1448,7 +1451,7 @@ async function loadUserLevel() {
             state.userLevel.xp = state.userLevel.totalXp % state.levelSettings.xpPerLevel;
             updateLevelDisplay();
         }
-    } catch (e) {}
+    } catch (e) { console.log('Level load error', e); }
 }
 
 // ===== CHAT SYSTEM =====
@@ -1483,8 +1486,9 @@ window.sendChatMessage = async function() {
     btn.disabled = false;
 };
 async function sendChatMessageInternal(msgData) {
-    try { await addDoc(collection(db, 'chat_messages'), { ...msgData, createdAt: serverTimestamp() }); }
-    catch (e) { showToast('Failed to send message'); }
+    try {
+        await addDoc(collection(db, 'chat_messages'), { ...msgData, createdAt: serverTimestamp() });
+    } catch (e) { console.log('Chat send error', e); showToast('Failed to send message'); }
 }
 function renderChatMessage(msg) {
     const container = document.getElementById('chatMessages');
@@ -1508,28 +1512,30 @@ function renderChatMessage(msg) {
 }
 function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 function setupChatListener() {
-    const q = query(collection(db, 'chat_messages'), orderBy('timestamp', 'desc'), limit(50));
-    onSnapshot(q, (snapshot) => {
-        const container = document.getElementById('chatMessages');
-        if (!container) return;
-        snapshot.docChanges().forEach(change => {
-            if (change.type === 'added') {
-                const msg = change.doc.data();
-                const alreadyRendered = Array.from(container.children).some(el => el.dataset && el.dataset.msgId === change.doc.id);
-                if (!alreadyRendered) {
-                    msg.id = change.doc.id;
-                    state.chatMessages.push(msg);
-                    renderChatMessage(msg);
-                    if (!state.chatOpen && msg.username !== state.username) {
-                        state.chatUnread++;
-                        const unreadEl = document.getElementById('chatUnread');
-                        if (unreadEl) { unreadEl.textContent = state.chatUnread; unreadEl.style.display = 'flex'; }
+    try {
+        const q = query(collection(db, 'chat_messages'), orderBy('timestamp', 'desc'), limit(50));
+        onSnapshot(q, (snapshot) => {
+            const container = document.getElementById('chatMessages');
+            if (!container) return;
+            snapshot.docChanges().forEach(change => {
+                if (change.type === 'added') {
+                    const msg = change.doc.data();
+                    const alreadyRendered = Array.from(container.children).some(el => el.dataset && el.dataset.msgId === change.doc.id);
+                    if (!alreadyRendered) {
+                        msg.id = change.doc.id;
+                        state.chatMessages.push(msg);
+                        renderChatMessage(msg);
+                        if (!state.chatOpen && msg.username !== state.username) {
+                            state.chatUnread++;
+                            const unreadEl = document.getElementById('chatUnread');
+                            if (unreadEl) { unreadEl.textContent = state.chatUnread; unreadEl.style.display = 'flex'; }
+                        }
                     }
                 }
-            }
+            });
+            if (state.chatMessages.length > 50) state.chatMessages = state.chatMessages.slice(-50);
         });
-        if (state.chatMessages.length > 50) state.chatMessages = state.chatMessages.slice(-50);
-    });
+    } catch (e) { console.log('Chat listener error', e); }
 }
 async function loadInitialChatMessages() {
     try {
@@ -1543,12 +1549,11 @@ async function loadInitialChatMessages() {
         const messages = [];
         snap.forEach(d => { messages.push({ id: d.id, ...d.data() }); });
         messages.reverse().forEach(msg => { state.chatMessages.push(msg); renderChatMessage(msg); });
-    } catch (e) {}
+    } catch (e) { console.log('Initial chat load error', e); }
 }
 
 // ===== CRASH GAME =====
 let crashState = { running: false, multiplier: 1.0, bet: 0, autoCashout: 0, interval: null, history: JSON.parse(localStorage.getItem('elite_crash') || '[]') };
-window.updateCrashPotential = function() {};
 function generateCrashPoint() { const r = Math.random(); if (r < 0.02) return 1.0; return Math.max(1.0, 0.98 / (1 - r)); }
 window.startCrash = async function() {
     if (!state.user) { showToast('Login to play!'); openAuthModal(); return; }
@@ -2515,11 +2520,9 @@ function renderCoinflipHistory() {
 
 // Update potential win display
 setInterval(() => {
-    const betInput = document.getElementById('betAmount');
-    const potentialEl = document.getElementById('potentialWin');
-    if (betInput && potentialEl) {
-        const bet = parseBetInput(betInput.value);
-        if (bet > 0) potentialEl.textContent = formatNumber(bet * 2);
+    const bet = parseBetInput(document.getElementById('betAmount').value);
+    if (bet > 0) {
+        document.getElementById('potentialWin').textContent = formatNumber(bet * 2);
     }
 }, 500);
 
